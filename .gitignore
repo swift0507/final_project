@@ -1,15 +1,17 @@
-#�뚮똾�솁占쎌뵬 野껉퀗�궢 占쎌젫占쎌뇚�눧占�
+#������ ��� ���ܹ�
 *.com
 *.class
 *.dll
 *.exe
 *.o
 *.so
+.classpath
 
-#嚥≪뮄�젃占쎈솁占쎌뵬
+
+#�α�����
 *.log
 
-#占쎌뒲占쎌겫筌ｋ똻�젫占쎈퓠占쎄퐣 筌띾슢諭띰옙�뮉 占쎈뻻占쎈뮞占쎈�� 占쎈솁占쎌뵬占쎈굶 占쎌젫占쎌뇚
+#�ü������ ����� �ý��� ���ϵ� ����
 .DS_Store
 .DS_Store?
 ._*
@@ -17,25 +19,3 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
-
-#占쎌뵠占쎄깻�뵳�럩�뮞 占쎈늄嚥≪뮇�젰占쎈뱜�몴占� 占쎌맄占쎈립 占쎈솁占쎌뵬
-.metadata
-bin/
-tmp/
-*.tmp
-*.bak
-*.swp
-*~.nib
-local.properties
-.settings/
-.loadpath
-.recommenders
-.externalToolBuilders/
-.project
-*.launch
-.factorypath
-.buildpath
-.target
-.tern-project
-.springBeans
-.recommenders/
