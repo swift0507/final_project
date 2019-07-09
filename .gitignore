@@ -19,3 +19,5 @@ ehthumbs.db
 Thumbs.db
 
 #이클립스 프로젝트를 위한 파일
+.classpath
+.project
