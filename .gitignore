@@ -1,4 +1,4 @@
-#컴파일 결과 제외물
+#而댄뙆�씪 寃곌낵 �젣�쇅臾�
 *.com
 *.class
 *.dll
@@ -6,10 +6,10 @@
 *.o
 *.so
 
-#로그파일
+#濡쒓렇�뙆�씪
 *.log
 
-#운영체제에서 만드는 시스템 파일들 제외
+#�슫�쁺泥댁젣�뿉�꽌 留뚮뱶�뒗 �떆�뒪�뀥 �뙆�씪�뱾 �젣�쇅
 .DS_Store
 .DS_Store?
 ._*
@@ -18,7 +18,7 @@
 ehthumbs.db
 Thumbs.db
 
-#이클립스 프로젝트를 위한 파일
+#�씠�겢由쎌뒪 �봽濡쒖젥�듃瑜� �쐞�븳 �뙆�씪
 .metadata
 bin/
 tmp/
@@ -33,7 +33,6 @@ local.properties
 .project
 .externalToolBuilders/
 *.launch
-.classpath
 .factorypath
 .buildpath
 .target
