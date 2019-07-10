@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-jsp 깃 테스트12
+jsp 깃 테스트123
 </body>
 </html>
