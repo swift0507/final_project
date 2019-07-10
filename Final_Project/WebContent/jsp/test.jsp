@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-땡기고 밀고 굿
+땡기고 밀고 굿구웃
 </body>
 </html>
