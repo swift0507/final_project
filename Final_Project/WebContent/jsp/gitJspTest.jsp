@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-서버컴퓨터 깃 테스트
+서버컴퓨터 깃 다시 테스트
 </body>
 </html>
