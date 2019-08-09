@@ -1,7 +1,5 @@
 package model;
 
-import java.sql.Date;
-
 public class FAQ {
 	private int faq_id;
 	private String faq_title;

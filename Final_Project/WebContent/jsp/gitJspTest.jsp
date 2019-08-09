@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-jsp 깃 테스트1234567
+서버컴퓨터 깃 테스트
 </body>
 </html>
