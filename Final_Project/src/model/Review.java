@@ -13,11 +13,13 @@ public class Review {
 	private int review_answer;
 	private String review_pict;
 	private int review_status;
+	private Answer answer;
 
 	public Review() {}
 
 	public Review(int review_id, int prod_id, String prod_name, String review_writer, int review_score,
-			String review_content, Date review_date, int review_answer, String review_pict, int review_status) {
+			String review_content, Date review_date, int review_answer, String review_pict, int review_status,
+			Answer answer) {
 		this.review_id = review_id;
 		this.prod_id = prod_id;
 		this.prod_name = prod_name;
@@ -28,6 +30,7 @@ public class Review {
 		this.review_answer = review_answer;
 		this.review_pict = review_pict;
 		this.review_status = review_status;
+		this.answer = answer;
 	}
 
 	public int getReview_id() {
@@ -110,12 +113,20 @@ public class Review {
 		this.review_status = review_status;
 	}
 
+	public Answer getAnswer() {
+		return answer;
+	}
+
+	public void setAnswer(Answer answer) {
+		this.answer = answer;
+	}
+
 	@Override
 	public String toString() {
 		return "Review [review_id=" + review_id + ", prod_id=" + prod_id + ", prod_name=" + prod_name
 				+ ", review_writer=" + review_writer + ", review_score=" + review_score + ", review_content="
 				+ review_content + ", review_date=" + review_date + ", review_answer=" + review_answer
-				+ ", review_pict=" + review_pict + ", review_status=" + review_status + "]";
+				+ ", review_pict=" + review_pict + ", review_status=" + review_status + ", answer=" + answer + "]";
 	}
 	
 }
