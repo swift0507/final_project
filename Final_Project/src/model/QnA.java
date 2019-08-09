@@ -10,11 +10,12 @@ public class QnA {
 	private Date qna_date;
 	private int qna_answer;
 	private int qna_secret;
+	private QnAComment qnacomment;
 	
 	public QnA() {}
 
 	public QnA(int qna_id, int prod_id, String mem_id, String qna_content, Date qna_date, int qna_answer,
-			int qna_secret) {
+			int qna_secret, QnAComment qnacomment) {
 		this.qna_id = qna_id;
 		this.prod_id = prod_id;
 		this.mem_id = mem_id;
@@ -22,6 +23,7 @@ public class QnA {
 		this.qna_date = qna_date;
 		this.qna_answer = qna_answer;
 		this.qna_secret = qna_secret;
+		this.qnacomment = qnacomment;
 	}
 
 	public int getQna_id() {
@@ -80,11 +82,19 @@ public class QnA {
 		this.qna_secret = qna_secret;
 	}
 
+	public QnAComment getQnacomment() {
+		return qnacomment;
+	}
+
+	public void setQnacomment(QnAComment qnacomment) {
+		this.qnacomment = qnacomment;
+	}
+
 	@Override
 	public String toString() {
 		return "QnA [qna_id=" + qna_id + ", prod_id=" + prod_id + ", mem_id=" + mem_id + ", qna_content=" + qna_content
-				+ ", qna_date=" + qna_date + ", qna_answer=" + qna_answer + ", qna_secret=" + qna_secret + "]";
+				+ ", qna_date=" + qna_date + ", qna_answer=" + qna_answer + ", qna_secret=" + qna_secret
+				+ ", qnacomment=" + qnacomment + "]";
 	}
-	
 	
 }
