@@ -8,12 +8,13 @@ import model.Member;
 public class HSServiceImpl extends HSServiceField implements HSService {
 	
 	
-	//로그인체크. 아이디가 없으면 리턴 false 아이디에 해당하는 비밀번호가 틀리면 false 리턴 다 맞으면 true 리턴
+	//로그인체크. 아이디가 없거나 비밀번호가 틀리면 null을 리턴하고 있으면 온전한 member를 리턴 
 	@Override
-	public boolean loginCheck(Member m) {
+	public Member loginCheck(Member m) {
 		// TODO Auto-generated method stub
-		System.out.println(memberDao.selectId(m));
-		return false;
+		Member mem = memberDao.selectId(m);
+		mem = memberDao.passCheck(m);
+		return mem;
 	}
 
 }

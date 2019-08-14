@@ -35,7 +35,7 @@
 	crossorigin="anonymous"></script>
 </head>
 <body>
-    <form action="login.do">
+    <form action="login.do" method="post">
     <table width = 350 style="margin-left: auto; margin-right: auto;">
         <tr>
             <td colspan = 2 height = 100></td>

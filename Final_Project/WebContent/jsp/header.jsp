@@ -59,6 +59,15 @@
 	}
 	
 </style>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+	var location = "loginForm.do?url="+location.pathname;
+	$("#targetURL").attr("href", location)
+});
+
+</script>
 </head>
 <body>
 <div class = "header_main">
@@ -66,7 +75,7 @@
 		<div class="collapse navbar-collapse flex-grow-1 text-right" id="header_nav">
 			<ul class="navbar-nav ml-auto flex-nowrap">
 				<li class="nav-item">
-					<a href="loginForm.jsp" class="nav-link">로그인</a>
+					<a href="loginForm.do" class="nav-link" id="targetURL">로그인</a>
 				</li>
 				<li class="nav-item">
 					<a href="signUpForm.jsp" class="nav-link">회원가입</a>
