@@ -41,4 +41,4 @@ local.properties
 .springBeans
 .recommenders/
 MANIFEST.MF
-pom.properties
+*.properties
