@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import model.Member;
+import model.Product;
 import dao.MemberDao;
 
 @Service
@@ -19,6 +20,14 @@ public class HSServiceImpl implements HSService {
 		// TODO Auto-generated method stub
 		
 		return false;
+	}
+
+
+	@Override
+	public Product getOneProduct(int prod_id) {
+		// TODO Auto-generated method stub
+		
+		return null;
 	}
 
 }
