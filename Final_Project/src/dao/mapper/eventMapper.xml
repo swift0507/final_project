@@ -12,6 +12,9 @@
     	select * from event
     </select>
     
-  
+<!-- getCount : 전체 게시물 수 구하기 -->
+	<select id="getCount" resultType="int">
+   		select count(*) from event
+   	</select>
     
 </mapper>

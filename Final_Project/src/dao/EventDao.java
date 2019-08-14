@@ -11,8 +11,8 @@ public interface EventDao {
 //	public int deleteEvent(int event_id);
 	public Event selectOne(int event_id);
 	public List<Event> selectAll();
+	public int getCount(); //전체 게시물 수 구하기
 	
-	//조회수 증가시키기
-	public void updateReadCount(int event_id);
+	public void updateReadCount(int event_id); 	//조회수 증가시키기
 	
 }
