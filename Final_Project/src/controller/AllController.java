@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import model.Member;
+import model.ProdOption;
 import model.Product;
 import service.HSService;
 
@@ -36,7 +39,14 @@ public class AllController {
 	@RequestMapping("prodView.do")
 	public void prodView(int prod_id, Model model) {
 		Product product = service.getOneProduct(prod_id);
+		List<ProdOption> prodOptionList = service.getProdOption(prod_id);
+		
+		for(int i = 0; i < prodOptionList.size(); i++) {
+			prodOptionList.get(i).setOptiondetail(service.getOptionDetail(prodOptionList.get(i).getOpt_id()));
+		}
+		
 		model.addAttribute("product", product);
+		model.addAttribute("option", prodOptionList);
 	}
 	
 	
