@@ -38,4 +38,7 @@ public class AllController {
 		Product product = service.getOneProduct(prod_id);
 		model.addAttribute("product", product);
 	}
+	
+	
+	
 }
