@@ -13,7 +13,11 @@ import model.Product;
 public interface HSService {
 	
 	//로그인체크 
-	public boolean loginCheck(Member m);
+	public Member loginCheck(Member m);
+	//밴리스트체크
+	public boolean banCheck(String ban_id);
+	//해당 아이디 장바구니 개수 가져오기
+	public int countBasket(String mem_id);
 	
 	//이벤트 읽기
 	public Event readEvent(int event_id);
