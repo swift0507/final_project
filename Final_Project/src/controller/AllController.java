@@ -36,7 +36,6 @@ public class AllController {
 	@RequestMapping("prodView.do")
 	public void prodView(int prod_id, Model model) {
 		Product product = service.getOneProduct(prod_id);
-		
 		model.addAttribute("product", product);
 	}
 }

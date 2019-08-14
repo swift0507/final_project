@@ -22,6 +22,7 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 	public Product getOneProduct(int prod_id) {
 		// TODO Auto-generated method stub	
 		Product product = productDao.selectOne(prod_id);
+		System.out.println(product);
 		return product;
 	}
 
