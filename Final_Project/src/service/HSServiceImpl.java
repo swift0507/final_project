@@ -1,5 +1,8 @@
 package service;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import model.Event;
@@ -34,6 +37,16 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		Product product = productDao.selectOne(prod_id);
 		System.out.println(product);
 		return product;
+	}
+	
+
+	@Override
+	public List<Event> getEventList() {
+		// TODO Auto-generated method stub
+		List<Event> event = eventDao.selectAll();
+		System.out.println(event);
+		
+		return event;
 	}
 
 }

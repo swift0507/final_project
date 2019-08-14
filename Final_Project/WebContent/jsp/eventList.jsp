@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,6 +40,7 @@
 		<div class = "row">
 			<div class = "col"></div>
 			<div class = "col-8">
+			
 				<h5><b>이벤트</b></h5>
 				<hr>
 				<table class="table table-hover text-center">
@@ -49,24 +52,16 @@
 				    </tr>
 				  </thead>
 				  <tbody>
-				    <tr>
-				      <th scope="row">3</th>
-				      <td>개쩌는 이벤트</td>
-				      <td colspan = 2>2019-08-08</td>
-				    </tr>
-				    
-				    <tr>
-				      <th scope="row">2</th>
-				      <td colspan = 2>개쩌는 이벤트</td>
-				      <td>2019-08-08</td>
 				  
-				    </tr>
-				    
+				  <!-- 자료넣기 -->
+				  <c:forEach items="${eventList}" var="e">
 				    <tr>
-				      <th scope="row">1</th>
-				      <td colspan="2">개쩌는 이벤트</td>
-				      <td>2019-08-08</td>
+				      <th scope="row">${e.event_id}</th>
+				      <td>${e.event_title}</td>
+				      <td colspan = 2>${e.event_date}</td>
 				    </tr>
+				   </c:forEach>
+				    
 				  </tbody>
 				</table>
 				

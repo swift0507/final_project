@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import model.Event;
 import model.Member;
 import model.Product;
 import service.HSService;
@@ -39,6 +42,21 @@ public class AllController {
 		model.addAttribute("product", product);
 	}
 	
+	@RequestMapping("eventList.do")
+	public void eventList(Model model) {
+		model.addAttribute("eventList", service.getEventList());
+	}
+	
+	
 	
 	
 }
+
+
+
+
+
+
+
+
+
