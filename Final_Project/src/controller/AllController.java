@@ -11,16 +11,4 @@ public class AllController {
 	@Autowired
 	HSService service;
 	
-	public void sujin() {
-		
-	}
-
-	public void seungmin() {
-		
-	}		
-
-	public void yoonsujin() {
-		
-	}
-			
 }
