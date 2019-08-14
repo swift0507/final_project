@@ -54,7 +54,6 @@
 	}
 	
 	.header_main {
-		width: 1280px;
 		align: center;
 	}
 	
