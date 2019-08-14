@@ -106,7 +106,7 @@ $(document).ready(function(){
             
             <td>
                 <div id = "item_name">
-                <h3>카드지갑</h3>
+                <h3>${ product.prod_name }</h3>
                 </div>
             </td>
         </tr>
