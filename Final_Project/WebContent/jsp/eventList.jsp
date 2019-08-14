@@ -40,7 +40,7 @@
 			<div class = "col-8">
 				<h5><b>이벤트</b></h5>
 				<hr>
-				<table class="table table-hover">
+				<table class="table table-hover text-center">
 				  <thead>
 				    <tr>
 				      <th scope="col">게시물 번호</th>

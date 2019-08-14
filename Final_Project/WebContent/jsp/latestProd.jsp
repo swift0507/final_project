@@ -44,7 +44,7 @@
 	<!-- header 종료 -->
 
 	<div class="container">
-		<h5><b>'item' 검색 결과</b></h5>
+		<h5><b>추천 상품 목록</b></h5>
 		<hr>
 		<div class="dropdown text-right">
 			<button class="btn btn-secondary dropdown-toggle" type="button"

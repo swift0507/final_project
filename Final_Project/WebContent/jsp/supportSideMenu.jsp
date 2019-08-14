@@ -5,12 +5,19 @@
 <head>
 	<meta charset="UTF-8">
 	<title>핸쇼</title>
+<script>
+$(document).ready(function(){
+	$('#notice').click(function(){
+		alert('hello?');
+	})
+})
+</script>
 </head>
 <body>
-	<table style = "width: 175px;">
+	<table style = "width: 175px; margin-left: auto; margin-right: auto;">
 		<tr>
 			<td>
-				<button class="btn btn-sm btn-outline-secondary btn-block">
+				<button class="btn btn-sm btn-outline-secondary btn-block" id = "notice">
 					<i class="fas fa-info-circle"></i> 공지사항
 				</button>
 			</td>

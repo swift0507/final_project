@@ -20,11 +20,10 @@
 	</nav>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="mx-auto d-sm-flex d-block flex-sm-nowrap">
-			<div
-				class="collapse navbar-collapse flex-grow-1 text-left text-white id="header_nav">
+			<div class="collapse navbar-collapse flex-grow-1 text-left text-white id = "header_nav">
 				<table>
 					<tr>
-						<td width="300"><img src="images/logo.png" width=150
+						<td width="300"><img src="images/logo.png" width = 150
 							height=50></span></td>
 						<td width="500"><large>(주) 핸쇼</large>
 							<address>서울시 강남구 테헤란로 212</address> <small>대표번호 : 1234 -

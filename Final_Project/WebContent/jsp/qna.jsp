@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- Required meta tags -->
+<!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -24,16 +24,7 @@
     crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
-
-  <style>
-    .checked {
-        color: orange;
-    }
-    #item_image {
-        text-align: center;
-    }
-</style>
+    crossorigin="anonymous"></script>	
 </head>
 <body>
 <!-- header -->
@@ -43,39 +34,50 @@
 <!-- header 종료 -->
 
 <!-- main body -->
-	<div class="container">
-		<div class="row">
-			<div class="col"></div>
-			<div class="col-8">
-				<h4>회원 탈퇴</h4>
-				<div class="alert alert-danger">
-					<p>
-						회원탈퇴 신청하기 전에 확인해주세요. <br> 
-						탈퇴 후 회원정보 및 이용기록은 모두 삭제되며, 다시 복구 할 수 없습니다. <br> 
-						작성한 구매후기와 결제 내역은 이용약관과 관련법에 의해 보관됩니다. <br>
-					</p>
-					<hr>
-					<p class="mb-0">동일한 SNS계정과 이메일을 사용한 재가입은 24시간 이내에는 불가능합니다.</p>
-				</div>
-				<div id = "input_pw">
-					<input type="password" class="form-control" placeholder="비밀번호" style = "width: 250px;">
-					<input type="password" class="form-control" placeholder="비밀번호 확인" style = "width: 250px;">
-				</div>
-				<br>
-				<div id = "buttons">
-					<button class="btn btn-sm btn-secondary" type="submit">회원탈퇴</button>
-    				<button class="btn btn-sm btn-secondary" type="button" onclick="history.go(-1)">취소</button>
-				</div>
-			</div>
-			<div class="col"></div>
+		<div class = "row">
+		<div class = "col-3">
+			<jsp:include page = "supportSideMenu.jsp"></jsp:include>
+		</div>
+		<div class = "col-7" id = "content">
+			<div class="container">
+			    <div id="accordion" class="accordion">
+			        <div class="card mb-0">
+			            <div class="card-header collapsed" data-toggle="collapse" href="#collapseOne">
+			                <a class="card-title">
+								정말 자주 물어보는 질문
+			                </a>
+			            </div>
+			            <div id="collapseOne" class="card-body collapse" data-parent="#accordion" >
+			                ........
+			            </div>
+			            <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+			                <a class="card-title">
+								정말 자주 물어보는 질문
+			                </a>
+			            </div>
+			            <div id="collapseTwo" class="card-body collapse" data-parent="#accordion" >
+			                ..........
+			            </div>
+			            <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+			                <a class="card-title">
+			                	정말 자주 물어보는 질문
+			                </a>
+			            </div>
+			            <div id="collapseThree" class="collapse" data-parent="#accordion" >
+			            	......
+			            </div>
+			        </div>
+			    </div>
+			</div>		
 		</div>
 	</div>
-	<!-- main body 종료 -->
+	
+<!-- main body 종료-->
 
 <!-- footer -->
 <footer>
 	<jsp:include page="footer.jsp"></jsp:include>
 </footer>
-<!-- footer 종료 -->
+<!-- footer 종료 -->   
 </body>
 </html>
