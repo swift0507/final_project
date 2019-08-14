@@ -25,7 +25,23 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
+<style>
+html, body {
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+}
+.content {
+  flex: 1 0 auto;
+}
+.footer {
+  flex-shrink: 0;
+}
+</style>     
 </head>
+
 <body>
 <!-- header -->
 <header>
@@ -34,6 +50,7 @@
 <!-- header 종료 -->
 
 <!-- main body -->
+<div class = "content">
 <div class="bd-example">
     <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
@@ -223,6 +240,7 @@
         </div>
       </div>
     </div>
+</div>
   <hr>
 <!-- main body 종료 -->
 
