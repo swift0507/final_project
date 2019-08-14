@@ -1,5 +1,7 @@
 package dao;
 
-public interface ProductDao {
+import model.Product;
 
+public interface ProductDao {
+	public Product selectOne(int prod_id);
 }
