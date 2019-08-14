@@ -1,10 +1,15 @@
 package service;
 
+<<<<<<< HEAD
 import java.util.HashMap;
+=======
+>>>>>>> branch 'master' of https://github.com/swift0507/final_project.git
 import java.util.List;
 
 import model.Event;
 import model.Member;
+import model.OptionDetail;
+import model.ProdOption;
 import model.Product;
 
 public interface HSService {
@@ -20,5 +25,11 @@ public interface HSService {
 
 	//상품ID로 상품 1개 가져오기
 	public Product getOneProduct(int prod_id);
+
+	//상품ID로 옵션 리스트 가져오기
+	public List<ProdOption> getProdOption(int prod_id);
+
+	//옵션ID로 해당 옵션의 옵션 상세 리스트 가져오기
+	public List<OptionDetail> getOptionDetail(int opt_id);
 
 }

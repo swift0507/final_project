@@ -1,12 +1,17 @@
 package service;
 
+<<<<<<< HEAD
 import java.util.HashMap;
+=======
+>>>>>>> branch 'master' of https://github.com/swift0507/final_project.git
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import model.Event;
 import model.Member;
+import model.OptionDetail;
+import model.ProdOption;
 import model.Product;
 
 @Service
@@ -30,15 +35,16 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		return eventDao.selectOne(event_id);
 	}
 
-
+	//상품ID로 상품1개 가져오기
 	@Override
 	public Product getOneProduct(int prod_id) {
 		// TODO Auto-generated method stub	
 		Product product = productDao.selectOne(prod_id);
-		System.out.println(product);
+
 		return product;
 	}
 	
+<<<<<<< HEAD
 
 	@Override
 	public List<Event> getEventList() {
@@ -49,4 +55,19 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		return event;
 	}
 
+=======
+	//해당 상품의 옵션들 가져오기
+	@Override
+	public List<ProdOption> getProdOption(int prod_id) {
+		// TODO Auto-generated method stub		
+		return prodOptionDao.selectByProd(prod_id);
+	}
+	
+	//해당 옵션의 옵션상세 리스트 가져오기
+	@Override
+	public List<OptionDetail> getOptionDetail(int opt_id) {
+		// TODO Auto-generated method stub
+		return optionDetailDao.selectByOption(opt_id);
+	}
+>>>>>>> branch 'master' of https://github.com/swift0507/final_project.git
 }

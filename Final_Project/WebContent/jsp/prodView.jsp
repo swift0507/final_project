@@ -113,7 +113,7 @@ $(document).ready(function(){
         <tr>
             <td>
                 <div id = "seller_id">
-                <h5>11hertz</h5>
+                <h5>${ product.sel_id }</h5>
                 </div>
             </td>
         </tr>
@@ -145,7 +145,7 @@ $(document).ready(function(){
         </tr>
         <tr>
             <div id = "delivery_cost">
-            <td><hr>배송비 : 2500원<hr></td>
+            <td><hr>배송비 : ${ product.prod_fee }<hr></td>
             </div>
         </tr>
         <tr>
@@ -154,7 +154,7 @@ $(document).ready(function(){
         <tr>
             <td>
                 <div id = "select_option">
-               	 사이즈&nbsp;
+               	 ${ option.opt_name }&nbsp;
                 <select id = "select_opt" class="custom-select-sm" style="width: 250px;"> 
                     <option value="90 / S">90 / S </option>
                     <option value="95 / M">95 / M</option>
