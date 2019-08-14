@@ -34,80 +34,50 @@
 <!-- header 종료 -->
 
 <!-- main body -->
-	<div class = "container">
 		<div class = "row">
-			<div class = "col"></div>
-			<div class = "col-8">
-				<h5><b>이벤트</b></h5>
-				<hr>
-				<table class="table table-hover text-center">
-				  <thead>
-				    <tr>
-				      <th scope="col">게시물 번호</th>
-				      <th scope="col" colspan = 2>제목</th>
-				      <th scope="col">게시일</th>
-				    </tr>
-				  </thead>
-				  <tbody>
-				    <tr>
-				      <th scope="row">3</th>
-				      <td>개쩌는 이벤트</td>
-				      <td colspan = 2>2019-08-08</td>
-				    </tr>
-				    
-				    <tr>
-				      <th scope="row">2</th>
-				      <td colspan = 2>개쩌는 이벤트</td>
-				      <td>2019-08-08</td>
-				  
-				    </tr>
-				    
-				    <tr>
-				      <th scope="row">1</th>
-				      <td colspan="2">개쩌는 이벤트</td>
-				      <td>2019-08-08</td>
-				    </tr>
-				  </tbody>
-				</table>
-				
-				<div class = "container">
-					<nav aria-label="Page navigation example">
-						<ul class="pagination justify-content-center">
-							<li class="page-item">
-								<a class="page-link" href="#" aria-label="Previous"> 
-								<span aria-hidden="true">&laquo;</span>
-								</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">1</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">2</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">3</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#" aria-label="Next"> 
-								<span aria-hidden="true">&raquo;</span>
-								</a>
-							</li>
-						</ul>
-					</nav>
-				</div>
-				
-			</div>
-				
-			<div class = "col"></div>
+		<div class = "col-3">
+			<jsp:include page = "supportSideMenu.jsp"></jsp:include>
+		</div>
+		<div class = "col-7" id = "content">
+			<div class="container">
+			    <div id="accordion" class="accordion">
+			        <div class="card mb-0">
+			            <div class="card-header collapsed" data-toggle="collapse" href="#collapseOne">
+			                <a class="card-title">
+								정말 자주 물어보는 질문
+			                </a>
+			            </div>
+			            <div id="collapseOne" class="card-body collapse" data-parent="#accordion" >
+			                ........
+			            </div>
+			            <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+			                <a class="card-title">
+								정말 자주 물어보는 질문
+			                </a>
+			            </div>
+			            <div id="collapseTwo" class="card-body collapse" data-parent="#accordion" >
+			                ..........
+			            </div>
+			            <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+			                <a class="card-title">
+			                	정말 자주 물어보는 질문
+			                </a>
+			            </div>
+			            <div id="collapseThree" class="collapse" data-parent="#accordion" >
+			            	......
+			            </div>
+			        </div>
+			    </div>
+			</div>		
 		</div>
 	</div>
+	
 <!-- main body 종료-->
 
 <!-- footer -->
 <footer>
 	<jsp:include page="footer.jsp"></jsp:include>
 </footer>
-<!-- footer 종료 -->
+<!-- footer 종료 -->   
 </body>
 </html>
-
