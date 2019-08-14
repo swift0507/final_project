@@ -2,7 +2,13 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-    <mapper namespace="dao.IMemberDao">
+    <mapper namespace="dao.MemberDao">
+    <select id="selectId" resultType="member">
+    	select * from mem_id where mem_id = #{mem_id}
+    </select>
     
+    <select id="passCheck" resultType="member">
+    	select * from mem_id where mem_pw = #{mem_pw}
+    </select>
     
     </mapper>
