@@ -41,7 +41,9 @@
             <td colspan = 2 height = 100></td>
         </tr>
         <tr>
-            <td colspan = 2 align = "center" height = 100><img src = "images/logo.png" width = 160 height = 60></td>
+            <td colspan = 2 align = "center" height = 100>
+            	<img src = "images/logo.png" width = 160 height = 60>
+            </td>
         </tr>
         <tr>
             <td colspan = 2>

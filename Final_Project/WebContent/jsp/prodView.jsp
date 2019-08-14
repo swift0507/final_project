@@ -219,7 +219,7 @@ $(document).ready(function(){
                     </div>
             </div>
             <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                <jsp:include page="header.jsp"></jsp:include>
+                
             </div>
             <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                 ...
@@ -238,7 +238,9 @@ $(document).ready(function(){
             </span>
         </div>
     </div>
+    
     <div class="col"></div>
+    
     </div>
     </div>
 	
