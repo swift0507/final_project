@@ -20,9 +20,9 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 
 	@Override
 	public Product getOneProduct(int prod_id) {
-		// TODO Auto-generated method stub
-		
-		return null;
+		// TODO Auto-generated method stub	
+		Product product = productDao.selectOne(prod_id);
+		return product;
 	}
 
 }

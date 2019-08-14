@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import model.Member;
+import model.Product;
 import service.HSService;
 
 @Controller
@@ -33,10 +34,9 @@ public class AllController {
 	}
 	
 	@RequestMapping("prodView.do")
-	public Model prodView(int prod_id) {
-		Model model;
-
+	public void prodView(int prod_id, Model model) {
+		Product product = service.getOneProduct(prod_id);
 		
-		return null;
+		model.addAttribute("product", product);
 	}
 }
