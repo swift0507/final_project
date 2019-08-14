@@ -14,6 +14,8 @@ public class AllController {
 	public void sujin() {
 		
 	}
-	
+	public void yoonsujin() {
+		
+	}
 			
 }
