@@ -72,8 +72,8 @@
 		<tr height=15>
 		</tr>
 		<tr>
-			<th colspan=2>생년월일 &nbsp;&nbsp;&nbsp; <select
-				class="custom-select-sm">
+			<th colspan=2>생년월일 &nbsp;&nbsp;&nbsp; 
+			<select class="custom-select-sm">
 					<option value="1988">1988</option>
 					<option value="1989">1989</option>
 					<option value="1990">1990</option>
@@ -87,7 +87,8 @@
 					<option value="1998">1998</option>
 					<option value="1999">1999</option>
 					<option value="2000">2000</option>
-			</select> &nbsp; 년 <select class="custom-select-sm">
+			</select> &nbsp; 년 
+			<select class="custom-select-sm">
 					<option value="1">1</option>
 					<option value="2">2</option>
 					<option value="3">3</option>
@@ -100,7 +101,8 @@
 					<option value="10">10</option>
 					<option value="11">11</option>
 					<option value="12">12</option>
-			</select> &nbsp; 월 <select class="custom-select-sm">
+			</select> &nbsp; 월 
+			<select class="custom-select-sm">
 					<option value="1">1</option>
 					<option value="2">2</option>
 					<option value="3">3</option>
