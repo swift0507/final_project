@@ -14,8 +14,13 @@ public class AllController {
 	public void sujin() {
 		
 	}
-	
+
 	public void seungmin() {
 		
 	}		
+
+	public void yoonsujin() {
+		
+	}
+			
 }
