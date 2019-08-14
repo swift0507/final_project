@@ -15,5 +15,7 @@ public class AllController {
 		
 	}
 	
-			
+	public void seungmin() {
+		
+	}		
 }

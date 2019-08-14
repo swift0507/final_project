@@ -10,4 +10,8 @@ public class UserController {
 	
 	@Autowired
 	HSService service;
+	
+	public void seungmin() {
+		
+	}
 }
