@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -20,6 +22,10 @@ public class AllController {
 	@Autowired
 	HSService service;
 	
+	@RequestMapping("main.do")
+	public void main() {}
+	
+	/*헤더풋터요청*/
 	//로그인페이지에 올 때 가고자하는 url을 보내줌
 	@RequestMapping("loginForm.do")
 	public void loginForm(Model model, @RequestParam(defaultValue="main.do")String url) {
@@ -28,6 +34,20 @@ public class AllController {
 		model.addAttribute("targetURL", url);
 	}
 	
+	@RequestMapping("signUpForm.do")
+	public void singnUpForm() {}
+	
+	@RequestMapping("support.do")
+	public void support() {}
+	
+	//로그아웃. 세션 만료시키고 main.do 리다이렉트
+	@RequestMapping("logout.do")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect: main.do";
+	}
+	
+	/*로그인폼버튼요청*/
 	//member가 있으면 세션 id에 id 세팅 grade에 등급 세팅하고 true 리턴 아님 false 리턴 
 	@RequestMapping("login.do")
 	public @ResponseBody boolean login(Member m, HttpSession session) {
@@ -35,10 +55,23 @@ public class AllController {
 		if(member == null) {
 			return false;
 		}
-		session.setAttribute("id", member.getMem_id());
-		session.setAttribute("grade", member.getMem_grade());
+		if(service.banCheck(member.getMem_id())) {
+			return false;
+		}
+		HashMap<String, Object> id = new HashMap<String, Object>();
+		id.put("mem_id", member.getMem_id());
+		id.put("mem_grade", member.getMem_grade());
+		id.put("mem_name", member.getMem_name());
+		id.put("countBasket", service.countBasket(member.getMem_id()));
+		session.setAttribute("loginUserInfo", id);
 		return true;
 	}
+	
+	@RequestMapping("findIdForm.do")
+	public void findIdForm() {}
+	
+	@RequestMapping("findPwForm.do")
+	public void findPwForm() {}
 	
 	@RequestMapping("prodView.do")
 	public Model prodView(int prod_id) {
