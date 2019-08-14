@@ -40,5 +40,5 @@ local.properties
 .tern-project
 .springBeans
 .recommenders/
-MANIFEST.MF
+*.MF
 *.properties
