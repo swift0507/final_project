@@ -39,4 +39,12 @@ public class AllController {
 		session.setAttribute("grade", member.getMem_grade());
 		return true;
 	}
+	
+	@RequestMapping("prodView.do")
+	public Model prodView(int prod_id) {
+		Model model;
+
+		
+		return null;
+	}
 }
