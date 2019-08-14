@@ -154,6 +154,7 @@ $(document).ready(function(){
         <tr>
             <td>
                 <div id = "select_option">
+               	 사이즈&nbsp;
                 <select id = "select_opt" class="custom-select-sm" style="width: 250px;"> 
                     <option value="90 / S">90 / S </option>
                     <option value="95 / M">95 / M</option>

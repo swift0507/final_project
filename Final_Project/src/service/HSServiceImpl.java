@@ -3,6 +3,7 @@ package service;
 import org.springframework.stereotype.Service;
 
 import model.Member;
+import model.Product;
 
 @Service
 public class HSServiceImpl extends HSServiceField implements HSService {
@@ -14,6 +15,14 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		// TODO Auto-generated method stub
 		System.out.println(memberDao.selectId(m));
 		return false;
+	}
+
+
+	@Override
+	public Product getOneProduct(int prod_id) {
+		// TODO Auto-generated method stub
+		
+		return null;
 	}
 
 }
