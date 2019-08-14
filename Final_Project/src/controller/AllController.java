@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import model.Event;
 import model.Member;
 import model.ProdOption;
 import model.Product;
@@ -49,6 +50,26 @@ public class AllController {
 		model.addAttribute("option", prodOptionList);
 	}
 	
+	@RequestMapping("eventList.do")
+	public void eventList(Model model) {
+		model.addAttribute("eventList", service.getEventList());
+	}
+	
+	@RequestMapping("event.do")
+	public void event(int event_id, Model model) {
+//		System.out.println(event_id);
+		model.addAttribute("event", service.readEvent(event_id));
+
+	}
 	
 	
 }
+
+
+
+
+
+
+
+
+

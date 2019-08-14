@@ -9,7 +9,7 @@
     </select>
     
     <select id="selectAll" resultType="event">
-    	select * from event
+    	select * from event order by event_id desc
     </select>
     
 <!-- getCount : 전체 게시물 수 구하기 -->

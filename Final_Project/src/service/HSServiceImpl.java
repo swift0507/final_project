@@ -40,6 +40,15 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		return product;
 	}
 	
+	@Override
+	public List<Event> getEventList() {
+		// TODO Auto-generated method stub
+		List<Event> event = eventDao.selectAll();
+		System.out.println(event);
+		
+		return event;
+	}
+
 	//해당 상품의 옵션들 가져오기
 	@Override
 	public List<ProdOption> getProdOption(int prod_id) {
@@ -53,4 +62,5 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		// TODO Auto-generated method stub
 		return optionDetailDao.selectByOption(opt_id);
 	}
+
 }

@@ -12,8 +12,9 @@ public class eventDaoTest {
 		
 		EventDao edao = context.getBean("eventDao",EventDao.class);
 		
-		//System.out.println(edao.selectOne(4));
-		System.out.println(edao.getCount());
+//		System.out.println(edao.selectOne(2));
+		System.out.print(edao.selectAll());
+//		System.out.println(edao.getCount());
 	}
 
 }
