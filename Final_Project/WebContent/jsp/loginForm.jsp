@@ -35,7 +35,7 @@
 	crossorigin="anonymous"></script>
 </head>
 <body>
-    <form>
+    <form action="login.do">
     <table width = 350 style="margin-left: auto; margin-right: auto;">
         <tr>
             <td colspan = 2 height = 100></td>
@@ -47,12 +47,12 @@
         </tr>
         <tr>
             <td colspan = 2>
-                <input type="text" class="form-control" placeholder="아이디" aria-describedby="sizing-addon1">
+                <input type="text" name = "mem_id" class="form-control" placeholder="아이디" aria-describedby="sizing-addon1">
             </td>
         </tr>
         <tr>
             <td colspan = 2>
-                <input type="password" class="form-control" placeholder="비밀번호" aria-describedby="sizing-addon1">
+                <input type="password" name="mem_pw" class="form-control" placeholder="비밀번호" aria-describedby="sizing-addon1">
             </td>
         </tr>
         <tr>
