@@ -29,7 +29,7 @@
 <body>
 <!-- header -->
 <header>
-	<jsp:include page="header.jsp"></jsp:include>
+	<jsp:include page="/jsp/header.jsp"></jsp:include>
 </header>
 <!-- header 종료 -->
 
@@ -239,7 +239,7 @@
 
 <!-- footer -->
 <footer>
-	<jsp:include page="footer.jsp"></jsp:include>
+	<jsp:include page="/jsp/footer.jsp"></jsp:include>
 </footer>
 <!-- footer 종료 -->
 </body>
