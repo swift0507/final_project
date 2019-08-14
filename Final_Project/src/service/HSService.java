@@ -1,9 +1,7 @@
 package service;
 
-<<<<<<< HEAD
+
 import java.util.HashMap;
-=======
->>>>>>> branch 'master' of https://github.com/swift0507/final_project.git
 import java.util.List;
 
 import model.Event;

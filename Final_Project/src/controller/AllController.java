@@ -55,7 +55,12 @@ public class AllController {
 		model.addAttribute("eventList", service.getEventList());
 	}
 	
-	
+	@RequestMapping("event.do")
+	public void event(int event_id, Model model) {
+//		System.out.println(event_id);
+		model.addAttribute("event", service.readEvent(event_id));
+
+	}
 	
 	
 }
