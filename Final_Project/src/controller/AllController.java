@@ -26,7 +26,7 @@ public class AllController {
 	HSService service;
 	
 	@RequestMapping("main.do")
-	public void main() {}
+	public void main() {} 
 	
 	/*헤더풋터요청*/
 	//로그인페이지에 올 때 가고자하는 url을 보내줌

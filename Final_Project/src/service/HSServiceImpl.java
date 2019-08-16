@@ -64,7 +64,7 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 	public List<Event> getEventList() {
 		// TODO Auto-generated method stub
 		List<Event> event = eventDao.selectAll();
-		System.out.println(event);
+//		System.out.println(event);
 		
 		return event;
 	}
@@ -81,6 +81,13 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 	public List<OptionDetail> getOptionDetail(int opt_id) {
 		// TODO Auto-generated method stub
 		return optionDetailDao.selectByOption(opt_id);
+	}
+
+	//조회수 증가
+	@Override
+	public int updateReadCount(int event_readcount) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

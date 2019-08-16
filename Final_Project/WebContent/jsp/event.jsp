@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -60,7 +62,7 @@
 				<table style = "width : 800px">
 					<tr>
 						<td>
-							<h6><b>2019 렛츠락 페스티벌 Vol.13</b></h6>
+							<h6><b>${event}</b></h6>
 						</td>
 					</tr>
 					<tr>

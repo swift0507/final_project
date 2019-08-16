@@ -57,7 +57,7 @@
 				  <c:forEach items="${eventList}" var="e">
 				    <tr>
 				      <th scope="row">${e.event_id}</th>
-				      <td><a href="event.do?num=${e.event_id}">${e.event_title}</a></td>
+				      <td><a href="event.do?event_id=${e.event_id}">${e.event_title}</a></td>
 				      <td colspan = 2>${e.event_date}</td>
 				    </tr>
 				   </c:forEach>
