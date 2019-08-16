@@ -81,12 +81,15 @@ public class AllController {
 		Product product = service.getOneProduct(prod_id);
 		List<ProdOption> prodOptionList = service.getProdOption(prod_id);
 		
+		//옵션 모델의 옵션 상세 필드에 해당 옵션 ID로 찾은 옵션상세 list를 set하기
 		for(int i = 0; i < prodOptionList.size(); i++) {
 			prodOptionList.get(i).setOptiondetail(service.getOptionDetail(prodOptionList.get(i).getOpt_id()));
+			
+			model.addAttribute("option" + i, prodOptionList.get(i));
+			
 		}
 		
 		model.addAttribute("product", product);
-		model.addAttribute("option", prodOptionList);
 	}
 	
 	@RequestMapping("eventList.do")

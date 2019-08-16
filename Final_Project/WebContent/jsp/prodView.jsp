@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -154,7 +155,7 @@ $(document).ready(function(){
         <tr>
             <td>
                 <div id = "select_option">
-               	 ${ option.opt_name }&nbsp;
+               	${ option0.opt_name }
                 <select id = "select_opt" class="custom-select-sm" style="width: 250px;"> 
                     <option value="90 / S">90 / S </option>
                     <option value="95 / M">95 / M</option>
