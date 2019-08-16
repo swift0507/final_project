@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
-
+  <link href="footer.css" rel="stylesheet" type="text/css">
   <title>핸쇼</title>
 
   <!-- Optional JavaScript -->
@@ -50,7 +50,7 @@
 			speedAsDuration : true
 		});
 	</script>
-
+<div class = "content">
 	<div class="container">
 		<div class="row">
 			<div class="col"></div>
@@ -60,7 +60,17 @@
 				<table style = "width : 800px">
 					<tr>
 						<td>
-							<h6><b>2019 렛츠락 페스티벌 Vol.13</b></h6>
+							<b>[2019 렛츠락 페스티벌 Vol.13]</b>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<b> 날짜 : </b> 
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<b> 조회수 : </b> 
 						</td>
 					</tr>
 					<tr>
@@ -68,19 +78,19 @@
 							<img src = "images/test.jpg" width = 800>
 						</td>
 					</tr>
-					<!-- <tr>
+					<tr>
 						<td>
 							<p>
 							Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
 							</p>
 						</td>
-					</tr> -->
+					</tr>
 				</table>
 			</div>
 			<div class="col"></div>
 		</div>
 	</div>
-	
+</div>	
 	<a data-scroll href="#header_nav">
 		<button type="button" id = "top_button" class="btn btn-secondary">TOP</button>
 	</a>
