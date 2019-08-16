@@ -1,6 +1,7 @@
 package service;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -76,9 +77,22 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 
 	//해당 상품의 옵션들 가져오기
 	@Override
-	public List<ProdOption> getProdOption(int prod_id) {
-		// TODO Auto-generated method stub		
-		return prodOptionDao.selectByProd(prod_id);
+	public HashMap<String, Object> getProdOption(int prod_id) {
+		// TODO Auto-generated method stub
+		//옵션 리스트 가져오기
+		List<ProdOption> prodOptionList = prodOptionDao.selectByProd(prod_id);
+		
+		//각각 옵션의 옵션상세 set
+		for(int i = 0; i < prodOptionList.size(); i++) {
+			prodOptionList.get(i).setOptiondetail(getOptionDetail(prodOptionList.get(i).getOpt_id()));
+		}
+		
+		//HashMap 형태로 담기
+		HashMap<String, Object> prodOptionMap = new HashMap<String, Object>();
+		
+		prodOptionMap.put("option", prodOptionList);
+		
+		return prodOptionMap;
 	}
 	
 	//해당 옵션의 옵션상세 리스트 가져오기

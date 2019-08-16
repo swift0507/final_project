@@ -1,5 +1,7 @@
 package model;
 
+import java.sql.Date;
+
 public class Product {
 	private int prod_id;
 	private String sel_id;
@@ -12,11 +14,14 @@ public class Product {
 	private String prod_depositor;
 	private int prod_status;
 	private int prod_fee;
+	private String prod_content;
+	private Date prod_date;
 
 	public Product() {}
 
 	public Product(int prod_id, String sel_id, String prod_name, int prod_price, int prod_readcount, int category_id,
-			String prod_bank, String prod_account, String prod_depositor, int prod_status, int prod_fee) {
+			String prod_bank, String prod_account, String prod_depositor, int prod_status, int prod_fee,
+			String prod_content, Date prod_date) {
 		this.prod_id = prod_id;
 		this.sel_id = sel_id;
 		this.prod_name = prod_name;
@@ -28,7 +33,10 @@ public class Product {
 		this.prod_depositor = prod_depositor;
 		this.prod_status = prod_status;
 		this.prod_fee = prod_fee;
+		this.prod_content = prod_content;
+		this.prod_date = prod_date;
 	}
+
 
 	public int getProd_id() {
 		return prod_id;
@@ -117,14 +125,32 @@ public class Product {
 	public void setProd_fee(int prod_fee) {
 		this.prod_fee = prod_fee;
 	}
+	
+	public String getProd_content() {
+		return prod_content;
+	}
+
+	public void setProd_content(String prod_content) {
+		this.prod_content = prod_content;
+	}
+
+	public Date getProd_date() {
+		return prod_date;
+	}
+
+	public void setProd_date(Date prod_date) {
+		this.prod_date = prod_date;
+	}
 
 	@Override
 	public String toString() {
 		return "Product [prod_id=" + prod_id + ", sel_id=" + sel_id + ", prod_name=" + prod_name + ", prod_price="
 				+ prod_price + ", prod_readcount=" + prod_readcount + ", category_id=" + category_id + ", prod_bank="
 				+ prod_bank + ", prod_account=" + prod_account + ", prod_depositor=" + prod_depositor + ", prod_status="
-				+ prod_status + ", prod_fee=" + prod_fee + "]";
+				+ prod_status + ", prod_fee=" + prod_fee + ", prod_content=" + prod_content + ", prod_date=" + prod_date
+				+ "]";
 	}
-	
+
+
 	
 }

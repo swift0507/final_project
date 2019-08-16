@@ -1,6 +1,7 @@
 package service;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 
 import model.Event;
@@ -29,7 +30,7 @@ public interface HSService {
 	public Product getOneProduct(int prod_id);
 
 	//상품ID로 옵션 리스트 가져오기
-	public List<ProdOption> getProdOption(int prod_id);
+	public HashMap<String, Object> getProdOption(int prod_id);
 
 	//옵션ID로 해당 옵션의 옵션 상세 리스트 가져오기
 	public List<OptionDetail> getOptionDetail(int opt_id);

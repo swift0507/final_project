@@ -154,13 +154,17 @@ $(document).ready(function(){
         </tr>
         <tr>
             <td>
+            	<!-- 옵션 선택 부분 -->
                 <div id = "select_option">
-               	${ option0.opt_name }
-                <select id = "select_opt" class="custom-select-sm" style="width: 250px;"> 
-                    <option value="90 / S">90 / S </option>
-                    <option value="95 / M">95 / M</option>
-                    <option value="100 / L">100 / L</option>
+                <c:forEach var="option" items="${ option }">
+               	${ option.opt_name }
+               		<select id = "select_opt" class="custom-select-sm" style="width: 250px;"> 
+               	<c:forEach var="optiondetail" items="${ option.optiondetail }">
+                    <option>${ optiondetail.optd_choice } </option>
+               	</c:forEach>
                 </select>
+                <br>
+                </c:forEach>
                 </div>
                 <hr>
             </td>
@@ -208,15 +212,7 @@ $(document).ready(function(){
             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                     <div id = "content">
                     <span>
-                    - check <br>
-                    2차 주문 일정: 7월 12일 ~ 15일 <br>
-                    2차 일괄 발송: 7월 18일 <br>
-                    3차 주문 일정: 7월 19일 ~ 22일 <br>
-                    <br><br>
-                    - schedule <br>
-                   	 금, 토, 일, 월: 주문 및 제작 <br>
-                    	화, 수: 제작 <br>
-                    	목: 일괄 발송 <br>
+                    ${ product.prod_content }
                     </span>
                     </div>
             </div>
