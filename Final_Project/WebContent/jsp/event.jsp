@@ -75,8 +75,8 @@
 					<tr>
 						<td colspan="4">
 							<%-- <td>${event.event_pict}</td> --%>
-							<img src = "C:\Users\student\git\final_project\Final_Project\WebContent\images\${event.event_pict}" alt="이미지 로딩에 문제" width = "700px"> <br><br>
-							<%-- <img src="download.do?num=${board.num}"> --%>
+							
+							<img src="download.do?num=${board.num}" width = "700px"> <br><br>
 							<p>${event.event_content}</p>
 						</td>
 					</tr>

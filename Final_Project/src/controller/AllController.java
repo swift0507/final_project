@@ -116,6 +116,11 @@ public class AllController {
 
 	}
 	
+	//수진수정
+//	public View download(int num) { 
+//		
+//	}
+	
 }
 
 

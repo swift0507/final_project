@@ -12,7 +12,12 @@
     	select * from notice order by notice_id desc
     </select>
     
+    <!-- 전체 게시물 수 구하기 -->
     <select id="getCount" resultType="int">
     	select count(*) from notice
     </select>
+    
+    <update id="updateReadCount" parameterType="int">
+   		update notice set notice_readcount = notice_readcount+1 where notice_id = #{notice_id}
+   	</update>
     </mapper>
