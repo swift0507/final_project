@@ -10,8 +10,8 @@ public class noticeDaoTest {
 
 		NoticeDao ndao = context.getBean("noticeDao",NoticeDao.class);
 		
-		System.out.println(ndao.selectOne(2));
+//		System.out.println(ndao.selectOne(2));
 //		System.out.print(ndao.selectAll());
-//		System.out.println(ndao.getCount());
+		System.out.println(ndao.getCount());
 	}
 }

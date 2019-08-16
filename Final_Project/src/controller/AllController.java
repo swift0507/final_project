@@ -101,12 +101,19 @@ public class AllController {
 
 	}
 	
+	@RequestMapping("noticeList.do")
+	public void noticeList(Model model) {
+		model.addAttribute("noticeList", service.getNoticeList());
+	}
+	
+	@RequestMapping("notice.do")
+	public void notice(int notice_id, Model model) {
+//		System.out.println(notice_id);
+		model.addAttribute("notice", service.readEvent(notice_id));
+
+	}
 	
 }
-
-
-
-
 
 
 

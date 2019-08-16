@@ -8,5 +8,9 @@ public interface NoticeDao {
 	
 	public Notice selectOne(int notice_id);
 	public List<Notice> selectAll();
+	
+	public int getCount();
+	
+	public void updateReadCount(int notice_id);
 
 }

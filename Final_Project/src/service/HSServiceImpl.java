@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import model.Event;
 import model.Member;
+import model.Notice;
 import model.OptionDetail;
 import model.ProdOption;
 import model.Product;
@@ -90,5 +91,23 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	//공지사항 읽기
+	@Override
+	public Notice readNotice(int notice_id) {
+		// TODO Auto-generated method stub
+		noticeDao.updateReadCount(notice_id);
+		return noticeDao.selectOne(notice_id);
+	}
+
+	//공지사항list전부 가져오기
+	@Override
+	public List<Notice> getNoticeList() {
+		// TODO Auto-generated method stub
+		List<Notice> notice = noticeDao.selectAll();
+		System.out.println(notice);
+		return notice;
+	}
+	
 
 }

@@ -11,4 +11,8 @@
     <select id="selectAll" resultType="notice">
     	select * from notice order by notice_id desc
     </select>
+    
+    <select id="getCount" resultType="int">
+    	select count(*) from notice
+    </select>
     </mapper>
