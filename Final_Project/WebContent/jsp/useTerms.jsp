@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
-
+  <link href="footer.css" rel="stylesheet" type="text/css">
   <title>핸쇼</title>
 
   <!-- Optional JavaScript -->
@@ -40,24 +40,24 @@
 			speedAsDuration : true
 		});
 	</script>
-
+<div class = "content">
 	<div class="container">
 		<div class="row">
 			<div class="col"></div>
 			<div class="col-8">
 				<h3>이용약관</h3>
 				<hr>
-				<h3>서비스 이용약관</h3>
+				<h4>서비스 이용약관</h4>
 				<br>
-				<h4>제1장 총칙</h4>
+				<h5>제1장 총칙</h5>
 				<br>
-				<h5>제1조 (목적)</h5>
+				<h6>제1조 (목적)</h6>
 				본 약관은 서비스 이용자가 주식회사 핸쇼 또는 (주)핸쇼, 혹은 HandShow Inc. (이하 "회사"라 합니다)가
 				제공하는 온라인상의 인터넷 서비스(이하 "서비스"라고 하며, 접속 가능한 유•무선 단말기의 종류와는 상관없이 이용 가능한
 				"회사"가 제공하는 모든 "서비스"를 의미합니다. 이하 같습니다)에 회원으로 가입하고 이를 이용함에 있어 회사와 회원(본
 				약관에 동의하고 회원등록을 완료한 서비스 이용자를 말합니다. 이하 "회원"이라고 합니다)의 권리•의무 및 책임사항을
 				규정함을 목적으로 합니다. <br> <br>
-				<h5>제2조 (약관의 명시, 효력 및 개정)</h5>
+				<h6>제2조 (약관의 명시, 효력 및 개정)</h6>
 				가. 회사는 이 약관의 내용을 회원이 쉽게 알 수 있도록 서비스 초기 화면에 게시합니다. <br> <br>
 				나. 회사는 온라인 디지털콘텐츠산업 발전법, 전자상거래 등에서의 소비자보호에 관한 법률, 약관의 규제에 관한 법률,
 				소비자기본법 등 관련법을 위배하지 않는 범위에서 이 약관을 개정할 수 있습니다. <br> <br> 다.
@@ -77,7 +77,7 @@
 			<div class="col"></div>
 		</div>
 	</div>
-
+</div>
 	<div class="text-right">
 		<a data-scroll href="#header_nav"><button type="button"
 				class="btn btn-info">TOP</button></a>
