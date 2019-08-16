@@ -60,6 +60,7 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		return product;
 	}
 	
+	//이벤트 list전부 가져오기
 	@Override
 	public List<Event> getEventList() {
 		// TODO Auto-generated method stub
@@ -83,7 +84,7 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		return optionDetailDao.selectByOption(opt_id);
 	}
 
-	//조회수 증가
+	//이벤트 조회수 증가
 	@Override
 	public int updateReadCount(int event_readcount) {
 		// TODO Auto-generated method stub

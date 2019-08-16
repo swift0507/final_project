@@ -21,4 +21,6 @@
    		update event set event_readcount = event_readcount+1 where event_id = #{evnet_id}
    	</update>
     
+    
+    
 </mapper>
