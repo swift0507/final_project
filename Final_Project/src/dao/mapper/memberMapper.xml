@@ -8,7 +8,7 @@
     </select>
     
     <select id="passCheck" resultType="member">
-    	select * from member where mem_pw = #{mem_pw}
+    	select * from member where mem_id = #{mem_id} and mem_pw = #{mem_pw}
     </select>
     
     </mapper>

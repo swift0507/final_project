@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +13,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
-
+  <link href="footer.css" rel="stylesheet" type="text/css">
   <title>핸쇼</title>
 
   <!-- Optional JavaScript -->
@@ -50,37 +52,40 @@
 			speedAsDuration : true
 		});
 	</script>
-
+<div class = "content">
 	<div class="container">
 		<div class="row">
-			<div class="col"></div>
+			<div class="col-2"></div>
 			<div class="col-8">
 				<h5><b>이벤트</b></h5>
-				<hr>
-				<table style = "width : 800px">
-					<tr>
-						<td>
-							<h6><b>2019 렛츠락 페스티벌 Vol.13</b></h6>
-						</td>
+			
+				<table class = "table" style = "width : 700px">
+					<tr style = "height: 20px;">
 					</tr>
 					<tr>
-						<td>
-							<img src = "images/test.jpg" width = 800>
+						<th style = "width : 100px">작성일</th>
+						<td class = "text-left" style = "width : 250px">${event.event_date}</td>
+						<th style = "width : 100px">조회수</th>
+						<td class = "text-left" style = "width : 250px">${event.event_readcount}</td>
+					</tr>
+					<tr>
+						<th>제목</th>
+						<td colspan="3" class = "text-left">${event.event_title}</td>
+					</tr>
+					<tr>
+						<td colspan="4">
+							<%-- <td>${event.event_pict}</td> --%>
+							<img src = "C:\Users\student\git\final_project\Final_Project\WebContent\images\${event.event_pict}" alt="이미지 로딩에 문제" width = "700px"> <br><br>
+							<%-- <img src="download.do?num=${board.num}"> --%>
+							<p>${event.event_content}</p>
 						</td>
 					</tr>
-					<!-- <tr>
-						<td>
-							<p>
-							Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-							</p>
-						</td>
-					</tr> -->
 				</table>
 			</div>
-			<div class="col"></div>
+			<div class="col-2"></div>
 		</div>
 	</div>
-	
+</div>	
 	<a data-scroll href="#header_nav">
 		<button type="button" id = "top_button" class="btn btn-secondary">TOP</button>
 	</a>

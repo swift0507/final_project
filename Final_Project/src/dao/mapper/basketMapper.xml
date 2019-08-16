@@ -3,4 +3,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     <mapper namespace="dao.BasketDao">
+    <select id="countBasket" resultType="int">
+    	select count(*) from basket where mem_id = #{mem_id}
+    </select>
     </mapper>

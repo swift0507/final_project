@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +13,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
-
+  <link href="footer.css" rel="stylesheet" type="text/css">
   <title>핸쇼</title>
 
   <!-- Optional JavaScript -->
@@ -34,10 +36,12 @@
 <!-- header 종료 -->
 
 <!-- main body -->
+<div class = "content">
 	<div class = "container">
 		<div class = "row">
 			<div class = "col"></div>
 			<div class = "col-8">
+			
 				<h5><b>이벤트</b></h5>
 				<hr>
 				<table class="table table-hover text-center">
@@ -49,58 +53,49 @@
 				    </tr>
 				  </thead>
 				  <tbody>
-				    <tr>
-				      <th scope="row">3</th>
-				      <td>개쩌는 이벤트</td>
-				      <td colspan = 2>2019-08-08</td>
-				    </tr>
-				    
-				    <tr>
-				      <th scope="row">2</th>
-				      <td colspan = 2>개쩌는 이벤트</td>
-				      <td>2019-08-08</td>
 				  
-				    </tr>
-				    
+				  <!-- 자료넣기 -->
+				  <c:forEach items="${eventList}" var="e">
 				    <tr>
-				      <th scope="row">1</th>
-				      <td colspan="2">개쩌는 이벤트</td>
-				      <td>2019-08-08</td>
+				      <th scope="row">${e.event_id}</th>
+				      <td><a href="event.do?event_id=${e.event_id}">${e.event_title}</a></td>
+				      <td colspan = 2>${e.event_date}</td>
 				    </tr>
+				   </c:forEach>
+				    
 				  </tbody>
 				</table>
 				
-				<div class = "container">
-					<nav aria-label="Page navigation example">
-						<ul class="pagination justify-content-center">
-							<li class="page-item">
-								<a class="page-link" href="#" aria-label="Previous"> 
-								<span aria-hidden="true">&laquo;</span>
-								</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">1</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">2</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">3</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#" aria-label="Next"> 
-								<span aria-hidden="true">&raquo;</span>
-								</a>
-							</li>
-						</ul>
-					</nav>
-				</div>
 				
+				<nav>
+					<ul class="pagination justify-content-center">
+						<li class="page-item">
+							<a class="page-link" href="#"> 
+								<span>&laquo;</span>
+							</a>
+						</li>
+						<li class="page-item">
+							<a class="page-link" href="#">1</a>
+						</li>
+						<li class="page-item">
+							<a class="page-link" href="#">2</a>
+						</li>
+						<li class="page-item">
+							<a class="page-link" href="#">3</a>
+						</li>
+						<li class="page-item">
+							<a class="page-link" href="#"> 
+								<span>&raquo;</span>
+							</a>
+						</li>
+					</ul>
+				</nav>
 			</div>
 				
 			<div class = "col"></div>
 		</div>
 	</div>
+</div>
 <!-- main body 종료-->
 
 <!-- footer -->
