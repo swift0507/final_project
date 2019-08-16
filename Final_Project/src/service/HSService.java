@@ -32,6 +32,6 @@ public interface HSService {
 	//옵션ID로 해당 옵션의 옵션 상세 리스트 가져오기
 	public List<OptionDetail> getOptionDetail(int opt_id);
 
-	//조회수 증가
+	//이벤트 조회수 증가
 	public int updateReadCount(int event_readcount);
 }
