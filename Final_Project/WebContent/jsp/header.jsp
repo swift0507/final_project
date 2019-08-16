@@ -136,10 +136,10 @@ $(document).ready(function(){
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="mx-auto d-sm-flex d-block flex-sm-nowrap">
 			<div class="navbar-nav">
-				<a class="nav-item nav-link" href="#">인기 상품</a>
-				<a class="nav-item nav-link" href="#">나의 추천 상품</a>
-				<a class="nav-item nav-link" href="#">최근 등록 상품</a>
-				<a class="nav-item nav-link" href="#">이벤트</a>
+				<a class="nav-item nav-link" href="popularProd.jsp">인기 상품</a>
+				<a class="nav-item nav-link" href="user/recommend.jsp">나의 추천 상품</a>
+				<a class="nav-item nav-link" href="latestProd.jsp">최근 등록 상품</a>
+				<a class="nav-item nav-link" href="eventList.jsp">이벤트</a>
 			</div>
 		</div>
 	</nav>
