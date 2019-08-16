@@ -1,9 +1,11 @@
 package service;
 
+import java.io.File;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import dao.EventDao;
 import model.Event;
 import model.Member;
 import model.Notice;
@@ -14,6 +16,8 @@ import model.Product;
 @Service
 public class HSServiceImpl extends HSServiceField implements HSService {
 	
+	EventDao eDao;
+	
 	//로그인체크. 아이디가 없거나 비밀번호가 틀리면 null을 리턴하고 있으면 온전한 member를 리턴 
 	@Override
 	public Member loginCheck(Member m) {
@@ -22,7 +26,6 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		mem = memberDao.passCheck(m);
 		return mem;
 	}
-	
 
 	//이벤트 읽기
 	@Override
@@ -107,6 +110,25 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		List<Notice> notice = noticeDao.selectAll();
 		System.out.println(notice);
 		return notice;
+	}
+	
+	//공지사항 조회수 증가
+	@Override
+	public int updateReadCount1(int notice_readcount) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	//첨부파일
+	@Override
+	public File getAttachedFile(int num) {
+		// TODO Auto-generated method stub
+		
+		Event event = eDao.selectOne(num);
+		String event_pict = event.getEvent_pict();
+		String path = "C:/Temp/attach/";
+		
+		return new File(path+event_pict);
 	}
 	
 

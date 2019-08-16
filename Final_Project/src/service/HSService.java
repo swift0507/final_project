@@ -1,5 +1,6 @@
 package service;
 
+import java.io.File;
 import java.util.List;
 
 import model.Event;
@@ -42,4 +43,9 @@ public interface HSService {
 	//공지사항페이지의 게시물 리스트 출력
 	public List<Notice> getNoticeList();
 	
+	//공지사항 조회수 증가
+	int updateReadCount1(int notice_readcount);
+	
+	//첨부파일을 가져다 주는 기능
+	public File getAttachedFile(int num);
 }

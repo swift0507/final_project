@@ -14,7 +14,7 @@ import org.springframework.web.servlet.view.AbstractView;
 
 public class DownloadView extends AbstractView {
 
-	//파일객체를 필드로@@@@@@@
+	//파일객체를 필드로@
 	private File file;
 	
 	public DownloadView(File file) { 
