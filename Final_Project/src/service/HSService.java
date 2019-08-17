@@ -28,6 +28,9 @@ public interface HSService {
 
 	//상품ID로 상품 1개 가져오기
 	public Product getOneProduct(int prod_id);
+	
+	//상품 보기 조회수 증가
+	public void prodViewCount(int prod_id);
 
 	//상품ID로 옵션 리스트 가져오기
 	public HashMap<String, Object> getProdOption(int prod_id);

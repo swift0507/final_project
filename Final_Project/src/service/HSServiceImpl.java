@@ -53,13 +53,22 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		return basketDao.countBasket(mem_id);
 	}
 
-	//상품ID로 상품1개 가져오기
+	//상품ID로 상품1개 가져오기 (prodView)
 	@Override
 	public Product getOneProduct(int prod_id) {
 		// TODO Auto-generated method stub	
+		prodViewCount(prod_id);
+		
 		Product product = productDao.selectOne(prod_id);
 
 		return product;
+	}
+	
+	//상품 보기 조회수 증가(단순)
+	public void prodViewCount(int prod_id) {
+		
+		//조회수 증가
+		productDao.updateReadCount(prod_id);
 	}
 	
 	//이벤트 list전부 가져오기
@@ -98,8 +107,6 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		// TODO Auto-generated method stub
 		return optionDetailDao.selectByOption(opt_id);
 	}
-	
-//	public HashMap
 
 	//이벤트 조회수 증가
 	@Override
@@ -143,6 +150,8 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		
 		return new File(path+event_pict);
 	}
+	
+	
 	
 
 }

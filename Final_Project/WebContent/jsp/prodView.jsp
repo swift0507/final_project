@@ -114,7 +114,7 @@ $(document).ready(function(){
         <tr>
             <td>
                 <div id = "seller_id">
-                <h5>${ product.sel_id }</h5>
+                <h5>${ product.sel_id } / 조회수 : ${ product.prod_readcount }</h5>
                 </div>
             </td>
         </tr>
