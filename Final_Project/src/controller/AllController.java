@@ -80,12 +80,6 @@ public class AllController {
 	public void prodView(int prod_id, Model model) {
 		Product product = service.getOneProduct(prod_id);
 		
-//		for(int i = 0; i < prodOptionList.size(); i++) {
-//			//옵션 모델의 옵션 상세 필드에 해당 옵션 ID로 찾은 옵션상세 list를 set하기
-//			prodOptionList.get(i).setOptiondetail(service.getOptionDetail(prodOptionList.get()));		
-//			System.out.println(prodOptionList.get(i));
-//		}
-		
 		//옵션 보내기
 		model.addAllAttributes(service.getProdOption(prod_id));
 		

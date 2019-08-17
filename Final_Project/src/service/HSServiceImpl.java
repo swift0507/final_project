@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import dao.EventDao;
 import model.Event;
 import model.Member;
 import model.Notice;
@@ -16,8 +15,6 @@ import model.Product;
 
 @Service
 public class HSServiceImpl extends HSServiceField implements HSService {
-	
-	EventDao eDao;
 	
 	//로그인체크. 아이디가 없거나 비밀번호가 틀리면 null을 리턴하고 있으면 온전한 member를 리턴 
 	@Override
@@ -101,6 +98,8 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		// TODO Auto-generated method stub
 		return optionDetailDao.selectByOption(opt_id);
 	}
+	
+//	public HashMap
 
 	//이벤트 조회수 증가
 	@Override
@@ -133,12 +132,12 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		return 0;
 	}
 
-	//첨부파일
+	//이벤트 첨부파일
 	@Override
 	public File getAttachedFile(int num) {
 		// TODO Auto-generated method stub
 		
-		Event event = eDao.selectOne(num);
+		Event event = eventDao.selectOne(num);
 		String event_pict = event.getEvent_pict();
 		String path = "C:/Temp/attach/";
 		
