@@ -48,7 +48,8 @@
 			<div class = "col-8">
 				<!-- 주문 전체 정보 header table -->
 				<table style = "width: 700px;">
-					<tr style = "height: 30px;">
+					<tr style = "height: 30px;"></tr>
+					<tr>
 						<td>
 							<h5><b>주문 내역 상세 보기</b></h5>
 						</td>
@@ -56,12 +57,8 @@
 					<tr>
 						<td>
 							<span> 주문번호 : 123-45-678910 </span> &nbsp;&nbsp;&nbsp;
-							<span> 주문일 : 2019-08-16 </span> 
-						</td>
-					</tr>
-					<tr style = "height: 10px">
-						<td colspan = 3>
-							<hr>
+							<span> 주문일 : 2019-08-16 </span>
+							<hr> 
 						</td>
 					</tr>
 				</table>

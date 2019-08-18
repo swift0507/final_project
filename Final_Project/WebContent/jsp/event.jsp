@@ -31,6 +31,7 @@
 </head>
 <style>
 #top_button {
+	background-color: transparent;
     position: fixed;
     bottom: 0;
     right: 0;
@@ -39,6 +40,30 @@
 	display: none;
 }
 </style>
+<script>
+	var scroll = new SmoothScroll('a[href*="#"]', {
+		speed : 1500,
+		speedAsDuration : true
+	});
+</script>
+<script>
+	// When the user scrolls down 20px from the top of the document, show the button
+	window.onscroll = function() {scrollFunction()};
+
+	function scrollFunction() {
+  		if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    		document.getElementById("top_button").style.display = "block";
+ 		} else {
+    		document.getElementById("top_button").style.display = "none";
+  		}
+	}
+
+	// When the user clicks on the button, scroll to the top of the document
+	function topFunction() {
+	  document.body.scrollTop = 0;
+	  document.documentElement.scrollTop = 0;
+	}
+</script>
 <body>
 <!-- header -->
 <header>
@@ -46,12 +71,7 @@
 </header>
 <!-- header 종료 -->
 
-	<script>
-		var scroll = new SmoothScroll('a[href*="#"]', {
-			speed : 1500,
-			speedAsDuration : true
-		});
-	</script>
+<!-- main body -->
 <div class = "content">
 	<div class="container">
 		<div class="row">
@@ -91,26 +111,9 @@
 	</a>
 	
 	<hr>
-	
-	
-	<script>
-	// When the user scrolls down 20px from the top of the document, show the button
-	window.onscroll = function() {scrollFunction()};
 
-	function scrollFunction() {
-  		if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-    		document.getElementById("top_button").style.display = "block";
- 		} else {
-    		document.getElementById("top_button").style.display = "none";
-  		}
-	}
+<!-- main body 종료 -->
 
-	// When the user clicks on the button, scroll to the top of the document
-	function topFunction() {
-	  document.body.scrollTop = 0;
-	  document.documentElement.scrollTop = 0;
-	}
-</script>
 <!-- footer -->
 <footer>
 	<jsp:include page="footer.jsp"></jsp:include>
