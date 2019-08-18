@@ -50,6 +50,15 @@ public class AllController {
 		return "redirect: main.do";
 	}
 	
+	//인기상품
+	@RequestMapping("popularProd.do")
+	public void popularProd() {}
+	
+	//최근 등록 상품
+	@RequestMapping("latestProd.do")
+	public void latestProd() {}
+	
+	
 	/*로그인폼버튼요청*/
 	//member가 있으면 세션 id에 id 세팅 grade에 등급 세팅하고 true 리턴 아님 false 리턴 
 	@RequestMapping("login.do")
