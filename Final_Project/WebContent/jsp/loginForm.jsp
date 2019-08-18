@@ -80,12 +80,12 @@ $(document).ready(function(){
         </tr>
         <tr>
             <td colspan = 2>
-                <input type="text" id="mem_id" class="form-control" placeholder="아이디" aria-describedby="sizing-addon1">
+                <input type="text" id="mem_id" class="form-control" placeholder="아이디">
             </td>
         </tr>
         <tr>
             <td colspan = 2>
-                <input type="password" id="mem_pw" class="form-control" placeholder="비밀번호" aria-describedby="sizing-addon1">
+                <input type="password" id="mem_pw" class="form-control" placeholder="비밀번호">
             </td>
         </tr>
         <tr>
