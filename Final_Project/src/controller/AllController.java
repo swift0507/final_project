@@ -26,7 +26,7 @@ public class AllController {
 	HSService service;
 	
 	@RequestMapping("main.do")
-	public void main() {}
+	public void main() {} 
 	
 	/*헤더풋터요청*/
 	//로그인페이지에 올 때 가고자하는 url을 보내줌
@@ -49,6 +49,15 @@ public class AllController {
 		session.invalidate();
 		return "redirect: main.do";
 	}
+	
+	//인기상품
+	@RequestMapping("popularProd.do")
+	public void popularProd() {}
+	
+	//최근 등록 상품
+	@RequestMapping("latestProd.do")
+	public void latestProd() {}
+	
 	
 	/*로그인폼버튼요청*/
 	//member가 있으면 세션 id에 id 세팅 grade에 등급 세팅하고 true 리턴 아님 false 리턴 
@@ -79,14 +88,12 @@ public class AllController {
 	@RequestMapping("prodView.do")
 	public void prodView(int prod_id, Model model) {
 		Product product = service.getOneProduct(prod_id);
-		List<ProdOption> prodOptionList = service.getProdOption(prod_id);
 		
-		for(int i = 0; i < prodOptionList.size(); i++) {
-			prodOptionList.get(i).setOptiondetail(service.getOptionDetail(prodOptionList.get(i).getOpt_id()));
-		}
+		//옵션 보내기
+		model.addAllAttributes(service.getProdOption(prod_id));
 		
+		//상품 보내기
 		model.addAttribute("product", product);
-		model.addAttribute("option", prodOptionList);
 	}
 	
 	@RequestMapping("eventList.do")
@@ -101,12 +108,24 @@ public class AllController {
 
 	}
 	
+	@RequestMapping("noticeList.do")
+	public void noticeList(Model model) {
+		model.addAttribute("noticeList", service.getNoticeList());
+	}
+	
+	@RequestMapping("notice.do")
+	public void notice(int notice_id, Model model) {
+//		System.out.println(notice_id);
+		model.addAttribute("notice", service.readEvent(notice_id));
+
+	}
+	
+	//수진수정
+//	public View download(int num) { 
+//		
+//	}
 	
 }
-
-
-
-
 
 
 

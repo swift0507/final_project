@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,6 +31,7 @@
 </head>
 <style>
 #top_button {
+	background-color: transparent;
     position: fixed;
     bottom: 0;
     right: 0;
@@ -37,68 +40,13 @@
 	display: none;
 }
 </style>
-<body>
-<!-- header -->
-<header>
-	<jsp:include page="header.jsp"></jsp:include>
-</header>
-<!-- header 종료 -->
-
-	<script>
-		var scroll = new SmoothScroll('a[href*="#"]', {
-			speed : 1500,
-			speedAsDuration : true
-		});
-	</script>
-<div class = "content">
-	<div class="container">
-		<div class="row">
-			<div class="col"></div>
-			<div class="col-8">
-				<h5><b>이벤트</b></h5>
-				<hr>
-				<table style = "width : 800px">
-					<tr>
-						<td>
-							<b>[2019 렛츠락 페스티벌 Vol.13]</b>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<b> 날짜 : </b> 
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<b> 조회수 : </b> 
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<img src = "images/test.jpg" width = 800>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<p>
-							Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-							</p>
-						</td>
-					</tr>
-				</table>
-			</div>
-			<div class="col"></div>
-		</div>
-	</div>
-</div>	
-	<a data-scroll href="#header_nav">
-		<button type="button" id = "top_button" class="btn btn-secondary">TOP</button>
-	</a>
-	
-	<hr>
-	
-	
-	<script>
+<script>
+	var scroll = new SmoothScroll('a[href*="#"]', {
+		speed : 1500,
+		speedAsDuration : true
+	});
+</script>
+<script>
 	// When the user scrolls down 20px from the top of the document, show the button
 	window.onscroll = function() {scrollFunction()};
 
@@ -116,6 +64,56 @@
 	  document.documentElement.scrollTop = 0;
 	}
 </script>
+<body>
+<!-- header -->
+<header>
+	<jsp:include page="header.jsp"></jsp:include>
+</header>
+<!-- header 종료 -->
+
+<!-- main body -->
+<div class = "content">
+	<div class="container">
+		<div class="row">
+			<div class="col-2"></div>
+			<div class="col-8">
+				<h5><b>이벤트</b></h5>
+			
+				<table class = "table" style = "width : 700px">
+					<tr style = "height: 20px;">
+					</tr>
+					<tr>
+						<th style = "width : 100px">작성일</th>
+						<td class = "text-left" style = "width : 250px">${event.event_date}</td>
+						<th style = "width : 100px">조회수</th>
+						<td class = "text-left" style = "width : 250px">${event.event_readcount}</td>
+					</tr>
+					<tr>
+						<th>제목</th>
+						<td colspan="3" class = "text-left">${event.event_title}</td>
+					</tr>
+					<tr>
+						<td colspan="4">
+							<%-- <td>${event.event_pict}</td> --%>
+							
+							<img src="download.do?num=${board.num}" width = "700px"> <br><br>
+							<p>${event.event_content}</p>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="col-2"></div>
+		</div>
+	</div>
+</div>	
+	<a data-scroll href="#header_nav">
+		<button type="button" id = "top_button" class="btn btn-secondary">TOP</button>
+	</a>
+	
+	<hr>
+
+<!-- main body 종료 -->
+
 <!-- footer -->
 <footer>
 	<jsp:include page="footer.jsp"></jsp:include>

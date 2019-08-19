@@ -5,13 +5,6 @@
 <head>
 	<meta charset="UTF-8">
 	<title>핸쇼</title>
-<script>
-$(document).ready(function(){
-	$('#notice').click(function(){
-		alert('hello?');
-	})
-})
-</script>
 </head>
 <body>
 	<table style = "width: 175px; margin-left: auto; margin-right: auto;">
