@@ -11,4 +11,14 @@
     	select * from member where mem_id = #{mem_id} and mem_pw = #{mem_pw}
     </select>
     
+    <select id="findId" resultType="member">
+    	select * from member where mem_name = #{mem_name} and mem_email = #{mem_email} and mem_birth = #{mem_birth} 
+    </select>
+    
+    <select id="findPw" resultType="member">
+    	select * from member where mem_id=#{mem_id} and mem_name = #{mem_name} and mem_email = #{mem_email} and mem_birth = #{mem_birth} 
+    </select>
+    <update id="resetPw">
+    	update member set mem_pw=#{mem_pw} where mem_id=#{mem_id}
+    </update>
     </mapper>

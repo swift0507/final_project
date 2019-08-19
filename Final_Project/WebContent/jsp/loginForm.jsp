@@ -52,7 +52,7 @@
 							alert("아이디 또는 비밀번호가 일치하지 않습니다..")
 						}
 						else{
-							window.location.assign($('#targetURL').attr('value'));
+							window.location.assign($('#targetURL').val());
 						}
 					}
 				});
@@ -72,7 +72,9 @@
         </tr>
         <tr>
             <td colspan = 2 align = "center" height = 100>
-            	<img src = "images/logo.png" width = 160 height = 60>
+            	<a class="navbar-brand" href="/Final_Project/main.do">
+					<img src="images/logo.png" id="logo" width=160 height=60>
+				</a>
             </td>
         </tr>
         <tr>

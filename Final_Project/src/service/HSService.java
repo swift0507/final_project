@@ -15,6 +15,16 @@ public interface HSService {
 	
 	//로그인체크 
 	public Member loginCheck(Member m);
+	
+	//id찾기
+	public Member findId(Member m);
+	
+	//pw찾기
+	public Member findPw(Member m);
+	
+	//pw재설정
+	public int resetPw(Member m);
+	
 	//밴리스트체크
 	public boolean banCheck(String ban_id);
 	//해당 아이디 장바구니 개수 가져오기

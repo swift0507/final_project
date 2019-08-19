@@ -60,12 +60,15 @@
 		}
 		
 	</style>
+<script type="text/javascript">
 
-	<script type="text/javascript">
+$(document).ready(function(){
+	var loc = "/Final_Project/loginForm.do?url="+location.pathname;
+
+	$("#targetURL").attr("href", loc)
 	
-	$(document).ready(function(){
-		var loc = "loginForm.do?url="+location.pathname;
-	
+	$("#logout").on("click", function(){
+		alert("로그아웃되셨습니다.")
 		$("#targetURL").attr("href", loc)
 		
 		$("#logout").on("click", function(){
@@ -73,7 +76,12 @@
 		});
 	});
 	
-	</script>
+	if(location.pathname.search("/user") != -1 || location.pathname.search("/seller") != -1){
+		$("#logo").attr("src", "../images/logo.png")
+	}
+});
+
+</script>
 </head>
 <body>
 <div class = "header_main">
@@ -83,10 +91,10 @@
 			<c:choose>
 				<c:when test="${loginUserInfo==null}">
 					<li class="nav-item">
-						<a href="loginForm.do" class="nav-link" id="targetURL">로그인</a>
+						<a href="" class="nav-link" id="targetURL">로그인</a>
 					</li>
 					<li class="nav-item">
-						<a href="signUpForm.do" class="nav-link">회원가입</a>
+						<a href="/Final_Project/signUpForm.do" class="nav-link">회원가입</a>
 					</li>
 				</c:when>
 				<c:otherwise>
@@ -94,12 +102,12 @@
 						<b class="nav-link" style="color : white;">${loginUserInfo.mem_name}님</b>
 					</li>
 					<li class="nav-item">
-						<a href="logout.do" class="nav-link" id="logout">로그아웃</a>
+						<a href="/Final_Project/logout.do" class="nav-link" id="logout">로그아웃</a>
 					</li>
 				</c:otherwise>
 			</c:choose>
 				<li class="nav-item">
-					<a href="support.do" class="nav-link">고객센터</a>
+					<a href="/Final_Project/support.do" class="nav-link">고객센터</a>
 				</li>
 			</ul>
 		</div>
@@ -111,11 +119,11 @@
 			</td>
 			<td class = "logo text-center">
 				<a class="navbar-brand" href="main.do">
-					<img src="images/logo.png" style = "width: 150px; height: 50px;">
+					<img src="images/logo.png" id="logo" style = "width: 150px; height: 50px;">
 				</a>
 			</td>
 			<td class = "search_form">
-			<form class="form-inline my-2 my-lg-0 justify-content-center" action="search.do" method="get">				
+			<form class="form-inline my-2 my-lg-0 justify-content-center" action="/Final_Project/search.do" method="get">				
 				<input class="form-control mr-sm-2" style="width: 300px;" type="text" name="keyword" placeholder="상품명 또는 사장님 입력" aria-label="Search">
 				<input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="검색">
 			</form>
@@ -123,9 +131,9 @@
 			<td class = "blank">
 			</td>
 			<td class= "icon text-center">
-				<a href="user/myPage.do" class="text-decoration-none text-dark"><i class = "fas fa-user" style = "font-size: 24px;"></i></a>
+				<a href="/Final_Project/user/myPage.do" class="text-decoration-none text-dark"><i class = "fas fa-user" style = "font-size: 24px;"></i></a>
 				&nbsp;&nbsp;&nbsp;
-				<a href="user/basket.do" class="text-decoration-none text-dark"><i class = "fas fa-shopping-cart" style = "font-size: 24px;"><span class="badge badge-pill badge-danger" id = "cart_amt" style='font-size: 12px'>${loginUserInfo.countBasket}</span></i></a>
+				<a href="/Final_Project/user/basket.do" class="text-decoration-none text-dark"><i class = "fas fa-shopping-cart" style = "font-size: 24px;"><span class="badge badge-pill badge-danger" id = "cart_amt" style='font-size: 12px'>${loginUserInfo.countBasket}</span></i></a>
 			</td>
 		</tr>
 	</table>
@@ -133,10 +141,10 @@
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="mx-auto d-sm-flex d-block flex-sm-nowrap">
 			<div class="navbar-nav">
-				<a class="nav-item nav-link" href="popularProd.do">인기 상품</a>
-				<a class="nav-item nav-link" href="user/recommend.jsp">나의 추천 상품</a>
-				<a class="nav-item nav-link" href="latestProd.do">최근 등록 상품</a>
-				<a class="nav-item nav-link" href="eventList.do">이벤트</a>
+				<a class="nav-item nav-link" href="/Final_Project/popularProd.do">인기 상품</a>
+				<a class="nav-item nav-link" href="/Final_Project/user/recommend.jsp">나의 추천 상품</a>
+				<a class="nav-item nav-link" href="/Final_Project/latestProd.do">최근 등록 상품</a>
+				<a class="nav-item nav-link" href="/Final_Project/eventList.do">이벤트</a>
 			</div>
 		</div>
 	</nav>

@@ -10,11 +10,11 @@
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="mx-auto d-sm-flex d-block flex-sm-nowrap">
 			<div class="navbar-nav">
-				<a class="nav-item nav-link" href="noticeList.jsp">공지사항</a> 
-				<a class="nav-item nav-link" href="#">문의하기</a> 
-				<a class="nav-item nav-link" href="#">FAQ</a>
-				<a class="nav-item nav-link" href="personal_info.jsp">개인정보취급방침</a> 
-				<a class="nav-item nav-link" href="provision.jsp">이용약관</a>
+				<a class="nav-item nav-link" href="/Final_Project/noticeList.do">공지사항</a> 
+				<a class="nav-item nav-link" href="/Final_Project/user/contactWriteForm.do">문의하기</a> 
+				<a class="nav-item nav-link" href="/Final_Project/faq.do">FAQ</a>
+				<a class="nav-item nav-link" href="/Final_Project/privacyTerms.do">개인정보취급방침</a> 
+				<a class="nav-item nav-link" href="/Final_Project/useTerms.do">이용약관</a>
 			</div>
 		</div>
 	</nav>
