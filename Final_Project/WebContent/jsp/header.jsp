@@ -45,11 +45,11 @@
 	}
 	
 	.blank {
-		width: 20%;
+		width: 15%;
 	}
 	
 	.search_form {
-		width: 25%;
+		width: 35%;
 		nowrap;
 	}
 	
@@ -113,12 +113,12 @@ $(document).ready(function(){
 			</td>
 			<td class = "logo text-center">
 				<a class="navbar-brand" href="main.do">
-					<img src="images/logo.png" width=150 height=50>
+					<img src="images/logo.png" style = "width: 150px; height: 50px;">
 				</a>
 			</td>
 			<td class = "search_form">
 			<form class="form-inline my-2 my-lg-0 justify-content-center" action="search.do" method="get">				
-				<input class="form-control mr-sm-2" style="width: 400px;" type="text" name="keyword" placeholder="상품명 또는 사장님 입력" aria-label="Search">
+				<input class="form-control mr-sm-2" style="width: 300px;" type="text" name="keyword" placeholder="상품명 또는 사장님 입력" aria-label="Search">
 				<input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="검색">
 			</form>
 			</td>
