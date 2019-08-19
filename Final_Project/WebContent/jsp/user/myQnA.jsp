@@ -25,15 +25,6 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 	  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	  crossorigin="anonymous"></script>
-	<style>
-		.checked {
-			color: orange;
-		}
-		
-		#item_image {
-			text-align: center;
-		}
-	</style>
 </head>
 <body>
 <!-- header -->
@@ -50,23 +41,21 @@
 				<jsp:include page = "userSideMenu.jsp"></jsp:include>
 			</div>
 			<div class = "col-8">
-				<!-- 후기 header / 작성 button -->
+				<!-- QnA header -->
 				<table style = "width: 700px;">
 					<tr>
 						<td>
-							<h5><b>나의 후기</b></h5>
-						</td>
-						<td class = "text-right">
-							<button class = "btn btn-sm btn-secondary">후기 작성</button>
+							<h5><b>나의 QnA</b></h5>
 						</td>
 					</tr>
 					<tr>
 						<td><hr></td>
 					</tr>
 				</table>
-				<!-- 후기 header / 작성 button 종료 -->
-				
-				<!-- 후기 table 1 -->
+				<!-- QnA header 종료 -->
+				  	<button class = "btn btn-sm btn-secondary">수정</button>
+					      	<button class = "btn btn-sm btn-danger">삭제</button>
+				<!-- QnA table 1 -->
 				<table style = "width: 700px;">
 					<tr>
 					    <th style = "width: 75px;">
@@ -74,10 +63,6 @@
 					    </th>
 					    <th>
 					      	로즈마리 천연 비누 1개
-					    </th>
-					    <th class = "text-right">
-					    	<button class = "btn btn-sm btn-secondary">수정</button>
-					      	<button class = "btn btn-sm btn-danger">삭제</button>
 					    </th>
 				    </tr>
 				    <tr style = "height: 10px;"></tr>
@@ -104,47 +89,7 @@
 				</table>
 				<br>
 				<hr>
-				<!-- 후기 table 1 종료-->
-				
-				<!-- 후기 table 2 -->
-				<table style = "width: 700px;">
-					<tr>
-					    <th style = "width: 75px;">
-					    	<img src = "images/sk.png" style = "width: 50px; height: 50px;">
-					    </th>
-					    <th>
-					      	로즈마리 천연 비누 1개
-					    </th>
-					    <th class = "text-right">
-					    	<button class = "btn btn-sm btn-secondary">수정</button>
-					      	<button class = "btn btn-sm btn-danger">삭제</button>
-					    </th>
-				    </tr>
-				    <tr style = "height: 10px;"></tr>
-				    <tr>
-				    	<td colspan = 3>
-				    		<span id = "star_rating">
-			                	<span class="fa fa-star checked"></span>
-			                	<span class="fa fa-star checked"></span>
-			                	<span class="fa fa-star checked"></span>
-			               		<span class="fa fa-star checked"></span>
-			                	<span class="fa fa-star"></span>
-			                </span>
-				    	</td>
-				    </tr>
-				    <tr style = "height: 10px;"></tr>
-				    <tr>
-				    	<td colspan = 3>
-				    		<p class = "review">
-				    			좋습니다. 비누로 세수하면 건조한 느낌이라 싫어하는데 
-				    			이 비누는 촉촉하고 피부가 좋아지는 것이 느껴집니다.
-				    		</p>
-				    	</td>
-				    </tr>
-				</table>
-				<br>
-				<hr>
-				<!-- 후기 table 2 종료-->
+				<!-- QnA table 1 종료-->
 				
 				<!-- 페이징 처리  -->
 				<div class = "container">
