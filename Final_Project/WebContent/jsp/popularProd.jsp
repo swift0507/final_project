@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,20 +59,23 @@
 		<br>
 		<div class="row">
 			<div class="card-deck">
+			<c:forEach var="prod" items="${ popularProd }">
 				<div class="card">
-					<img src="images/sk.png" class="card-img-top" alt="..." width="200"
+					<img src="images/noimage.png" class="card-img-top" alt="..." width="200"
 						height="200">
 					<div class="card-body">
-						<h5 class="card-title">1st</h5>
-						<p class="card-text">SK Wyverns</p>
+						<h5 class="card-title">${ prod.prod_name }</h5>
+						<p class="card-text">${ prod.sel_id }</p>
+						<h5 class="card-price">${ prod.prod_price }</h5>
 					</div>
 					<div class="card-footer text-right">
 						<i class = "far fa-heart">10</i>
            	 	 		&nbsp;
               			<i class = "far fa-comment-dots">12</i>
 					</div>
-				</div>
-				<div class="card">
+				</div>		
+			</c:forEach>
+				<!-- <div class="card">
 					<img src="images/kw.png" class="card-img-top" alt="..." width="200"
 						height="200">
 					<div class="card-body">
@@ -122,7 +126,7 @@
            	 	 		&nbsp;
               			<i class = "far fa-comment-dots">12</i>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>

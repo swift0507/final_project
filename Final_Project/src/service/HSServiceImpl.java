@@ -80,6 +80,24 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		
 		return event;
 	}
+	
+	//인기순 상품 가져오기
+	public HashMap<String, Object> getProdByReadCount() {
+		HashMap<String, Object> popularProd = new HashMap<String, Object>();
+		
+		popularProd.put("popularProd", productDao.selectByReadCount());
+		
+		return popularProd;
+	}
+	
+	//최신순 상품 가져오기
+	public HashMap<String, Object> getProdByLatest() {
+		HashMap<String, Object> latestProd = new HashMap<String, Object>();
+		
+		latestProd.put("latestProd", productDao.selectByLatest());
+		
+		return latestProd;
+	}
 
 	//해당 상품의 옵션들 가져오기
 	@Override

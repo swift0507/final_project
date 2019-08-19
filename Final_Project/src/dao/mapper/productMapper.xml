@@ -12,4 +12,12 @@
     	update product set prod_readcount = (prod_readcount + 1) where prod_id = #{prod_id}
     </update>
     
+    <select id="selectByReadCount" resultType="product">
+    	select * from product order by prod_readcount desc
+    </select>
+    
+    <select id="selectByLatest" resultType="product">
+    	select * from product order by prod_date desc
+    </select>
+    
     </mapper>
