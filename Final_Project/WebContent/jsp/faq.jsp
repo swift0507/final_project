@@ -11,13 +11,13 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
-	<link href = "../footer.css" rel="stylesheet" type="text/css">
+	<link href = "footer.css" rel="stylesheet" type="text/css">
 	
 	<title>핸쇼</title>
 	
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.4.1.js"
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
  		integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
  		crossorigin="anonymous">
 	</script>
@@ -29,6 +29,7 @@
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 		crossorigin="anonymous">
 	</script>
+	
 </head> 
 <body>
 <!-- header -->
@@ -43,7 +44,7 @@
 		<div class = "col-3">
 			<jsp:include page = "supportSideMenu.jsp"></jsp:include>
 		</div>
-		<div class = "col-7">
+		<div class = "col-8">
 			<div class="container">
 			    <div id="accordion" class="accordion">
 			        <div class="card mb-0">
@@ -53,7 +54,7 @@
 			                </a>
 			            </div>
 			            <div id="collapseOne" class="card-body collapse" data-parent="#accordion" >
-			                ........
+			               	         정말 자주 물어보는 질문의 대답
 			            </div>
 			            <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
 			                <a class="card-title">
@@ -61,7 +62,7 @@
 			                </a>
 			            </div>
 			            <div id="collapseTwo" class="card-body collapse" data-parent="#accordion" >
-			                ..........
+			                 	정말 자주 물어보는 질문의 대답
 			            </div>
 			            <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
 			                <a class="card-title">
@@ -69,7 +70,7 @@
 			                </a>
 			            </div>
 			            <div id="collapseThree" class="collapse" data-parent="#accordion" >
-			            	......
+			            	 정말 자주 물어보는 질문의 대답
 			            </div>
 			        </div>
 			    </div>

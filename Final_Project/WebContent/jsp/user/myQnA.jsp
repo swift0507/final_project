@@ -17,7 +17,7 @@
 	
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.4.1.js"
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
  		integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
  		crossorigin="anonymous">
 	</script>
@@ -28,18 +28,7 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 		crossorigin="anonymous">
-	</script>
-	<script>
-	$(document).ready(function(){
-		$('.answer').hide();
-	
-		$('#arrow').click(function(){
-			$('.answer').toggle();
-			$('#arrow').toggleClass('far fa-caret-square-down far fa-caret-square-up');
-		})	
-	})
 	</script>	
-	
 </head>
 <body>
 <!-- header -->
