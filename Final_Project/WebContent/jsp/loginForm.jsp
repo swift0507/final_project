@@ -3,68 +3,65 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- Required meta tags -->
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-<!-- Bootstrap CSS -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
-<link rel='stylesheet'
-	href='https://use.fontawesome.com/releases/v5.7.0/css/all.css'
-	integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ'
-	crossorigin='anonymous'>
-
-<title>핸쇼</title>
-
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-	crossorigin="anonymous"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-	crossorigin="anonymous"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-	$("#loginCheck").on("click", function(){
-		if($("#mem_id").val()==""){
-			alert("아이디를 입력해주세요.");
-		}
-		else if($("#mem_pw").val()==""){
-			alert("비밀번호를 입력해주세요.");
-		}
-		else{
-			$.ajax({
-				//true면 이동 false면 안이동
-				url : "login.do",
-				data : {mem_id : $("#mem_id").val(), mem_pw :$("#mem_pw").val()},
-				type : "post",
-				success : function(data){
-					var result = data;
-					if(!result){
-						alert("아이디 또는 비밀번호가 일치하지 않습니다..")
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+	<link href = "/footer.css" rel="stylesheet" type="text/css">
+	
+	<title>핸쇼</title>
+	
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.4.1.js"
+ 		integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+ 		crossorigin="anonymous">
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous">
+	</script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous">
+	</script>
+	<script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15.0.0/dist/smooth-scroll.polyfills.min.js">
+	</script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$("#loginCheck").on("click", function(){
+			if($("#mem_id").val()==""){
+				alert("아이디를 입력해주세요.");
+			}
+			else if($("#mem_pw").val()==""){
+				alert("비밀번호를 입력해주세요.");
+			}
+			else{
+				$.ajax({
+					//true면 이동 false면 안이동
+					url : "login.do",
+					data : {mem_id : $("#mem_id").val(), mem_pw :$("#mem_pw").val()},
+					type : "post",
+					success : function(data){
+						var result = data;
+						if(!result){
+							alert("아이디 또는 비밀번호가 일치하지 않습니다..")
+						}
+						else{
+							window.location.assign($('#targetURL').attr('value'));
+						}
 					}
-					else{
-						window.location.assign($('#targetURL').attr('value'));
-					}
-				}
-			});
-		}
+				});
+			}
+		});
+		
+		
 	});
-	
-	
-});
-</script>
+	</script>
 </head>
 <body>
 	<input type="hidden" value= '${targetURL}' id='targetURL'>
