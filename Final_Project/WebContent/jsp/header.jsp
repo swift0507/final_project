@@ -125,7 +125,7 @@ $(document).ready(function(){
 			<td class = "blank">
 			</td>
 			<td class= "icon text-center">
-				<a href="user/mypage.do" class="text-decoration-none text-dark"><i class = "fas fa-user" style = "font-size: 24px;"></i></a>
+				<a href="user/myPage.do" class="text-decoration-none text-dark"><i class = "fas fa-user" style = "font-size: 24px;"></i></a>
 				&nbsp;&nbsp;&nbsp;
 				<a href="user/basket.do" class="text-decoration-none text-dark"><i class = "fas fa-shopping-cart" style = "font-size: 24px;"><span class="badge badge-pill badge-danger" id = "cart_amt" style='font-size: 12px'>${loginUserInfo.countBasket}</span></i></a>
 			</td>
