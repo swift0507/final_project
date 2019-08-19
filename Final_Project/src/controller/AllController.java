@@ -52,11 +52,15 @@ public class AllController {
 	
 	//인기상품
 	@RequestMapping("popularProd.do")
-	public void popularProd() {}
+	public void popularProd(Model model) {
+		model.addAllAttributes(service.getProdByReadCount());
+	}
 	
 	//최근 등록 상품
 	@RequestMapping("latestProd.do")
-	public void latestProd() {}
+	public void latestProd(Model model) {
+		model.addAllAttributes(service.getProdByLatest());
+	}
 	
 	
 	/*로그인폼버튼요청*/

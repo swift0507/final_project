@@ -25,6 +25,12 @@ public interface HSService {
 	
 	//이벤트페이지의 게시물 리스트 출력
 	public List<Event> getEventList();
+	
+	//인기순 상품목록 가져오기
+	public HashMap<String, Object> getProdByReadCount();
+	
+	//최신순 상품목록 가져오기
+	public HashMap<String, Object> getProdByLatest();
 
 	//상품ID로 상품 1개 가져오기
 	public Product getOneProduct(int prod_id);

@@ -160,7 +160,8 @@ $(document).ready(function(){
                	${ option.opt_name }
                		<select id = "select_opt" class="custom-select-sm" style="width: 250px;"> 
                	<c:forEach var="optiondetail" items="${ option.optiondetail }">
-                    <option>${ optiondetail.optd_choice } </option>
+                    <option id = "${ optiondetail.optd_id }">${ optiondetail.optd_choice } </option>
+                    <br>
                	</c:forEach>
                 </select>
                 <br>
