@@ -24,7 +24,32 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		mem = memberDao.passCheck(m);
 		return mem;
 	}
+	
+	//id찾기
+	@Override
+	public Member findId(Member m) {
+		// TODO Auto-generated method stub
+		return memberDao.findId(m);
+	}
+	
+	//pw찾기
+	@Override
+	public Member findPw(Member m) {
+		// TODO Auto-generated method stub
+		return memberDao.findPw(m);
+	}
+	
+	//pw재설정
+	@Override
+	public int resetPw(Member m) {
+		// TODO Auto-generated method stub
+//		System.out.println(memberDao.resetPw(m));
+		return memberDao.resetPw(m);
+	}
 
+
+
+	
 	//이벤트 읽기
 	@Override
 	public Event readEvent(int event_id) {
@@ -80,6 +105,24 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		
 		return event;
 	}
+	
+	//인기순 상품 가져오기
+	public HashMap<String, Object> getProdByReadCount() {
+		HashMap<String, Object> popularProd = new HashMap<String, Object>();
+		
+		popularProd.put("popularProd", productDao.selectByReadCount());
+		
+		return popularProd;
+	}
+	
+	//최신순 상품 가져오기
+	public HashMap<String, Object> getProdByLatest() {
+		HashMap<String, Object> latestProd = new HashMap<String, Object>();
+		
+		latestProd.put("latestProd", productDao.selectByLatest());
+		
+		return latestProd;
+	}
 
 	//해당 상품의 옵션들 가져오기
 	@Override
@@ -106,6 +149,15 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 	public List<OptionDetail> getOptionDetail(int opt_id) {
 		// TODO Auto-generated method stub
 		return optionDetailDao.selectByOption(opt_id);
+	}
+	
+	//검색어에 따른 상품목록 가져오기
+	public HashMap<String, Object> getProdByKeyword(String keyword) {
+		HashMap<String, Object> searchProd = new HashMap<String, Object>();
+		
+		searchProd.put("searchProd", productDao.selectByKeyword(keyword));
+		
+		return searchProd;
 	}
 
 	//이벤트 조회수 증가
@@ -150,6 +202,7 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		
 		return new File(path+event_pict);
 	}
+
 	
 	
 	

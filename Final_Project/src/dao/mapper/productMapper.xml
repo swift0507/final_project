@@ -12,4 +12,18 @@
     	update product set prod_readcount = (prod_readcount + 1) where prod_id = #{prod_id}
     </update>
     
+    <select id="selectByReadCount" resultType="product">
+    	select * from product order by prod_readcount desc
+    </select>
+    
+    <select id="selectByLatest" resultType="product">
+    	select * from product order by prod_date desc
+    </select>
+    
+    <select id="selectByKeyword" parameterType="String" resultType="product">
+    	<if test="value != null">
+    	    select * from product where prod_name like '%${ value }%' or sel_id like '%${ value }%'
+    	</if>
+    </select>
+    
     </mapper>

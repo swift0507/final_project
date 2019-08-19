@@ -52,12 +52,36 @@ public class AllController {
 	
 	//인기상품
 	@RequestMapping("popularProd.do")
-	public void popularProd() {}
+	public void popularProd(Model model) {
+		model.addAllAttributes(service.getProdByReadCount());
+	}
 	
 	//최근 등록 상품
 	@RequestMapping("latestProd.do")
-	public void latestProd() {}
+	public void latestProd(Model model) {
+		model.addAllAttributes(service.getProdByLatest());
+	}
 	
+	//검색어 기반 상품 목록
+	@RequestMapping("search.do")
+	public void search(Model model, String keyword) {
+		System.out.println(keyword);
+		model.addAllAttributes(service.getProdByKeyword(keyword));
+		model.addAttribute("keyword", keyword);
+	}
+	
+	//개인정보이용방침
+	@RequestMapping("privacyTerms.do")
+	public void provision() {}
+	
+	@RequestMapping("faq.do")
+	public void faq() {
+		//미완성
+	}
+	
+	//이용약관
+	@RequestMapping("useTerms.do")
+	public void useTerms() {}
 	
 	/*로그인폼버튼요청*/
 	//member가 있으면 세션 id에 id 세팅 grade에 등급 세팅하고 true 리턴 아님 false 리턴 
@@ -79,11 +103,52 @@ public class AllController {
 		return true;
 	}
 	
+	//id찾기 폼 요청
 	@RequestMapping("findIdForm.do")
 	public void findIdForm() {}
 	
+	//id찾기
+	@RequestMapping("findId.do")
+	public @ResponseBody String findId(Member m) {
+//		System.out.println(m);
+		Member member = service.findId(m);
+		if(member == null) {
+			return "해당하는 id가 존재하지 않습니다.";
+		}
+		return "회원님의 id는 " +member.getMem_id()+"입니다.";
+	}
+	
+	//비밀번호 찾기 폼 요청
 	@RequestMapping("findPwForm.do")
 	public void findPwForm() {}
+	
+	//비밀번호찾기요청
+	@RequestMapping("findPw.do")
+	public @ResponseBody boolean findPw(Member m) {
+		System.out.println(m);
+		Member member = service.findPw(m);
+		if(member == null) {
+			return false;
+		}
+		return true;
+	}
+	
+	//비밀번호재설정폼 요청
+	@RequestMapping("resetPwForm.do")
+	public void resetPwForm(String mem_id, Model model) {
+		model.addAttribute("mem_id", mem_id);
+	}
+	
+	//비밀번호재설정요청
+	@RequestMapping("resetPw.do")
+	public @ResponseBody boolean resetPw(Member m) {
+		System.out.println(m);
+		if(service.resetPw(m)==1) {
+			return true;
+		}
+		return false;
+	}
+	
 	
 	@RequestMapping("prodView.do")
 	public void prodView(int prod_id, Model model) {

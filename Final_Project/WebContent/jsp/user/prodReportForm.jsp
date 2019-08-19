@@ -31,51 +31,43 @@
 	</script>
 	<script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15.0.0/dist/smooth-scroll.polyfills.min.js">
 	</script>
-
-	<style>
-		.checked {
-			color: orange;
-		}
-		#item_image {
-			text-align: center;
-		}
-	</style>
 </head>
 <body>
-<!-- header -->
-<header>
-	<jsp:include page="/jsp/header.jsp"></jsp:include>
-</header>
-<!-- header 종료 -->
-
-<!-- main body -->
-<div class = "content">
-	<div class="container">
-		<div class="row">
-			<div class="col"></div>
-			<div class="col-6">
-				<h4>회원 정보 수정</h4>
-				<hr>
-				<br>
-				<div id = "input_pw">
-					<input type="password" class="form-control" placeholder="비밀번호" style = "width: 250px;">
-				</div>
-				<br><br>
-				<div id = "buttons">
-					<button class="btn btn-sm btn-secondary" type="submit" style = "width: 100px;">확인</button>
-    				<button class="btn btn-sm btn-secondary" type="button" onclick="history.go(-1)" style = "width: 100px;">취소</button>
-				</div>
-			</div>
-			<div class="col"></div>
-		</div>
-	</div>
-</div>
-	<!-- main body 종료 -->
-
-<!-- footer -->
-<footer>
-	<jsp:include page="/jsp/footer.jsp"></jsp:include>
-</footer>
-<!-- footer 종료 -->
+	<table style = "width: 400px; margin-left: auto; margin-right: auto;">
+		<tr style = "height: 50px;"></tr>
+		<tr>
+			<td>
+				<h5><b>상품 신고</b></h5>
+			</td>
+		</tr>
+		<tr>
+			<td> 
+				<hr> 
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<select class="custom-select" style = "width: 400px;">
+					<option value="preport_reason_01"> 허위 매물 </option>
+					<option value="preport_reason_02"> 도배 </option>
+					<option value="preport_reason_03"> 타 상품 비방 </option>
+					<option value="preport_reason_04"> 타 업체 모방 </option>
+					<option value="preport_reason_05"> 기타 </option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<textarea class = "form-control" rows = "10" id = "comment" placeholder = "내용을 입력해주세요"></textarea>
+			</td>
+		</tr>
+		<tr style = "height: 20px;"></tr>
+		<tr>
+			<td class = "text-center">
+				<button class="btn btn-sm btn-secondary" style = "width: 75px;" type="submit">등록</button>
+				<button class="btn btn-sm btn-secondary" style = "width: 75px;" type="button">취소</button>
+			</td>
+		</tr>
+	</table>	
 </body>
 </html>
