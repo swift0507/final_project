@@ -62,6 +62,19 @@ public class AllController {
 		model.addAllAttributes(service.getProdByLatest());
 	}
 	
+	//검색어 기반 상품 목록
+	@RequestMapping("search.do")
+	public void search(Model model, String keyword) {
+		System.out.println(keyword);
+		model.addAllAttributes(service.getProdByKeyword(keyword));
+		model.addAttribute("keyword", keyword);
+	}
+	
+	//마이페이지 불러오기
+	@RequestMapping("user/myPage.do")
+	public void mypage() {
+		
+	}
 	
 	/*로그인폼버튼요청*/
 	//member가 있으면 세션 id에 id 세팅 grade에 등급 세팅하고 true 리턴 아님 false 리턴 

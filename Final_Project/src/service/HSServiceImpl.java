@@ -125,6 +125,15 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		// TODO Auto-generated method stub
 		return optionDetailDao.selectByOption(opt_id);
 	}
+	
+	//검색어에 따른 상품목록 가져오기
+	public HashMap<String, Object> getProdByKeyword(String keyword) {
+		HashMap<String, Object> searchProd = new HashMap<String, Object>();
+		
+		searchProd.put("searchProd", productDao.selectByKeyword(keyword));
+		
+		return searchProd;
+	}
 
 	//이벤트 조회수 증가
 	@Override

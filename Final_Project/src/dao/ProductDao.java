@@ -9,4 +9,5 @@ public interface ProductDao {
 	public void updateReadCount(int prod_id);
 	public List<Product> selectByReadCount();
 	public List<Product> selectByLatest();
+	public List<Product> selectByKeyword(String keyword);
 }
