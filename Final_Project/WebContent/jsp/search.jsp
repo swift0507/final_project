@@ -57,10 +57,10 @@
 			</div>
 		</div>
 		<br>
-		<div class="row">
-			<div class="card-deck">
+		<div class="row container">
+			
 			<c:forEach var="prod" items="${ searchProd }">
-				<div class="card">
+				<div class="card ml-3 mb-3">
 					<img src="images/noimage.png" class="card-img-top" alt="..." width="200"
 						height="200">
 					<div class="card-body">
@@ -127,7 +127,7 @@
               			<i class = "far fa-comment-dots">12</i>
 					</div>
 				</div> -->
-			</div>
+			
 		</div>
 	</div>
 
