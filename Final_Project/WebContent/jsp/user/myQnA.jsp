@@ -29,6 +29,17 @@
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 		crossorigin="anonymous">
 	</script>
+	<script>
+	$(document).ready(function(){
+		$('.answer').hide();
+	
+		$('#arrow').click(function(){
+			$('.answer').toggle();
+			$('#arrow').toggleClass('far fa-caret-square-down far fa-caret-square-up');
+		})	
+	})
+	</script>	
+	
 </head>
 <body>
 <!-- header -->
@@ -61,59 +72,123 @@
 				<!-- QnA table 1 -->
 				<table style = "width: 700px;">
 					<tr>
-					    <th style = "width: 125px;">
-					    	<img src = "images/sk.png" style = "width: 50px; height: 50px;">
-					    </th>
 					    <th>
+					    	<img src = "images/sk.png" style = "width: 50px; height: 50px;">
+					    	&nbsp;&nbsp;
 					      	로즈마리 천연 비누 1개
 					    </th>
 				    </tr>
 				    <tr style = "height: 10px;"></tr>
 				    <tr>
-				    	<td>
-				    		<span class="badge badge-primary">질문</span>
+				    	<td style = "width: 700px;">
+				    		<span class = "badge badge-primary">질문</span>
+				    	</td>
+				 
+				    </tr>
+				    <tr>
+				    	<td style = "width: 700px;">
+				    		<input type = "text" class = "form-control" style = "width: 700px;" value = "얼굴에 써도 되나요!?">
 				    	</td>
 				    </tr>
-				    <tr style = "height: 10px;"></tr>
+				  	
+				  	<tr style = "height: 10px;"></tr>
+				  	
 				    <tr>
-				    	<td>
+				    	<td style = "width: 700px;">
 				    		<span class="badge badge-success">답변</span>
 				    	</td>
 				    </tr>
+				    <tr>
+				    	<td>
+				    		<input type = "text" class = "form-control" style = "width: 700px;" value = "네! 가능합니다">
+				    	</td>
+				    </tr>
+	
 				</table>
 				<br>
 				<hr>
 				<!-- QnA table 1 종료-->
 				
+				<!-- QnA table 2 -->
+				<table style = "width: 700px;">
+					<tr>
+					    <th>
+					    	<img src = "images/sk.png" style = "width: 50px; height: 50px;">
+					    	&nbsp;&nbsp;
+					      	로즈마리 천연 비누 1개
+					    </th>
+				    </tr>
+				    <tr style = "height: 10px;"></tr>
+				    <tr>
+				    	<td style = "width: 700px;">
+				    		<span class = "badge badge-primary">질문</span>
+				    	</td>
+				 
+				    </tr>
+				    <tr>
+				    	<td style = "width: 700px;">
+				    		<input type = "text" class = "form-control" style = "width: 700px;" value = "얼굴에 써도 되나요!?">
+				    	</td>
+				    </tr>
+				  	
+				  	<tr style = "height: 10px;"></tr>
+				  	
+				    <tr>
+				    	<td style = "width: 700px;">
+				    		<span class="badge badge-success">답변</span>
+				    	</td>
+				    </tr>
+				    <tr>
+				    	<td>
+				    		<input type = "text" class = "form-control" style = "width: 700px;" value = "네! 가능합니다">
+				    	</td>
+				    </tr>
+	
+				</table>
+				<br>
+				<hr>
+				<!-- QnA table 2 종료-->
 				
+				<!-- QnA table 3 -->
+				<table style = "width: 700px;">
+					<tr>
+					    <th>
+					    	<img src = "images/sk.png" style = "width: 50px; height: 50px;">
+					    	&nbsp;&nbsp;
+					      	로즈마리 천연 비누 1개
+					    </th>
+				    </tr>
+				    <tr style = "height: 10px;"></tr>
+				    <tr>
+				    	<td style = "width: 700px;">
+				    		<span class = "badge badge-primary">질문</span>
+				    	</td>
+				 
+				    </tr>
+				    <tr>
+				    	<td style = "width: 700px;">
+				    		<input type = "text" class = "form-control" style = "width: 700px;" value = "얼굴에 써도 되나요!?">
+				    	</td>
+				    </tr>
+				  	
+				  	<tr style = "height: 10px;"></tr>
+				  	
+				    <tr>
+				    	<td style = "width: 700px;">
+				    		<span class="badge badge-success">답변</span>
+				    	</td>
+				    </tr>
+				    <tr>
+				    	<td>
+				    		<input type = "text" class = "form-control" style = "width: 700px;" value = "네! 가능합니다">
+				    	</td>
+				    </tr>
+	
+				</table>
+				<br>
+				<hr>
+				<!-- QnA table 3 종료-->
 				
-				<!-- 페이징 처리  -->
-				<div class = "container">
-					<nav>
-						<ul class="pagination justify-content-center">
-							<li class="page-item">
-								<a class="page-link" href="#"> 
-								<span>&laquo;</span>
-								</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">1</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">2</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">3</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#"> 
-								<span>&raquo;</span>
-								</a>
-							</li>
-						</ul>
-					</nav>
-				</div>
-				<!-- 페이징 처리  종료 -->
 			</div>
 		</div>
 	</div>
