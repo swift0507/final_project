@@ -75,7 +75,9 @@ $(document).ready(function(){
         </tr>
         <tr>
             <td colspan = 2 align = "center" height = 100>
-            	<img src = "images/logo.png" width = 160 height = 60>
+            	<a class="navbar-brand" href="/Final_Project/main.do">
+					<img src="images/logo.png" id="logo" width=160 height=60>
+				</a>
             </td>
         </tr>
         <tr>

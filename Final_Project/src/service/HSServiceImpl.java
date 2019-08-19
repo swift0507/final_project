@@ -24,7 +24,32 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		mem = memberDao.passCheck(m);
 		return mem;
 	}
+	
+	//id찾기
+	@Override
+	public Member findId(Member m) {
+		// TODO Auto-generated method stub
+		return memberDao.findId(m);
+	}
+	
+	//pw찾기
+	@Override
+	public Member findPw(Member m) {
+		// TODO Auto-generated method stub
+		return memberDao.findPw(m);
+	}
+	
+	//pw재설정
+	@Override
+	public int resetPw(Member m) {
+		// TODO Auto-generated method stub
+//		System.out.println(memberDao.resetPw(m));
+		return memberDao.resetPw(m);
+	}
 
+
+
+	
 	//이벤트 읽기
 	@Override
 	public Event readEvent(int event_id) {
@@ -177,6 +202,7 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		
 		return new File(path+event_pict);
 	}
+
 	
 	
 	
