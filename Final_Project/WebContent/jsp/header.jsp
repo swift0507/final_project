@@ -112,15 +112,14 @@ $(document).ready(function(){
 			<td class = "blank">
 			</td>
 			<td class = "logo text-center">
-				<a class="navbar-brand" href="main.jsp">
+				<a class="navbar-brand" href="main.do">
 					<img src="images/logo.png" width=150 height=50>
 				</a>
 			</td>
 			<td class = "search_form">
-			<form class="form-inline my-2 my-lg-0 justify-content-center">				
-				<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-				<button class="btn btn-outline-success my-2 my-sm-0" type="button"
-						onclick="location.href = 'searchResult.jsp'">Search</button>
+			<form class="form-inline my-2 my-lg-0 justify-content-center" action="search.do" method="get">				
+				<input class="form-control mr-sm-2" type="text" name="keyword" placeholder="상품명 또는 사장님 입력" aria-label="Search">
+				<input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="검색">
 			</form>
 			</td>
 			<td class = "blank">
@@ -136,10 +135,10 @@ $(document).ready(function(){
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="mx-auto d-sm-flex d-block flex-sm-nowrap">
 			<div class="navbar-nav">
-				<a class="nav-item nav-link" href="#">인기 상품</a>
-				<a class="nav-item nav-link" href="#">나의 추천 상품</a>
-				<a class="nav-item nav-link" href="#">최근 등록 상품</a>
-				<a class="nav-item nav-link" href="#">이벤트</a>
+				<a class="nav-item nav-link" href="popularProd.do">인기 상품</a>
+				<a class="nav-item nav-link" href="user/recommend.jsp">나의 추천 상품</a>
+				<a class="nav-item nav-link" href="latestProd.do">최근 등록 상품</a>
+				<a class="nav-item nav-link" href="eventList.do">이벤트</a>
 			</div>
 		</div>
 	</nav>

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,33 +55,25 @@
 				    </tr>
 				  </thead>
 				  <tbody>
-				    <tr>
-				      <th scope="row">3</th>
-				      <td>매우 중요한 공지사항</td>
-				      <td colspan = 2>2019-08-08</td>
-				    </tr>
-				    
-				    <tr>
-				      <th scope="row">2</th>
-				      <td colspan = 2>매우 중요한 공지사항</td>
-				      <td>2019-08-08</td>
 				  
-				    </tr>
-				    
+				  <!-- 자료넣기 -->
+				  <c:forEach items="${noticeList}" var="n">
 				    <tr>
-				      <th scope="row">1</th>
-				      <td colspan="2">매우 중요한 공지사항</td>
-				      <td>2019-08-08</td>
+				      <th scope="row">${n.notice_id}</th>
+				      <td><a href="notice.do?notice_id=${n.notice_id}">${n.notice_title}</a></td>
+				      <td colspan = 2>${n.notice_date}</td>
 				    </tr>
+				   </c:forEach>
+				    
 				  </tbody>
 				</table>
 				
 				<div class = "container">
-					<nav aria-label="Page navigation example">
+					<nav>
 						<ul class="pagination justify-content-center">
 							<li class="page-item">
-								<a class="page-link" href="#" aria-label="Previous"> 
-								<span aria-hidden="true">&laquo;</span>
+								<a class="page-link" href="#"> 
+								<span>&laquo;</span>
 								</a>
 							</li>
 							<li class="page-item">
@@ -92,8 +86,8 @@
 								<a class="page-link" href="#">3</a>
 							</li>
 							<li class="page-item">
-								<a class="page-link" href="#" aria-label="Next"> 
-								<span aria-hidden="true">&raquo;</span>
+								<a class="page-link" href="#"> 
+								<span>&raquo;</span>
 								</a>
 							</li>
 						</ul>

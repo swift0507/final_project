@@ -114,7 +114,7 @@
     <div class="col-8">
     	<div class = "row">
     		<h5><b>주문 내역</b></h5>
-		    <br><br>
+		    <br><hr>
     		<table class="table text-center">
 				<tr>
 					<th scope="col">날짜</th>
@@ -153,7 +153,7 @@
     	
     	<div class = "row">
     		<h5><b>찜 목록</b></h5>
-		    <br><br>
+		    <br><hr>
 		    <div class="card-deck">
 				<div class="card">
 					<img src="images/sk.png" class="card-img-top" alt="..." width="200"

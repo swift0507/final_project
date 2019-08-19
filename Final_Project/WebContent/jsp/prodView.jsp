@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -113,20 +114,18 @@ $(document).ready(function(){
         <tr>
             <td>
                 <div id = "seller_id">
-                <h5>${ product.sel_id }</h5>
+                <h5>${ product.sel_id } / 조회수 : ${ product.prod_readcount }</h5>
                 </div>
             </td>
         </tr>
         <tr>
             <td>
                 <span id = "star_rating">
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
+                	<span class="fa fa-star checked"></span>
+                	<span class="fa fa-star checked"></span>
+                	<span class="fa fa-star checked"></span>
+               		<span class="fa fa-star checked"></span>
+                	<span class="fa fa-star"></span>
                 </span>
             </td>
         </tr>
@@ -153,13 +152,18 @@ $(document).ready(function(){
         </tr>
         <tr>
             <td>
+            	<!-- 옵션 선택 부분 -->
                 <div id = "select_option">
-               	 ${ option.opt_name }&nbsp;
-                <select id = "select_opt" class="custom-select-sm" style="width: 250px;"> 
-                    <option value="90 / S">90 / S </option>
-                    <option value="95 / M">95 / M</option>
-                    <option value="100 / L">100 / L</option>
+                <c:forEach var="option" items="${ option }">
+               	${ option.opt_name }
+               		<select id = "select_opt" class="custom-select-sm" style="width: 250px;"> 
+               	<c:forEach var="optiondetail" items="${ option.optiondetail }">
+                    <option id = "${ optiondetail.optd_id }">${ optiondetail.optd_choice } </option>
+                    <br>
+               	</c:forEach>
                 </select>
+                <br>
+                </c:forEach>
                 </div>
                 <hr>
             </td>
@@ -207,15 +211,7 @@ $(document).ready(function(){
             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                     <div id = "content">
                     <span>
-                    - check <br>
-                    2차 주문 일정: 7월 12일 ~ 15일 <br>
-                    2차 일괄 발송: 7월 18일 <br>
-                    3차 주문 일정: 7월 19일 ~ 22일 <br>
-                    <br><br>
-                    - schedule <br>
-                   	 금, 토, 일, 월: 주문 및 제작 <br>
-                    	화, 수: 제작 <br>
-                    	목: 일괄 발송 <br>
+                    ${ product.prod_content }
                     </span>
                     </div>
             </div>

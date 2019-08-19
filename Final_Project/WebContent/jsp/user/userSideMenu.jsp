@@ -8,6 +8,7 @@
 </head>
 <body>
 		<table style = "width: 175px;">
+			<tr style = "height: 30px;">
 			<tr>
 				<th>
 					<h5><b><i class = "fas fa-info-circle"></i> &nbsp;&nbsp;쇼핑 이용 정보</b></h5>

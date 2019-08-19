@@ -1,11 +1,14 @@
 package service;
 
+import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import model.Event;
 import model.Member;
+import model.Notice;
 import model.OptionDetail;
 import model.ProdOption;
 import model.Product;
@@ -21,7 +24,6 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		mem = memberDao.passCheck(m);
 		return mem;
 	}
-	
 
 	//이벤트 읽기
 	@Override
@@ -51,29 +53,70 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		return basketDao.countBasket(mem_id);
 	}
 
-	//상품ID로 상품1개 가져오기
+	//상품ID로 상품1개 가져오기 (prodView)
 	@Override
 	public Product getOneProduct(int prod_id) {
 		// TODO Auto-generated method stub	
+		prodViewCount(prod_id);
+		
 		Product product = productDao.selectOne(prod_id);
 
 		return product;
 	}
 	
+	//상품 보기 조회수 증가(단순)
+	public void prodViewCount(int prod_id) {
+		
+		//조회수 증가
+		productDao.updateReadCount(prod_id);
+	}
+	
+	//이벤트 list전부 가져오기
 	@Override
 	public List<Event> getEventList() {
 		// TODO Auto-generated method stub
 		List<Event> event = eventDao.selectAll();
-		System.out.println(event);
+//		System.out.println(event);
 		
 		return event;
+	}
+	
+	//인기순 상품 가져오기
+	public HashMap<String, Object> getProdByReadCount() {
+		HashMap<String, Object> popularProd = new HashMap<String, Object>();
+		
+		popularProd.put("popularProd", productDao.selectByReadCount());
+		
+		return popularProd;
+	}
+	
+	//최신순 상품 가져오기
+	public HashMap<String, Object> getProdByLatest() {
+		HashMap<String, Object> latestProd = new HashMap<String, Object>();
+		
+		latestProd.put("latestProd", productDao.selectByLatest());
+		
+		return latestProd;
 	}
 
 	//해당 상품의 옵션들 가져오기
 	@Override
-	public List<ProdOption> getProdOption(int prod_id) {
-		// TODO Auto-generated method stub		
-		return prodOptionDao.selectByProd(prod_id);
+	public HashMap<String, Object> getProdOption(int prod_id) {
+		// TODO Auto-generated method stub
+		//옵션 리스트 가져오기
+		List<ProdOption> prodOptionList = prodOptionDao.selectByProd(prod_id);
+		
+		//각각 옵션의 옵션상세 set
+		for(int i = 0; i < prodOptionList.size(); i++) {
+			prodOptionList.get(i).setOptiondetail(getOptionDetail(prodOptionList.get(i).getOpt_id()));
+		}
+		
+		//HashMap 형태로 담기
+		HashMap<String, Object> prodOptionMap = new HashMap<String, Object>();
+		
+		prodOptionMap.put("option", prodOptionList);
+		
+		return prodOptionMap;
 	}
 	
 	//해당 옵션의 옵션상세 리스트 가져오기
@@ -82,5 +125,60 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		// TODO Auto-generated method stub
 		return optionDetailDao.selectByOption(opt_id);
 	}
+	
+	//검색어에 따른 상품목록 가져오기
+	public HashMap<String, Object> getProdByKeyword(String keyword) {
+		HashMap<String, Object> searchProd = new HashMap<String, Object>();
+		
+		searchProd.put("searchProd", productDao.selectByKeyword(keyword));
+		
+		return searchProd;
+	}
+
+	//이벤트 조회수 증가
+	@Override
+	public int updateReadCount(int event_readcount) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	//공지사항 읽기
+	@Override
+	public Notice readNotice(int notice_id) {
+		// TODO Auto-generated method stub
+		noticeDao.updateReadCount(notice_id);
+		return noticeDao.selectOne(notice_id);
+	}
+
+	//공지사항list전부 가져오기
+	@Override
+	public List<Notice> getNoticeList() {
+		// TODO Auto-generated method stub
+		List<Notice> notice = noticeDao.selectAll();
+		System.out.println(notice);
+		return notice;
+	}
+	
+	//공지사항 조회수 증가
+	@Override
+	public int updateReadCount1(int notice_readcount) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	//이벤트 첨부파일
+	@Override
+	public File getAttachedFile(int num) {
+		// TODO Auto-generated method stub
+		
+		Event event = eventDao.selectOne(num);
+		String event_pict = event.getEvent_pict();
+		String path = "C:/Temp/attach/";
+		
+		return new File(path+event_pict);
+	}
+	
+	
+	
 
 }

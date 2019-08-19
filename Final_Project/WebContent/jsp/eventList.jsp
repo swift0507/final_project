@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
-
+  <link href="footer.css" rel="stylesheet" type="text/css">
   <title>핸쇼</title>
 
   <!-- Optional JavaScript -->
@@ -36,6 +36,7 @@
 <!-- header 종료 -->
 
 <!-- main body -->
+<div class = "content">
 	<div class = "container">
 		<div class = "row">
 			<div class = "col"></div>
@@ -57,7 +58,7 @@
 				  <c:forEach items="${eventList}" var="e">
 				    <tr>
 				      <th scope="row">${e.event_id}</th>
-				      <td><a href="event.do?num=${e.event_id}">${e.event_title}</a></td>
+				      <td><a href="event.do?event_id=${e.event_id}">${e.event_title}</a></td>
 				      <td colspan = 2>${e.event_date}</td>
 				    </tr>
 				   </c:forEach>
@@ -65,37 +66,36 @@
 				  </tbody>
 				</table>
 				
-				<div class = "container">
-					<nav aria-label="Page navigation example">
-						<ul class="pagination justify-content-center">
-							<li class="page-item">
-								<a class="page-link" href="#" aria-label="Previous"> 
-								<span aria-hidden="true">&laquo;</span>
-								</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">1</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">2</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">3</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#" aria-label="Next"> 
-								<span aria-hidden="true">&raquo;</span>
-								</a>
-							</li>
-						</ul>
-					</nav>
-				</div>
 				
+				<nav>
+					<ul class="pagination justify-content-center">
+						<li class="page-item">
+							<a class="page-link" href="#"> 
+								<span>&laquo;</span>
+							</a>
+						</li>
+						<li class="page-item">
+							<a class="page-link" href="#">1</a>
+						</li>
+						<li class="page-item">
+							<a class="page-link" href="#">2</a>
+						</li>
+						<li class="page-item">
+							<a class="page-link" href="#">3</a>
+						</li>
+						<li class="page-item">
+							<a class="page-link" href="#"> 
+								<span>&raquo;</span>
+							</a>
+						</li>
+					</ul>
+				</nav>
 			</div>
 				
 			<div class = "col"></div>
 		</div>
 	</div>
+</div>
 <!-- main body 종료-->
 
 <!-- footer -->
