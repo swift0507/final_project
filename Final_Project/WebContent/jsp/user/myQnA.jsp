@@ -29,8 +29,6 @@
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 		crossorigin="anonymous">
 	</script>
-	<script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15.0.0/dist/smooth-scroll.polyfills.min.js">
-	</script>
 </head>
 <body>
 <!-- header -->
@@ -47,90 +45,75 @@
 				<jsp:include page = "userSideMenu.jsp"></jsp:include>
 			</div>
 			<div class = "col-8">
+				<!-- QnA header -->
 				<table style = "width: 700px;">
 					<tr>
 						<td>
-							<h5><b>주문 내역</b></h5>
-						</td>
-					</tr>
-					<tr>
-						<td class = "text-right">
-							<button class = "btn btn-sm btn-secondary">전체</button>
-							<button class = "btn btn-sm btn-secondary">1개월</button>
-							<button class = "btn btn-sm btn-secondary">3개월</button>
-							<button class = "btn btn-sm btn-secondary">6개월</button>
-							<button class = "btn btn-sm btn-secondary">1년</button>
+							<h5><b>나의 QnA</b></h5>
 						</td>
 					</tr>
 					<tr>
 						<td><hr></td>
 					</tr>
 				</table>
-				
+				<!-- QnA header 종료 -->
+				  	
+				<!-- QnA table 1 -->
 				<table style = "width: 700px;">
-				    <tr style = "height: 40px;">
-				      <th colspan = 3>
-				      	알록달록 캔들, 보라색 외 3개
-				      </th>
-				      <th class = "text-right">
-				      	<button class = "btn btn-sm btn-danger">주문취소</button>
-				      </th>
+					<tr>
+					    <th style = "width: 125px;">
+					    	<img src = "images/sk.png" style = "width: 50px; height: 50px;">
+					    </th>
+					    <th>
+					      	로즈마리 천연 비누 1개
+					    </th>
 				    </tr>
+				    <tr style = "height: 10px;"></tr>
 				    <tr>
-				      <td rowspan = 3>
-				      	<img src = "images/sk.png" width = 100 height = 100>
-				      </td>
-				      <td> 상품명 : SK Wyverns </td>
-				      <td rowspan = 3>
-				      	<h5>1조 2500억 원</h5>
-				      </td>
-				      
-				      <td rowspan = 3 class = "text-right">
-				      	<button type="button" class="btn btn-ml btn-info" disabled>배송 준비중</button> 
-				      </td>
+				    	<td>
+				    		<span class="badge badge-primary">질문</span>
+				    	</td>
 				    </tr>
+				    <tr style = "height: 10px;"></tr>
 				    <tr>
-				      <td> 주문날짜 : 2019-08-14 </td>
-				    </tr>
-				    <tr>
-				      <td> 주문번호 : 123-456-78910 </td>
-				    </tr>
-				</table>
-				
-				<br>
-				<hr>
-				
-				<table style = "width: 700px;">
-				    <tr height = 40>
-				      <th colspan = 3>
-				      	알록달록 캔들, 보라색 외 3개
-				      </th>
-				      <th class = "text-right">
-				      	
-				      </th>
-				    </tr>
-				    <tr>
-				      <td rowspan = 3>
-				      	<img src = "images/sk.png" width = 100 height = 100>
-				      </td>
-				      <td> 상품명 : SK Wyverns </td>
-				      <td rowspan = 3>
-				      	<h5>1조 2500억 원</h5>
-				      </td>
-				      
-				      <td rowspan = 3 class = "text-right">
-				      	<button type="button" class="btn btn-ml btn-success" disabled>구매 확정</button> 
-				      </td>
-				    </tr>
-				    <tr>
-				      <td> 주문날짜 : 2019-08-14 </td>
-				    </tr>
-				    <tr>
-				      <td> 주문번호 : 123-456-78910 </td>
+				    	<td>
+				    		<span class="badge badge-success">답변</span>
+				    	</td>
 				    </tr>
 				</table>
 				<br>
 				<hr>
+				<!-- QnA table 1 종료-->
+				
+				
+				
+				<!-- 페이징 처리  -->
+				<div class = "container">
+					<nav>
+						<ul class="pagination justify-content-center">
+							<li class="page-item">
+								<a class="page-link" href="#"> 
+								<span>&laquo;</span>
+								</a>
+							</li>
+							<li class="page-item">
+								<a class="page-link" href="#">1</a>
+							</li>
+							<li class="page-item">
+								<a class="page-link" href="#">2</a>
+							</li>
+							<li class="page-item">
+								<a class="page-link" href="#">3</a>
+							</li>
+							<li class="page-item">
+								<a class="page-link" href="#"> 
+								<span>&raquo;</span>
+								</a>
+							</li>
+						</ul>
+					</nav>
+				</div>
+				<!-- 페이징 처리  종료 -->
 			</div>
 		</div>
 	</div>

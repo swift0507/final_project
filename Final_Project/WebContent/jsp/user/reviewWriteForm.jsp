@@ -3,74 +3,78 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>핸쇼</title>
-<!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
-  <link href="footer.css" rel="stylesheet" type="text/css">	
-  <title>핸쇼</title>
-
-  <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
-<style>
-	@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
-
-	fieldset, label { margin: 0; padding: 0; }
-	body{ margin: 20px; }
-	h1 { font-size: 1.5em; margin: 10px; }
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	
-	/****** Style Star Rating Widget *****/
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+	<link href = "../footer.css" rel="stylesheet" type="text/css">
 	
-	.rating { 
-	  border: none;
-	  float: left;
-	}
+	<title>핸쇼</title>
 	
-	.rating > input { display: none; } 
-	.rating > label:before { 
-	  margin: 5px;
-	  font-size: 1.25em;
-	  font-family: FontAwesome;
-	  display: inline-block;
-	  content: "\f005";
-	}
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.4.1.js"
+ 		integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+ 		crossorigin="anonymous">
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous">
+	</script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous">
+	</script>
+	<script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15.0.0/dist/smooth-scroll.polyfills.min.js">
+	</script>
+	<style>
+		@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 	
-	.rating > .half:before { 
-	  content: "\f089";
-	  position: absolute;
-	}
-	
-	.rating > label { 
-	  color: #ddd; 
-	 float: right; 
-	}
-	
-	/***** CSS Magic to Highlight Stars on Hover *****/
-	
-	.rating > input:checked ~ label, /* show gold star when clicked */
-	.rating:not(:checked) > label:hover, /* hover current star */
-	.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
-	
-	.rating > input:checked + label:hover, /* hover current star when changing rating */
-	.rating > input:checked ~ label:hover,
-	.rating > label:hover ~ input:checked ~ label, /* lighten current selection */
-	.rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
-</style>
+		fieldset, label { margin: 0; padding: 0; }
+		body{ margin: 20px; }
+		h1 { font-size: 1.5em; margin: 10px; }
+		
+		/****** Style Star Rating Widget *****/
+		
+		.rating { 
+		  border: none;
+		  float: left;
+		}
+		
+		.rating > input { display: none; } 
+		.rating > label:before { 
+		  margin: 5px;
+		  font-size: 1.25em;
+		  font-family: FontAwesome;
+		  display: inline-block;
+		  content: "\f005";
+		}
+		
+		.rating > .half:before { 
+		  content: "\f089";
+		  position: absolute;
+		}
+		
+		.rating > label { 
+		  color: #ddd; 
+		 float: right; 
+		}
+		
+		/***** CSS Magic to Highlight Stars on Hover *****/
+		
+		.rating > input:checked ~ label, /* show gold star when clicked */
+		.rating:not(:checked) > label:hover, /* hover current star */
+		.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+		
+		.rating > input:checked + label:hover, /* hover current star when changing rating */
+		.rating > input:checked ~ label:hover,
+		.rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+		.rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
+	</style>
 </head>
 <body>
 	<table style = "width: 500px; margin-left: auto; margin-right: auto;">
