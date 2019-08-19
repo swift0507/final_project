@@ -117,10 +117,9 @@ $(document).ready(function(){
 				</a>
 			</td>
 			<td class = "search_form">
-			<form class="form-inline my-2 my-lg-0 justify-content-center">				
-				<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-				<button class="btn btn-outline-success my-2 my-sm-0" type="button"
-						onclick="location.href = 'searchResult.jsp'">Search</button>
+			<form class="form-inline my-2 my-lg-0 justify-content-center" action="search.do" method="get">				
+				<input class="form-control mr-sm-2" type="text" name="keyword" placeholder="상품명 또는 사장님 입력" aria-label="Search">
+				<input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="검색">
 			</form>
 			</td>
 			<td class = "blank">

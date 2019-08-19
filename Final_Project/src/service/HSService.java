@@ -35,6 +35,9 @@ public interface HSService {
 	//상품ID로 상품 1개 가져오기
 	public Product getOneProduct(int prod_id);
 	
+	//검색어 기반 상품목록 가져오기
+	public HashMap<String, Object> getProdByKeyword(String keyword);
+	
 	//상품 보기 조회수 증가
 	public void prodViewCount(int prod_id);
 

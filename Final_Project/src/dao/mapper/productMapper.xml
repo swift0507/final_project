@@ -20,4 +20,10 @@
     	select * from product order by prod_date desc
     </select>
     
+    <select id="selectByKeyword" parameterType="String" resultType="product">
+    	<if test="value != null">
+    	    select * from product where prod_name like '%${ value }%' or sel_id like '%${ value }%'
+    	</if>
+    </select>
+    
     </mapper>
