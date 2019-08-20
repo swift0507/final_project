@@ -54,8 +54,8 @@ public class AllController {
 	
 	//인기상품
 	@RequestMapping("popularProd.do")
-	public void popularProd(Model model) {
-		model.addAllAttributes(service.getProdByReadCount());
+	public void popularProd(Model model, @RequestParam(defaultValue="1")int page) {
+		model.addAllAttributes(service.getProdByReadCount(page));
 	}
 	
 	//최근 등록 상품
