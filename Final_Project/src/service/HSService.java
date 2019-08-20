@@ -46,7 +46,7 @@ public interface HSService {
 	public List<Event> getEventList();
 	
 	//인기순 상품목록 가져오기
-	public HashMap<String, Object> getProdByReadCount();
+	public HashMap<String, Object> getProdByReadCount(int page);
 	
 	//최신순 상품목록 가져오기
 	public HashMap<String, Object> getProdByLatest();
@@ -83,4 +83,13 @@ public interface HSService {
 
 	//배너 가져오기
 	public HashMap<String, Object> getBanners();
+	
+	//페이징처리 관련
+	public int getStartPage(int page);
+
+	public int getEndPage(int page);
+
+	public int getLastPage(int numOfCards);
+
+	public int getOffset(int page);
 }

@@ -73,7 +73,26 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		return memberDao.resetPw(m);
 	}
 
+	//첫번째 페이지
+	public int getStartPage(int page) {
+		// TODO Auto-generated method stub
+		return page - ((page - 1) % 5);
+	}
 
+	public int getEndPage(int page) {
+		// TODO Auto-generated method stub
+		return page - ((page - 1) % 5) + (5 - 1);
+	}
+
+	public int getLastPage(int numOfBoards) {
+		// TODO Auto-generated method stub
+		return (numOfBoards - 1) / 12 + 1;
+	}
+
+	public int getOffset(int page) {
+		// TODO Auto-generated method stub
+		return (page - 1) * 12 + 1;
+	}
 
 	
 	//이벤트 읽기
@@ -133,10 +152,20 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 	}
 	
 	//인기순 상품 가져오기
-	public HashMap<String, Object> getProdByReadCount() {
+	public HashMap<String, Object> getProdByReadCount(int page) {
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		
+		params.put("offset", getOffset(page));
+		params.put("cardsPerPage", 12);
+		
 		HashMap<String, Object> popularProd = new HashMap<String, Object>();
 		
-		popularProd.put("popularProd", productDao.selectByReadCount());
+		popularProd.put("current", page);
+		popularProd.put("start", getStartPage(page));
+		popularProd.put("end", getEndPage(page));
+		popularProd.put("last", getLastPage(productDao.getCount()));
+		popularProd.put("totalCards", productDao.getCount());
+		popularProd.put("popularProd", productDao.selectByReadCount(params));
 		
 		return popularProd;
 	}
@@ -249,7 +278,5 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		
 		return banners;
 	}
-	
-	
 
 }
