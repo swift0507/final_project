@@ -208,15 +208,13 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 	public HashMap<String, Object> getBanners() {
 		// TODO Auto-generated method stub
 		List<Banner> bannerList = bannerDao.selectAllBanner();
-		String path = "file:///C:/Users/usm05/git/final_project/Final_Project/WebContent/images/";
-		
-		for(int i = 0; i < bannerList.size(); i++) {
-			String imageName = bannerList.get(i).getBanner_pict();
-			bannerList.get(i).setBanner_pict(path + imageName);
-		}
-		
-		System.out.println(bannerList);
-			
+//		String path = "file:///C:/Users/usm05/git/final_project/Final_Project/WebContent/images/";
+//		
+//		for(int i = 0; i < bannerList.size(); i++) {
+//			String imageName = bannerList.get(i).getBanner_pict();
+//			bannerList.get(i).setBanner_pict(path + imageName);
+//		}
+	
 		HashMap<String, Object> banners = new HashMap<String, Object>();
 		
 		banners.put("mainbanner", bannerList.get(0));
