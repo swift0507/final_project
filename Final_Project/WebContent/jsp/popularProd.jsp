@@ -60,7 +60,7 @@
 		<div class="dropdown text-right">
 			<button class="btn btn-secondary dropdown-toggle" type="button"
 					data-toggle="dropdown">정렬 기준</button>
-			<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+			<div class="dropdown-menu">
 				<button class="dropdown-item" type="button">인기순</button>
 				<button class="dropdown-item" type="button">등록일 순</button>
 				<button class="dropdown-item" type="button">후기 많은 순</button>
@@ -161,10 +161,14 @@
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
-				<li class="page-item <c:if test="${ last <= end }">disabled</c:if>"><a class="page-link" href="popularProd.do?page=${ end + 1 }">Next</a></li>
-				<li class="page-item <c:if test="${ last <= end }">disabled</c:if>"><a class="page-link" href="#"
-					aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-				</a></li>
+				<li class="page-item <c:if test="${ last <= end }">disabled</c:if>">
+					<a class="page-link" href="popularProd.do?page=${ end + 1 }">Next</a>
+				</li>
+				<li class="page-item <c:if test="${ last <= end }">disabled</c:if>">
+					<a class="page-link" href="#">
+						<span>&raquo;</span>
+					</a>
+				</li>
 			</ul>
 		</nav>
 	</div>
