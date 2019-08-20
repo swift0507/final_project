@@ -41,9 +41,6 @@
 				column-count: 5;
 			}
 		}
-		a:link { color: black; text-decoration: none;}
-		a:visited { color: black; text-decoration: none;}
-		a:hover { color: black; text-decoration: none;}
 	</style>
 </head>
 
@@ -70,9 +67,8 @@
 		<div class="row container">
 			<c:forEach var="prod" items="${ popularProd }">
 				<div class="card ml-3 mb-3">
-				<a href="prodView.do?prod_id=${ prod.prod_id }" target="_blank">
-					<img src="images/noimage.png" class="card-img-top" alt="..." width="200"
-						height="200">
+				<a class="text-decoration-none text-secondary" href="prodView.do?prod_id=${ prod.prod_id }" target="_blank">
+					<img src="images/noimage.png" class="card-img-top" style="width:200; height:200;">
 					<div class="card-body">
 						<h5 class="card-title">${ prod.prod_name }</h5>
 						<p class="card-text">${ prod.sel_id }</p>
@@ -144,12 +140,12 @@
 
 	&nbsp;
 	<div class="container">
-		<nav aria-label="Page navigation example">
+		<nav>
 			<ul class="pagination justify-content-center">
-				<li class="page-item <c:if test="${ start == 1 }">disabled</c:if>"><a class="page-link" href="popularProd.do?page=1"
-					aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+				<li class="page-item <c:if test="${ start == 1 }">disabled</c:if>"><a class="page-link" href="popularProd.do?page=1"> 
+				<span aria-hidden="true">&laquo;</span>
 				</a></li>
-				<li class="page-item <c:if test="${ start == 1 }">disabled</c:if>"><a class="page-link" href="popularProd.do?page=${ start - 1 }">Previous</a></li>
+				<li class="page-item <c:if test="${ start == 1 }">disabled</c:if>"><a class="page-link" href="popularProd.do?page=${ start - 1 }">이전</a></li>
 				<c:forEach begin="${ start }" end="${ end < last ? end : last }" var="i">
 					<c:choose>
 						<c:when test="${ i == current }">
@@ -161,8 +157,8 @@
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
-				<li class="page-item <c:if test="${ last <= end }">disabled</c:if>"><a class="page-link" href="popularProd.do?page=${ end + 1 }">Next</a></li>
-				<li class="page-item <c:if test="${ last <= end }">disabled</c:if>"><a class="page-link" href="#"
+				<li class="page-item <c:if test="${ last <= end }">disabled</c:if>"><a class="page-link" href="popularProd.do?page=${ end + 1 }">다음</a></li>
+				<li class="page-item <c:if test="${ last <= end }">disabled</c:if>"><a class="page-link" href="popularProd.do?page=${ last }"
 					aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 				</a></li>
 			</ul>

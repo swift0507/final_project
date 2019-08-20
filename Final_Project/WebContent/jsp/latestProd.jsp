@@ -40,7 +40,7 @@
 	</header>
 	<!-- header 종료 -->
 
-<div class = "content">
+
 	<div class="container">
 		<h5><b>최근 등록 상품</b></h5>
 		<hr>
@@ -54,11 +54,10 @@
 			</div>
 		</div>
 		<br>
-		<div class = "row container">
-			
+		<div class = "row container">			
 				<c:forEach var = "prod" items="${ latestProd }">
 				<div class = "card ml-3 mb-3">
-					<img src = "images/noimage.png" class = "card-img-top" style = "width: 200px; height: 200px;">
+					<img src = "images/noimage.png" class = "card-img-top" style="width:200; height:200;">
 					<div class = "card-body">
 						<h5 class = "card-title">${ prod.prod_name }</h5>
 						<p class = "card-text">${ prod.sel_id }</p>
@@ -153,7 +152,7 @@
 			</ul>
 		</nav>
 	</div>
-</div>
+
 	<!-- footer -->
 	<footer>
 		<jsp:include page="footer.jsp"></jsp:include>
