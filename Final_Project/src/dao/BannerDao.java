@@ -1,5 +1,9 @@
 package dao;
 
-public interface BannerDao {
+import java.util.List;
 
+import model.Banner;
+
+public interface BannerDao {
+	public List<Banner> selectAllBanner();
 }

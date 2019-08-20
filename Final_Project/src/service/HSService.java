@@ -71,4 +71,7 @@ public interface HSService {
 	
 	//첨부파일을 가져다 주는 기능
 	public File getAttachedFile(int num);
+
+	//배너 가져오기
+	public HashMap<String, Object> getBanners();
 }
