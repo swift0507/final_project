@@ -85,7 +85,7 @@
 <body>
 	<!-- header -->
 	<header>
-		<jsp:include page="header.jsp"></jsp:include>
+		<jsp:include page="../header.jsp"></jsp:include>
 	</header>
 	<!-- header 종료 -->
 	<div class = "content">	
@@ -185,8 +185,8 @@
 			                <img src = "images/sk.png" width = 60 height = 40>
 			            </td>
 			            <td>
-			                <button class="btn btn-sm btn-secondary" style="width: 170px;" id = "add_item_button">장바구니 담기</button>
-			                <button class="btn btn-sm btn-secondary" style="width: 170px;">즉시 구매</button>
+			                <button class="btn btn-sm btn-secondary" style="width: 170px;">숨김</button>
+			                <button class="btn btn-sm btn-secondary" style="width: 170px;">삭제</button>
 			            </td>
 			        </tr>
 			    </table>
@@ -234,7 +234,7 @@
 	</div>	
 	<!-- footer -->
 	<footer>
-		<jsp:include page="footer.jsp"></jsp:include>
+		<jsp:include page="../footer.jsp"></jsp:include>
 	</footer>
 	<!-- footer 종료 -->
 </body>

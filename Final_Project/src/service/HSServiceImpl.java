@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import model.Banner;
 import model.Event;
 import model.Member;
 import model.Notice;
@@ -228,11 +229,26 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		return new File(path+event_pict);
 	}
 
-	
-
-	
-
-	
+	//배너 가져오기
+	public HashMap<String, Object> getBanners() {
+		// TODO Auto-generated method stub
+		List<Banner> bannerList = bannerDao.selectAllBanner();
+//		String path = "file:///C:/Users/usm05/git/final_project/Final_Project/WebContent/images/";
+//		
+//		for(int i = 0; i < bannerList.size(); i++) {
+//			String imageName = bannerList.get(i).getBanner_pict();
+//			bannerList.get(i).setBanner_pict(path + imageName);
+//		}
+		HashMap<String, Object> banners = new HashMap<String, Object>();
+		
+		banners.put("mainbanner", bannerList.get(0));
+		
+		bannerList.remove(0);
+		
+		banners.put("banners", bannerList);
+		
+		return banners;
+	}
 	
 	
 
