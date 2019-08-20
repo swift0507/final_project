@@ -26,7 +26,9 @@ public class AllController {
 	HSService service;
 	
 	@RequestMapping("main.do")
-	public void main() {} 
+	public void main(Model model) {
+		model.addAllAttributes(service.getBanners());
+	} 
 	
 	/*헤더풋터요청*/
 	//로그인페이지에 올 때 가고자하는 url을 보내줌
@@ -52,14 +54,14 @@ public class AllController {
 	
 	//인기상품
 	@RequestMapping("popularProd.do")
-	public void popularProd(Model model) {
-		model.addAllAttributes(service.getProdByReadCount());
+	public void popularProd(Model model, @RequestParam(defaultValue="1")int page) {
+		model.addAllAttributes(service.getProdByReadCount(page));
 	}
 	
 	//최근 등록 상품
 	@RequestMapping("latestProd.do")
-	public void latestProd(Model model) {
-		model.addAllAttributes(service.getProdByLatest());
+	public void latestProd(Model model, @RequestParam(defaultValue="1")int page) {
+		model.addAllAttributes(service.getProdByLatest(page));
 	}
 	
 	//검색어 기반 상품 목록
@@ -94,6 +96,8 @@ public class AllController {
 		if(service.banCheck(member.getMem_id())) {
 			return false;
 		}
+		//최근로그인날짜세팅하기 
+		service.setLoginDate(member);
 		HashMap<String, Object> id = new HashMap<String, Object>();
 		id.put("mem_id", member.getMem_id());
 		id.put("mem_grade", member.getMem_grade());
@@ -149,6 +153,23 @@ public class AllController {
 		return false;
 	}
 	
+	//id중복확인 id가 있으면 false 없으면 true
+	@RequestMapping("idCheck.do")
+	public @ResponseBody boolean idCheck(Member m){
+		Member member = service.idCheck(m);
+		if(member == null) {
+			return true;
+		}
+		return false;
+	}
+	
+	//회원가입요청
+	@RequestMapping("signUp.do")
+	public @ResponseBody boolean signUp(Member m) {
+		//System.out.println(m);
+		return service.signUp(m);
+	}
+	
 	
 	@RequestMapping("prodView.do")
 	public void prodView(int prod_id, Model model) {
@@ -162,8 +183,8 @@ public class AllController {
 	}
 	
 	@RequestMapping("eventList.do")
-	public void eventList(Model model) {
-		model.addAttribute("eventList", service.getEventList());
+	public void eventList(Model model, @RequestParam(defaultValue="1")int page) {
+		model.addAllAttributes(service.getEventList(page));
 	}
 	
 	@RequestMapping("event.do")

@@ -12,7 +12,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
-	<link href = "/footer.css" rel="stylesheet" type="text/css">
+	<link href = "footer.css" rel="stylesheet" type="text/css">
 	
 	<title>핸쇼</title>
 	
@@ -40,7 +40,7 @@
 	</header>
 	<!-- header 종료 -->
 
-<div class = "content">
+
 	<div class="container">
 		<h5><b>최근 등록 상품</b></h5>
 		<hr>
@@ -54,11 +54,10 @@
 			</div>
 		</div>
 		<br>
-		<div class = "row container">
-			
+		<div class = "row container">			
 				<c:forEach var = "prod" items="${ latestProd }">
 				<div class = "card ml-3 mb-3">
-					<img src = "images/noimage.png" class = "card-img-top" style = "width: 200px; height: 200px;">
+					<img src = "images/noimage.png" class = "card-img-top" style="width:200; height:200;">
 					<div class = "card-body">
 						<h5 class = "card-title">${ prod.prod_name }</h5>
 						<p class = "card-text">${ prod.sel_id }</p>
@@ -128,32 +127,32 @@
 	</div>
 
 	&nbsp;
-	<div class = "container">
+	<div class="container">
 		<nav>
-			<ul class = "pagination justify-content-center">
-				<li class = "page-item">
-					<a class = "page-link" href = "#">
-						<span>&laquo;</span>
-					</a>
-				</li>
-				<li class = "page-item">
-					<a class = "page-link" href = "#">1</a>
-				</li>
-				<li class = "page-item">
-					<a class = "page-link" href = "#">2</a>
-				</li>
-				<li class = "page-item">
-					<a class = "page-link" href = "#">3</a>
-				</li>
-				<li class = "page-item">
-					<a class = "page-link" href = "#">
-						<span>&raquo;</span>
-					</a>
-				</li>
+			<ul class="pagination justify-content-center">
+				<li class="page-item <c:if test="${ start == 1 }">disabled</c:if>"><a class="page-link" href="latestProd.do?page=1"> 
+				<span aria-hidden="true">&laquo;</span>
+				</a></li>
+				<li class="page-item <c:if test="${ start == 1 }">disabled</c:if>"><a class="page-link" href="latestProd.do?page=${ start - 1 }">이전</a></li>
+				<c:forEach begin="${ start }" end="${ end < last ? end : last }" var="i">
+					<c:choose>
+						<c:when test="${ i == current }">
+							<li class="page-item active" aria-current="page">
+      							<span class="page-link">${ current } <span class="sr-only">(current)</span></span>
+    						</li></c:when>
+						<c:otherwise>
+							<li class="page-item"><a class="page-link" href="latestProd.do?page=${ i }">${ i }</a></li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+				<li class="page-item <c:if test="${ last <= end }">disabled</c:if>"><a class="page-link" href="latestProd.do?page=${ end + 1 }">다음</a></li>
+				<li class="page-item <c:if test="${ last <= end }">disabled</c:if>"><a class="page-link" href="latestProd.do?page=${ last }"
+					aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+				</a></li>
 			</ul>
 		</nav>
 	</div>
-</div>
+
 	<!-- footer -->
 	<footer>
 		<jsp:include page="footer.jsp"></jsp:include>

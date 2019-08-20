@@ -12,12 +12,12 @@
     	update product set prod_readcount = (prod_readcount + 1) where prod_id = #{prod_id}
     </update>
     
-    <select id="selectByReadCount" resultType="product">
-    	select * from product order by prod_readcount desc
+    <select id="selectByReadCount" parameterType="java.util.HashMap" resultType="product">
+    	select * from (select rownum as rn, e.* from (select * from product order by prod_readcount desc) e) where rn between #{offset} and (#{offset} + #{cardsPerPage} - 1)
     </select>
     
     <select id="selectByLatest" resultType="product">
-    	select * from product order by prod_date desc
+    	select * from (select rownum as rn, e.* from (select * from product order by prod_date desc) e) where rn between #{offset} and (#{offset} + #{cardsPerPage} - 1)
     </select>
     
     <select id="selectByKeyword" parameterType="String" resultType="product">
@@ -25,5 +25,9 @@
     	    select * from product where prod_name like '%${ value }%' or sel_id like '%${ value }%'
     	</if>
     </select>
+
+	<select id="getCount" resultType="int">
+		select count(*) from product
+	</select>
     
     </mapper>

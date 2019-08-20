@@ -16,6 +16,12 @@ public interface HSService {
 	//로그인체크 
 	public Member loginCheck(Member m);
 	
+	//최근 로그인날짜 세팅
+	public void setLoginDate(Member m);
+	
+	//id중복확인
+	public Member idCheck(Member m);
+	
 	//id찾기
 	public Member findId(Member m);
 	
@@ -24,6 +30,9 @@ public interface HSService {
 	
 	//pw재설정
 	public int resetPw(Member m);
+	
+	//회원가입요청
+	public boolean signUp(Member m);
 	
 	//밴리스트체크
 	public boolean banCheck(String ban_id);
@@ -34,13 +43,13 @@ public interface HSService {
 	public Event readEvent(int event_id);
 	
 	//이벤트페이지의 게시물 리스트 출력
-	public List<Event> getEventList();
+	public HashMap<String, Object> getEventList(int page);
 	
 	//인기순 상품목록 가져오기
-	public HashMap<String, Object> getProdByReadCount();
+	public HashMap<String, Object> getProdByReadCount(int page);
 	
 	//최신순 상품목록 가져오기
-	public HashMap<String, Object> getProdByLatest();
+	public HashMap<String, Object> getProdByLatest(int page);
 
 	//상품ID로 상품 1개 가져오기
 	public Product getOneProduct(int prod_id);
@@ -71,4 +80,18 @@ public interface HSService {
 	
 	//첨부파일을 가져다 주는 기능
 	public File getAttachedFile(int num);
+
+	//배너 가져오기
+	public HashMap<String, Object> getBanners();
+	
+	//페이징처리 관련
+	public int getStartPage(int page);
+
+	public int getEndPage(int page);
+
+	public int getProdLastPage(int numOfCards);
+
+	public int getProdOffset(int page);
+
+	
 }

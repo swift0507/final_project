@@ -13,9 +13,9 @@ public class UserCheckInterceptor extends HandlerInterceptorAdapter{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println(request.getSession().getAttribute("id"));
-		if(request.getSession().getAttribute("id")==null) {
-			response.sendRedirect("/Final_Project/loginForm.do");
+		//System.out.println(request.getSession().getAttribute("loginUserInfo"));
+		if(request.getSession().getAttribute("loginUserInfo")==null) {
+			response.sendRedirect("/Final_Project/loginForm.do?url="+request.getRequestURI());
 			return false;
 		}
 		return true;

@@ -118,7 +118,7 @@ $(document).ready(function(){
 			<td class = "blank">
 			</td>
 			<td class = "logo text-center">
-				<a class="navbar-brand" href="main.do">
+				<a class="navbar-brand" href="/Final_Project/main.do">
 					<img src="images/logo.png" id="logo" style = "width: 150px; height: 50px;">
 				</a>
 			</td>

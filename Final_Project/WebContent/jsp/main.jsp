@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
-	<link href = "/footer.css" rel="stylesheet" type="text/css">
+	<link href = "footer.css" rel="stylesheet" type="text/css">
 	
 	<title>핸쇼</title>
 	
@@ -67,34 +68,29 @@
       <div class="carousel-inner">
         <div class="carousel-item active">
           <div class="jumbotron">
-            <h1 class="display-4">Event 1</h1>
+            <!-- <h1 class="display-4">Event 1</h1>
             <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention
               to featured content or information.</p>
             <hr class="my-4">
             <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a> -->
+            <!-- <img src="images/horizonbanner1.PNG" width=100% height=500px> -->
+            <a href="${ mainbanner.banner_url }"><img src="images/${ mainbanner.banner_pict }" width=100% height=500px></a>
           </div>
         </div>
+        <c:forEach var="banner" items="${ banners }">
         <div class="carousel-item">
           <div class="jumbotron">
-            <h1 class="display-4">Event 2</h1>
+            <!-- <h1 class="display-4">Event 2</h1>
             <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention
               to featured content or information.</p>
             <hr class="my-4">
             <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a> -->
+            <a href="${ banner.banner_url }"><img src="images/${ banner.banner_pict }" width=100% height=500px></a>
           </div>
-        </div>
-        <div class="carousel-item">
-          <div class="jumbotron">
-            <h1 class="display-4">Event 3</h1>
-            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention
-              to featured content or information.</p>
-            <hr class="my-4">
-            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-          </div>
-        </div>
+        </div>     
+        </c:forEach>
       </div>
       <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
