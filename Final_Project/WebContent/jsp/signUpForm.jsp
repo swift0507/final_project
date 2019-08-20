@@ -140,12 +140,34 @@
     	})
     	
     	//비밀번호 체크
-    	$("#passCheck").blur(function(){
+    	$("#mem_pw").keyup(function(){
+    		if($("#passCheck").val() != $("#mem_pw").val()){
+    			$("#passCheck").attr("class", "form-control is-invalid")
+				$("#passCheckResult").text("비밀번호가 일치하지 않습니다.").attr("class", "invalid-feedback");
+    			passCheck = false;
+    		}
+    		else if($("#mem_pw").val()==""){
+    			$("#passCheck").attr("class", "form-control")
+    			$("#passCheckResult").text("")
+    		}
+    		
+    		else{
+    			$("#passCheck").attr("class", "form-control is-valid")
+				$("#passCheckResult").text("비밀번호 일치").attr("class", "valid-feedback");
+    			passCheck = true;
+    		}
+    	})
+    	
+    	$("#passCheck").keyup(function(){
     		//비밀번호가일치하지 않으면
     		if($("#passCheck").val() != $("#mem_pw").val()){
     			$("#passCheck").attr("class", "form-control is-invalid")
 				$("#passCheckResult").text("비밀번호가 일치하지 않습니다.").attr("class", "invalid-feedback");
     			passCheck = false;
+    		}
+    		else if($("#passCheck").val()==""){
+    			$("#passCheck").attr("class", "form-control")
+    			$("#passCheckResult").text("")
     		}
     		else{
     			$("#passCheck").attr("class", "form-control is-valid")
