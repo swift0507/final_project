@@ -167,8 +167,7 @@ public class AllController {
 	@RequestMapping("signUp.do")
 	public @ResponseBody boolean signUp(Member m) {
 		//System.out.println(m);
-		service.signUp(m);
-		return true;
+		return service.signUp(m);
 	}
 	
 	
