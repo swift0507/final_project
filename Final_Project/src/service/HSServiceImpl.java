@@ -1,6 +1,8 @@
 package service;
 
 import java.io.File;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 
@@ -23,6 +25,29 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		Member mem = memberDao.selectId(m);
 		mem = memberDao.passCheck(m);
 		return mem;
+	}
+	
+	//로그인날짜세팅, 방문날짜 하루 증가
+	@Override
+	public void setLoginDate(Member m) {
+		// TODO Auto-generated method stub
+		memberDao.updateLoginDate(m);
+		memberDao.updateMemberHistory(m);
+	}
+	
+	//id 중복확인
+	@Override
+	public Member idCheck(Member m) {
+		// TODO Auto-generated method stub
+		return memberDao.selectId(m);
+	}
+	
+	//회원가입요청
+	@Override
+	public boolean signUp(Member m) {
+		// TODO Auto-generated method stub
+		memberDao.signUp(m);
+		return true;
 	}
 	
 	//id찾기
@@ -202,6 +227,10 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		
 		return new File(path+event_pict);
 	}
+
+	
+
+	
 
 	
 	

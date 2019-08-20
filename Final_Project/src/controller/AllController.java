@@ -94,6 +94,8 @@ public class AllController {
 		if(service.banCheck(member.getMem_id())) {
 			return false;
 		}
+		//최근로그인날짜세팅하기 
+		service.setLoginDate(member);
 		HashMap<String, Object> id = new HashMap<String, Object>();
 		id.put("mem_id", member.getMem_id());
 		id.put("mem_grade", member.getMem_grade());
@@ -147,6 +149,24 @@ public class AllController {
 			return true;
 		}
 		return false;
+	}
+	
+	//id중복확인 id가 있으면 false 없으면 true
+	@RequestMapping("idCheck.do")
+	public @ResponseBody boolean idCheck(Member m){
+		Member member = service.idCheck(m);
+		if(member == null) {
+			return true;
+		}
+		return false;
+	}
+	
+	//회원가입요청
+	@RequestMapping("signUp.do")
+	public @ResponseBody boolean signUp(Member m) {
+		//System.out.println(m);
+		service.signUp(m);
+		return true;
 	}
 	
 	

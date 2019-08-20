@@ -21,4 +21,14 @@
     <update id="resetPw">
     	update member set mem_pw=#{mem_pw} where mem_id=#{mem_id}
     </update>
+    <update id="updateLoginDate">
+    	update member set mem_recentlogin = default where mem_id=#{mem_id}
+    </update>
+    <update id="updateMemberHistory">
+    	update member set mem_history=(mem_history + 1) where mem_id=#{mem_id}
+    </update>
+    <insert id="signUp">
+	    insert into member values(#{mem_id}, #{mem_pw}, #{mem_name}, #{mem_birth}, #{mem_gender}, #{mem_email}, #{mem_phone},
+	    #{mem_zipcode}, #{mem_addr}, #{mem_remainaddr}, default, #{mem_marketing}, default, default, default)
+    </insert>
     </mapper>

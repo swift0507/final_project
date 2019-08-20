@@ -9,4 +9,7 @@ public interface MemberDao {
 	public Member findId(Member m);
 	public Member findPw(Member m);
 	public int resetPw(Member m);
+	public void updateLoginDate(Member m);
+	public void updateMemberHistory(Member m);
+	public void signUp(Member m);
 }
