@@ -73,25 +73,40 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		return memberDao.resetPw(m);
 	}
 
-	//첫번째 페이지
+	//시작 페이지 번호
 	public int getStartPage(int page) {
 		// TODO Auto-generated method stub
 		return page - ((page - 1) % 5);
 	}
 
+	//끝 페이지 번호
 	public int getEndPage(int page) {
 		// TODO Auto-generated method stub
 		return page - ((page - 1) % 5) + (5 - 1);
 	}
 
-	public int getLastPage(int numOfBoards) {
+	//상품 목록의 마지막 페이지 번호
+	public int getProdLastPage(int numOfCards) {
 		// TODO Auto-generated method stub
-		return (numOfBoards - 1) / 12 + 1;
+		return (numOfCards - 1) / 12 + 1;
 	}
 
-	public int getOffset(int page) {
+	//각 상품목록 페이지의 첫번째 카드번호
+	public int getProdOffset(int page) {
 		// TODO Auto-generated method stub
 		return (page - 1) * 12 + 1;
+	}
+	
+	//게시판 형식 목록의 마지막 페이지 번호
+	public int getBoardLastPage(int numOfBoards) {
+		// TODO Auto-generated method stub
+		return (numOfBoards - 1) / 10 + 1;
+	}
+
+	//게시판 형식 목록 페이지의 첫번째 카드번호
+	public int getBoardOffset(int page) {
+		// TODO Auto-generated method stub
+		return (page - 1) * 10 + 1;
 	}
 
 	
@@ -143,19 +158,29 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 	
 	//이벤트 list전부 가져오기
 	@Override
-	public List<Event> getEventList() {
-		// TODO Auto-generated method stub
-		List<Event> event = eventDao.selectAll();
-//		System.out.println(event);
+	public HashMap<String, Object> getEventList(int page) {
+		HashMap<String, Object> params = new HashMap<String, Object>();
 		
-		return event;
+		params.put("offset", getProdOffset(page));
+		params.put("boardsPerPage", 10);
+		
+		HashMap<String, Object> eventMap = new HashMap<String, Object>();
+		
+		eventMap.put("current", page);
+		eventMap.put("start", getStartPage(page));
+		eventMap.put("end", getEndPage(page));
+		eventMap.put("last", getProdLastPage(eventDao.getCount()));
+		eventMap.put("totalBoards", eventDao.getCount());
+		eventMap.put("event", eventDao.selectAll(params));
+		
+		return eventMap;
 	}
 	
 	//인기순 상품 가져오기
 	public HashMap<String, Object> getProdByReadCount(int page) {
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		
-		params.put("offset", getOffset(page));
+		params.put("offset", getProdOffset(page));
 		params.put("cardsPerPage", 12);
 		
 		HashMap<String, Object> popularProd = new HashMap<String, Object>();
@@ -163,7 +188,7 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		popularProd.put("current", page);
 		popularProd.put("start", getStartPage(page));
 		popularProd.put("end", getEndPage(page));
-		popularProd.put("last", getLastPage(productDao.getCount()));
+		popularProd.put("last", getProdLastPage(productDao.getCount()));
 		popularProd.put("totalCards", productDao.getCount());
 		popularProd.put("popularProd", productDao.selectByReadCount(params));
 		
@@ -171,10 +196,20 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 	}
 	
 	//최신순 상품 가져오기
-	public HashMap<String, Object> getProdByLatest() {
+	public HashMap<String, Object> getProdByLatest(int page) {
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		
+		params.put("offset", getProdOffset(page));
+		params.put("cardsPerPage", 12);
+		
 		HashMap<String, Object> latestProd = new HashMap<String, Object>();
 		
-		latestProd.put("latestProd", productDao.selectByLatest());
+		latestProd.put("current", page);
+		latestProd.put("start", getStartPage(page));
+		latestProd.put("end", getEndPage(page));
+		latestProd.put("last", getProdLastPage(productDao.getCount()));
+		latestProd.put("totalCards", productDao.getCount());
+		latestProd.put("latestProd", productDao.selectByLatest(params));
 		
 		return latestProd;
 	}

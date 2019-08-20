@@ -8,10 +8,6 @@
     	select * from event where event_id = #{event_id}
     </select>
     
-    <select id="selectAll" resultType="event">
-    	select * from event order by event_id desc
-    </select>
-    
 	<!-- 전체 게시물 수 구하기 -->
 	<select id="getCount" resultType="int">
    		select count(*) from event
@@ -20,5 +16,9 @@
    	<update id="updateReadCount" parameterType="int">
    		update event set event_readcount = event_readcount+1 where event_id = #{evnet_id}
    	</update>
-    
+   	
+   	<select id="selectAll" resultType="event">
+    	select * from (select rownum as rn, e.* from (select * from event order by event_id desc) e) where rn between #{offset} and (#{offset} + #{boardsPerPage} - 1)
+    </select>
+   	
 </mapper>
