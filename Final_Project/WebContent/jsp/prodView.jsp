@@ -95,14 +95,14 @@
 			    <div class="col-8">
 			    <table style = "width: 700px;">
 			        <tr> 
-			            <td rowspan = 7 colspan = 5 style = "width: 350px;">
+			            <td rowspan = 8 colspan = 5 style = "width: 350px;">
 			                <div id = "item_image">
 			                    <img src = "images/sk.png">
 			                </div>
 			            </td>
 			            
 			            <td>
-			                <div id = "item_name">
+			                <div id = "item_name" class="mt-5">
 			                <h3>${ product.prod_name }</h3>
 			                </div>
 			            </td>
@@ -125,6 +125,11 @@
 			                </span>
 			            </td>
 			        </tr>
+			        <tr style="height: 70px;">
+			        	<td>
+			        		<h4>${ product.prod_price }원</h4>
+			        	</td>
+			        </tr>
 			        <tr>
 			            <td>
 			                <div id = "like_report">
@@ -140,7 +145,7 @@
 			        </tr>
 			        <tr>
 			            <td>
-			            	<hr>배송비 : ${ product.prod_fee }<hr>
+			            	<hr>배송비 : ${ product.prod_fee }원<hr>
 			            </td>
 			        </tr>
 			        <tr>
@@ -157,7 +162,7 @@
 				               	${ option.opt_name }
 				               		<select id = "select_opt" class="custom-select-sm" style="width: 250px;"> 
 				               	<c:forEach var="optiondetail" items="${ option.optiondetail }">
-				                    <option id = "${ optiondetail.optd_id }">${ optiondetail.optd_choice } </option>
+				                    <option id="${ optiondetail.optd_id }">${ optiondetail.optd_choice }</option>
 				                    <br>
 				               	</c:forEach>
 				                </select>
