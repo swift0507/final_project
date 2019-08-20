@@ -12,7 +12,6 @@
 	  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 	<link href = "/footer.css" rel="stylesheet" type="text/css">
-	
 	<title>핸쇼</title>
 	
 	<!-- Optional JavaScript -->
@@ -31,6 +30,18 @@
 	</script>
 	<script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15.0.0/dist/smooth-scroll.polyfills.min.js">
 	</script>
+	<script>
+     var scroll = new SmoothScroll('a[href*="#"]', {
+	      speed: 500,
+	      speedAsDuration: true
+      });
+  	</script>
+  	<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
+	<style>
+		div {
+			font-family: 'Nanum Gothic', sans-serif;
+		}
+	</style>
 </head>
 <body>
 	<!-- header -->
@@ -39,12 +50,7 @@
 	</header>
 	<!-- header 종료 -->
 
-	<script>
-     var scroll = new SmoothScroll('a[href*="#"]', {
-	      speed: 500,
-	      speedAsDuration: true
-      });
-  </script>
+	
 <div class = "content">
 	<div class="container">
 		<div class="row">
