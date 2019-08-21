@@ -264,15 +264,27 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		noticeDao.updateReadCount(notice_id);
 		return noticeDao.selectOne(notice_id);
 	}
-
+	
 	//공지사항list전부 가져오기
 	@Override
-	public List<Notice> getNoticeList() {
-		// TODO Auto-generated method stub
-		List<Notice> notice = noticeDao.selectAll();
-		System.out.println(notice);
-		return notice;
+	public HashMap<String, Object> getNoticetList(int page) {
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		
+		params.put("offset", getProdOffset(page));
+		params.put("boardsPerPage", 10);
+		
+		HashMap<String, Object> noticeMap = new HashMap<String, Object>();
+		
+		noticeMap.put("current", page);
+		noticeMap.put("start", getStartPage(page));
+		noticeMap.put("end", getEndPage(page));
+		noticeMap.put("last", getProdLastPage(noticeDao.getCount()));
+		noticeMap.put("totalBoards", noticeDao.getCount());
+		noticeMap.put("notice", noticeDao.selectAll(params));
+		
+		return noticeMap;
 	}
+	
 	
 	//공지사항 조회수 증가
 	@Override
@@ -281,7 +293,7 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		return 0;
 	}
 
-	//이벤트 첨부파일
+	//이벤트 첨부파일 @@@@@@@@@@@@@@@@@@
 	@Override
 	public File getAttachedFile(int num) {
 		// TODO Auto-generated method stub
@@ -313,5 +325,6 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		
 		return banners;
 	}
+
 
 }

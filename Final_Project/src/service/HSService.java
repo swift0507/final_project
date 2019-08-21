@@ -73,14 +73,12 @@ public interface HSService {
 	public Notice readNotice(int notice_id);
 	
 	//공지사항페이지의 게시물 리스트 출력
-	public List<Notice> getNoticeList();
+//	public List<Notice> getNoticeList();
+	public HashMap<String, Object> getNoticetList(int page);
 	
 	//공지사항 조회수 증가
 	int updateReadCount1(int notice_readcount);
 	
-	//첨부파일을 가져다 주는 기능
-	public File getAttachedFile(int num);
-
 	//배너 가져오기
 	public HashMap<String, Object> getBanners();
 	
@@ -93,5 +91,6 @@ public interface HSService {
 
 	public int getProdOffset(int page);
 
-	
+	//첨부파일을 가져다 주는 기능
+	public File getAttachedFile(int num);
 }

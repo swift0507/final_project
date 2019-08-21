@@ -182,11 +182,13 @@ public class AllController {
 		model.addAttribute("product", product);
 	}
 	
+	//이벤트 목록 요청
 	@RequestMapping("eventList.do")
 	public void eventList(Model model, @RequestParam(defaultValue="1")int page) {
 		model.addAllAttributes(service.getEventList(page));
 	}
 	
+	//이벤트 상세 요청
 	@RequestMapping("event.do")
 	public void event(int event_id, Model model) {
 //		System.out.println(event_id);
@@ -194,15 +196,17 @@ public class AllController {
 
 	}
 	
+	//공지사항 목록 요청
 	@RequestMapping("noticeList.do")
-	public void noticeList(Model model) {
-		model.addAttribute("noticeList", service.getNoticeList());
+	public void noticeList(Model model, @RequestParam(defaultValue="1")int page) {
+		model.addAllAttributes(service.getNoticetList(page));
 	}
 	
+	//공지사항 상세 요청
 	@RequestMapping("notice.do")
 	public void notice(int notice_id, Model model) {
 //		System.out.println(notice_id);
-		model.addAttribute("notice", service.readEvent(notice_id));
+		model.addAttribute("notice", service.readNotice(notice_id));
 
 	}
 	
