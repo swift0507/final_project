@@ -33,14 +33,15 @@
 	</script>
 </head>
 <body>
-	<table width=350 style="margin-left: auto; margin-right: auto;">
-		<tr height=30></tr>
+	<table style = "width: 350px; margin-left: auto; margin-right: auto;">
+		<tr style = "width: 30px;"></tr>
 		<tr>
-			<td colspan=2 align="center" height=100><img
-				src="images/logo.png" width=160 height=60></td>
+			<td colspan = 2 class = "text-center" style = "height: 100px;">
+				<img src = "images/logo.png" style = "width: 160px; height: 60px;">
+			</td>
 		</tr>
 		<tr>
-			<td colspan=2 align="left">
+			<td colspan = 2 class = "text-left">
 				<h4>
 					<b>회원 정보 수정</b>
 				</h4>
@@ -48,59 +49,68 @@
 			</td>
 		</tr>
 		<tr>
-			<th> 아이디 :  </th> <td>11hertz</td>
+			<th> 아이디 :  </th> 
+			<td> 11hertz </td>
 		</tr>
-		<tr height = 10></tr>
+		<tr style = "height: 10px;"></tr>
 		<tr>
-			<th> 이름 :  </th> <td>이기훈</td>
+			<th> 이름 :  </th> 
+			<td> 이기훈 </td>
 		</tr>
-		<tr height = 10></tr>
-		<tr height=40>
-			<td colspan=2><input type="password" class="form-control"
-				placeholder="비밀번호" aria-describedby="sizing-addon1"></td>
+		<tr style = "height: 10px;"></tr>
+		<tr style = "height: 40px;">
+			<td colspan = 2>
+				<input type = "password" class = "form-control" placeholder = "비밀번호"">
+			</td>
 		</tr>
-		<tr height=30></tr>
-		<tr height=40>
-			<td colspan=2><input type="password" class="form-control"
-				placeholder="새 비밀번호" aria-describedby="sizing-addon1"></td>
-		</tr>
-		<tr>
-			<td colspan=2><input type="password" class="form-control"
-				placeholder="새 비밀번호 확인" aria-describedby="sizing-addon1"></td>
-		</tr>
-		<tr height=20></tr>
-		<tr>
-			<td colspan=2><input type="email" class="form-control"
-				id="exampleInputEmail1" aria-describedby="emailHelp"
-				placeholder="이메일"></td>
-		</tr>
-		<tr height=50>
-			<td colspan=2><input type="text" class="form-control"
-				placeholder="휴대전화" aria-describedby="sizing-addon1"></td>
-		</tr>
-		<tr height=20></tr>
-		<tr height=50>
-			<td width=150><input type="text" class="form-control"
-				placeholder="우편번호" aria-describedby="sizing-addon1"></td>
-			<td width=150><button id="btn-Yes"
-					class="btn btn-sm btn-secondary btn-block" type="button">우편번호
-					찾기</button></td>
+		<tr style = "height: 30px;"></tr>
+		<tr style = "height: 40px;">
+			<td colspan = 2>
+				<input type = "password" class = "form-control" placeholder = "새 비밀번호">
+			</td>
 		</tr>
 		<tr>
-			<td colspan=2><input type="text" class="form-control"
-				placeholder="주소" aria-describedby="sizing-addon1"></td>
+			<td colspan = 2>
+				<input type = "password" class = "form-control" placeholder = "새 비밀번호 확인">
+			</td>
+		</tr>
+		<tr style = "height: 20px;"></tr>
+		<tr>
+			<td colspan = 2>
+				<input type = "email" class = "form-control" placeholder="이메일">
+			</td>
+		</tr>
+		<tr style = "height: 50px;">
+			<td colspan = 2>
+				<input type = "text" class = "form-control" placeholder = "휴대전화">
+			</td>
+		</tr>
+		<tr style = "height: 20px;"></tr>
+		<tr style = "height: 50px;">
+			<td style = "width: 150px;">
+				<input type = "text" class = "form-control" placeholder = "우편번호">
+			</td>
+			<td style = "width: 150px;">
+				<button class = "btn btn-sm btn-secondary btn-block" type = "button">우편번호 찾기</button>
+			</td>
 		</tr>
 		<tr>
-			<td colspan=2><input type="text" class="form-control"
-				placeholder="나머지 주소" aria-describedby="sizing-addon1"></td>
+			<td colspan = 2>
+				<input type = "text" class = "form-control" placeholder = "주소" >
+			</td>
+		</tr>
+		<tr>
+			<td colspan = 2>
+				<input type = "text" class = "form-control" placeholder = "나머지 주소">
+			</td>
 		</tr>
 
-		<tr height=20></tr>
+		<tr style = "height: 20px;"></tr>
 		<tr>
-			<td colspan=2>
-				<button class="btn btn-sm btn-secondary" type="submit" style = "width: 170px;">수정</button>
-				<button class="btn btn-sm btn-secondary" type="button"
-						onclick="history.go(-1)" style = "width: 170px;">취소</button>
+			<td colspan = 2>
+				<button class = "btn btn-sm btn-secondary" type = "submit" style = "width: 170px;">수정</button>
+				<button class = "btn btn-sm btn-secondary" type = "button"
+						onclick = "history.go(-1)" style = "width: 170px;">취소</button>
 			</td>
 		</tr>
 	</table>

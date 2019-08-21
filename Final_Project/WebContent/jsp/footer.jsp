@@ -26,7 +26,7 @@
 						<td style = "width: 300px;">
 							<img src="images/logo.png" style = "width: 150px; height: 50px;">
 						</td>
-						<td style = "500px;">
+						<td style = "width: 500px;">
 							<large>(주) 핸쇼</large>
 							<address>서울시 강남구 테헤란로 212</address> 
 							<small>대표번호 : 1234 - 5678</small> <br> 
