@@ -60,8 +60,8 @@ public class AllController {
 	
 	//최근 등록 상품
 	@RequestMapping("latestProd.do")
-	public void latestProd(Model model) {
-		model.addAllAttributes(service.getProdByLatest());
+	public void latestProd(Model model, @RequestParam(defaultValue="1")int page) {
+		model.addAllAttributes(service.getProdByLatest(page));
 	}
 	
 	//검색어 기반 상품 목록
@@ -183,8 +183,8 @@ public class AllController {
 	}
 	
 	@RequestMapping("eventList.do")
-	public void eventList(Model model) {
-		model.addAttribute("eventList", service.getEventList());
+	public void eventList(Model model, @RequestParam(defaultValue="1")int page) {
+		model.addAllAttributes(service.getEventList(page));
 	}
 	
 	@RequestMapping("event.do")
