@@ -31,21 +31,6 @@
 	</script>
 	<script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15.0.0/dist/smooth-scroll.polyfills.min.js">
 	</script>
-	<style>
-		html, body {
-		  height: 100%;
-		}
-		body {
-		  display: flex;
-		  flex-direction: column;
-		}
-		.content {
-		  flex: 1 0 auto;
-		}
-		.footer {
-		  flex-shrink: 0;
-		}
-	</style> 
 </head>
 <body>
 <!-- header -->
