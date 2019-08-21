@@ -31,22 +31,7 @@
 		crossorigin="anonymous">
 	</script>
 	<script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15.0.0/dist/smooth-scroll.polyfills.min.js">
-	</script>
-	<style>
-		html, body {
-		  height: 100%;
-		}
-		body {
-		  display: flex;
-		  flex-direction: column;
-		}
-		.content {
-		  flex: 1 0 auto;
-		}
-		.footer {
-		  flex-shrink: 0;
-		}
-	</style>     
+	</script>    
 </head>
 
 <body>
@@ -93,11 +78,11 @@
         </c:forEach>
       </div>
       <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="carousel-control-prev-icon"></span>
         <span class="sr-only">Previous</span>
       </a>
       <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="carousel-control-next-icon"></span>
         <span class="sr-only">Next</span>
       </a>
     </div>
@@ -243,7 +228,7 @@
       </div>
     </div>
 </div>
-  <hr>
+<hr>
 <!-- main body 종료 -->
 
 <!-- footer -->
