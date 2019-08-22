@@ -172,7 +172,7 @@ public class AllController {
 	
 	
 	@RequestMapping("prodView.do")
-	public void prodView(int prod_id, Model model) {
+	public void prodView(int prod_id, Model model, @RequestParam(defaultValue="1")int qnaPage) {
 		Product product = service.getOneProduct(prod_id);
 		
 		//옵션 보내기
@@ -180,6 +180,14 @@ public class AllController {
 		
 		//상품 보내기
 		model.addAttribute("product", product);
+		
+		model.addAllAttributes(service.getQnAById(prod_id, qnaPage));
+		
+	}
+	
+	@RequestMapping("qnaByProd.do")
+	public @ResponseBody HashMap<String, Object> qnaByProd(int prod_id, int qnaPage) {
+		return service.getQnAById(prod_id, qnaPage);
 	}
 	
 	@RequestMapping("eventList.do")

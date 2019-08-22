@@ -84,14 +84,26 @@ public interface HSService {
 	//배너 가져오기
 	public HashMap<String, Object> getBanners();
 	
-	//페이징처리 관련
+	/*페이징처리 관련*/
+	//시작 페이지
 	public int getStartPage(int page);
 
+	//끝 페이지
 	public int getEndPage(int page);
 
+	//상품카드 목록의 마지막 페이지 번호
 	public int getProdLastPage(int numOfCards);
-
-	public int getProdOffset(int page);
-
 	
+	//상품카드 페이지의 첫번째 카드번호
+	public int getProdOffset(int page);
+	
+	//게시판 형식 목록의 마지막 페이지 번호
+	public int getBoardLastPage(int numOfBoards);
+	
+	//게시판 형식 목록 페이지의 첫번째 게시물번호
+	public int getBoardOffset(int page);
+	/*여기까지 페이징 관련*/
+
+	//상품별 Q&A 가져오기
+	public HashMap<String, Object> getQnAById(int prod_id, int qnaPage);
 }

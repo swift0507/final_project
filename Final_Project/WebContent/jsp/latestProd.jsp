@@ -57,6 +57,7 @@
 		<div class = "row container">			
 				<c:forEach var = "prod" items="${ latestProd }">
 				<div class = "card ml-3 mb-3">
+				<a class="text-decoration-none text-secondary" href="prodView.do?prod_id=${ prod.prod_id }" target="_blank">
 					<img src = "images/noimage.png" class = "card-img-top" style="width:200; height:200;">
 					<div class = "card-body">
 						<h5 class = "card-title">${ prod.prod_name }</h5>
@@ -68,6 +69,7 @@
            	 	 		&nbsp;
               			<i class = "far fa-comment-dots">12</i>
 					</div>
+					</a>
 				</div>		
 			</c:forEach>
 				<!-- <div class="card">
