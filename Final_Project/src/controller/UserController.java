@@ -1,7 +1,12 @@
 package controller;
 
+import java.util.HashMap;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import service.HSService;
@@ -14,8 +19,14 @@ public class UserController {
 	
 	//마이페이지 불러오기
 	@RequestMapping("user/myPage.do")
-	public void mypage() {
-		//미완성
+	public void mypage(Model m, HttpSession session) {
+		//미완성 
+		//영수증리스트 가져오기 최신순서대로
+		HashMap<String, Object> id = (HashMap<String, Object>)session.getAttribute("loginUserInfo");
+		String mem_id = (String)id.get("mem_id");
+		m.addAttribute("receiptList", service.getReceiptListByMember(mem_id));
+		//찜목록 가져오기
+		m.addAttribute("pickList", service.getPickList(mem_id));
 	}
 		
 	//장바구니보기
