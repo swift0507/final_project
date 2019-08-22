@@ -40,7 +40,7 @@
 	</header>
 	<!-- header 종료 -->
 
-
+<div class = "content">
 	<div class="container">
 		<h5><b>최근 등록 상품</b></h5>
 		<hr>
@@ -154,7 +154,7 @@
 			</ul>
 		</nav>
 	</div>
-
+</div>
 	<!-- footer -->
 	<footer>
 		<jsp:include page="footer.jsp"></jsp:include>
