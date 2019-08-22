@@ -60,39 +60,42 @@
 			input_category_form += '</tr>'
 		/* 카테고리 추가 폼 종료 */
 		
-		/* 상세 옵션 추가 폼 */
-		var input_option_form = '<tr>';
-			input_option_form += '<td style = "width: 5%;" class= "text-center">';
-			input_option_form += '</td>';
-			input_option_form += '<td style = "width: 25%;">';
-			input_option_form += '</td>';
-			input_option_form += '<td colspan = 2 style = "width: 50%;">';
-			input_option_form += '<input type="text" class="form-control" placeholder = "설명">';
-			input_option_form += '</td>';
-			input_option_form += '<td style = "width: 20%">'
-			input_option_form += '</td>';
-			input_option_form += '</tr>';
-			input_option_form += '<tr>';
-			input_option_form += '<td colspan = 2></td>';
-			input_option_form += '<td>';
-			input_option_form += '추가 금액';
-			input_option_form += '</td>';
-			input_option_form += '<td>';
-			input_option_form += '<input type="text" class="form-control" placeholder = "추가 금액" style = "width: 275px;">';	
-			input_option_form += '</td>';
-			input_option_form += '<td></td>';
-			input_option_form += '</tr>';
-			input_option_form += '<tr>';
-			input_option_form += '<td colspan = 2></td>';
-			input_option_form += '<td>';
-			input_option_form += '수량';
-			input_option_form += '</td>';
-			input_option_form += '<td>';
-			input_option_form += '<input type="text" class="form-control" placeholder = "수량" style = "width: 275px;">';	
-			input_option_form += '</td>';
-			input_option_form += '<td></td>';
-			input_option_form += '</tr>';
+		/* 옵션 추가 폼 */
+		/* 옵션 추가 폼  종료*/
 		
+		/* 상세 옵션 추가 폼 */
+		var input_suboption_form = '<tr>';
+			input_suboption_form += '<td style = "width: 5%;" class= "text-center">';
+			input_suboption_form += '</td>';
+			input_suboption_form += '<td style = "width: 25%;">';
+			input_suboption_form += '</td>';
+			input_suboption_form += '<td colspan = 2 style = "width: 50%;">';
+			input_suboption_form += '<input type="text" class="form-control" placeholder = "설명">';
+			input_suboption_form += '</td>';
+			input_suboption_form += '<td style = "width: 20%">'
+			input_suboption_form += '</td>';
+			input_suboption_form += '</tr>';
+			input_suboption_form += '<tr>';
+			input_suboption_form += '<td colspan = 2></td>';
+			input_suboption_form += '<th>';
+			input_suboption_form += '추가 금액';
+			input_suboption_form += '</th>';
+			input_suboption_form += '<td>';
+			input_suboption_form += '<input type="text" class="form-control" placeholder = "추가 금액" style = "width: 275px;">';	
+			input_suboption_form += '</td>';
+			input_suboption_form += '<td></td>';
+			input_suboption_form += '</tr>';
+			input_suboption_form += '<tr>';
+			input_suboption_form += '<td colspan = 2></td>';
+			input_suboption_form += '<th>';
+			input_suboption_form += '수량';
+			input_suboption_form += '</th>';
+			input_suboption_form += '<td>';
+			input_suboption_form += '<input type="text" class="form-control" placeholder = "수량" style = "width: 275px;">';	
+			input_suboption_form += '</td>';
+			input_suboption_form += '<td></td>';
+			input_suboption_form += '</tr>';
+			input_suboption_form += '<tr style = "height: 10px"></tr>';
 		/* 상세 옵션 추가 폼 종료*/
 		
 		
@@ -128,13 +131,37 @@
 		
 		/* 상세 옵션 폼 추가 Script */
 		$('#add_sub_option').click(function(){
-			$('#option_table').append(input_option_form);	
+			$('#option_table').append(input_suboption_form);	
 		})
 		
 		/* 상세 옵션 폼 추가 Script 종료 */
-		
+
+
 	})
 	</script>
+	
+	<!-- 대표 사진 미리보기 Script -->
+	<script>
+	     function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#rep_image')
+                        .attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+	</script>
+	<!-- 대표 사진 미리보기 Script 종료 -->
+	<style>
+		img{
+  			max-width: 150px;
+  			max-height: 175px;
+		}
+	</style>
 </head>
 <body>
 <!-- header -->
@@ -155,7 +182,7 @@
 			<table style = "width: 700px;" class= "mt-4">
 				<tr>
 					<td rowspan = 5 style = "width: 30%; height: 175px;">
-						<img src = "images/noimage.png" style = "width: 150px; height: 175px;">
+						<img id = "rep_image" src = "images/noimage.png" style = "width: 150px; height: 175px;">
 					</td>
 					<th colspan = 2 style = "width: 70%;"> 상품명 </th>
 				</tr>
@@ -248,7 +275,7 @@
 				</tr>
 				<tr>
 					<td colspan = 2>
-						<input type="file" class="form-control-file">
+						<input type="file" class="form-control-file" onchange="readURL(this);">
 					</td>
 				</tr>
 			</table>
@@ -344,13 +371,16 @@
 			
 			<br>
 			
-			<table style = "width: 700px;" id = "option_table">
+			<table style = "width: 700px;">
 				<tr>
 					<td colspan = 5>
 						<button class = "btn-secondary" id = "add_option">추가</button>
 						<button class = "btn-secondary" id = "del_option">삭제</button>
 					</td>
 				</tr>
+			</table>
+			
+			<table style = "width: 700px;" id = "option_table">
 				<tr style = "height: 10px"></tr>
 				<tr>
 					<td style = "width: 5%;" class= "text-center">
@@ -386,6 +416,7 @@
 					</td>
 					<td></td>
 				</tr>
+				<tr style = "height: 10px"></tr>
 				
 			</table>
 			
@@ -404,12 +435,15 @@
 			</table>
 			<!-- 상품 상세정보 textarea 종료 -->
 			
+			<br><br>
 			
 			<!-- 등록 / 취소 button -->
-			
-			<button class = "btn-secondary"> 등록 </button>
-			<button class = "btn-secondary"> 취소 </button>
+			<div class = "text-center">
+				<button class = "btn-secondary"> 등록 </button>
+				<button class = "btn-secondary"> 취소 </button>
+			</div>
 			<!-- 등록 / 취소 button 종료-->
+			
 			<br><br>
 			</div>
 		</div>

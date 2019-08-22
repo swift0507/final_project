@@ -18,6 +18,7 @@ import model.Notice;
 import model.OptionDetail;
 import model.ProdOption;
 import model.Product;
+import model.Receipt;
 
 @Service
 public class HSServiceImpl extends HSServiceField implements HSService {
@@ -74,6 +75,21 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		// TODO Auto-generated method stub
 //		System.out.println(memberDao.resetPw(m));
 		return memberDao.resetPw(m);
+	}
+	
+	//멤버의 주문내역을 가져오기(주문자기준)
+	@Override
+	public List<Receipt> getReceiptListByMember(String mem_id) {
+		// TODO Auto-generated method stub
+		return receiptDao.selectReceiptListByMember(mem_id);
+	}
+	
+	//맴버의 찜리스트 가져오기
+	@Override
+	public List<Product> getPickList(String mem_id) {
+		// TODO Auto-generated method stub
+		System.out.println(pickDao.selectPickList(mem_id));
+		return pickDao.selectPickList(mem_id);
 	}
 
 	//시작 페이지 번호
@@ -328,6 +344,7 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		return banners;
 	}
 
+<<<<<<< HEAD
 	@Override
 	public File getNoticeFile(int num) {
 		// TODO Auto-generated method stub
@@ -345,4 +362,8 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		return faqDao.selectAll();
 	}
 	
+=======
+
+
+>>>>>>> branch 'master' of https://github.com/swift0507/final_project.git
 }
