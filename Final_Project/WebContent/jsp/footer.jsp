@@ -5,6 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <title>핸쇼</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function(){
+	if(location.pathname.search("/user") != -1 || location.pathname.search("/seller") != -1){
+		$("#footerlogo").attr("src", "../images/logo.png")
+	}
+});
+
+</script>
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -24,7 +34,7 @@
 				<table>
 					<tr>
 						<td style = "width: 300px;">
-							<img src="images/logo.png" style = "width: 150px; height: 50px;">
+							<img src="images/logo.png" id="footerlogo" style = "width: 150px; height: 50px;">
 						</td>
 						<td style = "width: 500px;">
 							<large>(주) 핸쇼</large>

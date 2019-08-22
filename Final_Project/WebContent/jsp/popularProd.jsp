@@ -12,7 +12,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
-	<link href = "/footer.css" rel="stylesheet" type="text/css">
+	<link href = "footer.css" rel="stylesheet" type="text/css">
 	
 	<title>핸쇼</title>
 	
@@ -157,29 +157,14 @@
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
-<<<<<<< HEAD
-				<li class="page-item <c:if test="${ last <= end }">disabled</c:if>">
-					<a class="page-link" href="popularProd.do?page=${ end + 1 }">Next</a>
-				</li>
-				<li class="page-item <c:if test="${ last <= end }">disabled</c:if>">
-					<a class="page-link" href="#">
-						<span>&raquo;</span>
-					</a>
-				</li>
-=======
+
 				<li class="page-item <c:if test="${ last <= end }">disabled</c:if>"><a class="page-link" href="popularProd.do?page=${ end + 1 }">다음</a></li>
-				<li class="page-item <c:if test="${ last <= end }">disabled</c:if>"><a class="page-link" href="popularProd.do?page=${ last }"
-					aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+				<li class="page-item <c:if test="${ last <= end }">disabled</c:if>"><a class="page-link" href="popularProd.do?page=${ last }"> <span>&raquo;</span>
 				</a></li>
->>>>>>> branch 'master' of https://github.com/swift0507/final_project.git
 			</ul>
 		</nav>
 	</div>
-	현재 페이지 : ${ current }<br>
-	시작 페이지 : ${ start }<br>
-	끝 페이지 : ${ end }<br>
-	마지막 페이지 : ${ last }<br>
-	
+
 	
 	<!-- footer -->
 	<footer>

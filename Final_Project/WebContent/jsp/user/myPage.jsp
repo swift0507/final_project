@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,6 +33,45 @@
 	</script>
 	<script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15.0.0/dist/smooth-scroll.polyfills.min.js">
 	</script>
+	
+	<script type="text/javascript">
+	$(document).ready(function(){
+		
+		$(".delstatus").each(function(){
+			if(this.innerHTML == 0){
+				this.innerHTML = "결제대기"
+			}
+			else if(this.innerHTML == 1){
+				this.innerHTML = "결제완료"
+			}
+			else if(this.innerHTML == 2){
+				this.innerHTML = "배송준비중"
+			}
+			else if(this.innerHTML == 3){
+				this.innerHTML = "배송중"
+			}
+			else if(this.innerHTML == 4){
+				this.innerHTML = "배송완료"
+			}
+			else if(this.innerHTML == 5){
+				this.innerHTML = "구매확정"
+			}
+			else if(this.innerHTML == 6){
+				this.innerHTML = "교환신청"
+			}
+			else if(this.innerHTML == 7){
+				this.innerHTML = "교환완료"
+			}
+		})
+		$("#pickMore").on("click", function(){
+			location.href="pickList.do"
+		})
+		$("#receiptMore").on("click", function(){
+			location.href="orderList.do"
+		})
+		
+	})
+	</script>
 </head>
 <body>
 <!-- header -->
@@ -57,40 +98,47 @@
 						<th scope="col">구매 내역</th>
 						<th scope="col">배송 상태</th>
 					</tr>
-					<tr>
+					<c:forEach begin="1" end="3" var="receipt" items="${receiptList}">
+						<tr>
+							<td>${receipt.receipt_orderdate}</td>
+							<td>${receipt.receipt_prod}</td>
+							<td class="delstatus">${receipt.receipt_delstatus}</td>
+						</tr>
+					</c:forEach>
+					<!-- <tr>
 						<td>2019-08-13</td>
 						<td>캔들</td>
 						<td>배송준비중</td>
-					</tr>
-					<tr>
-						<td>2019-08-13</td>
-						<td>캔들</td>
-						<td>배송준비중</td>
-					</tr>
-					<tr>
-						<td>2019-08-13</td>
-						<td>캔들</td>
-						<td>배송준비중</td>
-					</tr>
-					<tr>
-						<td>2019-08-13</td>
-						<td>캔들</td>
-						<td>배송준비중</td>
-					</tr>
-					<tr>
-						<td>2019-08-13</td>
-						<td>캔들</td>
-						<td>배송준비중</td>
-					</tr>
+					</tr> -->
 				</table>
 	    	</div>
+	    	<div class="text-center">
+				<button class="btn btn-sm btn-secondary" id="receiptMore"> 더보기  </button>
+			</div>	
 	    	
 	    	<br>
 	    	
-	    	<div class = "row">
 	    		<h5><b>찜 목록</b></h5>
 			    <br><hr>
-			    <div class="card-deck">
+	    	<div class = "row mx-auto">
+			    <c:forEach begin="1" end="3" var="pick" items="${ pickList }">
+					<div class="card ml-3 mb-3" style="width : 14rem;">
+					<a class="text-decoration-none text-secondary" href="/Final_Project/prodView.do?prod_id=${ pick.prod_id }" target="_blank">
+						<img src="../images/noimage.png" class="card-img-top" style="width:100; height:100;">
+						<div class="card-body">
+							<h5 class="card-title">${ pick.prod_name }</h5>
+							<p class="card-text">${ pick.sel_id }</p>
+							<h5 class="card-price">${ pick.prod_price }</h5>
+						</div>
+						<div class="card-footer text-right">
+							<i class = "far fa-heart">10</i>
+	           	 	 		&nbsp;
+	              			<i class = "far fa-comment-dots">12</i>
+						</div>
+					</a>	
+					</div>	
+				</c:forEach> 
+			   <!-- <div class="card-deck">
 					<div class="card">
 						<img src="images/sk.png" class="card-img-top" alt="..." width="200"
 							height="200">
@@ -124,11 +172,12 @@
 							
 						</div>
 					</div>
-				</div>
+				</div> 
 				
 				<hr>
 				
 				<div class="card-deck">
+				
 					<div class="card">
 						<img src="images/sk.png" class="card-img-top" alt="..." width="200"
 							height="200">
@@ -162,11 +211,11 @@
 					
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 			<br>
 			<div class="text-center">
-				<button class="btn btn-sm btn-secondary"> 더보기  </button>
+				<button class="btn btn-sm btn-secondary" id="pickMore"> 더보기  </button>
 			</div>	
 	      </div>
 	  </div>

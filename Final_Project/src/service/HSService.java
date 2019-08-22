@@ -4,12 +4,14 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 
+import model.Basket;
 import model.Event;
 import model.Member;
 import model.Notice;
 import model.OptionDetail;
 import model.ProdOption;
 import model.Product;
+import model.Receipt;
 
 public interface HSService {
 	
@@ -38,6 +40,15 @@ public interface HSService {
 	public boolean banCheck(String ban_id);
 	//해당 아이디 장바구니 개수 가져오기
 	public int countBasket(String mem_id);
+	
+	//해당 로그인 id의 주문내역(receipt)리스트 가져오기
+	public List<Receipt> getReceiptListByMember(String mem_id);
+	
+	//로그인 id의 찜리스트 가져오기
+	public List<Product> getPickList(String mem_id);
+	
+	//장바구니 가져오기
+	public List<HashMap<String, Object>> getBasketList(String mem_id);
 	
 	//이벤트 읽기
 	public Event readEvent(int event_id);
@@ -84,14 +95,26 @@ public interface HSService {
 	//배너 가져오기
 	public HashMap<String, Object> getBanners();
 	
-	//페이징처리 관련
+	/*페이징처리 관련*/
+	//시작 페이지
 	public int getStartPage(int page);
 
+	//끝 페이지
 	public int getEndPage(int page);
 
+	//상품카드 목록의 마지막 페이지 번호
 	public int getProdLastPage(int numOfCards);
-
-	public int getProdOffset(int page);
-
 	
+	//상품카드 페이지의 첫번째 카드번호
+	public int getProdOffset(int page);
+	
+	//게시판 형식 목록의 마지막 페이지 번호
+	public int getBoardLastPage(int numOfBoards);
+	
+	//게시판 형식 목록 페이지의 첫번째 게시물번호
+	public int getBoardOffset(int page);
+	/*여기까지 페이징 관련*/
+
+	//상품별 Q&A 가져오기
+	public HashMap<String, Object> getQnAById(int prod_id, int qnaPage);
 }

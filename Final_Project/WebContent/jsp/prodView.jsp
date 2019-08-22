@@ -78,8 +78,129 @@
 				type: 'success',
 				title: '장바구니에 아이템이 추가되었습니다.'
 			})
-		})
+		});
+		
+		var prod_id = ${ product.prod_id };
+		var qnaCurrentPage = 1;
+		
+		
+		function QnA(prod_id, qnaCurrentPage){
+			$.ajax({
+		        type		: "POST",
+		        url 		: "qnaByProd.do",
+		        data		:  {prod_id : prod_id, qnaPage : qnaCurrentPage},
+		        success		: function(data) {	        	
+		        	
+		        	var inputQnA = "";
+		        	
+		        	for(var i = 0; i < data.qna.length; i++) {
+		        		var date = new Date(data.qna[i].qna_date);
+		        		inputQnA += '<tr>';
+		        		inputQnA += '<td style="width: 15%; text-align: center"><span class = "badge badge-primary">질문</span></td>';
+		        		inputQnA += '<td style="width: 55%">' + data.qna[i].qna_id + '.' + data.qna[i].qna_content + '</td>';
+		        		inputQnA += '<td style="width: 12%; text-align: center">' + data.qna[i].mem_id + '</td>';
+		        		inputQnA += '<td style="width: 18%; text-align: center">' + date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + '</td>';
+		    			inputQnA += '</tr>';
+		    			
+		    			
+		    			if(data.qna[i].qnacomment != null) {
+		    				commDate = new Date(data.qna[i].qnacomment.comm_date);
+		    				inputQnA += '<tr class="table-active">';
+			        		inputQnA += '<td style="width: 15%; text-align: center">';
+			        		inputQnA += '<img src="images/commenticon.png" style = "width: 20px; height: 20px;">';
+			        		inputQnA += '<span class="badge badge-success">답변</span></td>';
+			        		inputQnA += '<td style="width: 55%">' + data.qna[i].qnacomment.comm_content + '</td>';
+			    			inputQnA += '<td style="width: 12%; text-align: center">판매자</td>';
+			    			inputQnA += '<td style="width: 18%; text-align: center">' + date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + '</td>';
+			    			inputQnA += '</tr>';
+		    				
+		    			}
+		        	}
+			    	$('#qnaTable').html(inputQnA);
+		        }
+		    });
+		}
+		
+		$("#nav-contact-tab").on("click", function() {
+			$('#qnaTable').empty();
+			QnA(prod_id, qnaCurrentPage);		
+		});
+		
+		var totalBoards = ${ totalBoards };    // 총 데이터 수
+	    var boardsPerPage = 10;    // 한 페이지에 나타낼 데이터 수
+	    var offset = 5;        // 한 화면에 나타낼 페이지 수
+	    
+	    function paging(totalBoards, boardsPerPage, offset, current) {
+	        
+	        console.log("current : " + current);
+	        
+	        var last = Math.ceil(totalBoards / boardsPerPage);    // 총 페이지 수
+	        var pageGroup = Math.ceil(current / offset);    // 페이지 그룹
+	        
+	        console.log("pageGroup : " + pageGroup);
+	        
+	        var end = pageGroup * offset;    // 화면에 보여질 마지막 페이지 번호
+	        if(end > last)
+	            end = last;
+	        var start = end - (offset - 1);    // 화면에 보여질 첫번째 페이지 번호
+	        var next = end + 1;
+	        var prev = start - 1;
+	        
+	        console.log("start : " + start);
+	        console.log("end : " + end);
+	        console.log("next : " + next);
+	        console.log("prev : " + prev);
+	        console.log("last : " + last);
+
+	        var pagingLayout = "";
+	        
+	        pagingLayout += '<ul class="pagination justify-content-center">';
+	        if(prev > 0) {
+	        	pagingLayout += '<li class="page-item"><a class="page-link" id="1"><span>&laquo;</span></a></li>';
+	            pagingLayout += '<li class="page-item"><a class="page-link" id=' + prev + '>이전</a></li>';
+	        }
+	        else {
+	        	pagingLayout += '<li class="page-item disabled"><a class="page-link" id="1"><span>&laquo;</span></a></li>';
+	            pagingLayout += '<li class="page-item disabled"><a class="page-link" id=' + prev + '>이전</a></li>';
+	        }
+	        
+	        for(var i = start; i <= end; i++){       
+	        	if(i == current) {
+	            	pagingLayout += '<li class="page-item active">';
+	            	pagingLayout += '<span class="page-link" id=' + current + '>' + current + '<span class="sr-only">(current)</span></span>';
+	            	pagingLayout += '</li>';
+	            }
+					
+				else {
+					pagingLayout += '<li class="page-item">';
+					pagingLayout += '<a class="page-link" id=' + i  + '>' + i  + '</a>';
+					pagingLayout += '</li>';
+				}
+	        }
+	        
+	        if((pageGroup * offset) > last) {
+	            pagingLayout += '<li class="page-item disabled"><a class="page-link" id=' + next + '>다음</a></li>';
+	            pagingLayout += '<li class="page-item disabled"><a class="page-link" id=' + last + '><span>&raquo;</span></a></li>';
+	        }
+	        else {
+	        	pagingLayout += '<li class="page-item"><a class="page-link" id=' + next + '>다음</a></li>';
+	        	pagingLayout += '<li class="page-item"><a class="page-link" id=' + last + '><span>&raquo;</span></a></li>';
+	        }
+	        pagingLayout += '</ul>';
+	            
+	        $("#paging").html(pagingLayout);    // 페이지 목록 생성
+	       
+	        $(".page-link").on("click", function() {
+				var qnaCurrentPage = $(this).attr('id');
+				paging(totalBoards, boardsPerPage, offset, qnaCurrentPage);
+				QnA(prod_id, qnaCurrentPage);
+			});
+		
+	    };
+		paging(totalBoards, boardsPerPage, offset, 1);
+	 
 	})
+	
 	</script>
 </head>
 <body>
@@ -161,6 +282,7 @@
 				                <c:forEach var="option" items="${ option }">
 				               	${ option.opt_name }
 				               		<select id = "select_opt" class="custom-select-sm" style="width: 250px;"> 
+				               		<option disabled selected hidden>옵션을 선택해주세요</option>
 				               	<c:forEach var="optiondetail" items="${ option.optiondetail }">
 				                    <option id="${ optiondetail.optd_id }">${ optiondetail.optd_choice }</option>
 				                    <br>
@@ -212,10 +334,134 @@
 			                    </div>
 			            </div>
 			            <div class="tab-pane fade" id="nav-profile" role="tabpanel">
-			                
+			            	<br>
+			                <table style = "width: 700px;">
+								<tr>
+								    <th style = "width: 75px;">
+								    	<img src = "images/sk.png" style = "width: 50px; height: 50px;">
+								    </th>
+								    <th>
+								      	로즈마리 천연 비누 1개
+								    </th>
+								    <th class = "text-right">
+								    	<button class = "btn btn-sm btn-secondary">수정</button>
+								      	<button class = "btn btn-sm btn-danger">삭제</button>
+								    </th>
+							    </tr>
+							    <tr style = "height: 10px;"></tr>
+							    <tr>
+							    	<td colspan = 3>
+							    		<span id = "star_rating">
+						                	<span class="fa fa-star checked"></span>
+						                	<span class="fa fa-star checked"></span>
+						                	<span class="fa fa-star checked"></span>
+						               		<span class="fa fa-star checked"></span>
+						                	<span class="fa fa-star"></span>
+						                </span>
+							    	</td>
+							    </tr>
+							    <tr style = "height: 10px;"></tr>
+							    <tr>
+							    	<td colspan = 3>
+							    		<p class = "review">
+							    			좋습니다. 비누로 세수하면 건조한 느낌이라 싫어하는데 
+							    			이 비누는 촉촉하고 피부가 좋아지는 것이 느껴집니다.
+							    		</p>
+							    	</td>
+							    </tr>
+							</table>
+							<hr>
+							<table style = "width: 700px;">
+								<tr>
+								    <th style = "width: 75px;">
+								    	<img src = "images/sk.png" style = "width: 50px; height: 50px;">
+								    </th>
+								    <th>
+								      	로즈마리 천연 비누 1개
+								    </th>
+								    <th class = "text-right">
+								    	<button class = "btn btn-sm btn-secondary">수정</button>
+								      	<button class = "btn btn-sm btn-danger">삭제</button>
+								    </th>
+							    </tr>
+							    <tr style = "height: 10px;"></tr>
+							    <tr>
+							    	<td colspan = 3>
+							    		<span id = "star_rating">
+						                	<span class="fa fa-star checked"></span>
+						                	<span class="fa fa-star checked"></span>
+						                	<span class="fa fa-star checked"></span>
+						               		<span class="fa fa-star checked"></span>
+						                	<span class="fa fa-star"></span>
+						                </span>
+							    	</td>
+							    </tr>
+							    <tr style = "height: 10px;"></tr>
+							    <tr>
+							    	<td colspan = 3>
+							    		<p class = "review">
+							    			좋습니다. 비누로 세수하면 건조한 느낌이라 싫어하는데 
+							    			이 비누는 촉촉하고 피부가 좋아지는 것이 느껴집니다.
+							    		</p>
+							    	</td>
+							    </tr>
+							</table>
+							<br>
+							<hr>
 			            </div>
 			            <div class="tab-pane fade" id="nav-contact" role="tabpanel">
-			                ...
+			                <table class="table table-bordered" id="qnaTable">
+							    <!-- <tr>
+							      <td style="width: 15%; text-align: center"><span class = "badge badge-primary">질문</span></td>
+							      <td style="width: 55%">내용</td>
+							      <td style="width: 12%">아이디</td>
+							      <td style="width: 18%">작성일</td>
+							    </tr>
+							    <tr class="table-active">
+							      <td style="width: 15%; text-align: center">
+							      	<img src="images/commenticon.png" style = "width: 20px; height: 20px;">
+							      	<span class="badge badge-success">답변</span>
+							      </td>
+							      <td style="width: 55%">내용</td>
+							      <td style="width: 12%">아이디</td>
+							      <td style="width: 18%">작성일</td>
+							    </tr> -->
+							</table>
+				<nav id="paging">
+					<%-- <ul class="pagination justify-content-center">
+						<li class="page-item <c:if test="${ start == 1 }">disabled</c:if>">
+							<a class="page-link" id="1"> 
+								<span>&laquo;</span>
+							</a>
+						</li>
+							
+						<li class="page-item <c:if test="${ start == 1 }">disabled</c:if>">
+							<a class="page-link" id="${ start - 1 }">이전</a>
+						</li>
+						<c:forEach begin="${ start }" end="${ end < last ? end : last }" var="i">
+							<c:choose>
+								<c:when test="${ i == current }">
+									<li class="page-item active" aria-current="page">
+		      							<span class="page-link">${ current } <span class="sr-only">(current)</span></span>
+		    						</li>
+		    					</c:when>
+								<c:otherwise>
+									<li class="page-item">
+										<a class="page-link" id="${ i }">${ i }</a>
+									</li>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						<li class="page-item <c:if test="${ last <= end }">disabled</c:if>">
+							<a class="page-link" id="${ end + 1 }">다음</a>
+						</li>
+						<li class="page-item <c:if test="${ last <= end }">disabled</c:if>">
+							<a class="page-link" id="${ last }">
+								<span>&raquo;</span>
+							</a>
+						</li>
+					</ul> --%>
+				</nav>
 			            </div>
 			        </div>
 			        <hr>
@@ -231,7 +477,11 @@
 			            </span>
 			        </div>
 			    </div>
-			    
+			    현재 페이지 : ${ current }<br>
+	시작 페이지 : ${ start }<br>
+	끝 페이지 : ${ end }<br>
+	마지막 페이지 : ${ last }<br>
+	갯수 : ${ totalBoards }
 			    <div class="col"></div>
 		    
 		    </div>

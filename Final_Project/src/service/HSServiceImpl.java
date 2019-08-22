@@ -3,18 +3,25 @@ package service;
 import java.io.File;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import model.Banner;
+import model.Basket;
 import model.Event;
 import model.Member;
 import model.Notice;
 import model.OptionDetail;
 import model.ProdOption;
 import model.Product;
+import model.QnA;
+import model.QnAComment;
+import model.Receipt;
+import model.Seller;
 
 @Service
 public class HSServiceImpl extends HSServiceField implements HSService {
@@ -72,38 +79,85 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 //		System.out.println(memberDao.resetPw(m));
 		return memberDao.resetPw(m);
 	}
+	
+	//멤버의 주문내역을 가져오기(주문자기준)
+	@Override
+	public List<Receipt> getReceiptListByMember(String mem_id) {
+		// TODO Auto-generated method stub
+		return receiptDao.selectReceiptListByMember(mem_id);
+	}
+	
+	//맴버의 찜리스트 가져오기
+	@Override
+	public List<Product> getPickList(String mem_id) {
+		// TODO Auto-generated method stub
+		return pickDao.selectPickList(mem_id);
+	}
+	
+	//맴버의 장바구니 가져오기
+	@Override
+	public List<HashMap<String, Object>> getBasketList(String mem_id) {
+		// TODO Auto-generated method stub
+		//System.out.println(basketDao.groupBySeller(mem_id));
+		List<HashMap<String, Object>> list = new ArrayList<HashMap<String,Object>>();
+		for(String sel_id : basketDao.groupBySeller(mem_id)) {
+			HashMap<String, Object> basketInfo = new HashMap<String, Object>();
+			HashMap<String, String> param = new HashMap<String, String>();
+			param.put("mem_id", mem_id);
+			param.put("sel_id", sel_id);
+			//장바구니리스트를 받아오기
+			List<Basket> basketList = basketDao.selectBySeller(param);
+			Seller seller = sellerDao.selectOneSeller(sel_id);
+			//System.out.println(seller);
+			basketInfo.put("list", basketList);
+			basketInfo.put("seller", seller);
+			//상품네임, 이미지
+			list.add(basketInfo);
+		}
+//		System.out.println(list.size());
+//		for(List<Basket> sublist : list) {
+//			System.out.println(sublist);
+//		}
+		return list;
+	}
 
 	//시작 페이지 번호
+	@Override
 	public int getStartPage(int page) {
 		// TODO Auto-generated method stub
 		return page - ((page - 1) % 5);
 	}
 
 	//끝 페이지 번호
+	@Override
 	public int getEndPage(int page) {
 		// TODO Auto-generated method stub
 		return page - ((page - 1) % 5) + (5 - 1);
 	}
 
 	//상품 목록의 마지막 페이지 번호
+	@Override
 	public int getProdLastPage(int numOfCards) {
 		// TODO Auto-generated method stub
 		return (numOfCards - 1) / 12 + 1;
 	}
 
 	//각 상품목록 페이지의 첫번째 카드번호
+	@Override
 	public int getProdOffset(int page) {
 		// TODO Auto-generated method stub
 		return (page - 1) * 12 + 1;
 	}
 	
 	//게시판 형식 목록의 마지막 페이지 번호
+	@Override
 	public int getBoardLastPage(int numOfBoards) {
 		// TODO Auto-generated method stub
 		return (numOfBoards - 1) / 10 + 1;
 	}
 
 	//게시판 형식 목록 페이지의 첫번째 카드번호
+	@Override
 	public int getBoardOffset(int page) {
 		// TODO Auto-generated method stub
 		return (page - 1) * 10 + 1;
@@ -150,6 +204,7 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 	}
 	
 	//상품 보기 조회수 증가(단순)
+	@Override
 	public void prodViewCount(int prod_id) {
 		
 		//조회수 증가
@@ -177,6 +232,7 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 	}
 	
 	//인기순 상품 가져오기
+	@Override
 	public HashMap<String, Object> getProdByReadCount(int page) {
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		
@@ -196,6 +252,7 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 	}
 	
 	//최신순 상품 가져오기
+	@Override
 	public HashMap<String, Object> getProdByLatest(int page) {
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		
@@ -241,7 +298,40 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		return optionDetailDao.selectByOption(opt_id);
 	}
 	
+	//해당 상품 Q&A 가져오기
+	@Override
+	public HashMap<String, Object> getQnAById(int prod_id, int qnaPage) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> params = new HashMap<String, Object>();
+			
+		params.put("offset", getBoardOffset(qnaPage));
+		params.put("boardsPerPage", 10);
+		params.put("prod_id", prod_id);
+		
+		List<QnA> qnaListByProd = qnaDao.selectById(params);
+		
+		for(int i = 0; i < qnaListByProd.size(); i++) {
+			if(qnaListByProd.get(i).getQna_answer() == 1)
+			qnaListByProd.get(i).setQnacomment(getQnAComment(qnaListByProd.get(i).getQna_id()));
+		}
+			
+		HashMap<String, Object> qnaMap = new HashMap<String, Object>();
+		
+		qnaMap.put("last", getBoardLastPage(qnaDao.getCountById(prod_id)));
+		qnaMap.put("totalBoards", qnaDao.getCountById(prod_id));
+		qnaMap.put("qna", qnaListByProd);
+			
+		return qnaMap;
+	}
+		
+	//해당 Q&A의 답변 가져오기
+	public QnAComment getQnAComment(int qna_id) {
+		
+		return qnaCommentDao.selectByQnAId(qna_id);
+	}
+	
 	//검색어에 따른 상품목록 가져오기
+	@Override
 	public HashMap<String, Object> getProdByKeyword(String keyword) {
 		HashMap<String, Object> searchProd = new HashMap<String, Object>();
 		
@@ -294,6 +384,7 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 	}
 
 	//배너 가져오기
+	@Override
 	public HashMap<String, Object> getBanners() {
 		// TODO Auto-generated method stub
 		List<Banner> bannerList = bannerDao.selectAllBanner();
