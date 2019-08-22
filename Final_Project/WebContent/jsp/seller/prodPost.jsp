@@ -404,11 +404,13 @@
 			</table>
 			<!-- 상품 상세정보 textarea 종료 -->
 			
+			<br><br>
 			
 			<!-- 등록 / 취소 button -->
-			
-			<button class = "btn-secondary"> 등록 </button>
-			<button class = "btn-secondary"> 취소 </button>
+			<div class = "text-center">
+				<button class = "btn-secondary"> 등록 </button>
+				<button class = "btn-secondary"> 취소 </button>
+			</div>
 			<!-- 등록 / 취소 button 종료-->
 			<br><br>
 			</div>
