@@ -3,5 +3,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     <mapper namespace="dao.ReceiptDao">
-    
+    <select id="selectReceiptListByMember" resultType="receipt">
+    	select * from receipt where mem_id=#{mem_id} order by receipt_orderdate desc
+    </select>
     </mapper>

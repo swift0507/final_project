@@ -10,6 +10,7 @@ import model.Notice;
 import model.OptionDetail;
 import model.ProdOption;
 import model.Product;
+import model.Receipt;
 
 public interface HSService {
 	
@@ -38,6 +39,12 @@ public interface HSService {
 	public boolean banCheck(String ban_id);
 	//해당 아이디 장바구니 개수 가져오기
 	public int countBasket(String mem_id);
+	
+	//해당 로그인 id의 주문내역(receipt)리스트 가져오기
+	public List<Receipt> getReceiptListByMember(String mem_id);
+	
+	//로그인 id의 찜리스트 가져오기
+	public List<Product> getPickList(String mem_id);
 	
 	//이벤트 읽기
 	public Event readEvent(int event_id);
