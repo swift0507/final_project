@@ -141,7 +141,7 @@ $(document).ready(function(){
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="mx-auto d-sm-flex d-block flex-sm-nowrap">
 			<div class="navbar-nav">
-				<a class="nav-item nav-link" href="/Final_Project/popularProd.do?page=1">인기 상품</a>
+				<a class="nav-item nav-link" href="/Final_Project/popularProd.do">인기 상품</a>
 				<a class="nav-item nav-link" href="/Final_Project/user/recommend.jsp">나의 추천 상품</a>
 				<a class="nav-item nav-link" href="/Final_Project/latestProd.do">최근 등록 상품</a>
 				<a class="nav-item nav-link" href="/Final_Project/eventList.do">이벤트</a>

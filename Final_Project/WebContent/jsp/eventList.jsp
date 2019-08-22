@@ -13,7 +13,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
-	<link href = "/footer.css" rel="stylesheet" type="text/css">
+	<link href = "footer.css" rel="stylesheet" type="text/css">
 	
 	<title>핸쇼</title>
 	
@@ -58,39 +58,50 @@
 				      <th scope="col">게시일</th>
 				    </tr>
 				  </thead>
-				  <tbody>
 				  
+				  <tbody>
 				  <!-- 자료넣기 -->
-				  <c:forEach items="${eventList}" var="e">
-				    <tr>
-				      <th scope="row">${e.event_id}</th>
-				      <td><a href="event.do?event_id=${e.event_id}">${e.event_title}</a></td>
-				      <td colspan = 2>${e.event_date}</td>
-				    </tr>
-				   </c:forEach>
-				    
+					<c:forEach items="${event}" var="e">
+					    <tr>
+					      <th scope="row">${e.event_id}</th>
+					      <td><a href="event.do?event_id=${e.event_id}">${e.event_title}</a></td>
+					      <td colspan = 2>${e.event_date}</td>
+					    </tr>
+				    </c:forEach>
 				  </tbody>
 				</table>
 				
 				
 				<nav>
 					<ul class="pagination justify-content-center">
-						<li class="page-item">
-							<a class="page-link" href="#"> 
+						<li class="page-item <c:if test="${ start == 1 }">disabled</c:if>">
+							<a class="page-link" href="eventList.do?page=1"> 
 								<span>&laquo;</span>
 							</a>
 						</li>
-						<li class="page-item">
-							<a class="page-link" href="#">1</a>
+							
+						<li class="page-item <c:if test="${ start == 1 }">disabled</c:if>">
+							<a class="page-link" href="eventList.do?page=${ start - 1 }">이전</a>
 						</li>
-						<li class="page-item">
-							<a class="page-link" href="#">2</a>
+						<c:forEach begin="${ start }" end="${ end < last ? end : last }" var="i">
+							<c:choose>
+								<c:when test="${ i == current }">
+									<li class="page-item active" aria-current="page">
+		      							<span class="page-link">${ current } <span class="sr-only">(current)</span></span>
+		    						</li>
+		    					</c:when>
+								<c:otherwise>
+									<li class="page-item">
+										<a class="page-link" href="eventList.do?page=${ i }">${ i }</a>
+									</li>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						<li class="page-item <c:if test="${ last <= end }">disabled</c:if>">
+							<a class="page-link" href="eventList.do?page=${ end + 1 }">다음</a>
 						</li>
-						<li class="page-item">
-							<a class="page-link" href="#">3</a>
-						</li>
-						<li class="page-item">
-							<a class="page-link" href="#"> 
+						<li class="page-item <c:if test="${ last <= end }">disabled</c:if>">
+							<a class="page-link" href="eventList.do?page=${ last }">
 								<span>&raquo;</span>
 							</a>
 						</li>

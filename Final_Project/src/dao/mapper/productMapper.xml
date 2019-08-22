@@ -17,7 +17,7 @@
     </select>
     
     <select id="selectByLatest" resultType="product">
-    	select * from product order by prod_date desc
+    	select * from (select rownum as rn, e.* from (select * from product order by prod_date desc) e) where rn between #{offset} and (#{offset} + #{cardsPerPage} - 1)
     </select>
     
     <select id="selectByKeyword" parameterType="String" resultType="product">

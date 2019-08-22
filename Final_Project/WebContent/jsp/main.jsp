@@ -12,7 +12,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
-	<link href = "/footer.css" rel="stylesheet" type="text/css">
+	<link href = "footer.css" rel="stylesheet" type="text/css">
 	
 	<title>핸쇼</title>
 	
@@ -31,22 +31,7 @@
 		crossorigin="anonymous">
 	</script>
 	<script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15.0.0/dist/smooth-scroll.polyfills.min.js">
-	</script>
-	<style>
-		html, body {
-		  height: 100%;
-		}
-		body {
-		  display: flex;
-		  flex-direction: column;
-		}
-		.content {
-		  flex: 1 0 auto;
-		}
-		.footer {
-		  flex-shrink: 0;
-		}
-	</style>     
+	</script>    
 </head>
 
 <body>
@@ -93,11 +78,11 @@
         </c:forEach>
       </div>
       <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="carousel-control-prev-icon"></span>
         <span class="sr-only">Previous</span>
       </a>
       <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="carousel-control-next-icon"></span>
         <span class="sr-only">Next</span>
       </a>
     </div>
@@ -243,7 +228,7 @@
       </div>
     </div>
 </div>
-  <hr>
+<hr>
 <!-- main body 종료 -->
 
 <!-- footer -->
