@@ -157,29 +157,14 @@
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
-<<<<<<< HEAD
-				<li class="page-item <c:if test="${ last <= end }">disabled</c:if>">
-					<a class="page-link" href="popularProd.do?page=${ end + 1 }">Next</a>
-				</li>
-				<li class="page-item <c:if test="${ last <= end }">disabled</c:if>">
-					<a class="page-link" href="#">
-						<span>&raquo;</span>
-					</a>
-				</li>
-=======
+
 				<li class="page-item <c:if test="${ last <= end }">disabled</c:if>"><a class="page-link" href="popularProd.do?page=${ end + 1 }">다음</a></li>
-				<li class="page-item <c:if test="${ last <= end }">disabled</c:if>"><a class="page-link" href="popularProd.do?page=${ last }"
-					aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+				<li class="page-item <c:if test="${ last <= end }">disabled</c:if>"><a class="page-link" href="popularProd.do?page=${ last }"> <span>&raquo;</span>
 				</a></li>
->>>>>>> branch 'master' of https://github.com/swift0507/final_project.git
 			</ul>
 		</nav>
 	</div>
-	현재 페이지 : ${ current }<br>
-	시작 페이지 : ${ start }<br>
-	끝 페이지 : ${ end }<br>
-	마지막 페이지 : ${ last }<br>
-	
+
 	
 	<!-- footer -->
 	<footer>

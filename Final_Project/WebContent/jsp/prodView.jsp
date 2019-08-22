@@ -212,7 +212,43 @@
 			                    </div>
 			            </div>
 			            <div class="tab-pane fade" id="nav-profile" role="tabpanel">
-			                
+			                <table style = "width: 700px;">
+								<tr>
+								    <th style = "width: 75px;">
+								    	<img src = "images/sk.png" style = "width: 50px; height: 50px;">
+								    </th>
+								    <th>
+								      	로즈마리 천연 비누 1개
+								    </th>
+								    <th class = "text-right">
+								    	<button class = "btn btn-sm btn-secondary">수정</button>
+								      	<button class = "btn btn-sm btn-danger">삭제</button>
+								    </th>
+							    </tr>
+							    <tr style = "height: 10px;"></tr>
+							    <tr>
+							    	<td colspan = 3>
+							    		<span id = "star_rating">
+						                	<span class="fa fa-star checked"></span>
+						                	<span class="fa fa-star checked"></span>
+						                	<span class="fa fa-star checked"></span>
+						               		<span class="fa fa-star checked"></span>
+						                	<span class="fa fa-star"></span>
+						                </span>
+							    	</td>
+							    </tr>
+							    <tr style = "height: 10px;"></tr>
+							    <tr>
+							    	<td colspan = 3>
+							    		<p class = "review">
+							    			좋습니다. 비누로 세수하면 건조한 느낌이라 싫어하는데 
+							    			이 비누는 촉촉하고 피부가 좋아지는 것이 느껴집니다.
+							    		</p>
+							    	</td>
+							    </tr>
+							</table>
+							<br>
+							<hr>
 			            </div>
 			            <div class="tab-pane fade" id="nav-contact" role="tabpanel">
 			                ...
