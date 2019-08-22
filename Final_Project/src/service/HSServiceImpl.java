@@ -8,9 +8,11 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import dao.FaqDao;
 import dao.NoticeDao;
 import model.Banner;
 import model.Event;
+import model.FAQ;
 import model.Member;
 import model.Notice;
 import model.OptionDetail;
@@ -336,5 +338,11 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		return new File(path+notice_pict);
 	}
 
-
+	//faq 목록 출력
+	@Override
+	public List<FAQ> getFaqList() {
+		// TODO Auto-generated method stub
+		return faqDao.selectAll();
+	}
+	
 }

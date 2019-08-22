@@ -77,12 +77,7 @@ public class AllController {
 	//개인정보이용방침
 	@RequestMapping("privacyTerms.do")
 	public void provision() {}
-	
-	@RequestMapping("faq.do")
-	public void faq() {
-		//미완성
-	}
-	
+
 	//이용약관
 	@RequestMapping("useTerms.do")
 	public void useTerms() {}
@@ -226,6 +221,11 @@ public class AllController {
 		return view; 
 	}
 	
+	//faq 요청
+	@RequestMapping("faq.do")
+	public void faq(Model model) {
+		model.addAttribute("faq",service.getFaqList());
+	}
 }
 
 

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import model.Event;
+import model.FAQ;
 import model.Member;
 import model.Notice;
 import model.OptionDetail;
@@ -96,5 +97,8 @@ public interface HSService {
 	
 	//공지사항_첨부파일을 가져다 주는 기능
 	public File getNoticeFile(int num);
+	
+	//faq 페이지의 게시물 리스트 출력
+	public List<FAQ> getFaqList();
 
 }

@@ -118,8 +118,7 @@
 						</tr>
 						<tr>
 							<td colspan="4">
-								<%-- <td>${event.event_pict}</td> --%> <img
-								src="noticedownload.do?num=${notice.notice_id}" width="700px"> <br>
+								<img src="noticedownload.do?num=${notice.notice_id}" width="700px"> <br>
 								<br>
 								<p>${notice.notice_content}</p>
 							</td>
