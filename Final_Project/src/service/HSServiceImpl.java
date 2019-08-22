@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import dao.NoticeDao;
 import model.Banner;
 import model.Event;
 import model.Member;
@@ -293,14 +294,13 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		return 0;
 	}
 
-	//이벤트 첨부파일 @@@@@@@@@@@@@@@@@@
+	//이벤트 첨부파일
 	@Override
-	public File getAttachedFile(int num) {
+	public File getEventFile(int num) {
 		// TODO Auto-generated method stub
-		
 		Event event = eventDao.selectOne(num);
 		String event_pict = event.getEvent_pict();
-		String path = "C:/Temp/attach/";
+		String path = "C:\\Temp\\attach\\";
 		
 		return new File(path+event_pict);
 	}
@@ -324,6 +324,16 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		banners.put("banners", bannerList);
 		
 		return banners;
+	}
+
+	@Override
+	public File getNoticeFile(int num) {
+		// TODO Auto-generated method stub
+		
+		Notice notice = noticeDao.selectOne(num);
+		String notice_pict = notice.getNotice_pict();
+		String path = "C:\\Temp\\attach\\";
+		return new File(path+notice_pict);
 	}
 
 

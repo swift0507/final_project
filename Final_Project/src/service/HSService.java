@@ -82,6 +82,9 @@ public interface HSService {
 	//배너 가져오기
 	public HashMap<String, Object> getBanners();
 	
+	//이벤트_첨부파일을 가져다 주는 기능이벤트
+	public File getEventFile(int num);
+	
 	//페이징처리 관련
 	public int getStartPage(int page);
 
@@ -90,7 +93,8 @@ public interface HSService {
 	public int getProdLastPage(int numOfCards);
 
 	public int getProdOffset(int page);
+	
+	//공지사항_첨부파일을 가져다 주는 기능
+	public File getNoticeFile(int num);
 
-	//첨부파일을 가져다 주는 기능
-	public File getAttachedFile(int num);
 }

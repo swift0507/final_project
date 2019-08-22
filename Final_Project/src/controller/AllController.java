@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.View;
 
 import model.Event;
 import model.Member;
@@ -210,10 +212,19 @@ public class AllController {
 
 	}
 	
-	//수진수정
-//	public View download(int num) { 
-//		
-//	}
+	@RequestMapping("eventdownload.do")
+	public View eventdownload(int num) {
+		File attachFile = service.getEventFile(num);
+		View view = new DownloadView(attachFile);
+		return view; 
+	}
+	
+	@RequestMapping("noticedownload.do")
+	public View noticedownload(int num) {
+		File attachFile = service.getNoticeFile(num);
+		View view = new DownloadView(attachFile);
+		return view; 
+	}
 	
 }
 
