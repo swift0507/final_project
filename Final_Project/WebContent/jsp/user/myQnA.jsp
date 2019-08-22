@@ -49,7 +49,7 @@
 				<table style = "width: 700px;">
 					<tr>
 						<td>
-							<h5><b>나의 QnA</b></h5>
+							<h5><b>나의 Q&A</b></h5>
 						</td>
 					</tr>
 					<tr>

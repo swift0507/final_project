@@ -33,47 +33,45 @@
 	</script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 	<script type="text/javascript">
-   $(document).ready(function(){
-	   $("#find").on("click", function(){
-		   //alert($("#year").val())
-		   //alert($("#month").val())
-		   //alert($("#day").val())
-		   //alert($("#name").val())
-		   //alert($("#email").val())
-		   if($("#name").val()==""){
-			   alert("이름을 입력하세요.")
-		   }
-		   else if($("#email").val()==""){
-			   alert("이메일을 입력하세요.")
-		   }
-		   else{
-			   var date = $("#year").val()+"-"+ $("#month").val()+"-"+$("#day").val();
-			   //alert(date);
-			   $.ajax({
-				   url : "findId.do",
-				   data : {mem_name : $("#name").val(), mem_birth : date, mem_email : $("#email").val()},
-				   type : "post",
-				   success : function(data){
-					   alert(data);
-				   }
-			   })
-		   }
-	   })
-	});
-   
-   </script>
-	
+	   $(document).ready(function(){
+		   $("#find").on("click", function(){
+			   //alert($("#year").val())
+			   //alert($("#month").val())
+			   //alert($("#day").val())
+			   //alert($("#name").val())
+			   //alert($("#email").val())
+			   if($("#name").val()==""){
+				   alert("이름을 입력하세요.")
+			   }
+			   else if($("#email").val()==""){
+				   alert("이메일을 입력하세요.")
+			   }
+			   else{
+				   var date = $("#year").val()+"-"+ $("#month").val()+"-"+$("#day").val();
+				   //alert(date);
+				   $.ajax({
+					   url : "findId.do",
+					   data : {mem_name : $("#name").val(), mem_birth : date, mem_email : $("#email").val()},
+					   type : "post",
+					   success : function(data){
+						   alert(data);
+					   }
+				   })
+			   }
+		   })
+		});
+    </script>
 </head>
 <body>
-	<table width=350 style="margin-left: auto; margin-right: auto;">
-		<tr height=30></tr>
+	<table style = "width: 350px; margin-left: auto; margin-right: auto;">
+		<tr style = "width: 30px;"></tr>
 		<tr>
-			<td colspan=2 align="center" height=100>
-					<img src="images/logo.png" id="logo" width=160 height=60>
+			<td colspan = 2 class = "text-center" style = "height: 100px;">
+				<img src = "images/logo.png" id = "logo" style = "width: 160px; height: 60px;">
 			</td>
 		</tr>
 		<tr>
-			<td colspan=2 align="left">
+			<td colspan = 2 class = "text-left">
 				<h4>
 					<b>아이디 찾기</b>
 				</h4>
@@ -82,14 +80,15 @@
 		</tr>
 
 		<tr>
-			<td colspan=2><input type="text" class="form-control"
-				id="name" placeholder="이름"></td>
+			<td colspan = 2>
+				<input type="text" class="form-control" id="name" placeholder="이름">
+			</td>
 		</tr>
-		<tr height=15>
+		<tr style = "height: 15px;">
 		</tr>
-		<tr height=50>
-			<th colspan=2>생년월일 &nbsp;&nbsp;&nbsp; <select
-				class="custom-select-sm" id="year">
+		<tr style = "height: 50px;">
+			<th colspan = 2>생년월일 &nbsp;&nbsp;&nbsp; 
+				<select class = "custom-select-sm" id = "year">
 					<option value="1988">1988</option>
 					<option value="1989">1989</option>
 					<option value="1990">1990</option>
@@ -103,7 +102,9 @@
 					<option value="1998">1998</option>
 					<option value="1999">1999</option>
 					<option value="2000">2000</option>
-			</select> &nbsp; 년 <select class="custom-select-sm" id="month">
+				</select> &nbsp; 년 
+				
+				<select class = "custom-select-sm" id = "month">
 					<option value="1">1</option>
 					<option value="2">2</option>
 					<option value="3">3</option>
@@ -116,7 +117,9 @@
 					<option value="10">10</option>
 					<option value="11">11</option>
 					<option value="12">12</option>
-			</select> &nbsp; 월 <select class="custom-select-sm" id="day">
+				</select> &nbsp; 월 
+				
+				<select class="custom-select-sm" id="day">
 					<option value="1">1</option>
 					<option value="2">2</option>
 					<option value="3">3</option>
@@ -148,23 +151,24 @@
 					<option value="29">29</option>
 					<option value="30">30</option>
 					<option value="31">31</option>
-			</select> 일 &nbsp;
+				</select> 일 &nbsp;
 			</th>
 		</tr>
 
-		<tr height=50>
-			<td colspan=2><input type="email" class="form-control"
-				id="email" placeholder="이메일"></td>
+		<tr style = "height: 50px;">
+			<td colspan = 2>
+				<input type="email" class="form-control" id="email" placeholder="이메일">
+			</td>
 		</tr>
-		<tr height=30></tr>
+		
+		<tr style = "height: 30px;"></tr>
+		
 		<tr>
 			<td>
-				<button class="btn btn-sm btn-secondary btn-block"
-					id="find">찾기</button>
+				<button class="btn btn-sm btn-secondary btn-block" id="find">찾기</button>
 			</td>
 			<td>
-				<button class="btn btn-sm btn-secondary btn-block"
-					type="button" onclick="history.go(-1)">취소</button>
+				<button class="btn btn-sm btn-secondary btn-block" type="button" onclick="history.go(-1)">취소</button>
 			</td>
 		</tr>
 	</table>
