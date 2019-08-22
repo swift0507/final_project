@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 
+import model.Basket;
 import model.Event;
 import model.Member;
 import model.Notice;
@@ -45,6 +46,9 @@ public interface HSService {
 	
 	//로그인 id의 찜리스트 가져오기
 	public List<Product> getPickList(String mem_id);
+	
+	//장바구니 가져오기
+	public List<HashMap<String, Object>> getBasketList(String mem_id);
 	
 	//이벤트 읽기
 	public Event readEvent(int event_id);
