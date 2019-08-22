@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,130 +50,36 @@
 		</div>
 	    
 	    <div class="col-8">
-	    	<div class = "row">
 	    		<h5><b>찜 목록</b></h5>
 			    <br><br>
-			    <div class="card-deck">
-					<div class="card">
-						<img src="images/sk.png" class="card-img-top" alt="..." width="200"
-							height="200">
+	    	<div class = "row mx-auto">
+	    		<c:forEach var="pick" items="${ pickList }">
+					<div class="card ml-3 mb-3" style="width : 14rem;">
+					<a class="text-decoration-none text-secondary" href="/Final_Project/prodView.do?prod_id=${ pick.prod_id }" target="_blank">
+						<img src="../images/noimage.png" class="card-img-top" style="width:100; height:100;">
 						<div class="card-body">
-							<h5 class="card-title">1st</h5>
-							<p class="card-text">SK Wyverns</p>
+							<h5 class="card-title">${ pick.prod_name }</h5>
+							<p class="card-text">${ pick.sel_id }</p>
+							<h5 class="card-price">${ pick.prod_price }</h5>
 						</div>
-						<div class="card-footer">
-						
+						<div class="card-footer text-right">
+							<i class = "far fa-heart">10</i>
+	           	 	 		&nbsp;
+	              			<i class = "far fa-comment-dots">12</i>
 						</div>
-					</div>
-					<div class="card">
-						<img src="images/kw.png" class="card-img-top" alt="..." width="200"
-							height="200">
-						<div class="card-body">
-							<h5 class="card-title">2nd</h5>
-							<p class="card-text">Kiwoom Heroes</p>
-						</div>
-						<div class="card-footer">
-					
-						</div>
-					</div>
-					<div class="card">
-						<img src="images/ds.png" class="card-img-top" alt="..." width="200"
-							height="200">
-						<div class="card-body">
-							<h5 class="card-title">3rd</h5>
-							<p class="card-text">Doosan Bears</p>
-						</div>
-						<div class="card-footer">
-							
-						</div>
-					</div>
-				</div>
-				
-				<br>
-				
-				<div class="card-deck">
-					<div class="card">
-						<img src="images/sk.png" class="card-img-top" alt="..." width="200"
-							height="200">
-						<div class="card-body">
-							<h5 class="card-title">1st</h5>
-							<p class="card-text">SK Wyverns</p>
-						</div>
-						<div class="card-footer">
-						
-						</div>
-					</div>
-					<div class="card">
-						<img src="images/kw.png" class="card-img-top" alt="..." width="200"
-							height="200">
-						<div class="card-body">
-							<h5 class="card-title">2nd</h5>
-							<p class="card-text">Kiwoom Heroes</p>
-						</div>
-						<div class="card-footer">
-						
-						</div>
-					</div>
-					<div class="card">
-						<img src="images/ds.png" class="card-img-top" alt="..." width="200"
-							height="200">
-						<div class="card-body">
-							<h5 class="card-title">3rd</h5>
-							<p class="card-text">Doosan Bears</p>
-						</div>
-						<div class="card-footer">
-					
-						</div>
-					</div>
-				</div>
-			</div>
+					</a>	
+					</div>	
+				</c:forEach> 
 			
 			<br>
 			
-			<div class="card-deck">
-					<div class="card">
-						<img src="images/sk.png" class="card-img-top" alt="..." width="200"
-							height="200">
-						<div class="card-body">
-							<h5 class="card-title">1st</h5>
-							<p class="card-text">SK Wyverns</p>
-						</div>
-						<div class="card-footer">
-						
-						</div>
-					</div>
-					<div class="card">
-						<img src="images/kw.png" class="card-img-top" alt="..." width="200"
-							height="200">
-						<div class="card-body">
-							<h5 class="card-title">2nd</h5>
-							<p class="card-text">Kiwoom Heroes</p>
-						</div>
-						<div class="card-footer">
-					
-						</div>
-					</div>
-					<div class="card">
-						<img src="images/ds.png" class="card-img-top" alt="..." width="200"
-							height="200">
-						<div class="card-body">
-							<h5 class="card-title">3rd</h5>
-							<p class="card-text">Doosan Bears</p>
-						</div>
-						<div class="card-footer">
-							
-						</div>
-					</div>
-				</div>
-			
-			<br>
-			
+	      </div>
 			<div class="text-center">
 				<button class="btn btn-sm btn-secondary"> 더보기  </button>
 			</div>	
-	      </div>
 	  </div>
 	</div>
+</div>
 </div>
 <!-- main body 종료 -->
 

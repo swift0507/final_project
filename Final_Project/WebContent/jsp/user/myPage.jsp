@@ -63,6 +63,12 @@
 				this.innerHTML = "교환완료"
 			}
 		})
+		$("#pickMore").on("click", function(){
+			location.href="pickList.do"
+		})
+		$("#receiptMore").on("click", function(){
+			location.href="orderList.do"
+		})
 		
 	})
 	</script>
@@ -92,7 +98,7 @@
 						<th scope="col">구매 내역</th>
 						<th scope="col">배송 상태</th>
 					</tr>
-					<c:forEach var="receipt" items="${receiptList}">
+					<c:forEach begin="1" end="3" var="receipt" items="${receiptList}">
 						<tr>
 							<td>${receipt.receipt_orderdate}</td>
 							<td>${receipt.receipt_prod}</td>
@@ -106,13 +112,16 @@
 					</tr> -->
 				</table>
 	    	</div>
+	    	<div class="text-center">
+				<button class="btn btn-sm btn-secondary" id="receiptMore"> 더보기  </button>
+			</div>	
 	    	
 	    	<br>
 	    	
 	    		<h5><b>찜 목록</b></h5>
 			    <br><hr>
-	    	<div class = "row">
-			    <c:forEach var="pick" items="${ pickList }">
+	    	<div class = "row mx-auto">
+			    <c:forEach begin="1" end="3" var="pick" items="${ pickList }">
 					<div class="card ml-3 mb-3" style="width : 14rem;">
 					<a class="text-decoration-none text-secondary" href="/Final_Project/prodView.do?prod_id=${ pick.prod_id }" target="_blank">
 						<img src="../images/noimage.png" class="card-img-top" style="width:100; height:100;">
@@ -206,7 +215,7 @@
 			</div>
 			<br>
 			<div class="text-center">
-				<button class="btn btn-sm btn-secondary"> 더보기  </button>
+				<button class="btn btn-sm btn-secondary" id="pickMore"> 더보기  </button>
 			</div>	
 	      </div>
 	  </div>

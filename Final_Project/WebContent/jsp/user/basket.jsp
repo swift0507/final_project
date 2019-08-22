@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,11 +33,53 @@
 	</script>
 	<script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15.0.0/dist/smooth-scroll.polyfills.min.js">
 	</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 	<style>
 		text-center item_header {
 			background-color: lightgrey;
 		}
 	</style>
+	
+	<script type="text/javascript">
+	$(document).ready(function(){
+		
+		$(".prod_name").each(function(){
+			var prod = this.innerHTML;
+			var elem = this;
+			//alert(prod);
+			$.ajax({
+				url : "findProdName.do",
+				data : {prod_id : prod},
+				type : "get",
+				success : function(data){
+					var id = "."+data.prod_id;
+					//alert(data.prod_name);
+					elem.innerHTML = "상품명 : "+ data.prod_name
+					elem.style.visibility=""
+					$(id).attr("src", "../images/noimage.png")
+				}
+			})
+		})
+		
+		//
+		$(".basket_price").each(function(){
+			//alert($(this).nextUntil("h5").text())
+			//alert(parseInt($(this).closest("h5").text()))
+			var eachprice = parseInt($(this).closest("h5").text());
+			//alert(eachprice)
+			$(this).parent().parent().find($(".prodnum")).text()
+			
+			var number = parseInt($(this).parent().parent().find($(".prodnum")).text());
+			//alert(number)
+			var totalprice = eachprice * number
+			$(this).closest($(".prodTotal").text(totalprice+" 원"))
+		})
+		
+		
+		
+	})
+	
+	</script>
 </head>
 <body>
 <!-- header -->
@@ -73,183 +117,75 @@
 				</table>
 				<!-- 장바구니 header table 종료 -->
 				
+			    
+				
+				<c:forEach var="map" items="${list}">
 				<!-- 사장님1 Component -->
 				<div class = "seller1"> 
 				<!-- 사장님별 장바구니 header table -->
 				<table style = "width: 800px;">
 					<tr>
 						<td colspan = 5 style = "height: 50px;">
-							<input class="checkbox" type="checkbox" value="" id="checkSeller1">&nbsp;&nbsp;&nbsp; <b>노라조 사장님</b> 
+							<input class="checkbox" type="checkbox" value="" id="checkSeller1">&nbsp;&nbsp;&nbsp; <b>${map.list[0].sel_id} 사장님</b> 
 						</td>
 					</tr>
 				</table>
-				<!-- 사장님별 장바구니 header table 종료 -->	
-				
-				<!-- 사장님별 장바구니 상품 table 1 -->
-				<table style = "width: 800px;">
-					<tr style = "height: 20px;"></tr>	
-				    <tr>
-				      <td rowspan = 3 style = "width: 20%;">
-				      	<input class="checkbox" type="checkbox" value="" id="check1">
-				      	&nbsp;&nbsp;&nbsp; <img src = "images/sk.png" width = 100 height = 100>
-				      </td>
-				      <td style = "width: 25%;"> 상품명 : 카레 </td>
-				      <td rowspan = 3 class = "text-center" style = "width: 20%;">
-				      	<h5>1조 2500억 원</h5>
-				      </td>
-				      <td rowspan = 3 class = "text-center" style = "width: 15%;">
-				      	1
-				      </td>
-				      <td rowspan = 3 class = "text-center" style = "width: 20%;">
-				      	<h5>1조 2500억 원</h5>
-				      </td>
-				    </tr>
-				    <tr>
-				      <td> 옵션 1 : 소고기 제외 </td>
-				    </tr>
-				    <tr>
-				      <td> 옵션 2 : 양파, 감자 </td>
-				    </tr>
-				    <tr style = "height: 20px;"></tr>
-				    <tr class = "text-right" style = "background-color: lightgrey">
-				      <td>배송비</td>
-				      <td colspan = 3></td>
-				      <td>3000 원</td>
-				    </tr>
-				</table>
-				<!-- 사장님별 장바구니 상품 table 1 종료 -->
-				
+				<c:forEach var="basket" items="${map.list}">
 				<!-- 사장님별 장바구니 상품 table 2 -->
-				<table style = "width: 800px;">
-					<tr style = "height: 20px;"></tr>	
+				<table class="product" style = "width: 800px;">
+					<tr style = "height: 20px;">
+						<td>
+						<input type="hidden" class="prod_id" value="${basket.prod_id}">
+						<input type="hidden" value="${basket.basket_id}">
+						</td>
+					</tr>	
 				    <tr>
 				      <td rowspan = 3 style = "width: 20%;">
 				      	<input class="checkbox" type="checkbox" value="" id="check2">
-				      	&nbsp;&nbsp;&nbsp; <img src = "images/sk.png" width = 100 height = 100>
+				      	&nbsp;&nbsp;&nbsp; <img src = "images/sk.png" class="${basket.prod_id}" width = 100 height = 100>
 				      </td>
-				      <td style = "width: 25%;"> 상품명 : 카레 </td>
+				      <td style = "width: 25%;  visibility: hidden;" class="prod_name"> ${basket.prod_id} </td>
 				      <td rowspan = 3 class = "text-center" style = "width: 20%;">
-				      	<h5>1조 2500억 원</h5>
+				      	<h5 class="basket_price">${basket.basket_price} 원</h5>
 				      </td>
 				      <td rowspan = 3 class = "text-center" style = "width: 15%;">
-				      	1
+				      	<h5 class="prodnum">1</h5>
 				      </td>
 				      <td rowspan = 3 class = "text-center" style = "width: 20%;">
-				      	<h5>1조 2500억 원</h5>
+				      	<h5 class="prodTotal">합계금액</h5>
 				      </td>
 				    </tr>
 				    <tr>
-				      <td> 옵션 1 : 소고기 제외 </td>
+				      <td> ${basket.basket_option}</td>
 				    </tr>
 				    <tr>
-				      <td> 옵션 2 : 양파, 감자 </td>
 				    </tr>
+				    </c:forEach>
 				    <tr style = "height: 20px;"></tr>
 				    <tr class = "text-right" style = "background-color: lightgrey">
-				      <td>배송비</td>
-				      <td colspan = 3></td>
-				      <td>3000 원</td>
+				      <td>배송비 </td>
+				      <td colspan = 3><input type="hidden" value="${map.seller.sel_free}"></td>
+				      <td class="eachFee">${map.seller.sel_fee} 원</td>
 				    </tr>
 				</table>
 				<hr>
 				<!-- 사장님별 장바구니 상품 table 2 종료 -->
 				</div>
 				<!-- 사장님1 Component 종료 -->
+				</c:forEach>
 				
-				<!-- 사장님2 Component -->
-				<div class = "seller2"> 
-				<!-- 사장님별 장바구니 header table -->
-				<table style = "width: 800px;">
-					<tr>
-						<td colspan = 5 style = "height: 50px;">
-							<input class="checkbox" type="checkbox" value="" id="checkSeller2">&nbsp;&nbsp;&nbsp; <b>노라조 사장님</b> 
-						</td>
-					</tr>
-				</table>
-				<!-- 사장님별 장바구니 header table 종료 -->	
-				
-				<!-- 사장님별 장바구니 상품 table 1 -->
-				<table style = "width: 800px;">	
-					<tr style = "height: 20px;"></tr>
-				    <tr>
-				      <td rowspan = 3 style = "width: 20%;">
-				      	<input class="checkbox" type="checkbox" value="" id="check1">
-				      	&nbsp;&nbsp;&nbsp; <img src = "images/sk.png" width = 100 height = 100>
-				      </td>
-				      <td style = "width: 25%;"> 상품명 : 카레 </td>
-				      <td rowspan = 3 class = "text-center" style = "width: 20%;">
-				      	<h5>1조 2500억 원</h5>
-				      </td>
-				      <td rowspan = 3 class = "text-center" style = "width: 15%;">
-				      	1
-				      </td>
-				      <td rowspan = 3 class = "text-center" style = "width: 20%;">
-				      	<h5>1조 2500억 원</h5>
-				      </td>
-				    </tr>
-				    <tr>
-				      <td> 옵션 1 : 소고기 제외 </td>
-				    </tr>
-				    <tr>
-				      <td> 옵션 2 : 양파, 감자 </td>
-				    </tr>
-				    <tr style = "height: 20px;"></tr>
-				    <tr class = "text-right" style = "background-color: lightgrey">
-				      <td>배송비</td>
-				      <td colspan = 3></td>
-				      <td>3000 원</td>
-				    </tr>
-				</table>
-				<!-- 사장님별 장바구니 상품 table 1 종료 -->
-				
-				<!-- 사장님별 장바구니 상품 table 2 -->
-				<table style = "width: 800px;">
-					<tr style = "height: 20px;"></tr>	
-				    <tr>
-				      <td rowspan = 3 style = "width: 20%;">
-				      	<input class="checkbox" type="checkbox" value="" id="check2">
-				      	&nbsp;&nbsp;&nbsp; <img src = "images/sk.png" width = 100 height = 100>
-				      </td>
-				      <td style = "width: 25%;"> 상품명 : 카레 </td>
-				      <td rowspan = 3 class = "text-center" style = "width: 20%;">
-				      	<h5>1조 2500억 원</h5>
-				      </td>
-				      <td rowspan = 3 class = "text-center" style = "width: 15%;">
-				      	1
-				      </td>
-				      <td rowspan = 3 class = "text-center" style = "width: 20%;">
-				      	<h5>1조 2500억 원</h5>
-				      </td>
-				    </tr>
-				    <tr>
-				      <td> 옵션 1 : 소고기 제외 </td>
-				    </tr>
-				    <tr>
-				      <td> 옵션 2 : 양파, 감자 </td>
-				    </tr>
-				    <tr style = "height: 20px;"></tr>
-				    <tr class = "text-right" style = "background-color: lightgrey">
-				      <td>배송비</td>
-				      <td colspan = 3></td>
-				      <td>3000 원</td>
-				    </tr>
-				</table>
-				<hr>
-				<!-- 사장님별 장바구니 상품 table 2 종료 -->
-				</div>
-				<!-- 사장님2 Component 종료 -->
 				
 				<!-- 총 상품 금액 table -->
 				<table style = "width: 800px;">
 					<tr class = "text-right">
 						<th colspan = 2 style = "width: 400px;">
-						<th style = "width: 100px;"> 사용 금액  </th>
-						<td style = "width: 200px;"> 5조  </td>
+						<th style = "width: 100px;"> 총 주문 금액  </th>
+						<td style = "width: 200px;" class="payPrice"> 5조  </td>
 					</tr>
 					<tr class = "text-right">
 						<th colspan = 2 style = "width: 400px;">
 						<th style = "width: 100px;"> 배송비  </th>
-						<td style = "width: 200px;"> 6000 원 </td>
+						<td style = "width: 200px;" class="totalFee"> 6000 원 </td>
 					</tr>
 					<tr style = "height: 10px">
 						<td colspan = 4>
@@ -257,9 +193,9 @@
 						</td>
 					</tr>
 					<tr style = "font-size: 20px;">
-						<th colspan = 2 class = "text-left"> 총 상품 금액 </th>
+						<th colspan = 2 class = "text-left"> 결제 예정 금액 </th>
 						
-						<th colspan = 2 class = "text-right"> 5조 6000원</th>
+						<th colspan = 2 class = "text-right totalPayPrice"> 5조 6000원</th>
 					</tr>
 				</table>
 				<!-- 총 상품 금액 table 종료 -->
