@@ -37,104 +37,16 @@
 		var photo_count = 1;
 		var detail_count = 1;
 		var option_count = 1;
+		var sub_option_count = 1;
 		
 		/* file 추가  폼 */
 		var input_photo_form = '<tr id = "added_photo">';
 			input_photo_form += '<td>'
-			input_photo_form += '<input type="file" class="form-control-file">'
+			input_photo_form += '<input type="file" class="form-control-file"' + 'id = "    +">'
 			input_photo_form += '</td>'
 			input_photo_form += '</tr>'
 		/* file 추가 폼 종료 */
 		
-		/* detail 추가 폼 */
-		var input_detail_form = '<tr id = "detail">';
-			input_detail_form += '<td style = "width: 5%;" class= "text-center">';
-			input_detail_form += '<input type = "checkbox">'
-			input_detail_form += '</td>'
-			input_detail_form += '<td style = "width: 30%;">'
-			input_detail_form += '<input type="text" class="form-control" placeholder = "항목명" style = "width: 175px;">'
-			input_detail_form += '</td>'
-			input_detail_form += '<td style = "width: 65%;">'
-			input_detail_form += '<input type="text" class="form-control" placeholder = "설명">'
-			input_detail_form += '</td>'
-			input_detail_form += '</tr>'
-		/* detail 추가 폼 종료 */
-		
-		/* 옵션 추가 폼 */
-			input_option_form = '<table style = "width: 700px;" id = "option_table">';
-			input_option_form += '<tr style = "height: 10px"></tr>';
-			input_option_form += '<tr>';
-			input_option_form += '<td style = "width: 5%;" class= "text-center">';
-			input_option_form += '<input type = "checkbox">';
-			input_option_form += '</td>';
-			input_option_form += '<td style = "width: 25%;">';
-			input_option_form += '<input type="text" class="form-control" placeholder = "항목명" style = "width: 175px;">';
-			input_option_form += '</td>';
-			input_option_form += '<td colspan = 2 style = "width: 50%;">';
-			input_option_form += '<input type="text" class="form-control" placeholder = "설명">';
-			input_option_form += '</td>';
-			input_option_form += '<td style = "width: 20%" class = "text-center">'
-			input_option_form += '<button class = "btn-secondary" id = "add_optionDetail">항목 추가</button>';
-			input_option_form += '</td>';
-			input_option_form += '</tr>';
-			input_option_form += '<tr>';
-			input_option_form += '<td colspan = 2></td>';
-			input_option_form += '<th>';
-			input_option_form += '추가 금액';
-			input_option_form += '</th>';
-			input_option_form += '<td>';
-			input_option_form += '<input type="text" class="form-control" placeholder = "추가 금액" style = "width: 275px;">';	
-			input_option_form += '</td>';
-			input_option_form += '<td></td>';
-			input_option_form += '</tr>';
-			input_option_form += '<tr>';
-			input_option_form += '<td colspan = 2></td>';
-			input_option_form += '<th>';
-			input_option_form += '수량';
-			input_option_form += '</th>';
-			input_option_form += '<td>';
-			input_option_form += '<input type="text" class="form-control" placeholder = "수량" style = "width: 275px;">';	
-			input_option_form += '</td>';
-			input_option_form += '<td></td>';
-			input_option_form += '</tr>';
-			input_option_form += '<tr style = "height: 10px"></tr>';
-			input_option_form += '</table>';
-		/* 옵션 추가 폼  종료*/
-		
-		/* 상세 옵션 추가 폼 */
-		var input_optionDetail_form = '<tr>';
-			input_optionDetail_form += '<td style = "width: 5%;" class= "text-center">';
-			input_optionDetail_form += '</td>';
-			input_optionDetail_form += '<td style = "width: 25%;">';
-			input_optionDetail_form += '</td>';
-			input_optionDetail_form += '<td colspan = 2 style = "width: 50%;">';
-			input_optionDetail_form += '<input type="text" class="form-control" placeholder = "설명">';
-			input_optionDetail_form += '</td>';
-			input_optionDetail_form += '<td style = "width: 20%" class = "text-center">'
-			input_optionDetail_form += '</td>';
-			input_optionDetail_form += '</tr>';
-			input_optionDetail_form += '<tr>';
-			input_optionDetail_form += '<td colspan = 2></td>';
-			input_optionDetail_form += '<th>';
-			input_optionDetail_form += '추가 금액';
-			input_optionDetail_form += '</th>';
-			input_optionDetail_form += '<td>';
-			input_optionDetail_form += '<input type="text" class="form-control" placeholder = "추가 금액" style = "width: 275px;">';	
-			input_optionDetail_form += '</td>';
-			input_optionDetail_form += '<td></td>';
-			input_optionDetail_form += '</tr>';
-			input_optionDetail_form += '<tr>';
-			input_optionDetail_form += '<td colspan = 2></td>';
-			input_optionDetail_form += '<th>';
-			input_optionDetail_form += '수량';
-			input_optionDetail_form += '</th>';
-			input_optionDetail_form += '<td>';
-			input_optionDetail_form += '<input type="text" class="form-control" placeholder = "수량" style = "width: 275px;">';	
-			input_optionDetail_form += '</td>';
-			input_optionDetail_form += '<td></td>';
-			input_optionDetail_form += '</tr>';
-			input_optionDetail_form += '<tr style = "height: 10px"></tr>';
-		/* 상세 옵션 추가 폼 종료*/
 		
 		/* 사진 첨부 입력 폼 추가 Script */
 		$('#add_photo').click(function(){
@@ -161,6 +73,31 @@
 		/* detail 입력 폼 추가 Script */
 		$('#add_detail').click(function(){
 			detail_count += 1;
+			
+			/* 상세정보 테이블
+
+		    prod_id number not null,
+		    detail_id number unique not null,
+		    detail_name varchar2(20) not null,
+		    detail_explain varchar2(50) not null,
+			*/
+			
+			
+			
+			/* detail 추가 폼 */
+			var input_detail_form = '<tr id = "detail' + (detail_count) + '">';
+				input_detail_form += '<td style = "width: 5%;" class= "text-center">';
+				input_detail_form += '<input type = "checkbox">'
+				input_detail_form += '</td>'
+				input_detail_form += '<td style = "width: 30%;">'
+				input_detail_form += '<input type="text" class="form-control" placeholder = "항목명" style = "width: 175px;"' + 'id = "detail_name' + (detail_count) + '">'
+				input_detail_form += '</td>'
+				input_detail_form += '<td style = "width: 65%;">'
+				input_detail_form += '<input type="text" class="form-control" placeholder = "설명"' + 'id = "detail_explain' + (detail_count) + '">';
+				input_detail_form += '</td>'
+				input_detail_form += '</tr>'
+			/* detail 추가 폼 종료 */
+			
 			$('#detail_table').append(input_detail_form);
 		})
 		/* detail 입력 폼 추가 Script 종료 */
@@ -169,7 +106,7 @@
 		$('#del_detail').click(function(){
 			if(detail_count > 1) {
 				detail_count -= 1;
-				$('#detail:last-of-type').detach();
+				$('#detail_table tr').last().detach();
 			} else {
 				alert('한 개 이상의 옵션을 지정하셔야 합니다.');	
 			}
@@ -179,28 +116,122 @@
 		/* 옵션 폼 추가 Script */
 		$('#add_option').click(function(){
 			option_count += 1;
-			var newitem = $(".option_table").clone();
-				newitem.removeClass();
-				newitem.addClass("option_table"+(option_count));
-				newitem.removeAttr('id');
-				newitem.attr('id', 'option_table'+(option_count));
 		
-				$('#add_option_table').append(newitem);
+			/* --상품 옵션 테이블
+			    opt_id number primary key,
+			    prod_id number not null,
+			    opt_name varchar2(20) not null,
+			    opt_order number(1) not null,     --옵션 순서
+			*/
+			
+			/* 옵션 추가 폼 */
+			var	input_option_form = '<table style = "width: 700px;"'; 
+				input_option_form += 'id = "option_table' + (option_count);
+				input_option_form += '">';
+				input_option_form += '<tr style = "height: 10px"></tr>';
+				input_option_form += '<tr>';
+				input_option_form += '<td style = "width: 5%;" class= "text-center">';
+				input_option_form += '<input type = "checkbox">';
+				input_option_form += '</td>';
+				input_option_form += '<td style = "width: 25%;">';
+				input_option_form += '<input type="text" class="form-control" placeholder = "옵션명" style = "width: 175px;">';
+				input_option_form += '</td>';
+				input_option_form += '<td colspan = 2 style = "width: 50%;">';
+				input_option_form += '<input type="text" class="form-control" placeholder = "상세옵션명">';
+				input_option_form += '</td>';
+				input_option_form += '<td style = "width: 20%" class = "text-center">'
+				input_option_form += '<button class = "btn-secondary" id = "add_optionDetail">항목 추가</button>';
+				input_option_form += '</td>';
+				input_option_form += '</tr>';
+				input_option_form += '<tr>';
+				input_option_form += '<td colspan = 2></td>';
+				input_option_form += '<th>';
+				input_option_form += '추가 금액';
+				input_option_form += '</th>';
+				input_option_form += '<td>';
+				input_option_form += '<input type="text" class="form-control" placeholder = "추가 금액" style = "width: 275px;">';	
+				input_option_form += '</td>';
+				input_option_form += '<td></td>';
+				input_option_form += '</tr>';
+				input_option_form += '<tr>';
+				input_option_form += '<td colspan = 2></td>';
+				input_option_form += '<th>';
+				input_option_form += '수량';
+				input_option_form += '</th>';
+				input_option_form += '<td>';
+				input_option_form += '<input type="text" class="form-control" placeholder = "수량" style = "width: 275px;">';	
+				input_option_form += '</td>';
+				input_option_form += '<td></td>';
+				input_option_form += '</tr>';
+				input_option_form += '<tr style = "height: 10px"></tr>';
+				input_option_form += '</table>';
+			/* 옵션 추가 폼  종료*/
+			
+			$('.option_area').append(input_option_form);
 		})
 		/* 옵션 폼 추가 Script 종료 */
 		
 		
 		/* 옵션 폼 삭제 Script */
 		$('#del_option').click(function(){
-			$('#option_table:last-of-type').detach();
-			option_count -= 1;
+			if(option_count > 1) {
+				$('.option_area').children().last().detach();
+				option_count -= 1;
+			} else {
+				alert('한 개 이상의 옵션을 지정하셔야 합니다.');	
+			}
 		})
 		/* 옵션 폼 삭제 Script 종료 */
 	
 		
 		/* 상세 옵션 폼 추가 Script */
 		$('#add_optionDetail').click(function(){
-			$('#option_table').append(input_optionDetail_form);	
+			sub_option_count += 1;
+			
+			/* --옵션 상세 테이블
+			    opt_id number not null,    --옵션 아이디
+			    optd_id number unique not null,    --옵션 상세 개별 아이디
+			    optd_choice varchar2(100) not null,    --상세 옵션명
+			    optd_price number not null,    --상세 옵션별 추가금액
+			    optd_quantity number not null,    --상세 옵션별 수량   */
+			
+			/* 상세 옵션 추가 폼 */
+			var input_optionDetail_form = '<tr>';
+				input_optionDetail_form += '<td style = "width: 5%;" class= "text-center">';
+				input_optionDetail_form += '</td>';
+				input_optionDetail_form += '<td style = "width: 25%;">';
+				input_optionDetail_form += '</td>';
+				input_optionDetail_form += '<td colspan = 2 style = "width: 50%;">';
+				input_optionDetail_form += '<input type="text" class="form-control"'; 
+				input_optionDetail_form += 'id = "optd_choice' + (option_count) + '_' + (sub_option_count) + '" ' + 'placeholder = "상세옵션명">';
+				input_optionDetail_form += '</td>';
+				input_optionDetail_form += '<td style = "width: 20%" class = "text-center">'
+				input_optionDetail_form += '</td>';
+				input_optionDetail_form += '</tr>';
+				input_optionDetail_form += '<tr>';
+				input_optionDetail_form += '<td colspan = 2></td>';
+				input_optionDetail_form += '<th>';
+				input_optionDetail_form += '추가 금액';
+				input_optionDetail_form += '</th>';
+				input_optionDetail_form += '<td>';
+				input_optionDetail_form += '<input type="text" class="form-control" placeholder = "추가 금액" style = "width: 275px;">';	
+				input_optionDetail_form += '</td>';
+				input_optionDetail_form += '<td></td>';
+				input_optionDetail_form += '</tr>';
+				input_optionDetail_form += '<tr>';
+				input_optionDetail_form += '<td colspan = 2></td>';
+				input_optionDetail_form += '<th>';
+				input_optionDetail_form += '수량';
+				input_optionDetail_form += '</th>';
+				input_optionDetail_form += '<td>';
+				input_optionDetail_form += '<input type="text" class="form-control" placeholder = "수량" style = "width: 275px;">';	
+				input_optionDetail_form += '</td>';
+				input_optionDetail_form += '<td></td>';
+				input_optionDetail_form += '</tr>';
+				input_optionDetail_form += '<tr style = "height: 10px"></tr>';
+			/* 상세 옵션 추가 폼 종료*/
+			
+			$('#option_table1').append(input_optionDetail_form);	
 		})
 		/* 상세 옵션 폼 추가 Script 종료 */
 
@@ -414,8 +445,7 @@
 			<!-- 카테고리 선택 table 종료 -->
 			<br>
 			
-			<!-- detail 추가 table -->
-			<table style = "width: 700px;" id = "detail_table">
+			<table style = "width: 700px;">
 				<tr>
 					<td colspan = 3>
 						<button class = "btn-secondary" id = "add_detail">추가</button>
@@ -423,15 +453,19 @@
 					</td>
 				</tr>
 				<tr style = "height: 10px"></tr>
-				<tr class = "detail">
+			</table>
+		
+			<!-- detail 추가 table -->
+			<table style = "width: 700px;" id = "detail_table">
+				<tr id = "detail1">
 					<td style = "width: 5%;" class= "text-center">
 						<input type = "checkbox">
 					</td>
 					<td style = "width: 30%;">
-						<input type="text" class="form-control" placeholder = "항목명" style = "width: 175px;">
+						<input type="text" class="form-control" placeholder = "항목명" style = "width: 175px;" id = "detail_name1">
 					</td>
 					<td style = "width: 65%;">
-						<input type="text" class="form-control" placeholder = "설명">
+						<input type="text" class="form-control" placeholder = "설명" id = "detail_explain1">
 					</td>
 				</tr>
 			</table>
@@ -473,22 +507,36 @@
 			</table>
 			<!-- 옵션 추가 여부 설정 table -->
 			
+			<div class = "option_area">
+			<!--  --상품 옵션 테이블
+			    opt_id number primary key,
+			    prod_id number not null,
+			    opt_name varchar2(20) not null,
+			    opt_order number(1) not null,     --옵션 순서
+			    
+			--옵션 상세 테이블
+			    opt_id number not null,    --옵션 아이디
+			    optd_id number unique not null,    --옵션 상세 개별 아이디
+			    optd_choice varchar2(100) not null,    --상세 옵션명
+			    optd_price number not null,    --상세 옵션별 추가금액
+			    optd_quantity number not null,    --상세 옵션별 수량    -->
+			
 			
 			<!-- 세부 옵션 설정 table -->
-			<table style = "width: 700px;" class = "option_table" id = "option_table">
+			<table style = "width: 700px;" id = "option_table1">
 				<tr style = "height: 10px"></tr>
 				<tr>
 					<td style = "width: 5%;" class= "text-center">
 						<input type = "checkbox">
 					</td>
 					<td style = "width: 25%;">
-						<input type="text" class="form-control" placeholder = "항목명" style = "width: 175px;">
+						<input type="text" class="form-control" id = "opt_name1" placeholder = "옵션명" style = "width: 175px;">
 					</td>
 					<td colspan = 2 style = "width: 50%;">
-						<input type="text" class="form-control" placeholder = "설명">
+						<input type="text" class="form-control" id = "optd_choice1_1" placeholder = "상세옵션명">
 					</td>
 					<td style = "width: 20%" class = "text-center">
-						<button class = "btn-secondary" id = "add_optionDetail">항목 추가</button>	
+						<button class = "btn-secondary" id = "add_optionDetail1">항목 추가</button>	
 					</td>
 				</tr>
 				<tr>
@@ -497,7 +545,7 @@
 						 추가 금액
 					</th>
 					<td>
-						<input type="text" class="form-control" placeholder = "추가 금액" style = "width: 275px;">	
+						<input type="text" class="form-control" id = "optd_price1_1" placeholder = "추가 금액" style = "width: 275px;">	
 					</td>
 					<td></td>
 				</tr>
@@ -507,17 +555,15 @@
 						 수량
 					</th>
 					<td>
-						<input type="text" class="form-control" placeholder = "수량" style = "width: 275px;">	
+						<input type="text" class="form-control" id = "optd_quantity1_1" placeholder = "수량" style = "width: 275px;">	
 					</td>
 					<td></td>
 				</tr>
-				<tr style = "height: 10px"></tr>
+				<tr style = "height: 10px;"></tr>
 			</table>
 			<!-- 세부 옵션 설정 table 종료 -->
+			</div>
 			
-			<div id = "add_option_table">
-			
-			</div> 
 			
 			</div>
 			<br><br>

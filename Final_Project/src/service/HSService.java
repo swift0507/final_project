@@ -4,14 +4,18 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 
+import model.Answer;
 import model.Basket;
 import model.Event;
+import model.FAQ;
 import model.Member;
 import model.Notice;
 import model.OptionDetail;
 import model.ProdOption;
 import model.Product;
+import model.QnAComment;
 import model.Receipt;
+import model.Review;
 
 public interface HSService {
 	
@@ -61,6 +65,12 @@ public interface HSService {
 	
 	//최신순 상품목록 가져오기
 	public HashMap<String, Object> getProdByLatest(int page);
+	
+	//인기순 상품목록 가져오기(메인 5개)
+	public List<Product> getProdByReadCountForMain();
+		
+	//최신순 상품목록 가져오기(메인 5개)
+	public List<Product> getProdByLatestForMain();
 
 	//상품ID로 상품 1개 가져오기
 	public Product getOneProduct(int prod_id);
@@ -84,16 +94,17 @@ public interface HSService {
 	public Notice readNotice(int notice_id);
 	
 	//공지사항페이지의 게시물 리스트 출력
-	public List<Notice> getNoticeList();
+//	public List<Notice> getNoticeList();
+	public HashMap<String, Object> getNoticetList(int page);
 	
 	//공지사항 조회수 증가
 	int updateReadCount1(int notice_readcount);
 	
-	//첨부파일을 가져다 주는 기능
-	public File getAttachedFile(int num);
-
 	//배너 가져오기
 	public HashMap<String, Object> getBanners();
+	
+	//이벤트_첨부파일을 가져다 주는 기능이벤트
+	public File getEventFile(int num);
 	
 	/*페이징처리 관련*/
 	//시작 페이지
@@ -108,6 +119,17 @@ public interface HSService {
 	//상품카드 페이지의 첫번째 카드번호
 	public int getProdOffset(int page);
 	
+	//공지사항_첨부파일을 가져다 주는 기능
+	public File getNoticeFile(int num);
+	
+	//faq 페이지의 게시물 리스트 출력
+	public List<FAQ> getFaqList();
+	
+	//고객센터 공지사항 출력
+	public List<Notice> getsupportnoticeList();
+	
+	//고객센터 자주묻는질문 출력
+	public List<FAQ> getsupportfaqList();
 	//게시판 형식 목록의 마지막 페이지 번호
 	public int getBoardLastPage(int numOfBoards);
 	
@@ -117,4 +139,22 @@ public interface HSService {
 
 	//상품별 Q&A 가져오기
 	public HashMap<String, Object> getQnAById(int prod_id, int qnaPage);
+
+	public int writeReview(Review review);
+	public int modifyReview(Review review);
+	public int deleteReview(int review_id);
+
+	public List<Review> getReviewList();
+	
+	public int getQnACountById(int prod_id);
+	
+	public QnAComment getQnAComment(int qna_id);
+
+	//상품별 후기 가져오기
+	public HashMap<String, Object> getReviewById(int prod_id, int reviewPage);
+	
+	public int getReviewCountById(int prod_id);
+	
+	public Answer getReviewAnswer(int review_id);
+
 }

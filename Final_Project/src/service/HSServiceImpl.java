@@ -1,18 +1,17 @@
 package service;
 
 import java.io.File;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import model.Answer;
 import model.Banner;
 import model.Basket;
 import model.Event;
+import model.FAQ;
 import model.Member;
 import model.Notice;
 import model.OptionDetail;
@@ -21,6 +20,7 @@ import model.Product;
 import model.QnA;
 import model.QnAComment;
 import model.Receipt;
+import model.Review;
 import model.Seller;
 
 @Service
@@ -108,8 +108,9 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 			//장바구니리스트를 받아오기
 			List<Basket> basketList = basketDao.selectBySeller(param);
 			Seller seller = sellerDao.selectOneSeller(sel_id);
-			//System.out.println(seller);
+			//사장님별 맵에 특정 사장님 장바구니 넣기
 			basketInfo.put("list", basketList);
+			//판매자 정보 넣기(배송비, 배송비무료 넣기 위함.)
 			basketInfo.put("seller", seller);
 			//상품네임, 이미지
 			list.add(basketInfo);
@@ -270,6 +271,23 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		
 		return latestProd;
 	}
+	
+	//인기순 상품 가져오기(메인 5개)
+	@Override
+	public List<Product> getProdByReadCountForMain() {
+		// TODO Auto-generated method stub
+		
+		return productDao.selectByReadCountForMain();
+	}
+
+	//최신순 상품 가져오기(메인 5개)
+	@Override
+	public List<Product> getProdByLatestForMain() {
+		// TODO Auto-generated method stub
+			
+		return productDao.selectByLatestForMain();
+	}
+
 
 	//해당 상품의 옵션들 가져오기
 	@Override
@@ -317,11 +335,15 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 			
 		HashMap<String, Object> qnaMap = new HashMap<String, Object>();
 		
-		qnaMap.put("last", getBoardLastPage(qnaDao.getCountById(prod_id)));
-		qnaMap.put("totalBoards", qnaDao.getCountById(prod_id));
+		qnaMap.put("qnaLast", getBoardLastPage(qnaDao.getCountById(prod_id)));
+		qnaMap.put("qnaTotalBoards", getQnACountById(prod_id));
 		qnaMap.put("qna", qnaListByProd);
 			
 		return qnaMap;
+	}
+	
+	public int getQnACountById(int prod_id) {
+		return qnaDao.getCountById(prod_id);
 	}
 		
 	//해당 Q&A의 답변 가져오기
@@ -329,6 +351,44 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		
 		return qnaCommentDao.selectByQnAId(qna_id);
 	}
+	
+	//해당 상품 후기 가져오기
+	@Override
+	public HashMap<String, Object> getReviewById(int prod_id, int reviewPage) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> params = new HashMap<String, Object>();
+			
+		params.put("offset", getBoardOffset(reviewPage));
+		params.put("boardsPerPage", 10);
+		params.put("prod_id", prod_id);
+		
+		List<Review> reviewListByProd = reviewDao.selectById(params);
+		
+		for(int i = 0; i < reviewListByProd.size(); i++) {
+			if(reviewListByProd.get(i).getReview_answer() == 1)
+			reviewListByProd.get(i).setAnswer(getReviewAnswer(reviewListByProd.get(i).getReview_id()));
+		}
+			
+		HashMap<String, Object> reviewMap = new HashMap<String, Object>();
+		
+		reviewMap.put("reviewLast", getBoardLastPage(reviewDao.getCountById(prod_id)));
+		reviewMap.put("reviewTotalBoards", getReviewCountById(prod_id));
+		reviewMap.put("review", reviewListByProd);
+		
+		System.out.println(reviewMap.get("reviewTotalBoards"));
+			
+		return reviewMap;
+	}
+	
+	public int getReviewCountById(int prod_id) {
+		return reviewDao.getCountById(prod_id);
+	}
+		
+	//해당 후기의 답변 가져오기
+	public Answer getReviewAnswer(int review_id) {
+		
+		return answerDao.selectByReviewId(review_id);
+	}	
 	
 	//검색어에 따른 상품목록 가져오기
 	@Override
@@ -354,15 +414,27 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		noticeDao.updateReadCount(notice_id);
 		return noticeDao.selectOne(notice_id);
 	}
-
+	
 	//공지사항list전부 가져오기
 	@Override
-	public List<Notice> getNoticeList() {
-		// TODO Auto-generated method stub
-		List<Notice> notice = noticeDao.selectAll();
-		System.out.println(notice);
-		return notice;
+	public HashMap<String, Object> getNoticetList(int page) {
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		
+		params.put("offset", getProdOffset(page));
+		params.put("boardsPerPage", 10);
+		
+		HashMap<String, Object> noticeMap = new HashMap<String, Object>();
+		
+		noticeMap.put("current", page);
+		noticeMap.put("start", getStartPage(page));
+		noticeMap.put("end", getEndPage(page));
+		noticeMap.put("last", getProdLastPage(noticeDao.getCount()));
+		noticeMap.put("totalBoards", noticeDao.getCount());
+		noticeMap.put("notice", noticeDao.selectAll(params));
+		
+		return noticeMap;
 	}
+	
 	
 	//공지사항 조회수 증가
 	@Override
@@ -373,12 +445,11 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 
 	//이벤트 첨부파일
 	@Override
-	public File getAttachedFile(int num) {
+	public File getEventFile(int num) {
 		// TODO Auto-generated method stub
-		
 		Event event = eventDao.selectOne(num);
 		String event_pict = event.getEvent_pict();
-		String path = "C:/Temp/attach/";
+		String path = "C:\\Temp\\attach\\";
 		
 		return new File(path+event_pict);
 	}
@@ -404,5 +475,62 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		
 		return banners;
 	}
+
+	//공지사항 첨부파일
+	@Override
+	public File getNoticeFile(int num) {
+		// TODO Auto-generated method stub
+		
+		Notice notice = noticeDao.selectOne(num);
+		String notice_pict = notice.getNotice_pict();
+		String path = "C:\\Temp\\attach\\";
+		return new File(path+notice_pict);
+	}
+
+	//faq 목록 출력
+	@Override
+	public List<FAQ> getFaqList() {
+		// TODO Auto-generated method stub
+		return faqDao.selectAll();
+	}
+
+	//고객센터(메인)_공지사항출력
+	@Override
+	public List<Notice> getsupportnoticeList() {
+		// TODO Auto-generated method stub
+		return noticeDao.selectsupport();
+	}
+
+	//고객센터(메인)_faq출력
+	@Override
+	public List<FAQ> getsupportfaqList() {
+		// TODO Auto-generated method stub
+		return faqDao.selectsupport();
+	}
+
+	@Override
+	public int writeReview(Review review) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int modifyReview(Review review) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int deleteReview(int review_id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<Review> getReviewList() {
+		// TODO Auto-generated method stub
+		return reviewDao.selectAll();
+	}
+
 
 }

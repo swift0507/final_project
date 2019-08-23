@@ -1,21 +1,18 @@
 package controller;
 
+import java.io.File;
 import java.util.HashMap;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.View;
 
-import model.Event;
 import model.Member;
-import model.ProdOption;
 import model.Product;
 import service.HSService;
 
@@ -27,6 +24,8 @@ public class AllController {
 	
 	@RequestMapping("main.do")
 	public void main(Model model) {
+		model.addAttribute("popular", service.getProdByReadCountForMain());
+		model.addAttribute("latest", service.getProdByLatestForMain());
 		model.addAllAttributes(service.getBanners());
 	} 
 	
@@ -41,9 +40,6 @@ public class AllController {
 	
 	@RequestMapping("signUpForm.do")
 	public void singnUpForm() {}
-	
-	@RequestMapping("support.do")
-	public void support() {}
 	
 	//로그아웃. 세션 만료시키고 main.do 리다이렉트
 	@RequestMapping("logout.do")
@@ -75,12 +71,7 @@ public class AllController {
 	//개인정보이용방침
 	@RequestMapping("privacyTerms.do")
 	public void provision() {}
-	
-	@RequestMapping("faq.do")
-	public void faq() {
-		//미완성
-	}
-	
+
 	//이용약관
 	@RequestMapping("useTerms.do")
 	public void useTerms() {}
@@ -172,8 +163,16 @@ public class AllController {
 	
 	
 	@RequestMapping("prodView.do")
-	public void prodView(int prod_id, Model model, @RequestParam(defaultValue="1")int qnaPage) {
+	public void prodView(int prod_id, Model model, @RequestParam(defaultValue="1")int qnaPage, HttpSession session) {
 		Product product = service.getOneProduct(prod_id);
+		
+		if(session.getAttribute("loginUserInfo") != null) {
+			HashMap<String, Object> id = (HashMap<String, Object>)session.getAttribute("loginUserInfo");
+			String mem_id = (String)id.get("mem_id");
+			System.out.println(mem_id);
+			model.addAttribute("loginUser", mem_id);
+		}
+		//로그인중일 때 현재 로그인중 ID 보내기
 		
 		//옵션 보내기
 		model.addAllAttributes(service.getProdOption(prod_id));
@@ -181,8 +180,16 @@ public class AllController {
 		//상품 보내기
 		model.addAttribute("product", product);
 		
-		model.addAllAttributes(service.getQnAById(prod_id, qnaPage));
+		//해당 상품의 후기 전체 갯수 model에 담기
+		model.addAttribute("reviewTotalBoards", service.getReviewCountById(prod_id));
 		
+		//해당 상품의 Q&A 전체 갯수 model에 담기
+		model.addAttribute("qnaTotalBoards", service.getQnACountById(prod_id));
+	}
+	
+	@RequestMapping("reviewByProd.do")
+	public @ResponseBody HashMap<String, Object> reviewByProd(int prod_id, int reviewPage) {		
+		return service.getReviewById(prod_id, reviewPage);
 	}
 	
 	@RequestMapping("qnaByProd.do")
@@ -190,11 +197,13 @@ public class AllController {
 		return service.getQnAById(prod_id, qnaPage);
 	}
 	
+	//이벤트 목록 요청
 	@RequestMapping("eventList.do")
 	public void eventList(Model model, @RequestParam(defaultValue="1")int page) {
 		model.addAllAttributes(service.getEventList(page));
 	}
 	
+	//이벤트 상세 요청
 	@RequestMapping("event.do")
 	public void event(int event_id, Model model) {
 //		System.out.println(event_id);
@@ -202,22 +211,49 @@ public class AllController {
 
 	}
 	
+	//공지사항 목록 요청
 	@RequestMapping("noticeList.do")
-	public void noticeList(Model model) {
-		model.addAttribute("noticeList", service.getNoticeList());
+	public void noticeList(Model model, @RequestParam(defaultValue="1")int page) {
+		model.addAllAttributes(service.getNoticetList(page));
 	}
 	
+	//공지사항 상세 요청
 	@RequestMapping("notice.do")
 	public void notice(int notice_id, Model model) {
 //		System.out.println(notice_id);
-		model.addAttribute("notice", service.readEvent(notice_id));
+		model.addAttribute("notice", service.readNotice(notice_id));
 
 	}
 	
-	//수진수정
-//	public View download(int num) { 
-//		
-//	}
+	@RequestMapping("eventdownload.do")
+	public View eventdownload(int num) {
+		File attachFile = service.getEventFile(num);
+		View view = new DownloadView(attachFile);
+		return view; 
+	}
+	
+	@RequestMapping("noticedownload.do")
+	public View noticedownload(int num) {
+		File attachFile = service.getNoticeFile(num);
+		View view = new DownloadView(attachFile);
+		return view; 
+	}
+	
+	//faq 요청
+	@RequestMapping("faq.do")
+	public void faq(Model model) {
+		model.addAttribute("faq",service.getFaqList());
+	}
+	
+	//목록 요청
+	@RequestMapping("support.do")
+	public void support(Model model) {
+		//공지사항 목룍
+		model.addAttribute("notice", service.getsupportnoticeList());
+		//자주 묻는 질문 목록
+		model.addAttribute("faq", service.getsupportfaqList());
+	}
+
 	
 }
 
