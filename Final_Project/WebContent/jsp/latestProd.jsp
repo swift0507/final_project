@@ -62,7 +62,7 @@
 					<div class = "card-body">
 						<h5 class = "card-title">${ prod.prod_name }</h5>
 						<p class = "card-text">${ prod.sel_id }</p>
-						<h5 class = "card-price">${ prod.prod_price }</h5>
+						<h5 class = "card-price">${ prod.prod_price }원</h5>
 					</div>
 					<div class = "card-footer text-right">
 						<i class = "far fa-heart">10</i>

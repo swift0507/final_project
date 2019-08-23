@@ -29,6 +29,8 @@ public class AllController {
 	
 	@RequestMapping("main.do")
 	public void main(Model model) {
+		model.addAttribute("popular", service.getProdByReadCountForMain());
+		model.addAttribute("latest", service.getProdByLatestForMain());
 		model.addAllAttributes(service.getBanners());
 	} 
 	
@@ -175,8 +177,17 @@ public class AllController {
 		//상품 보내기
 		model.addAttribute("product", product);
 		
+		model.addAttribute("reviewTotalBoards", service.getReviewCountById(prod_id));
+		
+		model.addAttribute("qnaTotalBoards", service.getQnACountById(prod_id));
+		
 		model.addAllAttributes(service.getQnAById(prod_id, qnaPage));
 		
+	}
+	
+	@RequestMapping("reviewByProd.do")
+	public @ResponseBody HashMap<String, Object> reviewByProd(int prod_id, int reviewPage) {		
+		return service.getReviewById(prod_id, reviewPage);
 	}
 	
 	@RequestMapping("qnaByProd.do")

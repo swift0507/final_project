@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 
+import model.Answer;
 import model.Basket;
 import model.Event;
 import model.FAQ;
@@ -12,6 +13,7 @@ import model.Notice;
 import model.OptionDetail;
 import model.ProdOption;
 import model.Product;
+import model.QnAComment;
 import model.Receipt;
 import model.Review;
 
@@ -63,6 +65,12 @@ public interface HSService {
 	
 	//최신순 상품목록 가져오기
 	public HashMap<String, Object> getProdByLatest(int page);
+	
+	//인기순 상품목록 가져오기(메인 5개)
+	public List<Product> getProdByReadCountForMain();
+		
+	//최신순 상품목록 가져오기(메인 5개)
+	public List<Product> getProdByLatestForMain();
 
 	//상품ID로 상품 1개 가져오기
 	public Product getOneProduct(int prod_id);
@@ -132,10 +140,23 @@ public interface HSService {
 	//상품별 Q&A 가져오기
 	public HashMap<String, Object> getQnAById(int prod_id, int qnaPage);
 	
+<<<<<<< HEAD
 	public int writeReview(Review review);
 	public int modifyReview(Review review);
 	public int deleteReview(int review_id);
 
 	public List<Review> getReviewList();
 	
+=======
+	public int getQnACountById(int prod_id);
+	
+	public QnAComment getQnAComment(int qna_id);
+
+	//상품별 후기 가져오기
+	public HashMap<String, Object> getReviewById(int prod_id, int reviewPage);
+	
+	public int getReviewCountById(int prod_id);
+	
+	public Answer getReviewAnswer(int review_id);
+>>>>>>> branch 'master' of https://github.com/swift0507/final_project.git
 }
