@@ -8,7 +8,7 @@ public class Receipt {
 	private String mem_id;
 	private String receipt_prod;
 	private int receipt_price;
-	private int receipt_fee;
+	private int receipt_fee;	
 	private Date receipt_orderdate;
 	private Date receipt_paydate;
 	private String receipt_name;
@@ -18,13 +18,17 @@ public class Receipt {
 	private String receipt_request;
 	private String receipt_payoption;
 	private int receipt_delstatus;
+	private String receipt_bank;
+	private String receipt_account;
+	private String receipt_depositor;
 	
 	public Receipt() {}
 
 	public Receipt(int receipt_id, String sel_id, String mem_id, String receipt_prod, int receipt_price,
 			int receipt_fee, Date receipt_orderdate, Date receipt_paydate, String receipt_name, String receipt_zipcode,
 			String receipt_addr, String receipt_phone, String receipt_request, String receipt_payoption,
-			int receipt_delstatus) {
+			int receipt_delstatus, String receipt_bank, String receipt_account, String receipt_depositor) {
+		super();
 		this.receipt_id = receipt_id;
 		this.sel_id = sel_id;
 		this.mem_id = mem_id;
@@ -40,6 +44,9 @@ public class Receipt {
 		this.receipt_request = receipt_request;
 		this.receipt_payoption = receipt_payoption;
 		this.receipt_delstatus = receipt_delstatus;
+		this.receipt_bank = receipt_bank;
+		this.receipt_account = receipt_account;
+		this.receipt_depositor = receipt_depositor;
 	}
 
 	public int getReceipt_id() {
@@ -162,6 +169,30 @@ public class Receipt {
 		this.receipt_delstatus = receipt_delstatus;
 	}
 
+	public String getReceipt_bank() {
+		return receipt_bank;
+	}
+
+	public void setReceipt_bank(String receipt_bank) {
+		this.receipt_bank = receipt_bank;
+	}
+
+	public String getReceipt_account() {
+		return receipt_account;
+	}
+
+	public void setReceipt_account(String receipt_account) {
+		this.receipt_account = receipt_account;
+	}
+
+	public String getReceipt_depositor() {
+		return receipt_depositor;
+	}
+
+	public void setReceipt_depositor(String receipt_depositor) {
+		this.receipt_depositor = receipt_depositor;
+	}
+
 	@Override
 	public String toString() {
 		return "Receipt [receipt_id=" + receipt_id + ", sel_id=" + sel_id + ", mem_id=" + mem_id + ", receipt_prod="
@@ -169,8 +200,9 @@ public class Receipt {
 				+ ", receipt_orderdate=" + receipt_orderdate + ", receipt_paydate=" + receipt_paydate
 				+ ", receipt_name=" + receipt_name + ", receipt_zipcode=" + receipt_zipcode + ", receipt_addr="
 				+ receipt_addr + ", receipt_phone=" + receipt_phone + ", receipt_request=" + receipt_request
-				+ ", receipt_payoption=" + receipt_payoption + ", receipt_delstatus=" + receipt_delstatus + "]";
+				+ ", receipt_payoption=" + receipt_payoption + ", receipt_delstatus=" + receipt_delstatus
+				+ ", receipt_bank=" + receipt_bank + ", receipt_account=" + receipt_account + ", receipt_depositor="
+				+ receipt_depositor + "]";
 	}
-	
 	
 }

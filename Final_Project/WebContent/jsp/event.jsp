@@ -101,7 +101,7 @@
 						<td colspan="4">
 							<%-- <td>${event.event_pict}</td> --%>
 							
-							<img src="download.do?num=${board.num}" width = "700px"> <br><br>
+							<img src="eventdownload.do?num=${event.event_id}" width = "700px"> <br><br>
 							<p>${event.event_content}</p>
 						</td>
 					</tr>

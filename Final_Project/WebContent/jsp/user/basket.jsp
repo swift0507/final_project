@@ -43,6 +43,8 @@
 	<script type="text/javascript">
 	$(document).ready(function(){
 		
+		//문제가 있음 체크박스문제, 배송비설정문제
+		
 		$(".prod_name").each(function(){
 			var prod = this.innerHTML;
 			var elem = this;
@@ -61,21 +63,59 @@
 			})
 		})
 		
-		//
+		//개수에 따른 가격설정
 		$(".basket_price").each(function(){
-			//alert($(this).nextUntil("h5").text())
-			//alert(parseInt($(this).closest("h5").text()))
 			var eachprice = parseInt($(this).closest("h5").text());
-			//alert(eachprice)
-			$(this).parent().parent().find($(".prodnum")).text()
-			
 			var number = parseInt($(this).parent().parent().find($(".prodnum")).text());
-			//alert(number)
 			var totalprice = eachprice * number
-			$(this).closest($(".prodTotal").text(totalprice+" 원"))
+			$(this).parentsUntil("table").find($(".prodTotal")).text(totalprice+" 원")
 		})
 		
+		//사장님 체크박스 눌렀을 때 하위요소 체크하기
+		$(".sellerCheck").on("click", function(){
+			if($(".sellerCheck").is(":checked")){
+				//$(this).parentsUntil("div").siblings().find(":checkbox").attr("checked",true)
+				$(this).parentsUntil("div").siblings().find($(".checkbox")).prop("checked",true)
+			}
+			else{
+				//$(this).parentsUntil("div").siblings().find(":checkbox").attr("checked",false)
+				$(this).parentsUntil("div").siblings().find($(".checkbox")).prop("checked",false)
+			}
+		})
 		
+		//전체선택
+		$("#checkAll").on("click", function(){
+			if($("#checkAll").is(":checked")){
+				$("input[type=checkbox]").prop("checked", true)
+			}
+			else{
+				$("input[type=checkbox]").prop("checked", false)
+			}
+		})
+		
+		//결제금액계산
+		var payPrice = 0
+		$(".prodTotal").each(function(){
+			payPrice += parseInt($(this).text())
+		})
+		$("#payPrice").text(payPrice+" 원")
+		
+		//총 배송비 계산
+		var totalFee = 0
+		$(".eachFee").each(function(){
+			totalFee +=parseInt($(this).text())
+		})
+		$("#totalFee").text(totalFee+" 원")
+		
+		//총 결제금액 계산
+		var totalPayPrice = payPrice + totalFee
+		$("#totalPayPrice").text(totalPayPrice+" 원")
+		
+		//체크 값 가져오기 $("input[name="이름"]:checked").each ~~
+		
+		$("#paymentAll").on("click", function(){
+			location.href = "payment.do"
+		})
 		
 	})
 	
@@ -121,12 +161,12 @@
 				
 				<c:forEach var="map" items="${list}">
 				<!-- 사장님1 Component -->
-				<div class = "seller1"> 
+				<div class = "${map.seller.sel_id}"> 
 				<!-- 사장님별 장바구니 header table -->
 				<table style = "width: 800px;">
 					<tr>
 						<td colspan = 5 style = "height: 50px;">
-							<input class="checkbox" type="checkbox" value="" id="checkSeller1">&nbsp;&nbsp;&nbsp; <b>${map.list[0].sel_id} 사장님</b> 
+							<input class="checkbox sellerCheck" type="checkbox" value="" id="checkSeller1">&nbsp;&nbsp;&nbsp; <b>${map.list[0].sel_id} 사장님</b> 
 						</td>
 					</tr>
 				</table>
@@ -136,12 +176,11 @@
 					<tr style = "height: 20px;">
 						<td>
 						<input type="hidden" class="prod_id" value="${basket.prod_id}">
-						<input type="hidden" value="${basket.basket_id}">
 						</td>
 					</tr>	
 				    <tr>
 				      <td rowspan = 3 style = "width: 20%;">
-				      	<input class="checkbox" type="checkbox" value="" id="check2">
+				      	<input class="checkbox prodCheck" type="checkbox" value="${basket.prod_id}">
 				      	&nbsp;&nbsp;&nbsp; <img src = "images/sk.png" class="${basket.prod_id}" width = 100 height = 100>
 				      </td>
 				      <td style = "width: 25%;  visibility: hidden;" class="prod_name"> ${basket.prod_id} </td>
@@ -152,7 +191,7 @@
 				      	<h5 class="prodnum">1</h5>
 				      </td>
 				      <td rowspan = 3 class = "text-center" style = "width: 20%;">
-				      	<h5 class="prodTotal">합계금액</h5>
+				      	<h5 class="prodTotal"></h5>
 				      </td>
 				    </tr>
 				    <tr>
@@ -180,12 +219,12 @@
 					<tr class = "text-right">
 						<th colspan = 2 style = "width: 400px;">
 						<th style = "width: 100px;"> 총 주문 금액  </th>
-						<td style = "width: 200px;" class="payPrice"> 5조  </td>
+						<td style = "width: 200px;" id="payPrice">  50원 </td>
 					</tr>
 					<tr class = "text-right">
 						<th colspan = 2 style = "width: 400px;">
 						<th style = "width: 100px;"> 배송비  </th>
-						<td style = "width: 200px;" class="totalFee"> 6000 원 </td>
+						<td style = "width: 200px;" id="totalFee"> 6000 원 </td>
 					</tr>
 					<tr style = "height: 10px">
 						<td colspan = 4>
@@ -195,7 +234,7 @@
 					<tr style = "font-size: 20px;">
 						<th colspan = 2 class = "text-left"> 결제 예정 금액 </th>
 						
-						<th colspan = 2 class = "text-right totalPayPrice"> 5조 6000원</th>
+						<th colspan = 2 class = "text-right" id= "totalPayPrice"> </th>
 					</tr>
 				</table>
 				<!-- 총 상품 금액 table 종료 -->
@@ -204,7 +243,7 @@
 			
 				<!-- 확인 button -->
 				<div class = "container text-center">
-					<button class = "btn btn-secondary" style = "width: 200px;">전체 구매</button>
+					<button class = "btn btn-secondary" style = "width: 200px;" id="paymentAll">전체 구매</button>
 					<button class = "btn btn-secondary" style = "width: 200px;">선택 구매</button>
 				</div>
 				<!-- 확인 button 종료 -->
