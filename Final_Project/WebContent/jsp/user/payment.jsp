@@ -137,21 +137,41 @@
 		
 		//여기서 해야할 것은 receipt객체와 receiptOrder 객체를 만드는 것. 
 		//우선 receiptOrder부터 만들기
+		
+		
 		$("#order").on("click", function(){
 			alert("주문")
+			//줘야하는 데이터는 사장님 id와 basket_id로 하나의 receipt과 주문 상품 개수에 맞는 receiptOrder를 만들어야 한다.
+			
 			$(".sel_id").each(function(){
-				//여기서 가져갈 건 배송비와 가격, 총가격임 여기는 사장님별 위치
-				//alert($(this).parentsUntil("div").find($(".sel_id")).val()) //사장님 id
-				alert($(this).val())
+				//여기서 가져갈 건 배송비와 가격,사장님id 총가격임 여기는 사장님별 위치
+				//사장님id
 				var sel_id = $(this).val();
+				//상품
+				var baskets = new Array();
+				//배송비
 				
+				//총 가격
+				
+				//alert(sel_id)
 				//사장님별 상품의 내용을 담을 곳
+				$(this).parentsUntil("div").siblings().find($(".basket_id")).each(function(){
+					alert($(this).val())
+					baskets.push($(this).val());
+				})
 				
-				alert($(this).parentsUntil("div").sibling().find($(".prod_id")).html())
-				//alert($(this).parentsUntil("div").html())
-				//alert($(this).parentsUntil("div").sibilings().find($(".prod_id")).html())
-				
+				//값을 다 담았고 ajax로 보내보기
+				$.ajax({
+					url : "order.do",
+					data: {sel_id : sel_id, baskets : baskets},
+					type : "post",
+					success : function(data){
+						alert(data);
+					}
+				})
 			})
+			
+			
 			
 		})
 			
@@ -211,7 +231,7 @@
 				<table class="${basket.sel_id}" style = "width: 800px;">
 					<tr style = "height: 20px;">
 						<td>
-						<input type="hidden" class="prod_id" value="${basket.prod_id}">
+						<input type="hidden" class="basket_id" value="${basket.basket_id}">
 						</td>
 					</tr>	
 				    <tr>

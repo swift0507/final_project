@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import model.Basket;
@@ -65,6 +66,15 @@ public class UserController {
 		member = service.idCheck(member);
 		m.addAttribute("member", member);
 		
+	}
+	
+	//영수증 하나 주문하기
+	@RequestMapping("user/order.do")
+	public @ResponseBody boolean order(@RequestParam(value="baskets[]") List<String> baskets,
+	@RequestParam(value="sel_id") String sel_id) {
+		System.out.println(sel_id);
+		System.out.println(baskets);
+		return true;
 	}
 	
 	//문의작성폼보기
