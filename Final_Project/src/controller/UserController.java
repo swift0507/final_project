@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import model.Basket;
+import model.Member;
 import model.Product;
 import service.HSService;
 
@@ -49,6 +51,30 @@ public class UserController {
 		Product p = service.getOneProduct(prod_id);
 		data.put("product", p);
 		return p;
+	}
+	
+	//결제화면가기
+	@RequestMapping("user/payment.do")
+	public void payment(Model m, HttpSession session) {
+		HashMap<String, Object> id = (HashMap<String, Object>)session.getAttribute("loginUserInfo");
+		String mem_id = (String)id.get("mem_id");
+		//사장님별 장바구니 리스트 받아오기 
+		m.addAttribute("list", service.getBasketList(mem_id));
+		//회원정보 받아오기
+		Member member = new Member();
+		member.setMem_id(mem_id);
+		member = service.idCheck(member);
+		m.addAttribute("member", member);
+		
+	}
+	
+	//영수증 하나 주문하기
+	@RequestMapping("user/order.do")
+	public @ResponseBody boolean order(@RequestParam(value="baskets[]") List<String> baskets,
+	@RequestParam(value="sel_id") String sel_id) {
+		System.out.println(sel_id);
+		System.out.println(baskets);
+		return true;
 	}
 	
 	//문의작성폼보기
