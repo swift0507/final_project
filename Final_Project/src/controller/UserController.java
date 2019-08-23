@@ -59,8 +59,8 @@ public class UserController {
 	
 	//나의 후기 보기
 	@RequestMapping("user/myReview.do")
-	public void myReview() {
-		//미완성
+	public void myReview(Model model) {
+		model.addAttribute("myReview",service.getReviewList());
 	}
 	
 	//나의 Q&A 보기

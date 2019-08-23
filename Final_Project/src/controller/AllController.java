@@ -240,6 +240,7 @@ public class AllController {
 		//자주 묻는 질문 목록
 		model.addAttribute("faq", service.getsupportfaqList());
 	}
+
 	
 }
 

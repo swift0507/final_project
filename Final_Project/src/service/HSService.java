@@ -13,6 +13,7 @@ import model.OptionDetail;
 import model.ProdOption;
 import model.Product;
 import model.Receipt;
+import model.Review;
 
 public interface HSService {
 	
@@ -94,15 +95,11 @@ public interface HSService {
 	//배너 가져오기
 	public HashMap<String, Object> getBanners();
 	
-<<<<<<< HEAD
 	//이벤트_첨부파일을 가져다 주는 기능이벤트
 	public File getEventFile(int num);
 	
-	//페이징처리 관련
-=======
 	/*페이징처리 관련*/
 	//시작 페이지
->>>>>>> branch 'master' of https://github.com/swift0507/final_project.git
 	public int getStartPage(int page);
 
 	//끝 페이지
@@ -114,7 +111,6 @@ public interface HSService {
 	//상품카드 페이지의 첫번째 카드번호
 	public int getProdOffset(int page);
 	
-<<<<<<< HEAD
 	//공지사항_첨부파일을 가져다 주는 기능
 	public File getNoticeFile(int num);
 	
@@ -126,7 +122,6 @@ public interface HSService {
 	
 	//고객센터 자주묻는질문 출력
 	public List<FAQ> getsupportfaqList();
-=======
 	//게시판 형식 목록의 마지막 페이지 번호
 	public int getBoardLastPage(int numOfBoards);
 	
@@ -136,5 +131,11 @@ public interface HSService {
 
 	//상품별 Q&A 가져오기
 	public HashMap<String, Object> getQnAById(int prod_id, int qnaPage);
->>>>>>> branch 'master' of https://github.com/swift0507/final_project.git
+	
+	public int writeReview(Review review);
+	public int modifyReview(Review review);
+	public int deleteReview(int review_id);
+
+	public List<Review> getReviewList();
+	
 }

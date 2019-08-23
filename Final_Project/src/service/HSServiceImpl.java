@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import dao.FaqDao;
 import dao.NoticeDao;
+import dao.ReviewDao;
 import model.Banner;
 import model.Basket;
 import model.Event;
@@ -24,6 +25,7 @@ import model.Product;
 import model.QnA;
 import model.QnAComment;
 import model.Receipt;
+import model.Review;
 import model.Seller;
 
 @Service
@@ -418,8 +420,8 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		
 		return banners;
 	}
-<<<<<<< HEAD
 
+	//공지사항 첨부파일
 	@Override
 	public File getNoticeFile(int num) {
 		// TODO Auto-generated method stub
@@ -437,20 +439,43 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		return faqDao.selectAll();
 	}
 
+	//고객센터(메인)_공지사항출력
 	@Override
 	public List<Notice> getsupportnoticeList() {
 		// TODO Auto-generated method stub
 		return noticeDao.selectsupport();
 	}
 
+	//고객센터(메인)_faq출력
 	@Override
 	public List<FAQ> getsupportfaqList() {
 		// TODO Auto-generated method stub
 		return faqDao.selectsupport();
 	}
 
+	@Override
+	public int writeReview(Review review) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
-=======
->>>>>>> branch 'master' of https://github.com/swift0507/final_project.git
+	@Override
+	public int modifyReview(Review review) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int deleteReview(int review_id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<Review> getReviewList() {
+		// TODO Auto-generated method stub
+		return reviewDao.selectAll();
+	}
+
 
 }
