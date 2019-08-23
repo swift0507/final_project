@@ -139,7 +139,6 @@ public interface HSService {
 
 	//상품별 Q&A 가져오기
 	public HashMap<String, Object> getQnAById(int prod_id, int qnaPage);
-	
 
 	public int writeReview(Review review);
 	public int modifyReview(Review review);
@@ -147,7 +146,6 @@ public interface HSService {
 
 	public List<Review> getReviewList();
 	
-
 	public int getQnACountById(int prod_id);
 	
 	public QnAComment getQnAComment(int qna_id);

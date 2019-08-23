@@ -1,19 +1,12 @@
 package service;
 
 import java.io.File;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-
-import dao.FaqDao;
-import dao.NoticeDao;
-import dao.ReviewDao;
 import model.Answer;
 import model.Banner;
 import model.Basket;
