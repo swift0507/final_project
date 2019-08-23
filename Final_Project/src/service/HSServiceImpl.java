@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import model.Answer;
 import model.Banner;
 import model.Basket;
 import model.Event;
@@ -18,7 +19,10 @@ import model.Notice;
 import model.OptionDetail;
 import model.ProdOption;
 import model.Product;
+import model.QnA;
+import model.QnAComment;
 import model.Receipt;
+import model.Review;
 import model.Seller;
 
 @Service
@@ -121,36 +125,42 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 	}
 
 	//시작 페이지 번호
+	@Override
 	public int getStartPage(int page) {
 		// TODO Auto-generated method stub
 		return page - ((page - 1) % 5);
 	}
 
 	//끝 페이지 번호
+	@Override
 	public int getEndPage(int page) {
 		// TODO Auto-generated method stub
 		return page - ((page - 1) % 5) + (5 - 1);
 	}
 
 	//상품 목록의 마지막 페이지 번호
+	@Override
 	public int getProdLastPage(int numOfCards) {
 		// TODO Auto-generated method stub
 		return (numOfCards - 1) / 12 + 1;
 	}
 
 	//각 상품목록 페이지의 첫번째 카드번호
+	@Override
 	public int getProdOffset(int page) {
 		// TODO Auto-generated method stub
 		return (page - 1) * 12 + 1;
 	}
 	
 	//게시판 형식 목록의 마지막 페이지 번호
+	@Override
 	public int getBoardLastPage(int numOfBoards) {
 		// TODO Auto-generated method stub
 		return (numOfBoards - 1) / 10 + 1;
 	}
 
 	//게시판 형식 목록 페이지의 첫번째 카드번호
+	@Override
 	public int getBoardOffset(int page) {
 		// TODO Auto-generated method stub
 		return (page - 1) * 10 + 1;
@@ -197,6 +207,7 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 	}
 	
 	//상품 보기 조회수 증가(단순)
+	@Override
 	public void prodViewCount(int prod_id) {
 		
 		//조회수 증가
@@ -224,6 +235,7 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 	}
 	
 	//인기순 상품 가져오기
+	@Override
 	public HashMap<String, Object> getProdByReadCount(int page) {
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		
@@ -243,6 +255,7 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 	}
 	
 	//최신순 상품 가져오기
+	@Override
 	public HashMap<String, Object> getProdByLatest(int page) {
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		
@@ -260,6 +273,23 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		
 		return latestProd;
 	}
+	
+	//인기순 상품 가져오기(메인 5개)
+	@Override
+	public List<Product> getProdByReadCountForMain() {
+		// TODO Auto-generated method stub
+		
+		return productDao.selectByReadCountForMain();
+	}
+
+	//최신순 상품 가져오기(메인 5개)
+	@Override
+	public List<Product> getProdByLatestForMain() {
+		// TODO Auto-generated method stub
+			
+		return productDao.selectByLatestForMain();
+	}
+
 
 	//해당 상품의 옵션들 가져오기
 	@Override
@@ -288,7 +318,72 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		return optionDetailDao.selectByOption(opt_id);
 	}
 	
+	//해당 상품 Q&A 가져오기
+	@Override
+	public HashMap<String, Object> getQnAById(int prod_id, int qnaPage) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> params = new HashMap<String, Object>();
+			
+		params.put("offset", getBoardOffset(qnaPage));
+		params.put("boardsPerPage", 10);
+		params.put("prod_id", prod_id);
+		
+		List<QnA> qnaListByProd = qnaDao.selectById(params);
+		
+		for(int i = 0; i < qnaListByProd.size(); i++) {
+			if(qnaListByProd.get(i).getQna_answer() == 1)
+			qnaListByProd.get(i).setQnacomment(getQnAComment(qnaListByProd.get(i).getQna_id()));
+		}
+			
+		HashMap<String, Object> qnaMap = new HashMap<String, Object>();
+		
+		qnaMap.put("last", getBoardLastPage(qnaDao.getCountById(prod_id)));
+		qnaMap.put("totalBoards", qnaDao.getCountById(prod_id));
+		qnaMap.put("qna", qnaListByProd);
+			
+		return qnaMap;
+	}
+		
+	//해당 Q&A의 답변 가져오기
+	public QnAComment getQnAComment(int qna_id) {
+		
+		return qnaCommentDao.selectByQnAId(qna_id);
+	}
+	
+	//해당 상품 후기 가져오기
+	@Override
+	public HashMap<String, Object> getReviewById(int prod_id, int reviewPage) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> params = new HashMap<String, Object>();
+			
+		params.put("offset", getBoardOffset(reviewPage));
+		params.put("boardsPerPage", 10);
+		params.put("prod_id", prod_id);
+		
+		List<Review> reviewListByProd = reviewDao.selectById(params);
+		
+		for(int i = 0; i < reviewListByProd.size(); i++) {
+			if(reviewListByProd.get(i).getReview_answer() == 1)
+			reviewListByProd.get(i).setAnswer(getReviewAnswer(reviewListByProd.get(i).getReview_id()));
+		}
+			
+		HashMap<String, Object> reviewMap = new HashMap<String, Object>();
+		
+		reviewMap.put("last", getBoardLastPage(qnaDao.getCountById(prod_id)));
+		reviewMap.put("totalBoards", qnaDao.getCountById(prod_id));
+		reviewMap.put("qna", reviewListByProd);
+			
+		return reviewMap;
+	}
+		
+	//해당 후기의 답변 가져오기
+	public Answer getReviewAnswer(int review_id) {
+		
+		return answerDao.selectByReviewId(review_id);
+	}	
+	
 	//검색어에 따른 상품목록 가져오기
+	@Override
 	public HashMap<String, Object> getProdByKeyword(String keyword) {
 		HashMap<String, Object> searchProd = new HashMap<String, Object>();
 		
@@ -341,6 +436,7 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 	}
 
 	//배너 가져오기
+	@Override
 	public HashMap<String, Object> getBanners() {
 		// TODO Auto-generated method stub
 		List<Banner> bannerList = bannerDao.selectAllBanner();
@@ -360,8 +456,5 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		
 		return banners;
 	}
-
-
-
 
 }

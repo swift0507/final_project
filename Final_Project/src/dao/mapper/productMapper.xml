@@ -29,5 +29,13 @@
 	<select id="getCount" resultType="int">
 		select count(*) from product
 	</select>
+	
+	<select id="selectByReadCountForMain" resultType="product">
+    	select * from (select rownum as rn, e.* from (select * from product order by prod_readcount desc) e) where rn between 1 and 5
+    </select>
+    
+    <select id="selectByLatestForMain" resultType="product">
+    	select * from (select rownum as rn, e.* from (select * from product order by prod_date desc) e) where rn between 1 and 5
+    </select>
     
     </mapper>
