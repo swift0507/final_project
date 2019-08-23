@@ -121,8 +121,12 @@
 		    });
 		}
 		
-		$("#nav-contact-tab").on("click", function() {
+		/* $("#nav-contact-tab").on("click", function() {
 			$('#qnaTable').empty();
+			QnA(prod_id, qnaCurrentPage);		
+		}); */
+		
+		$("#nav-qna-tab").on("click", function() {
 			QnA(prod_id, qnaCurrentPage);		
 		});
 		
@@ -321,8 +325,8 @@
 			    <nav>
 			        <div class="nav nav-tabs" id="nav-tab" role="tablist">
 			            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab">제품정보</a>
-			            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab">구매후기</a>
-			            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab">Q&A</a>
+			            <a class="nav-item nav-link" id="nav-review-tab" data-toggle="tab" href="#nav-profile" role="tab">구매후기</a>
+			            <a class="nav-item nav-link" id="nav-qna-tab" data-toggle="tab" href="#nav-contact" role="tab">Q&A</a>
 			        </div>
 			    </nav>
 			        <div class="tab-content" id="nav-tabContent">

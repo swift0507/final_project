@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import model.Answer;
 import model.Banner;
 import model.Basket;
 import model.Event;
@@ -21,6 +22,7 @@ import model.Product;
 import model.QnA;
 import model.QnAComment;
 import model.Receipt;
+import model.Review;
 import model.Seller;
 
 @Service
@@ -346,6 +348,38 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		
 		return qnaCommentDao.selectByQnAId(qna_id);
 	}
+	
+	//해당 상품 후기 가져오기
+	@Override
+	public HashMap<String, Object> getReviewById(int prod_id, int reviewPage) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> params = new HashMap<String, Object>();
+			
+		params.put("offset", getBoardOffset(reviewPage));
+		params.put("boardsPerPage", 10);
+		params.put("prod_id", prod_id);
+		
+		List<Review> reviewListByProd = reviewDao.selectById(params);
+		
+		for(int i = 0; i < reviewListByProd.size(); i++) {
+			if(reviewListByProd.get(i).getReview_answer() == 1)
+			reviewListByProd.get(i).setAnswer(getReviewAnswer(reviewListByProd.get(i).getReview_id()));
+		}
+			
+		HashMap<String, Object> reviewMap = new HashMap<String, Object>();
+		
+		reviewMap.put("last", getBoardLastPage(qnaDao.getCountById(prod_id)));
+		reviewMap.put("totalBoards", qnaDao.getCountById(prod_id));
+		reviewMap.put("qna", reviewListByProd);
+			
+		return reviewMap;
+	}
+		
+	//해당 후기의 답변 가져오기
+	public Answer getReviewAnswer(int review_id) {
+		
+		return answerDao.selectByReviewId(review_id);
+	}	
 	
 	//검색어에 따른 상품목록 가져오기
 	@Override

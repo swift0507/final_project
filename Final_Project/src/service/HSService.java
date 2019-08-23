@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 
+import model.Answer;
 import model.Basket;
 import model.Event;
 import model.Member;
@@ -11,6 +12,7 @@ import model.Notice;
 import model.OptionDetail;
 import model.ProdOption;
 import model.Product;
+import model.QnAComment;
 import model.Receipt;
 
 public interface HSService {
@@ -123,4 +125,11 @@ public interface HSService {
 
 	//상품별 Q&A 가져오기
 	public HashMap<String, Object> getQnAById(int prod_id, int qnaPage);
+	
+	public QnAComment getQnAComment(int qna_id);
+
+	//상품별 후기 가져오기
+	public HashMap<String, Object> getReviewById(int prod_id, int reviewPage);
+	
+	public Answer getReviewAnswer(int review_id);
 }
