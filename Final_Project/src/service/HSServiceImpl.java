@@ -10,10 +10,17 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+<<<<<<< HEAD
+import dao.FaqDao;
+import dao.NoticeDao;
+import dao.ReviewDao;
+=======
 import model.Answer;
+>>>>>>> branch 'master' of https://github.com/swift0507/final_project.git
 import model.Banner;
 import model.Basket;
 import model.Event;
+import model.FAQ;
 import model.Member;
 import model.Notice;
 import model.OptionDetail;
@@ -338,11 +345,15 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 			
 		HashMap<String, Object> qnaMap = new HashMap<String, Object>();
 		
-		qnaMap.put("last", getBoardLastPage(qnaDao.getCountById(prod_id)));
-		qnaMap.put("totalBoards", qnaDao.getCountById(prod_id));
+		qnaMap.put("qnaLast", getBoardLastPage(qnaDao.getCountById(prod_id)));
+		qnaMap.put("qnaTotalBoards", getQnACountById(prod_id));
 		qnaMap.put("qna", qnaListByProd);
 			
 		return qnaMap;
+	}
+	
+	public int getQnACountById(int prod_id) {
+		return qnaDao.getCountById(prod_id);
 	}
 		
 	//해당 Q&A의 답변 가져오기
@@ -370,11 +381,17 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 			
 		HashMap<String, Object> reviewMap = new HashMap<String, Object>();
 		
-		reviewMap.put("last", getBoardLastPage(qnaDao.getCountById(prod_id)));
-		reviewMap.put("totalBoards", qnaDao.getCountById(prod_id));
-		reviewMap.put("qna", reviewListByProd);
+		reviewMap.put("reviewLast", getBoardLastPage(reviewDao.getCountById(prod_id)));
+		reviewMap.put("reviewTotalBoards", getReviewCountById(prod_id));
+		reviewMap.put("review", reviewListByProd);
+		
+		System.out.println(reviewMap.get("reviewTotalBoards"));
 			
 		return reviewMap;
+	}
+	
+	public int getReviewCountById(int prod_id) {
+		return reviewDao.getCountById(prod_id);
 	}
 		
 	//해당 후기의 답변 가져오기
@@ -407,15 +424,27 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		noticeDao.updateReadCount(notice_id);
 		return noticeDao.selectOne(notice_id);
 	}
-
+	
 	//공지사항list전부 가져오기
 	@Override
-	public List<Notice> getNoticeList() {
-		// TODO Auto-generated method stub
-		List<Notice> notice = noticeDao.selectAll();
-		System.out.println(notice);
-		return notice;
+	public HashMap<String, Object> getNoticetList(int page) {
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		
+		params.put("offset", getProdOffset(page));
+		params.put("boardsPerPage", 10);
+		
+		HashMap<String, Object> noticeMap = new HashMap<String, Object>();
+		
+		noticeMap.put("current", page);
+		noticeMap.put("start", getStartPage(page));
+		noticeMap.put("end", getEndPage(page));
+		noticeMap.put("last", getProdLastPage(noticeDao.getCount()));
+		noticeMap.put("totalBoards", noticeDao.getCount());
+		noticeMap.put("notice", noticeDao.selectAll(params));
+		
+		return noticeMap;
 	}
+	
 	
 	//공지사항 조회수 증가
 	@Override
@@ -426,12 +455,11 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 
 	//이벤트 첨부파일
 	@Override
-	public File getAttachedFile(int num) {
+	public File getEventFile(int num) {
 		// TODO Auto-generated method stub
-		
 		Event event = eventDao.selectOne(num);
 		String event_pict = event.getEvent_pict();
-		String path = "C:/Temp/attach/";
+		String path = "C:\\Temp\\attach\\";
 		
 		return new File(path+event_pict);
 	}
@@ -457,5 +485,62 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		
 		return banners;
 	}
+
+	//공지사항 첨부파일
+	@Override
+	public File getNoticeFile(int num) {
+		// TODO Auto-generated method stub
+		
+		Notice notice = noticeDao.selectOne(num);
+		String notice_pict = notice.getNotice_pict();
+		String path = "C:\\Temp\\attach\\";
+		return new File(path+notice_pict);
+	}
+
+	//faq 목록 출력
+	@Override
+	public List<FAQ> getFaqList() {
+		// TODO Auto-generated method stub
+		return faqDao.selectAll();
+	}
+
+	//고객센터(메인)_공지사항출력
+	@Override
+	public List<Notice> getsupportnoticeList() {
+		// TODO Auto-generated method stub
+		return noticeDao.selectsupport();
+	}
+
+	//고객센터(메인)_faq출력
+	@Override
+	public List<FAQ> getsupportfaqList() {
+		// TODO Auto-generated method stub
+		return faqDao.selectsupport();
+	}
+
+	@Override
+	public int writeReview(Review review) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int modifyReview(Review review) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int deleteReview(int review_id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<Review> getReviewList() {
+		// TODO Auto-generated method stub
+		return reviewDao.selectAll();
+	}
+
 
 }
