@@ -2,12 +2,9 @@ package controller;
 
 import java.io.File;
 import java.util.HashMap;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.View;
 
-import model.Event;
 import model.Member;
-import model.ProdOption;
 import model.Product;
 import service.HSService;
 
@@ -177,12 +172,11 @@ public class AllController {
 		//상품 보내기
 		model.addAttribute("product", product);
 		
+		//해당 상품의 후기 전체 갯수 model에 담기
 		model.addAttribute("reviewTotalBoards", service.getReviewCountById(prod_id));
 		
+		//해당 상품의 Q&A 전체 갯수 model에 담기
 		model.addAttribute("qnaTotalBoards", service.getQnACountById(prod_id));
-		
-		model.addAllAttributes(service.getQnAById(prod_id, qnaPage));
-		
 	}
 	
 	@RequestMapping("reviewByProd.do")
