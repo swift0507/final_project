@@ -10,19 +10,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> branch 'master' of https://github.com/swift0507/final_project.git
 import dao.FaqDao;
 import dao.NoticeDao;
-<<<<<<< HEAD
 import dao.ReviewDao;
 import model.Answer;
-=======
-import dao.ReviewDao;
-import model.Answer;
->>>>>>> branch 'master' of https://github.com/swift0507/final_project.git
 import model.Banner;
 import model.Basket;
 import model.Event;
