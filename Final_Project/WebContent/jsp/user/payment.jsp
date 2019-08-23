@@ -146,8 +146,8 @@
 				var sel_id = $(this).val();
 				
 				//사장님별 상품의 내용을 담을 곳
-				$(this)
-				alert()
+				
+				alert($(this).parentsUntil("div").sibling().find($(".prod_id")).html())
 				//alert($(this).parentsUntil("div").html())
 				//alert($(this).parentsUntil("div").sibilings().find($(".prod_id")).html())
 				
