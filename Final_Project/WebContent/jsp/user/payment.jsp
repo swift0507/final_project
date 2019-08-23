@@ -134,9 +134,25 @@
 	    	            }
 	    	        }).open();
 	    	});
-			
+		
+		//여기서 해야할 것은 receipt객체와 receiptOrder 객체를 만드는 것. 
+		//우선 receiptOrder부터 만들기
 		$("#order").on("click", function(){
 			alert("주문")
+			$(".sel_id").each(function(){
+				//여기서 가져갈 건 배송비와 가격, 총가격임 여기는 사장님별 위치
+				//alert($(this).parentsUntil("div").find($(".sel_id")).val()) //사장님 id
+				alert($(this).val())
+				var sel_id = $(this).val();
+				
+				//사장님별 상품의 내용을 담을 곳
+				$(this)
+				alert()
+				//alert($(this).parentsUntil("div").html())
+				//alert($(this).parentsUntil("div").sibilings().find($(".prod_id")).html())
+				
+			})
+			
 		})
 			
 	})
@@ -171,12 +187,13 @@
 				<!-- 결제화면 header table 종료 -->
 
 				<c:forEach var="map" items="${list}">
-				<div class = "${map.seller.sel_id}"> 
+				<div> 
 				<!-- 사장님별 결제화면 header table -->
 				<table style = "width: 800px;">
 					<tr>
 						<td colspan = 4 style = "height: 50px;">
 							<b>${map.seller.sel_id} 사장님</b> 
+							<input type="hidden" class="sel_id" value="${map.seller.sel_id}">
 						</td>
 					</tr>
 					<tr style = "background-color: lightgrey" >
@@ -187,18 +204,11 @@
 					</tr>
 				</table>
 				<!-- 사장님별 결제화면 header table 종료 -->	
+				
 				<!-- 사장님1 Component -->
-				<!-- 사장님별 장바구니 header table -->
-				<%-- <table style = "width: 800px;">
-					<tr>
-						<td colspan = 5 style = "height: 50px;">
-							<input class="checkbox sellerCheck" type="checkbox" value="" id="checkSeller1">&nbsp;&nbsp;&nbsp; <b>${map.list[0].sel_id} 사장님</b> 
-						</td>
-					</tr>
-				</table> --%>
 				<c:forEach var="basket" items="${map.list}">
-				<!-- 사장님별 장바구니 상품 table 2 -->
-				<table class="product" style = "width: 800px;">
+				<!-- 사장님별 장바구니 상품 table -->
+				<table class="${basket.sel_id}" style = "width: 800px;">
 					<tr style = "height: 20px;">
 						<td>
 						<input type="hidden" class="prod_id" value="${basket.prod_id}">
