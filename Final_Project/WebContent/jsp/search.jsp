@@ -57,18 +57,19 @@
 			
 			<c:forEach var="prod" items="${ searchProd }">
 				<div class="card ml-3 mb-3">
-					<img src="images/noimage.png" class="card-img-top" alt="..." width="200"
-						height="200">
+				<a class="text-decoration-none text-secondary" href="prodView.do?prod_id=${ prod.prod_id }" target="_blank">
+					<img src="images/noimage.png" class="card-img-top" style="width:200; height:200;">
 					<div class="card-body">
 						<h5 class="card-title">${ prod.prod_name }</h5>
 						<p class="card-text">${ prod.sel_id }</p>
-						<h5 class="card-price">${ prod.prod_price }</h5>
+						<h5 class="card-price">${ prod.prod_price }원</h5>
 					</div>
 					<div class="card-footer text-right">
 						<i class = "far fa-heart">10</i>
            	 	 		&nbsp;
               			<i class = "far fa-comment-dots">12</i>
 					</div>
+				</a>
 				</div>		
 			</c:forEach>
 				<!-- <div class="card">

@@ -13,4 +13,6 @@ public interface ProductDao {
 	public List<Product> selectByKeyword(String keyword);
 	
 	public int getCount();
+	public List<Product> selectByReadCountForMain();
+	public List<Product> selectByLatestForMain();
 }

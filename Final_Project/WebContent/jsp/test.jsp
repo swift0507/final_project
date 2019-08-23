@@ -89,48 +89,36 @@
 </head>
  
 <body>
-<button id="addItemBtn">옵션추가</button>
-<table id="example" border = 1>
+	<button id = "addItemBtn" class = "addBtn btn btn-secondary"> 옵션추가 </button>
+	<br><br>
+	<table id = "example" style = "width: 700px;">
         <tr>
-            <th>옵션명</th>
-            <th>항목명</th>
-            <th>필수항목</th>
-            <th>가격</th>
-            <th>재고</th>
-            <th>옵션추가</th>
+            <th style = "width: 150px;">옵션명</th>
+            <th style = "width: 300px;">항목명</th>
+           
+            <th style = "width: 100px;">추가 금액</th>
+            <th style = "width: 75px;">수량</th>
+            <th style = "width: 75px;"></th>
         </tr>
-        <tr class="item1">
-            <td class = "align-baseline"><input type="text" /><button class="addBtn">항목추가</button></td>
-            <td><input type="text" /></td>
-            <td><input type="checkbox" /></td>
-            <td><input type="text" /></td>
-            <td><input type="text" /></td>
-            <td><button class="delBtn">삭제</button></td>
+        <tr class = "item1">
+            <td>
+            	<input type="text" class="form-control" style = "width: 140px;" placeholder = "옵션명">
+            	
+            </td>
+            <td>
+            	<button class = "addBtn btn btn-secondary" style = "width: 75px;">항목추가</button>
+            	<input type="text" class="form-control" style = "width: 210px;" placeholder = "항목명">
+            </td>
+            <td>
+            	<input type="text" class="form-control" style = "width: 100px;" placeholder = "추가 금액">
+            </td>
+            <td>
+            	<input type="text" class="form-control" style = "width: 75px;" placeholder = "수량">
+            </td>
+            <td>
+            	<button class = "delBtn btn btn-danger" style = "width: 75px;">삭제</button>
+            </td>
         </tr>
-        <tr class="item2">
-            <td class = "align-baseline"><input type="text" /><button class="addBtn">항목추가</button></td>
-            <td><input type="text" /></td>
-            <td><input type="checkbox" /></td>
-            <td><input type="text" /></td>
-            <td><input type="text" /></td>
-            <td><button class="delBtn">삭제</button></td>
-        </tr>
-        <tr class="item3">
-            <td class = "align-baseline"><input type="text" /><button class="addBtn">항목추가</button></td>
-            <td><input type="text" /></td>
-            <td><input type="checkbox" /></td>
-            <td><input type="text" /></td>
-            <td><input type="text" /></td>
-            <td><button class="delBtn">삭제</button></td>
-        </tr>
-        <tr class="item4">
-            <td class = "align-baseline"><input type="text" /><button class="addBtn">항목추가</button></td>
-            <td><input type="text" /></td>
-            <td><input type="checkbox" /></td>
-            <td><input type="text" /></td>
-            <td><input type="text" /></td>
-            <td><button class="delBtn">삭제</button></td>
-        </tr>
-</table>
+	</table>
 </body>
 </html>  
