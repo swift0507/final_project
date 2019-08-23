@@ -183,6 +183,10 @@ public class AllController {
 		//상품 보내기
 		model.addAttribute("product", product);
 		
+		model.addAttribute("reviewTotalBoards", service.getReviewCountById(prod_id));
+		
+		model.addAttribute("qnaTotalBoards", service.getQnACountById(prod_id));
+		
 		model.addAllAttributes(service.getQnAById(prod_id, qnaPage));
 		
 	}

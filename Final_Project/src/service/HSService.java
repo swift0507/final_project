@@ -126,10 +126,14 @@ public interface HSService {
 	//상품별 Q&A 가져오기
 	public HashMap<String, Object> getQnAById(int prod_id, int qnaPage);
 	
+	public int getQnACountById(int prod_id);
+	
 	public QnAComment getQnAComment(int qna_id);
 
 	//상품별 후기 가져오기
 	public HashMap<String, Object> getReviewById(int prod_id, int reviewPage);
+	
+	public int getReviewCountById(int prod_id);
 	
 	public Answer getReviewAnswer(int review_id);
 }

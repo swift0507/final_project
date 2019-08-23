@@ -163,14 +163,19 @@
 		        }
 		    });
 		}
-		var totalBoards = ${ reviewTotalBoards };    // 총 데이터 수
+		
+		var totalBoards;    // 총 데이터 수
 		
 		$("#nav-review-tab").on("click", function() {
-			Review(prod_id, reviewCurrentPage);		
+			totalBoards = ${ reviewTotalBoards };
+			Review(prod_id, reviewCurrentPage);
+			paging(totalBoards, boardsPerPage, offset, 1);
 		});
 		
 		$("#nav-qna-tab").on("click", function() {
-			QnA(prod_id, qnaCurrentPage);		
+			totalBoards = ${ qnaTotalBoards };
+			QnA(prod_id, qnaCurrentPage);
+			paging(totalBoards, boardsPerPage, offset, 1);
 		});
 		
 	    var boardsPerPage = 10;    // 한 페이지에 나타낼 데이터 수
@@ -178,6 +183,7 @@
 	    
 	    function paging(totalBoards, boardsPerPage, offset, current) {
 	        
+	        console.log("totalBoards : " + totalBoards);
 	        console.log("current : " + current);
 	        
 	        var last = Math.ceil(totalBoards / boardsPerPage);    // 총 페이지 수
@@ -245,8 +251,7 @@
 			});
 		
 	    };
-		paging(totalBoards, boardsPerPage, offset, 1);
-	 
+			 
 	})
 	
 	</script>
@@ -369,8 +374,8 @@
 			    <nav>
 			        <div class="nav nav-tabs" id="nav-tab" role="tablist">
 			            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab">제품정보</a>
-			            <a class="nav-item nav-link" id="nav-review-tab" data-toggle="tab" href="#nav-profile" role="tab">구매후기</a>
-			            <a class="nav-item nav-link" id="nav-qna-tab" data-toggle="tab" href="#nav-contact" role="tab">Q&A</a>
+			            <a class="nav-item nav-link" id="nav-review-tab" data-toggle="tab" href="#nav-profile" role="tab">구매후기(${ reviewTotalBoards })</a>
+			            <a class="nav-item nav-link" id="nav-qna-tab" data-toggle="tab" href="#nav-contact" role="tab">Q&A(${ qnaTotalBoards })</a>
 			        </div>
 			    </nav>
 			        <div class="tab-content" id="nav-tabContent">

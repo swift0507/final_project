@@ -336,11 +336,15 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 			
 		HashMap<String, Object> qnaMap = new HashMap<String, Object>();
 		
-		qnaMap.put("last", getBoardLastPage(qnaDao.getCountById(prod_id)));
-		qnaMap.put("qnaTotalBoards", qnaDao.getCountById(prod_id));
+		qnaMap.put("qnaLast", getBoardLastPage(qnaDao.getCountById(prod_id)));
+		qnaMap.put("qnaTotalBoards", getQnACountById(prod_id));
 		qnaMap.put("qna", qnaListByProd);
 			
 		return qnaMap;
+	}
+	
+	public int getQnACountById(int prod_id) {
+		return qnaDao.getCountById(prod_id);
 	}
 		
 	//해당 Q&A의 답변 가져오기
@@ -368,13 +372,17 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 			
 		HashMap<String, Object> reviewMap = new HashMap<String, Object>();
 		
-		reviewMap.put("last", getBoardLastPage(reviewDao.getCountById(prod_id)));
-		reviewMap.put("reviewTotalBoards", reviewDao.getCountById(prod_id));
+		reviewMap.put("reviewLast", getBoardLastPage(reviewDao.getCountById(prod_id)));
+		reviewMap.put("reviewTotalBoards", getReviewCountById(prod_id));
 		reviewMap.put("review", reviewListByProd);
 		
 		System.out.println(reviewMap.get("reviewTotalBoards"));
 			
 		return reviewMap;
+	}
+	
+	public int getReviewCountById(int prod_id) {
+		return reviewDao.getCountById(prod_id);
 	}
 		
 	//해당 후기의 답변 가져오기
