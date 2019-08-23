@@ -311,6 +311,10 @@
 			        </tr>
 			        <tr>
 			            <td>
+			            	<c:choose>
+			            		<c:when test="${ product.sel_id == loginUser }">
+			            		</c:when>
+			            		<c:otherwise>
 			                <div id = "like_report">
 			                	<button class="btn btn-sm btn-secondary" id = "like_button">
 			                   		<i class="far fa-heart" id = "like_item"></i> 찜하기
@@ -320,6 +324,8 @@
 			                    	<i class="fa fa-warning"></i> 신고
 			                	</button>
 			                </div>
+			                </c:otherwise>
+			            	</c:choose>
 			            </td>
 			        </tr>
 			        <tr>
@@ -370,8 +376,17 @@
 			                <img src = "images/sk.png" width = 60 height = 40>
 			            </td>
 			            <td>
-			                <button class="btn btn-sm btn-secondary" style="width: 170px;" id = "add_item_button">장바구니 담기</button>
-			                <button class="btn btn-sm btn-secondary" style="width: 170px;">즉시 구매</button>
+			                
+			                <c:choose>
+			            		<c:when test="${ product.sel_id == loginUser }">
+			            		<button class="btn btn-sm btn-secondary" style="width: 170px;" id = "modify_product">편집</button>
+			                <button class="btn btn-sm btn-secondary" style="width: 170px;" id = "delete_product">삭제</button>
+			            		</c:when>
+			            		<c:otherwise>
+			                <button class="btn btn-sm btn-secondary" style="width: 170px;" id = "add_basket">장바구니 담기</button>
+			                <button class="btn btn-sm btn-secondary" style="width: 170px;" id = "buy_product">즉시 구매</button>
+			                </c:otherwise>
+			            	</c:choose>
 			            </td>
 			        </tr>
 			    </table>
@@ -393,7 +408,7 @@
 			            </div>
 			            <div class="tab-pane fade" id="nav-profile" role="tabpanel">
 			            	<br>
-			                <table style = "width: 700px;" id="reviewTable">
+			                <table class="table" style = "width: 700px;" id="reviewTable">
 								<!-- <tr>
 								    <th style = "width: 75px;" rowspan = 3>
 								    	<img src = "images/sk.png" style = "width: 50px; height: 50px;">
