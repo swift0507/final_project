@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,11 +33,115 @@
 	</script>
 	<script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15.0.0/dist/smooth-scroll.polyfills.min.js">
 	</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 	<style>
 		text-center item_header {
 			background-color: lightgrey;
 		}
 	</style>
+	
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$(".prod_name").each(function(){
+			var prod = this.innerHTML;
+			var elem = this;
+			//alert(prod);
+			$.ajax({
+				url : "findProdName.do",
+				data : {prod_id : prod},
+				type : "get",
+				success : function(data){
+					var id = "."+data.prod_id;
+					//alert(data.prod_name);
+					elem.innerHTML = "상품명 : "+ data.prod_name
+					elem.style.visibility=""
+					$(id).attr("src", "../images/noimage.png")
+				}
+			})
+		})
+		
+		//개수에 따른 가격설정
+		$(".basket_price").each(function(){
+			var eachprice = parseInt($(this).closest("h5").text());
+			var number = parseInt($(this).parent().parent().find($(".prodnum")).text());
+			var totalprice = eachprice * number
+			$(this).parentsUntil("table").find($(".prodTotal")).text(totalprice+" 원")
+		})
+		
+		//결제금액계산
+		var payPrice = 0
+		$(".prodTotal").each(function(){
+			payPrice += parseInt($(this).text())
+		})
+		$("#payPrice").text(payPrice+" 원")
+		
+		//총 배송비 계산
+		var totalFee = 0
+		$(".eachFee").each(function(){
+			totalFee +=parseInt($(this).text())
+		})
+		$("#totalFee").text(totalFee+" 원")
+		
+		//총 결제금액 계산
+		var totalPayPrice = payPrice + totalFee
+		$("#totalPayPrice").text(totalPayPrice+" 원")
+		
+		//주문자정보와동일 
+		$("#sameAddr").on("click", function(){
+			if($(this).is(":checked")){
+				//alert("${member.mem_name}")
+				$("#receipt_name").val("${member.mem_name}")
+				$("#receipt_zipcode").val("${member.mem_zipcode}")
+				$("#addr").val("${member.mem_addr}")
+				$("#remainAddr").val("${member.mem_remainaddr}")
+				$("#receipt_phone").val("${member.mem_phone}")
+			}
+			else{
+				$("#receipt_name").val("")
+				$("#receipt_zipcode").val("")
+				$("#addr").val("")
+				$("#remainAddr").val("")
+				$("#receipt_phone").val("")
+			}
+			})
+		
+			$("#findZipcode").on("click",function(){
+	    	     new daum.Postcode({
+	    	        oncomplete: function(data) {
+	    	           // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+	    	           // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+	    	           // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+	    	           var addr = ''; // 주소 변수
+
+	    	                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+	    	                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+	    	                    addr = data.roadAddress;
+	    	                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+	    	                    addr = data.jibunAddress;
+	    	                }
+	    	               
+	    	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	    	                document.getElementById('receipt_zipcode').value = data.zonecode;
+	    	                document.getElementById("addr").value = addr;
+	    	                //$("#mem_zipcode").attr("readonly", "readonly");
+	    	                //$("#mem_addr").attr("readonly", "readonly");
+	    	                
+	    	                // 커서를 상세주소 필드로 이동한다.
+	    	                document.getElementById("remainAddr").focus();
+	    	                addrCheck = true;
+	    	            }
+	    	        }).open();
+	    	});
+			
+		$("#order").on("click", function(){
+			alert("주문")
+		})
+			
+	})
+	
+	</script>
 </head>
 <body>
 <!-- header -->
@@ -63,14 +169,14 @@
 					</tr>
 				</table>
 				<!-- 결제화면 header table 종료 -->
-				
-				<!-- 사장님1 Component -->
-				<div class = "seller1"> 
+
+				<c:forEach var="map" items="${list}">
+				<div class = "${map.seller.sel_id}"> 
 				<!-- 사장님별 결제화면 header table -->
 				<table style = "width: 800px;">
 					<tr>
 						<td colspan = 4 style = "height: 50px;">
-							<b>노라조 사장님</b> 
+							<b>${map.seller.sel_id} 사장님</b> 
 						</td>
 					</tr>
 					<tr style = "background-color: lightgrey" >
@@ -81,174 +187,72 @@
 					</tr>
 				</table>
 				<!-- 사장님별 결제화면 header table 종료 -->	
-				
-				<!-- 사장님별 결제화면 상품 table 1 -->
-				<table style = "width: 800px;">
-					<tr style = "height: 20px;"></tr>	
-				    <tr>
-				      <td rowspan = 3 style = "width: 20%;">
-				      	<img src = "images/sk.png" width = 100 height = 100>
-				      </td>
-				      <td style = "width: 25%;"> 상품명 : 카레 </td>
-				      <td rowspan = 3 class = "text-center" style = "width: 20%;">
-				      	<h5>1조 2500억 원</h5>
-				      </td>
-				      <td rowspan = 3 class = "text-center" style = "width: 15%;">
-				      	1
-				      </td>
-				      <td rowspan = 3 class = "text-center" style = "width: 20%;">
-				      	<h5>1조 2500억 원</h5>
-				      </td>
-				    </tr>
-				    <tr>
-				      <td> 옵션 1 : 소고기 제외 </td>
-				    </tr>
-				    <tr>
-				      <td> 옵션 2 : 양파, 감자 </td>
-				    </tr>
-				    <tr style = "height: 20px;"></tr>
-				    <tr class = "text-right" style = "background-color: lightgrey">
-				      <td>배송비</td>
-				      <td colspan = 3></td>
-				      <td>3000 원</td>
-				    </tr>
-				</table>
-				<!-- 사장님별 장바구니 상품 table 1 종료 -->
-				
+				<!-- 사장님1 Component -->
+				<!-- 사장님별 장바구니 header table -->
+				<%-- <table style = "width: 800px;">
+					<tr>
+						<td colspan = 5 style = "height: 50px;">
+							<input class="checkbox sellerCheck" type="checkbox" value="" id="checkSeller1">&nbsp;&nbsp;&nbsp; <b>${map.list[0].sel_id} 사장님</b> 
+						</td>
+					</tr>
+				</table> --%>
+				<c:forEach var="basket" items="${map.list}">
 				<!-- 사장님별 장바구니 상품 table 2 -->
-				<table style = "width: 800px;">
-					<tr style = "height: 20px;"></tr>	
+				<table class="product" style = "width: 800px;">
+					<tr style = "height: 20px;">
+						<td>
+						<input type="hidden" class="prod_id" value="${basket.prod_id}">
+						</td>
+					</tr>	
 				    <tr>
 				      <td rowspan = 3 style = "width: 20%;">
-				      	<img src = "images/sk.png" width = 100 height = 100>
+				      	<%-- <input class="checkbox prodCheck" type="checkbox" value="${basket.prod_id}"> --%>
+				      	&nbsp;&nbsp;&nbsp; <img src = "images/sk.png" class="${basket.prod_id}" width = 100 height = 100>
 				      </td>
-				      <td style = "width: 25%;"> 상품명 : 카레 </td>
+				      <td style = "width: 25%;  visibility: hidden;" class="prod_name"> ${basket.prod_id} </td>
 				      <td rowspan = 3 class = "text-center" style = "width: 20%;">
-				      	<h5>1조 2500억 원</h5>
+				      	<h5 class="basket_price">${basket.basket_price} 원</h5>
 				      </td>
 				      <td rowspan = 3 class = "text-center" style = "width: 15%;">
-				      	1
+				      	<h5 class="prodnum">1</h5>
 				      </td>
 				      <td rowspan = 3 class = "text-center" style = "width: 20%;">
-				      	<h5>1조 2500억 원</h5>
+				      	<h5 class="prodTotal"></h5>
 				      </td>
 				    </tr>
 				    <tr>
-				      <td> 옵션 1 : 소고기 제외 </td>
+				      <td> ${basket.basket_option}</td>
 				    </tr>
 				    <tr>
-				      <td> 옵션 2 : 양파, 감자 </td>
 				    </tr>
+				    </c:forEach>
 				    <tr style = "height: 20px;"></tr>
 				    <tr class = "text-right" style = "background-color: lightgrey">
-				      <td>배송비</td>
-				      <td colspan = 3></td>
-				      <td>3000 원</td>
+				      <td>배송비 </td>
+				      <td colspan = 3><input type="hidden" value="${map.seller.sel_free}"></td>
+				      <td class="eachFee">${map.seller.sel_fee} 원</td>
 				    </tr>
 				</table>
 				<hr>
 				<!-- 사장님별 장바구니 상품 table 2 종료 -->
 				</div>
 				<!-- 사장님1 Component 종료 -->
+				</c:forEach>
 				
-				<!-- 사장님2 Component -->
-				<div class = "seller2"> 
-				<!-- 사장님별 결제화면 header table -->
-				<table style = "width: 800px;">
-					<tr>
-						<td colspan = 4 style = "height: 50px;">
-							<b>노라조 사장님</b> 
-						</td>
-					</tr>
-					<tr style = "background-color: lightgrey" >
-						<th class = "text-center" style = "width: 45%;"> 상품정보 </th>
-						<th class = "text-center" style = "width: 20%;"> 판매가 </th>
-						<th class = "text-center" style = "width: 15%;"> 수량 </th>
-						<th class = "text-center" style = "width: 20%;"> 합계 </th>
-					</tr>
-				</table>
-				<!-- 사장님별 결제화면 header table 종료 -->	
+					
 				
-				<!-- 사장님별 결제화면 상품 table 1 -->
-				<table style = "width: 800px;">
-					<tr style = "height: 20px;"></tr>	
-				    <tr>
-				      <td rowspan = 3 style = "width: 20%;">
-				      	<img src = "images/sk.png" width = 100 height = 100>
-				      </td>
-				      <td style = "width: 25%;"> 상품명 : 카레 </td>
-				      <td rowspan = 3 class = "text-center" style = "width: 20%;">
-				      	<h5>1조 2500억 원</h5>
-				      </td>
-				      <td rowspan = 3 class = "text-center" style = "width: 15%;">
-				      	1
-				      </td>
-				      <td rowspan = 3 class = "text-center" style = "width: 20%;">
-				      	<h5>1조 2500억 원</h5>
-				      </td>
-				    </tr>
-				    <tr>
-				      <td> 옵션 1 : 소고기 제외 </td>
-				    </tr>
-				    <tr>
-				      <td> 옵션 2 : 양파, 감자 </td>
-				    </tr>
-				    <tr style = "height: 20px;"></tr>
-				    <tr class = "text-right" style = "background-color: lightgrey">
-				      <td>배송비</td>
-				      <td colspan = 3></td>
-				      <td>3000 원</td>
-				    </tr>
-				</table>
-				<!-- 사장님별 장바구니 상품 table 1 종료 -->
-				
-				<!-- 사장님별 장바구니 상품 table 2 -->
-				<table style = "width: 800px;">
-					<tr style = "height: 20px;"></tr>	
-				    <tr>
-				      <td rowspan = 3 style = "width: 20%;">
-				      	<img src = "images/sk.png" width = 100 height = 100>
-				      </td>
-				      <td style = "width: 25%;"> 상품명 : 카레 </td>
-				      <td rowspan = 3 class = "text-center" style = "width: 20%;">
-				      	<h5>1조 2500억 원</h5>
-				      </td>
-				      <td rowspan = 3 class = "text-center" style = "width: 15%;">
-				      	1
-				      </td>
-				      <td rowspan = 3 class = "text-center" style = "width: 20%;">
-				      	<h5>1조 2500억 원</h5>
-				      </td>
-				    </tr>
-				    <tr>
-				      <td> 옵션 1 : 소고기 제외 </td>
-				    </tr>
-				    <tr>
-				      <td> 옵션 2 : 양파, 감자 </td>
-				    </tr>
-				    <tr style = "height: 20px;"></tr>
-				    <tr class = "text-right" style = "background-color: lightgrey">
-				      <td>배송비</td>
-				      <td colspan = 3></td>
-				      <td>3000 원</td>
-				    </tr>
-				</table>
-				<hr>
-				<!-- 사장님별 장바구니 상품 table 2 종료 -->
-				</div>
-				<!-- 사장님2 Component 종료 -->
 				
 				<!-- 총 상품 금액 table -->
 				<table style = "width: 800px;">
 					<tr class = "text-right">
 						<th colspan = 2 style = "width: 400px;">
-						<th style = "width: 100px;"> 사용 금액  </th>
-						<td style = "width: 200px;"> 5조  </td>
+						<th style = "width: 100px;"> 총 주문 금액  </th>
+						<td style = "width: 200px;" id="payPrice">   </td>
 					</tr>
 					<tr class = "text-right">
 						<th colspan = 2 style = "width: 400px;">
 						<th style = "width: 100px;"> 배송비  </th>
-						<td style = "width: 200px;"> 6000 원 </td>
+						<td style = "width: 200px;" id="totalFee">  </td>
 					</tr>
 					<tr style = "height: 10px">
 						<td colspan = 4>
@@ -256,9 +260,9 @@
 						</td>
 					</tr>
 					<tr style = "font-size: 20px;">
-						<th colspan = 2 class = "text-left"> 총 상품 금액 </th>
+						<th colspan = 2 class = "text-left"> 결제 예정 금액 </th>
 						
-						<th colspan = 2 class = "text-right"> 5조 6000원</th>
+						<th colspan = 2 class = "text-right" id= "totalPayPrice"> </th>
 					</tr>
 				</table>
 				<!-- 총 상품 금액 table 종료 -->
@@ -270,13 +274,13 @@
 				<table class = "table" style = "width: 800px;">
 					<tr>
 						<th style = "width: 200px;"> 이름 </th>
-						<td style = "width: 600px;"> 이기훈 </td>
+						<td style = "width: 600px;"> ${member.mem_name} </td>
 					</tr>
 					<tr>
 						<th style = "width: 200px;"> 연락처 </th>
-						<td style = "width: 600px;"> 010-0000-0000 </td>
+						<td style = "width: 600px;"> ${member.mem_phone} </td>
 					</tr>
-				</table>
+				</table> 
 				<!-- 주문자 정보 table 종료 -->
 			
 				<br><br>
@@ -286,32 +290,43 @@
 				<table class = "table" style = "width: 800px;">
 					<tr>
 						<td colspan = 3 class = "text-right">
-							<input class="checkbox" type="checkbox" value="" id="checkAll"> &nbsp; 주문자 정보와 동일
+							<input class="checkbox" type="checkbox" value="" id="sameAddr"> &nbsp; 주문자 정보와 동일
 						</td>
 					</tr>
 					<tr>
 						<th style = "width: 200px;"> 이름 </th>
-						<td style = "width: 450px;"> <input type="text" class="form-control" placeholder="이름"> </td>
+						<td style = "width: 450px;"> <input type="text" id="receipt_name" class="form-control" placeholder="이름"> </td>
 						<td style = "width: 200px;"> </td>
 					</tr>
+					<tr style = "height: 50px;">
+						<th style = "width: 300px;">우편번호</th>
+						<td style = "width: 150px;">
+							<input type = "text" class = "form-control" id="receipt_zipcode" readonly="readonly" placeholder = "우편번호">
+						</td>
+						<td style = "width: 150px;">
+							<button class = "btn btn-secondary btn-block" id="findZipcode">우편번호 검색</button>
+						</td>
+					</tr>
 					<tr>
+						
 						<th style = "width: 200px;"> 주소 </th>
-						<td style = "width: 400px;"> <input type="text" class="form-control" placeholder="주소"> </td>
-						<td style = "width: 200px;"> <button class = "btn btn-secondary btn-block">우편번호 검색</button> </td>
+						<td style = "width: 400px;"> <input type="text" class="form-control" id="addr" readonly="readonly" placeholder="주소"> </td>
+						<td style = "width: 200px;"></td>
 					</tr>
 					<tr>
 						<th style = "width: 200px;"> 나머지 주소</th>
-						<td style = "width: 400px;"> <input type="text" class="form-control" placeholder="나머지 주소"> </td>
+						<!-- 주소 합쳐서 receipt_addr로 보내야 한다.  -->
+						<td style = "width: 400px;"> <input type="text" class="form-control" id="remainAddr" placeholder="나머지 주소"> </td>
 						<td style = "width: 200px;"> </td>
 					</tr>
 					<tr>
 						<th style = "width: 200px;"> 연락처 </th>
-						<td style = "width: 400px;"> <input type="text" class="form-control" placeholder="ex) 01000000000"> </td>
+						<td style = "width: 400px;"> <input type="text" class="form-control" id="receipt_phone" placeholder="ex) 01000000000"> </td>
 						<td style = "width: 200px;"> </td>
 					</tr>
 					<tr>
 						<th style = "width: 200px;"> 배송시 요청사항 </th>
-						<td style = "width: 400px;"> <input type="text" class="form-control" placeholder="40자 이내"> </td>
+						<td style = "width: 400px;"> <input type="text" class="form-control" id="receipt_request" placeholder="40자 이내"> </td>
 						<td style = "width: 200px;"> </td>
 					</tr>
 				</table>
@@ -324,14 +339,20 @@
 					<tr>
 						<th style = "width: 200px;"> 입금계좌 입력 </th>
 						<td colspan = 2 style = "width: 400px;">
-							<input type="text" class="form-control" placeholder="입금계좌"> 	
+							<input type="text" class="form-control" id="receipt_account" placeholder="입금계좌"> 	
 						</td>
-						<td style = "width: 200px;"> </td>
+						<td style = "width: 200px;">
+							<select id="receipt_bank">
+								<option value="우리">우리</option>
+								<option value="신한">신한</option>
+								<option value="국민">국민</option>
+							</select> 
+						</td>
 					</tr>
 					<tr>
 						<th style = "width: 200px;"> 예금주명 </th>
 						<td colspan = 2 style = "width: 400px;"> 
-							<input type="text" class="form-control" placeholder="예금주"> 	
+							<input type="text" class="form-control" id="receipt_depositor" placeholder="예금주"> 	
 						</td>
 						<td style = "width: 200px;"> </td>
 					</tr>
@@ -347,7 +368,7 @@
 				<!-- 확인 button -->
 				<div class = "container text-center">
 					<br><br>
-					<button class = "btn btn-secondary" style = "width: 150px;">주문하기</button>
+					<button class = "btn btn-secondary" id="order" style = "width: 150px;">주문하기</button>
 					<button class = "btn btn-secondary" style = "width: 150px;">뒤로가기</button>
 				</div>
 				<!-- 확인 button 종료 -->

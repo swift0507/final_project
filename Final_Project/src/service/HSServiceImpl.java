@@ -106,8 +106,9 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 			//장바구니리스트를 받아오기
 			List<Basket> basketList = basketDao.selectBySeller(param);
 			Seller seller = sellerDao.selectOneSeller(sel_id);
-			//System.out.println(seller);
+			//사장님별 맵에 특정 사장님 장바구니 넣기
 			basketInfo.put("list", basketList);
+			//판매자 정보 넣기(배송비, 배송비무료 넣기 위함.)
 			basketInfo.put("seller", seller);
 			//상품네임, 이미지
 			list.add(basketInfo);
