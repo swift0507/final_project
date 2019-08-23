@@ -4,7 +4,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     <mapper namespace="dao.ReviewDao">
     	<select id="selectById" parameterType="java.util.HashMap" resultType="Review">
-    		select * from (select rownum as rn, e.* from (select * from review where prod_id = #{ prod_id } order by qna_id desc) e) 
+    		select * from (select rownum as rn, e.* from (select * from review where prod_id = #{ prod_id } order by review_id desc) e) 
     		where rn between #{offset} and (#{offset} + #{boardsPerPage} - 1)
     	</select>
     	

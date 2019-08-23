@@ -81,8 +81,51 @@
 		});
 		
 		var prod_id = ${ product.prod_id };
-		var qnaCurrentPage = 1;
 		
+		var reviewCurrentPage = 1;
+		
+		function Review(prod_id, reviewCurrentPage){
+			$.ajax({
+		        type		: "POST",
+		        url 		: "reviewByProd.do",
+		        data		:  {prod_id : prod_id, reviewPage : reviewCurrentPage},
+		        success		: function(data) {	        	
+		        	
+		        	var inputReview = "";
+		        	for(var i = 0; i < data.review.length; i++) {
+		        		var date = new Date(data.review[i].review_date);
+		        		inputReview += '<tr style = "height: 10px;"></tr>';
+		        		inputReview += '<tr>';
+		        		inputReview += '<th style = "width: 75px;" rowspan = 3><img src = "images/sk.png" style = "width: 50px; height: 50px;"></th>';
+		        		inputReview += '<th><h5><b>' + data.review[i].prod_name + '</b></h5></th>';	//상품명
+		        		inputReview += '<th class = "text-right">작성자 : ' + data.review[i].review_writer + '&nbsp;&nbsp;&nbsp;<button class = "btn btn-sm btn-secondary">수정</button><button class = "btn btn-sm btn-danger">삭제</button></th>';
+		    			inputReview += '</tr><tr style = "height: 10px;"></tr><tr><td><b>' + date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + '</b></td>';
+		        		inputReview += '<td colspan = 2 class="text-right"><span id = "star_rating">';	//별점부분
+	                	inputReview += '<span class="fa fa-star checked"></span>';
+	                	inputReview += '<span class="fa fa-star checked"></span>';
+	                	inputReview += '<span class="fa fa-star checked"></span>';
+	                	inputReview += '<span class="fa fa-star checked"></span>';
+	                	inputReview += '<span class="fa fa-star checked"></span>';
+	                	inputReview += '</span></td></tr><tr style = "height: 10px;"></tr>';
+	                	
+	                	inputReview += '<tr><td colspan = 3><p>' + data.review[i].review_id + '.' + data.review[i].review_content +'</p></td></tr>'
+		    			
+		    			
+		    			if(data.review[i].answer != null) {
+		    				answerDate = new Date(data.review[i].answer.answer_date);
+		    				inputReview += '<tr class="table-active">';
+			        		inputReview += '<td style="width: 15%; text-align: center">';
+			        		inputReview += '<img src="images/commenticon.png" style = "width: 20px; height: 20px;"></td>';
+			        		inputReview += '<td colspan="2" style="width: 85%;"><p><h5><b>사장님 답변</b></h5><br><h6><b>' + answerDate.getFullYear() + '-' + (answerDate.getMonth() + 1) + '-' + answerDate.getDate() + '</b></h6>' + data.review[i].answer.answer_content + '</p></td></tr>';
+		    			}
+		        	}
+
+			    	$('#reviewTable').html(inputReview);
+		        }
+		    });
+		}
+		
+		var qnaCurrentPage = 1;
 		
 		function QnA(prod_id, qnaCurrentPage){
 			$.ajax({
@@ -111,7 +154,7 @@
 			        		inputQnA += '<span class="badge badge-success">답변</span></td>';
 			        		inputQnA += '<td style="width: 55%">' + data.qna[i].qnacomment.comm_content + '</td>';
 			    			inputQnA += '<td style="width: 12%; text-align: center">판매자</td>';
-			    			inputQnA += '<td style="width: 18%; text-align: center">' + date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + '</td>';
+			    			inputQnA += '<td style="width: 18%; text-align: center">' + commDate.getFullYear() + '-' + (commDate.getMonth() + 1) + '-' + commDate.getDate() + '</td>';
 			    			inputQnA += '</tr>';
 		    				
 		    			}
@@ -120,17 +163,16 @@
 		        }
 		    });
 		}
+		var totalBoards = ${ reviewTotalBoards };    // 총 데이터 수
 		
-		/* $("#nav-contact-tab").on("click", function() {
-			$('#qnaTable').empty();
-			QnA(prod_id, qnaCurrentPage);		
-		}); */
+		$("#nav-review-tab").on("click", function() {
+			Review(prod_id, reviewCurrentPage);		
+		});
 		
 		$("#nav-qna-tab").on("click", function() {
 			QnA(prod_id, qnaCurrentPage);		
 		});
 		
-		var totalBoards = ${ totalBoards };    // 총 데이터 수
 	    var boardsPerPage = 10;    // 한 페이지에 나타낼 데이터 수
 	    var offset = 5;        // 한 화면에 나타낼 페이지 수
 	    
@@ -192,12 +234,14 @@
 	        }
 	        pagingLayout += '</ul>';
 	            
-	        $("#paging").html(pagingLayout);    // 페이지 목록 생성
+	        $("#reviewPaging").html(pagingLayout);    // 페이지 목록 생성
+	        $("#qnaPaging").html(pagingLayout);    // 페이지 목록 생성
 	       
 	        $(".page-link").on("click", function() {
-				var qnaCurrentPage = $(this).attr('id');
-				paging(totalBoards, boardsPerPage, offset, qnaCurrentPage);
-				QnA(prod_id, qnaCurrentPage);
+				var CurrentPage = $(this).attr('id');
+				paging(totalBoards, boardsPerPage, offset, CurrentPage);
+				Review(prod_id, CurrentPage);
+				QnA(prod_id, CurrentPage);
 			});
 		
 	    };
@@ -339,22 +383,27 @@
 			            </div>
 			            <div class="tab-pane fade" id="nav-profile" role="tabpanel">
 			            	<br>
-			                <table style = "width: 700px;">
-								<tr>
-								    <th style = "width: 75px;">
+			                <table style = "width: 700px;" id="reviewTable">
+								<!-- <tr>
+								    <th style = "width: 75px;" rowspan = 3>
 								    	<img src = "images/sk.png" style = "width: 50px; height: 50px;">
 								    </th>
 								    <th>
-								      	로즈마리 천연 비누 1개
+								      	<h5><b>로즈마리 천연 비누 1개</b></h5>
+
 								    </th>
 								    <th class = "text-right">
+								    작성자아이디&nbsp;&nbsp;&nbsp;
 								    	<button class = "btn btn-sm btn-secondary">수정</button>
 								      	<button class = "btn btn-sm btn-danger">삭제</button>
 								    </th>
 							    </tr>
 							    <tr style = "height: 10px;"></tr>
 							    <tr>
-							    	<td colspan = 3>
+							    	<td>
+							    		<b>2019-01-01</b>
+							    	</td>
+							    	<td class="text-right" colspan = 2>
 							    		<span id = "star_rating">
 						                	<span class="fa fa-star checked"></span>
 						                	<span class="fa fa-star checked"></span>
@@ -362,56 +411,36 @@
 						               		<span class="fa fa-star checked"></span>
 						                	<span class="fa fa-star"></span>
 						                </span>
+							    		
 							    	</td>
 							    </tr>
 							    <tr style = "height: 10px;"></tr>
 							    <tr>
 							    	<td colspan = 3>
-							    		<p class = "review">
+							    		<p>
 							    			좋습니다. 비누로 세수하면 건조한 느낌이라 싫어하는데 
 							    			이 비누는 촉촉하고 피부가 좋아지는 것이 느껴집니다.
 							    		</p>
 							    	</td>
 							    </tr>
-							</table>
-							<hr>
-							<table style = "width: 700px;">
-								<tr>
-								    <th style = "width: 75px;">
-								    	<img src = "images/sk.png" style = "width: 50px; height: 50px;">
-								    </th>
-								    <th>
-								      	로즈마리 천연 비누 1개
-								    </th>
-								    <th class = "text-right">
-								    	<button class = "btn btn-sm btn-secondary">수정</button>
-								      	<button class = "btn btn-sm btn-danger">삭제</button>
-								    </th>
-							    </tr>
-							    <tr style = "height: 10px;"></tr>
-							    <tr>
-							    	<td colspan = 3>
-							    		<span id = "star_rating">
-						                	<span class="fa fa-star checked"></span>
-						                	<span class="fa fa-star checked"></span>
-						                	<span class="fa fa-star checked"></span>
-						               		<span class="fa fa-star checked"></span>
-						                	<span class="fa fa-star"></span>
-						                </span>
+							    <tr class="table-active">
+							    	
+							    	<td style="width: 15%; text-align: center">
+			        					<img src="images/commenticon.png" style = "width: 20px; height: 20px;">
+			        					
 							    	</td>
-							    </tr>
-							    <tr style = "height: 10px;"></tr>
-							    <tr>
-							    	<td colspan = 3>
-							    		<p class = "review">
-							    			좋습니다. 비누로 세수하면 건조한 느낌이라 싫어하는데 
-							    			이 비누는 촉촉하고 피부가 좋아지는 것이 느껴집니다.
+							    	<td colspan="2" style="width: 85%;">
+							    		<p>
+							    			<h5><b>사장님아이디</b></h5>
+							    			<br>
+							    			<h6><b>2019-01-02</b></h6>
+							    			촉촉쓰 개조은 우리비누 사랑해주세요
 							    		</p>
 							    	</td>
-							    </tr>
+							    </tr> -->
 							</table>
-							<br>
-							<hr>
+							
+							<nav id="reviewPaging"></nav>
 			            </div>
 			            <div class="tab-pane fade" id="nav-contact" role="tabpanel">
 			                <table class="table table-bordered" id="qnaTable">
@@ -431,7 +460,7 @@
 							      <td style="width: 18%">작성일</td>
 							    </tr> -->
 							</table>
-				<nav id="paging">
+				<nav id="qnaPaging">
 					<%-- <ul class="pagination justify-content-center">
 						<li class="page-item <c:if test="${ start == 1 }">disabled</c:if>">
 							<a class="page-link" id="1"> 
@@ -465,6 +494,7 @@
 							</a>
 						</li>
 					</ul> --%>
+					
 				</nav>
 			            </div>
 			        </div>
@@ -481,11 +511,6 @@
 			            </span>
 			        </div>
 			    </div>
-			    현재 페이지 : ${ current }<br>
-	시작 페이지 : ${ start }<br>
-	끝 페이지 : ${ end }<br>
-	마지막 페이지 : ${ last }<br>
-	갯수 : ${ totalBoards }
 			    <div class="col"></div>
 		    
 		    </div>

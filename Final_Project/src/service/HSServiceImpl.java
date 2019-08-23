@@ -337,7 +337,7 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		HashMap<String, Object> qnaMap = new HashMap<String, Object>();
 		
 		qnaMap.put("last", getBoardLastPage(qnaDao.getCountById(prod_id)));
-		qnaMap.put("totalBoards", qnaDao.getCountById(prod_id));
+		qnaMap.put("qnaTotalBoards", qnaDao.getCountById(prod_id));
 		qnaMap.put("qna", qnaListByProd);
 			
 		return qnaMap;
@@ -368,9 +368,11 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 			
 		HashMap<String, Object> reviewMap = new HashMap<String, Object>();
 		
-		reviewMap.put("last", getBoardLastPage(qnaDao.getCountById(prod_id)));
-		reviewMap.put("totalBoards", qnaDao.getCountById(prod_id));
-		reviewMap.put("qna", reviewListByProd);
+		reviewMap.put("last", getBoardLastPage(reviewDao.getCountById(prod_id)));
+		reviewMap.put("reviewTotalBoards", reviewDao.getCountById(prod_id));
+		reviewMap.put("review", reviewListByProd);
+		
+		System.out.println(reviewMap.get("reviewTotalBoards"));
 			
 		return reviewMap;
 	}

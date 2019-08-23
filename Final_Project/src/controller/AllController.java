@@ -188,7 +188,7 @@ public class AllController {
 	}
 	
 	@RequestMapping("reviewByProd.do")
-	public @ResponseBody HashMap<String, Object> reviewByProd(int prod_id, int reviewPage) {
+	public @ResponseBody HashMap<String, Object> reviewByProd(int prod_id, int reviewPage) {		
 		return service.getReviewById(prod_id, reviewPage);
 	}
 	
