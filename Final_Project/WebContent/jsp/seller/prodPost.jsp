@@ -179,7 +179,13 @@
 		/* 옵션 폼 추가 Script */
 		$('#add_option').click(function(){
 			option_count += 1;
-			$('#add_option_table').append(input_option_form);
+			var newitem = $(".option_table").clone();
+				newitem.removeClass();
+				newitem.addClass("option_table"+(option_count));
+				newitem.removeAttr('id');
+				newitem.attr('id', 'option_table'+(option_count));
+		
+				$('#add_option_table').append(newitem);
 		})
 		/* 옵션 폼 추가 Script 종료 */
 		
@@ -469,7 +475,7 @@
 			
 			
 			<!-- 세부 옵션 설정 table -->
-			<table style = "width: 700px;" id = "option_table">
+			<table style = "width: 700px;" class = "option_table" id = "option_table">
 				<tr style = "height: 10px"></tr>
 				<tr>
 					<td style = "width: 5%;" class= "text-center">
@@ -510,7 +516,9 @@
 			<!-- 세부 옵션 설정 table 종료 -->
 			
 			<div id = "add_option_table">
+			
 			</div> 
+			
 			</div>
 			<br><br>
 			
