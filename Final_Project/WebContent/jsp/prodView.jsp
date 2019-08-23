@@ -84,6 +84,8 @@
 		
 		var reviewCurrentPage = 1;
 		
+		var loginUser = "${ loginUser }";
+		
 		function Review(prod_id, reviewCurrentPage){
 			$.ajax({
 		        type		: "POST",
@@ -98,9 +100,12 @@
 		        		inputReview += '<tr>';
 		        		inputReview += '<th style = "width: 75px;" rowspan = 3><img src = "images/sk.png" style = "width: 50px; height: 50px;"></th>';
 		        		inputReview += '<th><h5><b>' + data.review[i].prod_name + '</b></h5></th>';	//상품명
-		        		inputReview += '<th class = "text-right">작성자 : ' + data.review[i].review_writer + '&nbsp;&nbsp;&nbsp;<button class = "btn btn-sm btn-secondary">수정</button><button class = "btn btn-sm btn-danger">삭제</button></th>';
+		        		if(data.review[i].review_writer == loginUser)
+		        			inputReview += '<th class = "text-right"><button class = "btn btn-sm btn-secondary">수정</button><button class = "btn btn-sm btn-danger">삭제</button></th>';
+		        		else
+		        			inputReview += '<th class = "text-right"><button class = "btn btn-sm btn-danger">신고</button></th>';
 		    			inputReview += '</tr><tr style = "height: 10px;"></tr><tr><td><b>' + date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + '</b></td>';
-		        		inputReview += '<td colspan = 2 class="text-right"><span id = "star_rating">';	//별점부분
+		        		inputReview += '<td colspan = 2 class="text-right"><b>작성자 : ' + data.review[i].review_writer + '</b>&nbsp;&nbsp;&nbsp;<span id = "star_rating">';	//별점부분
 	                	inputReview += '<span class="fa fa-star checked"></span>';
 	                	inputReview += '<span class="fa fa-star checked"></span>';
 	                	inputReview += '<span class="fa fa-star checked"></span>';
