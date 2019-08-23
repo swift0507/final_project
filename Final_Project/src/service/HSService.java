@@ -140,14 +140,14 @@ public interface HSService {
 	//상품별 Q&A 가져오기
 	public HashMap<String, Object> getQnAById(int prod_id, int qnaPage);
 	
-<<<<<<< HEAD
+
 	public int writeReview(Review review);
 	public int modifyReview(Review review);
 	public int deleteReview(int review_id);
 
 	public List<Review> getReviewList();
 	
-=======
+
 	public int getQnACountById(int prod_id);
 	
 	public QnAComment getQnAComment(int qna_id);
@@ -158,5 +158,5 @@ public interface HSService {
 	public int getReviewCountById(int prod_id);
 	
 	public Answer getReviewAnswer(int review_id);
->>>>>>> branch 'master' of https://github.com/swift0507/final_project.git
+
 }

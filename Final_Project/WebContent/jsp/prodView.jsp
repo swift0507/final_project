@@ -48,8 +48,8 @@
 		    $('#like_item').toggleClass("far fa-heart fas fa-heart");
 		});
 		
-		$("#select_opt").change(function(){
-			var s = $("#select_opt").val();
+		$(".custom-select-sm").change(function(){
+			var s = $(".custom-select-sm").val();
 			$("#selected_opt").text(s);
 		});
 		
@@ -334,7 +334,7 @@
 			                <div id = "select_option">
 				                <c:forEach var="option" items="${ option }">
 				               	${ option.opt_name }
-				               		<select id = "select_opt" class="custom-select-sm" style="width: 250px;"> 
+				               		<select id = "${ option.opt_id }" class="custom-select-sm" style="width: 250px;"> 
 				               		<option disabled selected hidden>옵션을 선택해주세요</option>
 				               	<c:forEach var="optiondetail" items="${ option.optiondetail }">
 				                    <option id="${ optiondetail.optd_id }">${ optiondetail.optd_choice }</option>
