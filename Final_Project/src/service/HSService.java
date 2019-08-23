@@ -61,6 +61,12 @@ public interface HSService {
 	
 	//최신순 상품목록 가져오기
 	public HashMap<String, Object> getProdByLatest(int page);
+	
+	//인기순 상품목록 가져오기(메인 5개)
+	public List<Product> getProdByReadCountForMain();
+		
+	//최신순 상품목록 가져오기(메인 5개)
+	public List<Product> getProdByLatestForMain();
 
 	//상품ID로 상품 1개 가져오기
 	public Product getOneProduct(int prod_id);

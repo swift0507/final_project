@@ -27,6 +27,8 @@ public class AllController {
 	
 	@RequestMapping("main.do")
 	public void main(Model model) {
+		model.addAttribute("popular", service.getProdByReadCountForMain());
+		model.addAttribute("latest", service.getProdByLatestForMain());
 		model.addAllAttributes(service.getBanners());
 	} 
 	

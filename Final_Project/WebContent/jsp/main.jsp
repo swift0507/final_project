@@ -93,19 +93,25 @@
     <br>
     <div class="row">
       <div class="card-deck">
-        <div class="card">
-          <img src="images/sk.png" class="card-img-top" alt="..." width="200" height="200">
+      <c:forEach var="popular" items="${ popular }">
+      	<div class="card">
+      	<a class="text-decoration-none text-secondary" href="prodView.do?prod_id=${ popular.prod_id }" target="_blank">
+          <img src="images/noimage.png" class="card-img-top" width="200" height="200">
           <div class="card-body">
-            <h5 class="card-title">1st</h5>
-            <p class="card-text">SK Wyverns</p>
+            <h5 class="card-title">${ popular.prod_name }</h5>
+			<p class="card-text">${ popular.sel_id }</p>
+			<h5 class="card-price">${ popular.prod_price }원</h5>
           </div>
           <div class="card-footer text-right">
            	<i class = "far fa-heart">10</i>
            	&nbsp;
             <i class = "far fa-comment-dots">12</i>
           </div>
+          </a>
         </div>
-        <div class="card">
+      </c:forEach>
+        
+        <!-- <div class="card">
           <img src="images/kw.png" class="card-img-top" alt="..." width="200" height="200">
           <div class="card-body">
             <h5 class="card-title">2nd</h5>
@@ -152,7 +158,7 @@
           	&nbsp;
           	<i class = "far fa-comment-dots">12</i>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -160,70 +166,27 @@
   <hr>
 
   <div class="container">
-      <h5><b>나의 추천 상품</b></h5>
+      <h5><b>최근 등록 상품</b></h5>
       <br>
       <div class="row">
         <div class="card-deck">
-          <div class="card">
-            <img src="images/kt.png" class="card-img-top" alt="..." width="200" height="200">
-            <div class="card-body">
-              <h5 class="card-title">6th</h5>
-              <p class="card-text">kt wiz</p>
-            </div>
-            <div class="card-footer text-right">
-              <i class = "far fa-heart">10</i>
-           	  &nbsp;
-              <i class = "far fa-comment-dots">12</i>
-            </div>
-          </div>
-          <div class="card">
-            <img src="images/ss.png" class="card-img-top" alt="..." width="200" height="200">
-            <div class="card-body">
-              <h5 class="card-title">7th</h5>
-              <p class="card-text">Samsung Lions</p>
-            </div>
-            <div class="card-footer text-right">
-              <i class = "far fa-heart">10</i>
-           	  &nbsp;
-              <i class = "far fa-comment-dots">12</i>
-            </div>
-          </div>
-          <div class="card">
-            <img src="images/kia.png" class="card-img-top" alt="..." width="200" height="200">
-            <div class="card-body">
-              <h5 class="card-title">8th</h5>
-              <p class="card-text">Kia Tigers</p>
-            </div>
-            <div class="card-footer text-right">
-              <i class = "far fa-heart">10</i>
-           	  &nbsp;
-              <i class = "far fa-comment-dots">12</i>
-            </div>
-          </div>
-          <div class="card">
-            <img src="images/hh.png" class="card-img-top" alt="..." width="200" height="200">
-            <div class="card-body">
-              <h5 class="card-title">9th</h5>
-              <p class="card-text">Hanhwa Eagles</p>
-            </div>
-            <div class="card-footer text-right">
-              <i class = "far fa-heart">10</i>
-           	  &nbsp;
-              <i class = "far fa-comment-dots">12</i>
-            </div>
-          </div>
-          <div class="card">
-            <img src="images/lt.png" class="card-img-top" alt="..." width="200" height="200">
-            <div class="card-body">
-              <h5 class="card-title">10th</h5>
-              <p class="card-text">Lotte Giants</p>
-            </div>
-            <div class="card-footer text-right">
-              <i class = "far fa-heart">10</i>
-           	  &nbsp;
-              <i class = "far fa-comment-dots">12</i>
-            </div>
-          </div>
+          <c:forEach var="latest" items="${ latest }">
+	      	<div class="card">
+	      	<a class="text-decoration-none text-secondary" href="prodView.do?prod_id=${ latest.prod_id }" target="_blank">
+	          <img src="images/noimage.png" class="card-img-top" width="200" height="200">
+	          <div class="card-body">
+	            <h5 class="card-title">${ latest.prod_name }</h5>
+				<p class="card-text">${ latest.sel_id }</p>
+				<h5 class="card-price">${ latest.prod_price }원</h5>
+	          </div>
+	          <div class="card-footer text-right">
+	           	<i class = "far fa-heart">10</i>
+	           	&nbsp;
+	            <i class = "far fa-comment-dots">12</i>
+	          </div>
+	          </a>
+	        </div>
+	      </c:forEach>
         </div>
       </div>
     </div>

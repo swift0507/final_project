@@ -270,6 +270,23 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		
 		return latestProd;
 	}
+	
+	//인기순 상품 가져오기(메인 5개)
+	@Override
+	public List<Product> getProdByReadCountForMain() {
+		// TODO Auto-generated method stub
+		
+		return productDao.selectByReadCountForMain();
+	}
+
+	//최신순 상품 가져오기(메인 5개)
+	@Override
+	public List<Product> getProdByLatestForMain() {
+		// TODO Auto-generated method stub
+			
+		return productDao.selectByLatestForMain();
+	}
+
 
 	//해당 상품의 옵션들 가져오기
 	@Override
