@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+<<<<<<< HEAD
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+=======
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+>>>>>>> branch 'master' of https://github.com/swift0507/final_project.git
 <mapper namespace="dao.ReviewDao">
 	<insert id="insertReview" parameterType="review">
 		insert into review
@@ -35,6 +39,7 @@
 		select *
 		from review
 	</select>
+<<<<<<< HEAD
 
 	<select id="selectById" parameterType="java.util.HashMap"
 		resultType="Review">
@@ -46,4 +51,16 @@
 	<select id="getCountById" parameterType="int" resultType="int">
 		select count(*) from review where prod_id = #{ prod_id }
 	</select>
+=======
+	
+	<select id="selectById" parameterType="java.util.HashMap" resultType="Review">
+    		select * from (select rownum as rn, e.* from (select * from review where prod_id = #{ prod_id } order by review_id desc) e) 
+    		where rn between #{offset} and (#{offset} + #{boardsPerPage} - 1)
+    	</select>
+    	
+    	<select id="getCountById" parameterType="int" resultType="int">
+   			select count(*) from review where prod_id = #{ prod_id }
+   		</select>
+
+>>>>>>> branch 'master' of https://github.com/swift0507/final_project.git
 </mapper>
