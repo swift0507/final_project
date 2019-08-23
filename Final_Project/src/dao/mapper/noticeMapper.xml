@@ -23,6 +23,10 @@
 		update notice set notice_readcount = notice_readcount+1 where notice_id =
 		#{notice_id}
 	</update>
+	
+	<select id="selectsupport" resultType="notice">
+		select * from (select rownum as rn, e.* from (select * from notice order by notice_id desc) e)where rn between 1 and 5
+	</select>
 
 
 </mapper>

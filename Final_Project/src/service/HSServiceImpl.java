@@ -344,7 +344,6 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		return banners;
 	}
 
-<<<<<<< HEAD
 	@Override
 	public File getNoticeFile(int num) {
 		// TODO Auto-generated method stub
@@ -361,9 +360,19 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		// TODO Auto-generated method stub
 		return faqDao.selectAll();
 	}
-	
-=======
+
+	@Override
+	public List<Notice> getsupportnoticeList() {
+		// TODO Auto-generated method stub
+		return noticeDao.selectsupport();
+	}
+
+	@Override
+	public List<FAQ> getsupportfaqList() {
+		// TODO Auto-generated method stub
+		return faqDao.selectsupport();
+	}
 
 
->>>>>>> branch 'master' of https://github.com/swift0507/final_project.git
+
 }

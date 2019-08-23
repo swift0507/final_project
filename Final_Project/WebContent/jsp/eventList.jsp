@@ -54,7 +54,6 @@
 	</header>
 	<!-- header 종료 -->
 
-<<<<<<< HEAD
 	<!-- main body -->
 	<div class="content">
 		<div class="container">
@@ -126,74 +125,7 @@
 				</div>
 
 				<div class="col"></div>
-=======
-<!-- main body -->
-<div class = "content">
-	<div class = "container">
-		<div class = "row">
-			<div class = "col"></div>
-			<div class = "col-8">
-			
-				<h5><b>이벤트</b></h5>
-				<hr>
-				<table class="table table-hover text-center">
-				  <thead>
-				    <tr>
-				      <th scope="col">게시물 번호</th>
-				      <th scope="col" colspan = 2>제목</th>
-				      <th scope="col">게시일</th>
-				    </tr>
-				  </thead>
-				  
-				  <tbody>
-				  <!-- 자료넣기 -->
-					<c:forEach items="${event}" var="e">
-					    <tr>
-					      <th scope="row">${e.event_id}</th>
-					      <td><a href="event.do?event_id=${e.event_id}">${e.event_title}</a></td>
-					      <td colspan = 2>${e.event_date}</td>
-					    </tr>
-				    </c:forEach>
-				  </tbody>
-				</table>
-				
-				
-				<nav>
-					<ul class="pagination justify-content-center">
-						<li class="page-item <c:if test="${ start == 1 }">disabled</c:if>">
-							<a class="page-link" href="eventList.do?page=1"> 
-								<span>&laquo;</span>
-							</a>
-						</li>
-							
-						<li class="page-item <c:if test="${ start == 1 }">disabled</c:if>">
-							<a class="page-link" href="eventList.do?page=${ start - 1 }">이전</a>
-						</li>
-						<c:forEach begin="${ start }" end="${ end < last ? end : last }" var="i">
-							<c:choose>
-								<c:when test="${ i == current }">
-									<li class="page-item active" aria-current="page">
-		      							<span class="page-link">${ current } <span class="sr-only">(current)</span></span>
-		    						</li>
-		    					</c:when>
-								<c:otherwise>
-									<li class="page-item">
-										<a class="page-link" href="eventList.do?page=${ i }">${ i }</a>
-									</li>
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
-						<li class="page-item <c:if test="${ last <= end }">disabled</c:if>">
-							<a class="page-link" href="eventList.do?page=${ end + 1 }">다음</a>
-						</li>
-						<li class="page-item <c:if test="${ last <= end }">disabled</c:if>">
-							<a class="page-link" href="eventList.do?page=${ last }">
-								<span>&raquo;</span>
-							</a>
-						</li>
-					</ul>
-				</nav>
->>>>>>> branch 'master' of https://github.com/swift0507/final_project.git
+
 			</div>
 		</div>
 	</div>

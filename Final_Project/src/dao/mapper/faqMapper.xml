@@ -15,4 +15,8 @@
 	<select id="getCount" resultType="int">
 		select count(*) from faq
 	</select>
+	
+	<select id="selectsupport" resultType="faq">
+		select * from (select rownum as rn, e.* from (select * from faq order by faq_id desc) e)where rn between 1 and 5
+	</select>
 </mapper>

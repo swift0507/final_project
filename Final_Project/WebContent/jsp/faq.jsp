@@ -25,7 +25,7 @@
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+<script src="https://code.jquery.com/jquery-3.4.1.js"
 	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
 	crossorigin="anonymous">
 	
@@ -40,9 +40,27 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous">
+	
+</script>
+<script
+	src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15.0.0/dist/smooth-scroll.polyfills.min.js">
+	
+</script>
+
+<script type="text/javascript">
+	$(function() {
+
+		$('.faqcontent').hide();
+
+		$('.faqtitle').click(function() {
+			$(this).parents('div').siblings('div.faqcontent').slideToggle();
+		});
+
+	});
 </script>
 
 </head>
+
 <body>
 	<!-- header -->
 	<header>
@@ -58,24 +76,19 @@
 			</div>
 			<div class="col-8">
 				<div class="container">
-					<!-- <div id="accordion" class="accordion"> -->
-					<c:forEach items="${faq}" var="f">
+					<c:forEach items="${faq}" var="f" varStatus="status">
 						<div class="card mb-0">
 							<div class="card-header">
-								<a class="card-title"> ${f.faq_title} </a>
+								<a class="faqtitle card-title"> <b>${f.faq_title}</b>
+								</a>
 							</div>
-							<div class="card-body">
-								${f.faq_content}
-							</div>
+							<div class="faqcontent card-body">${f.faq_content}</div>
 						</div>
 					</c:forEach>
-					<!-- </div> -->
 				</div>
 			</div>
 		</div>
 	</div>
-	
-
 	<!-- main body 종료-->
 
 	<!-- footer -->

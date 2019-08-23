@@ -107,5 +107,10 @@ public interface HSService {
 	
 	//faq 페이지의 게시물 리스트 출력
 	public List<FAQ> getFaqList();
-
+	
+	//고객센터 공지사항 출력
+	public List<Notice> getsupportnoticeList();
+	
+	//고객센터 자주묻는질문 출력
+	public List<FAQ> getsupportfaqList();
 }

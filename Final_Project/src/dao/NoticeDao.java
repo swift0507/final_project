@@ -14,4 +14,5 @@ public interface NoticeDao {
 	
 	public void updateReadCount(int notice_id); //조회수 증가
 
+	public List<Notice> selectsupport();
 }

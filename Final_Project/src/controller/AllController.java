@@ -44,9 +44,6 @@ public class AllController {
 	@RequestMapping("signUpForm.do")
 	public void singnUpForm() {}
 	
-	@RequestMapping("support.do")
-	public void support() {}
-	
 	//로그아웃. 세션 만료시키고 main.do 리다이렉트
 	@RequestMapping("logout.do")
 	public String logout(HttpSession session) {
@@ -226,6 +223,16 @@ public class AllController {
 	public void faq(Model model) {
 		model.addAttribute("faq",service.getFaqList());
 	}
+	
+	//목록 요청
+	@RequestMapping("support.do")
+	public void support(Model model) {
+		//공지사항 목룍
+		model.addAttribute("notice", service.getsupportnoticeList());
+		//자주 묻는 질문 목록
+		model.addAttribute("faq", service.getsupportfaqList());
+	}
+	
 }
 
 
