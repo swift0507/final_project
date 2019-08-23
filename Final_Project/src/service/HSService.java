@@ -144,6 +144,7 @@ public interface HSService {
 	public int modifyReview(Review review);
 	public int deleteReview(int review_id);
 
+	//
 	public List<Review> getReviewList();
 	
 	public int getQnACountById(int prod_id);
