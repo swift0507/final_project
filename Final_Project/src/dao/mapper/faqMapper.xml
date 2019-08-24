@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.FaqDao">
+
+	<select id="selectOne" parameterType="int" resultType="faq">
+		select * from faq where faq_id = #{faq_id}
+	</select>
+	
+	<select id="selectAll" resultType="faq">
+		select * from faq order by faq_id desc
+	</select>
+	
+	<select id="getCount" resultType="int">
+		select count(*) from faq
+	</select>
+	
+	<select id="selectsupport" resultType="faq">
+		select * from (select rownum as rn, e.* from (select * from faq order by faq_id desc) e)where rn between 1 and 5
+	</select>
+</mapper>

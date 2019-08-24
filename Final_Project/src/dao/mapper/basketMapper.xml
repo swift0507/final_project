@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <mapper namespace="dao.BasketDao">
+    <select id="countBasket" resultType="int">
+    	select count(*) from basket where mem_id = #{mem_id}
+    </select>
+    <select id="groupBySeller" resultType="String">
+    	select sel_id from basket where mem_id=#{mem_id} group by sel_id
+    </select>
+    <select id="selectBySeller" resultType="basket">
+    	select * from basket where mem_id=#{mem_id} and sel_id=#{sel_id}
+    </select>
+    </mapper>

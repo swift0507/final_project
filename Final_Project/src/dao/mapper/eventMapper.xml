@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.EventDao">
+    <select id="selectOne" parameterType="int" resultType="event">
+    	select * from event where event_id = #{event_id}
+    </select>
+    
+	<!-- 전체 게시물 수 구하기 -->
+	<select id="getCount" resultType="int">
+   		select count(*) from event
+   	</select>
+   	
+   	<update id="updateReadCount" parameterType="int">
+   		update event set event_readcount = event_readcount+1 where event_id = #{evnet_id}
+   	</update>
+   	
+   	<select id="selectAll" resultType="event">
+    	select * from (select rownum as rn, e.* from (select * from event order by event_id desc) e) where rn between #{offset} and (#{offset} + #{boardsPerPage} - 1)
+    </select>
+   	
+</mapper>

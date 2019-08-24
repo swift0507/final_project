@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <mapper namespace="dao.PickDao">
+    <select id="selectPickList" resultType="product">
+    select a.prod_id, sel_id, prod_name, prod_content, prod_price, prod_date, prod_readcount, category_id, prod_bank, prod_account, prod_depositor, prod_status, prod_fee from product a, pick b where a.prod_id= b.prod_id and mem_id=#{mem_id}
+    </select>
+    
+    </mapper>

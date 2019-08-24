@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <mapper namespace="dao.QnaDao">
+    	<select id="selectById" parameterType="java.util.HashMap" resultType="QnA">
+    		select * from (select rownum as rn, e.* from (select * from qna where prod_id = #{ prod_id } order by qna_id desc) e) 
+    		where rn between #{offset} and (#{offset} + #{boardsPerPage} - 1)
+    	</select>
+    	
+    	<select id="getCountById" parameterType="int" resultType="int">
+   			select count(*) from qna where prod_id = #{ prod_id }
+   		</select>
+    
+    	<update id="updateQnaAnswerById" parameterType="int">
+    		update qna set qna_answer = 1 where qna_id = #{ qna_id }
+    	</update>
+    </mapper>
