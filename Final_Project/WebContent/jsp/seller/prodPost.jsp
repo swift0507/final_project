@@ -527,11 +527,6 @@
 </div>
 <!-- main body 종료 -->
 
-
-</body>
-</html>
-<!-- main body 종료 -->
-
 <!-- footer -->
 <footer>
 	<jsp:include page="/jsp/footer.jsp"></jsp:include>
