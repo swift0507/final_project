@@ -76,7 +76,6 @@ public class UserController {
 		System.out.println(baskets);
 		System.out.println(prodnums);
 		System.out.println(receipt);
-		//service.pay(receipt, baskets, prodnums);
 		//결제가 되면 장바구니 내역에서 삭제시켜야 한다. 
 		//return service.pay(receipt, baskets, prodnums);
 		return 8;
