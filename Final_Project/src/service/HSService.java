@@ -51,8 +51,11 @@ public interface HSService {
 	//로그인 id의 찜리스트 가져오기
 	public List<Product> getPickList(String mem_id);
 	
-	//장바구니 가져오기
+	//장바구니 가져오기 + 결제화면 가기
 	public List<HashMap<String, Object>> getBasketList(String mem_id);
+	
+	//결제버튼눌렀을때 영수증 넣고 영수증별 상품 넣기. 주문한 receipt_id 보내기 
+	public int pay(Receipt receipt, List<Integer> baskets, List<Integer> prodnums);
 	
 	//이벤트 읽기
 	public Event readEvent(int event_id);

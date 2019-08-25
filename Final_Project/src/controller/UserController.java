@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import model.Basket;
 import model.Member;
 import model.Product;
+import model.Receipt;
 import service.HSService;
 
 @Controller
@@ -70,11 +71,21 @@ public class UserController {
 	
 	//영수증 하나 주문하기
 	@RequestMapping("user/order.do")
-	public @ResponseBody boolean order(@RequestParam(value="baskets[]") List<String> baskets,
-	@RequestParam(value="sel_id") String sel_id) {
-		System.out.println(sel_id);
+	public @ResponseBody int order(@RequestParam(value="baskets[]") List<Integer> baskets, Receipt receipt, @RequestParam(value="prodnum[]") List<Integer> prodnums) {
+		
 		System.out.println(baskets);
-		return true;
+		System.out.println(prodnums);
+		System.out.println(receipt);
+		//service.pay(receipt, baskets, prodnums);
+		//결제가 되면 장바구니 내역에서 삭제시켜야 한다. 
+		//return service.pay(receipt, baskets, prodnums);
+		return 8;
+	}
+	
+	//결제완료화면 직전에 구매한 장바구니를 가지고 간다. 
+	@RequestMapping("user/payComplete.do")
+	public void payComplete(@RequestParam(value = "receipt_id") List<Integer> receipt_id) {
+		System.out.println(receipt_id);
 	}
 	
 	//문의작성폼보기

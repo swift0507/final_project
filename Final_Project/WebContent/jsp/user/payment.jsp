@@ -43,6 +43,8 @@
 	
 	<script type="text/javascript">
 	$(document).ready(function(){
+		var addrCheck = false;
+		
 		$(".prod_name").each(function(){
 			var prod = this.innerHTML;
 			var elem = this;
@@ -54,7 +56,7 @@
 				success : function(data){
 					var id = "."+data.prod_id;
 					//alert(data.prod_name);
-					elem.innerHTML = "상품명 : "+ data.prod_name
+					elem.innerHTML = data.prod_name
 					elem.style.visibility=""
 					$(id).attr("src", "../images/noimage.png")
 				}
@@ -96,6 +98,7 @@
 				$("#addr").val("${member.mem_addr}")
 				$("#remainAddr").val("${member.mem_remainaddr}")
 				$("#receipt_phone").val("${member.mem_phone}")
+				addrCheck = true;
 			}
 			else{
 				$("#receipt_name").val("")
@@ -103,6 +106,7 @@
 				$("#addr").val("")
 				$("#remainAddr").val("")
 				$("#receipt_phone").val("")
+				addrCheck = false;
 			}
 			})
 		
@@ -140,38 +144,122 @@
 		
 		
 		$("#order").on("click", function(){
-			alert("주문")
 			//줘야하는 데이터는 사장님 id와 basket_id로 하나의 receipt과 주문 상품 개수에 맞는 receiptOrder를 만들어야 한다.
+			
+			//유효성검증
+			if($("#receipt_name").val()==""){
+				alert("이름을 입력해주세요.")
+				$("#receipt_name").focus();
+				return
+			}
+			else if(!addrCheck){
+				alert("우편번호를 입력해주세요")
+				$("#findZipcode").focus();
+				return
+			}
+			else if($("#remainAddr").val()==""){
+				alert("나머지 주소를 입력해주세요")
+				$("#remainAddr").focus();
+				return
+			}
+			else if($("#receipt_phone").val()==""){
+				alert("연락처를 입력해주세요")
+				$("#receipt_phone").focus();
+				return
+			}
+			else if($("#receipt_request").val()==""){
+				alert("요구사항을 입력해주세요")
+				$("#receipt_request").focus();
+				return
+			}
+			else if($("#receipt_account").val()==""){
+				alert("계좌번호를 입력해주세요")
+				$("#receipt_account").focus();
+				return
+			}
+			else if($("#receipt_bank").val()==""){
+				alert("은행을 선택해주세요")
+				$("#receipt_bank").focus();
+				return
+			}
+			else if($("#receipt_depositor").val()==""){
+				alert("예금주를 입력해주세요")
+				$("#receipt_depositor").focus();
+				return
+			}
+			
+			//받아오는 receipt_id
+			var idArray = new Array();
 			
 			$(".sel_id").each(function(){
 				//여기서 가져갈 건 배송비와 가격,사장님id 총가격임 여기는 사장님별 위치
 				//사장님id
 				var sel_id = $(this).val();
+				
 				//상품
 				var baskets = new Array();
+				
 				//배송비
+				var fee = 0;
+				fee = parseInt($(this).parentsUntil("div").siblings().find($(".eachFee")).text())
 				
-				//총 가격
+				//총 가격 총 가격은 합계를 합해서 가져온다. 
+				var receiptPrice = 0;
+				$(this).parentsUntil("div").siblings().find($(".prodTotal")).each(function(){
+					receiptPrice += parseInt($(this).text());
+				})
 				
-				//alert(sel_id)
-				//사장님별 상품의 내용을 담을 곳
+				//상품이름설정
+				var receipt_prod;
+				var prodLength = $(this).parentsUntil("div").siblings().find($(".prod_name")).length;
+				//$(this).parentsUntil("div").siblings().find($(".prod_name")).first().text()
+				if(prodLength == 1){
+					receipt_prod = $(this).parentsUntil("div").siblings().find($(".prod_name")).text()
+				}
+				else{
+					prodLength--;
+					receipt_prod = $(this).parentsUntil("div").siblings().find($(".prod_name")).first().text() + " 외 " + prodLength +"개" 
+				}
+				
+				//사장님별 상품의 내용을 담을 곳 
 				$(this).parentsUntil("div").siblings().find($(".basket_id")).each(function(){
-					alert($(this).val())
+					//alert($(this).val())
 					baskets.push($(this).val());
 				})
+				
+				//상품별 개수 인덱스로 구분
+				var prodnum = new Array();
+				$(this).parentsUntil("div").siblings().find($(".prodnum")).each(function(){
+					prodnum.push($(this).text())
+				})
+				
+				//주소 합치기
+				var addr = $("#addr").val() + " " + $("#remainAddr").val()
 				
 				//값을 다 담았고 ajax로 보내보기
 				$.ajax({
 					url : "order.do",
-					data: {sel_id : sel_id, baskets : baskets},
+					data: {prodnum : prodnum, sel_id : sel_id, baskets : baskets, receipt_price : receiptPrice, 
+						receipt_fee : fee, mem_id : "${member.mem_id}", receipt_prod : receipt_prod,
+						receipt_name : $("#receipt_name").val(), receipt_zipcode : $("#receipt_zipcode").val(),
+						receipt_addr : addr, receipt_phone : $("#receipt_phone").val(), receipt_request : $("#receipt_request").val(),
+						receipt_payoption : "무통장", receipt_bank : $("#receipt_bank").val(), receipt_account : $("#receipt_account").val(),
+						receipt_depositor : $("#receipt_depositor").val()},
 					type : "post",
+					async : false,
 					success : function(data){
-						alert(data);
+						var id = data;
+						//alert(id);
+						idArray.push(id)
 					}
 				})
 			})
-			
-			
+			//console.log(idArray)
+			var query = ""
+			for(var receipt_id of idArray){
+				query += "receipt_id="+receipt_id+"&"
+			}
+			location.href = "payComplete.do?"+query
 			
 		})
 			
