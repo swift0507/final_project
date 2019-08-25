@@ -117,12 +117,12 @@
 		
 		var option_count = 1;
         var suboption_count = 1;
-        	
+        
         /* 옵션 폼 추가 Script */
         	$('#add_option').on('click', function(){
         		option_count += 1;
     			
-        		var option = '<table style = "width: 700px;" id = "option_table'+ (option_count) +'">';
+        		var option = '<table style = "width: 700px;" class = "option_table'+ (option_count) +'">';
         		option += '<tr style = "height: 75px;">';
         		option += '<td class= "text-center" style = "width: 50px;">';
         		option += '<input type = "checkbox">';
@@ -153,6 +153,7 @@
         		option += '</table>';
         		
         		$('.option_area').append(option);	
+        		console.log(option_count);
         	})
         	/* 옵션 폼 추가 Script 종료 */
         	
@@ -168,7 +169,8 @@
         	
         	/* 상세 옵션 폼 추가 Script */
         	$(document).on('click','#add_optionDetail', function(){
-        		suboption_count += 1;
+        		var test = $(this).parent().parent().index();
+        		
         		
         		var sub_option = '<tr>';
         		sub_option += '<td style = "width: 50px;"></td>';
@@ -186,7 +188,7 @@
         		sub_option += '</tr>';
         		
         		$(this).parent().parent().parent().last().append(sub_option);
-        		
+        		console.log(test);
         	})
 			/* 상세 옵션 폼 추가 Script 종료 */
 
@@ -449,7 +451,9 @@
 			
 			<!-- 옵션 추가 여부 설정 table -->
 			<div id = "select_opt_use" style = "display: none;">
-				<table style = "width: 700px;">
+				<!-- 옵션 추가 영역 -->
+				<div class = "option_area">
+				<table style = "width: 700px;" class = "opt_add_del">
 					<tr>
 						<td colspan = 5>
 							<button class = "btn-secondary" id = "add_option">추가</button>
@@ -457,9 +461,7 @@
 						</td>
 					</tr>
 				</table>
-				<!-- 옵션 추가 영역 -->
-				<div class = "option_area">
-				<table style = "width: 700px;" id = "option_table1">
+				<table style = "width: 700px;" class = "option_table1">
 					<tr style = "height: 75px;">
 						<td class= "text-center" style = "width: 50px;">
 							<input type = "checkbox">
@@ -473,7 +475,7 @@
 						</td>
 					</tr>
 					<!-- 상세옵션 추가 영역 -->
-					<tr>
+					<tr class = "sub_option1_1">
 						<td style = "width: 50px;"></td>
 						
 						<td style = "width: 200px;">
