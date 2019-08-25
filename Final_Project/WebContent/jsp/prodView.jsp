@@ -145,7 +145,10 @@
 		        		var date = new Date(data.qna[i].qna_date);
 		        		inputQnA += '<tr>';
 		        		inputQnA += '<td style="width: 15%; text-align: center"><span class = "badge badge-primary">질문</span></td>';
-		        		inputQnA += '<td style="width: 55%">' + data.qna[i].qna_id + '.' + data.qna[i].qna_content + '</td>';
+		        		inputQnA += '<td style="width: 55%">' + data.qna[i].qna_id + '.' + data.qna[i].qna_content;
+		        		if(data.qna[i].mem_id == loginUser) 
+		        			inputQnA += '<span calss="text-right"><a href="#" class="text-secondary"><small>삭제</small></a></span>';
+		        		inputQnA += '</td>'
 		        		inputQnA += '<td style="width: 12%; text-align: center">' + data.qna[i].mem_id + '</td>';
 		        		inputQnA += '<td style="width: 18%; text-align: center">' + date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + '</td>';
 		    			inputQnA += '</tr>';
@@ -256,7 +259,7 @@
 			});
 		
 	    };
-			 
+	   
 	})
 	
 	</script>
