@@ -12,4 +12,10 @@
     <select id="selectBySeller" resultType="basket">
     	select * from basket where mem_id=#{mem_id} and sel_id=#{sel_id}
     </select>
+    <select id="selectByBasketId" resultType="basket">
+    	select * from basket where basket_id = #{basket_id}
+    </select>
+    <delete id="deleteByBasketId">
+    	delete from basket where basket_id = #{basket_id}
+    </delete>
     </mapper>
