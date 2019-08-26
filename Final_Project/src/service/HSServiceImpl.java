@@ -614,5 +614,11 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		return reviewDao.selectAll();
 	}
 
+	@Override
+	public void deleteQnA(int qna_id) {
+		// TODO Auto-generated method stub
+		qnaDao.deleteQnAById(qna_id);
+	}
+
 
 }

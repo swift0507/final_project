@@ -199,6 +199,11 @@ public class AllController {
 		return service.getQnAById(prod_id, qnaPage);
 	}
 	
+	@RequestMapping("deleteQnA.do")
+	public @ResponseBody void deleteQnA(int qna_id) {
+		service.deleteQnA(qna_id);
+	}
+	
 	//이벤트 목록 요청
 	@RequestMapping("eventList.do")
 	public void eventList(Model model, @RequestParam(defaultValue="1")int page) {
