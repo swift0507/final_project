@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,6 +33,45 @@
 	</script>
 	<script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15.0.0/dist/smooth-scroll.polyfills.min.js">
 	</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+	
+	<script type="text/javascript">
+	$(document).ready(function(){
+		var date = new Date();
+		
+		
+		date.setDate(date.getDate()+7)
+		var month = date.getMonth()+1
+		var stringDate = date.getFullYear()+"-"+month+"-"+date.getDate();
+		$(".sel_id").each(function(){
+			var elem = $(this)
+			//alert(elem.val())
+			$.ajax({
+				url : "findSeller.do",
+				data : {sel_id : elem.val()},
+				type: "get",
+				success : function(data){
+					elem.parentsUntil("table").siblings().find($(".sel_bank")).text("은행 : "+data.sel_bank)
+					elem.parentsUntil("table").siblings().find($(".sel_account")).text("계좌번호 : "+data.sel_account)
+					elem.parentsUntil("table").siblings().find($(".sel_depositor")).text("예금주 : "+data.sel_depositor)
+				}
+			})
+			var price = parseInt(elem.parentsUntil("table").siblings().find($(".receipt_price")).val())
+			var fee = parseInt(elem.parentsUntil("table").siblings().find($(".receipt_fee")).val())
+			var totalpay = price+fee;
+			elem.parentsUntil("table").siblings().find($(".totalpay")).text("금액 : "+totalpay+"원")
+			elem.parentsUntil("table").siblings().find($(".duedate")).text("입금마감일 : "+stringDate)
+		})
+		
+		$("#orderList").on("click", function(){
+			location.href = "orderList.do"
+		})
+		$("#main").on("click", function(){
+			location.href = "/Final_Project/main.do"
+		})
+	})
+	
+	</script>
 </head>
 <body>
 	<!-- header -->
@@ -41,69 +82,84 @@
 	
 <!-- main body -->
 <div class = "content">
-	<div class="container">
+	<!-- <div class="container"> -->
 		<div class="row">
 			<div class="col"></div>
 			<div class="col-8">
-				<h5><b>주문 완료</b></h5>
-				<hr>
+				<!-- <h5><b>주문 완료</b></h5>
+				<hr> -->
 				<i class = "far fa-thumbs-up" style = "font-size: 30px;"> 주문이 완료되었습니다.</i> <br>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<b class = "indent">주문내역은 [마이페이지 > 구매내역] 에서 확인 가능합니다.</b>
 				<br><br>
-				
 				<table style = "width: 700px;">
+				<tr>
+					<td><h5><b>주문 완료</b></h5>
+				<hr></td>
+				</tr>
+				</table>
+				<c:forEach var="receipt" items="${receiptList}">
+				<table style = "width: 700px; margin-left:auto; margin-right:auto;">
 					<tr>
 						<th rowspan = 3 class = "align-top"> 배송정보 </th>
-						<td colspan = 2> 이기훈 </td>
+						<td colspan = 2> ${receipt.receipt_name} </td>
 					</tr>
 					<tr>
-						<td> 010-1234-5678 </td>
+						<td> ${receipt.receipt_phone} </td>
 					</tr>
 					<tr>
-						<td> 01234 서울시 강남구 테헤란로 212</td>
+						<td> ${receipt.receipt_addr}</td>
 					</tr>
 					
 					<tr style = "height: 30px;"></tr>
 				
 					<tr>
-						<th rowspan = 2 class = "align-top"> 결제정보 </th>
-						<td> 작품금액 </td>
+						<th rowspan="3" class = "align-top"> 결제정보  <input type="hidden" class="sel_id" value="${receipt.sel_id}"></th>
+						<td>${receipt.receipt_prod}</td>
 					</tr>
 					<tr>
-						<td> 배송비 </td>
+						<td><input type="hidden" class="receipt_price" value="${receipt.receipt_price}">작품금액 : ${receipt.receipt_price}원</td>
+					</tr>
+					<tr>
+						<td><input type="hidden" class="receipt_fee" value="${receipt.receipt_fee}">배송비 : ${receipt.receipt_fee}원</td>
 					</tr>
 					
 					<tr style = "height: 30px;"></tr>
 					
 					<tr>
 						<th rowspan = 5 class = "align-top"> 입금정보 </th>
-						<td> 은행 : ㅇㅇ은행 </td>
+						<td class="sel_bank">  </td>
 					</tr>
 					<tr>
-						<td> 계좌번호 : 1234-567890-1234 </td>
+						<td class="sel_account">  </td>
 					</tr>
 					<tr>
-						<td> 예금주 : ㅁㅁㅁ</td>
+						<td class="sel_depositor"> </td>
 					</tr>
 					<tr>
-						<td> 금액 : 1조 2500억원</td>
+						<td class="totalpay"> 금액 : 1조 2500억원</td>
 					</tr>
 					<tr>
-						<td> 입금 마감일 : 2019-08-21</td>
+						<td class="duedate"> 입금 마감일 : 2019-08-21</td>
 					</tr>
-					<tr style = "height: 20px;"></tr>
 					<tr>
-						<td colspan = 2 class = "text-center">
-							<button class="btn btn-sm btn-secondary" type="button">주문내역 / 배송조회 </button>
-							<button class="btn btn-sm btn-secondary" type="button">쇼핑 계속하기 </button>
-						</td>
+						<td><hr></td>
 					</tr>
 				</table>
-			</div>
+				</c:forEach>
+				<table style = "width: 700px;">
+				<tr>
+					<td class="text-center">
+						<button class="btn btn-sm btn-secondary" type="button" id="orderList">주문내역 / 배송조회 </button>
+						<button class="btn btn-sm btn-secondary" type="button" id="main">쇼핑 계속하기 </button>
+					</td>
+				</tr>
+				</table>
+				
 			<div class="col"></div>
-		</div>
-	</div>
+			</div>
+		</div> 
+	<!-- </div> -->
 </div>
 <!-- main body 종료-->
 	<!-- footer -->

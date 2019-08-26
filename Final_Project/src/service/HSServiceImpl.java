@@ -156,6 +156,24 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		}
 		return receipt.getReceipt_id();
 	}
+	
+	//receipt_id로 receipt list 주기
+	@Override
+	public List<Receipt> payComplete(List<Integer> receipt_id) {
+		// TODO Auto-generated method stub
+		List<Receipt> receiptList = new ArrayList<Receipt>();
+		for(int eachId : receipt_id) {
+			receiptList.add(receiptDao.selectReceiptByReceiptId(eachId));
+		}
+		return receiptList;
+	}
+	
+	//seller 하나 가져오기
+	@Override
+	public Seller getSeller(String sel_id) {
+		// TODO Auto-generated method stub
+		return sellerDao.selectOneSeller(sel_id);
+	}
 
 
 	//시작 페이지 번호
@@ -613,8 +631,12 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 	}
 
 	//후기 list 가져오기
+<<<<<<< HEAD
 	@Override
+=======
+>>>>>>> branch 'master' of https://github.com/swift0507/final_project.git
 	public HashMap<String, Object> getReviewList(int page) {
+<<<<<<< HEAD
 		HashMap<String, Object> params = new HashMap<String, Object>();
 
 		params.put("offset", getBoardOffset(page));
@@ -633,9 +655,29 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 	}
 
 	
+=======
+			HashMap<String, Object> params = new HashMap<String, Object>();
+			
+			params.put("offset", getProdOffset(page));
+			params.put("boardsPerPage", 10);
+			
+			HashMap<String, Object> reviewMap = new HashMap<String, Object>();
+			
+			reviewMap.put("current", page);
+			reviewMap.put("start", getStartPage(page));
+			reviewMap.put("end", getEndPage(page));
+			reviewMap.put("last", getProdLastPage(reviewDao.getCount()));
+			reviewMap.put("totalBoards", reviewDao.getCount());
+			reviewMap.put("review", reviewDao.selectAll(params));
+			
+			return reviewMap;
+		}
+		
+>>>>>>> branch 'master' of https://github.com/swift0507/final_project.git
 	@Override
-	public void deleteQnA(int qna_id) {
+	public int deleteQnA(int qna_id) {
 		// TODO Auto-generated method stub
+<<<<<<< HEAD
 		qnaDao.deleteQnAById(qna_id);
 	}
 
@@ -647,4 +689,8 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 	}
 
 
+=======
+		return qnaDao.deleteQnAById(qna_id);
+	}
+>>>>>>> branch 'master' of https://github.com/swift0507/final_project.git
 }

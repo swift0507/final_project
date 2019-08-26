@@ -33,6 +33,35 @@
 	</script>
 	<script type="text/javascript">
 	$(document).ready(function(){
+		$("#mem_pw").keyup(function(key){
+			if(key.keyCode==13){
+				if($("#mem_id").val()==""){
+					alert("아이디를 입력해주세요.");
+				}
+				else if($("#mem_pw").val()==""){
+					alert("비밀번호를 입력해주세요.");
+				}
+				else{
+					$.ajax({
+						//true면 이동 false면 안이동
+						url : "login.do",
+						data : {mem_id : $("#mem_id").val(), mem_pw :$("#mem_pw").val()},
+						type : "post",
+						success : function(data){
+							var result = data;
+							if(!result){
+								alert("아이디 또는 비밀번호가 일치하지 않습니다..")
+							}
+							else{
+								window.location.assign($('#targetURL').val());
+							}
+						}
+					});
+				}
+			}
+		})
+		
+		
 		$("#loginCheck").on("click", function(){
 			if($("#mem_id").val()==""){
 				alert("아이디를 입력해주세요.");

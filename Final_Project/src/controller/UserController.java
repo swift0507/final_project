@@ -17,7 +17,11 @@ import model.Basket;
 import model.Member;
 import model.Product;
 import model.Receipt;
+<<<<<<< HEAD
 import model.Review;
+=======
+import model.Seller;
+>>>>>>> branch 'master' of https://github.com/swift0507/final_project.git
 import service.HSService;
 
 @Controller
@@ -40,7 +44,6 @@ public class UserController {
 	//장바구니보기
 	@RequestMapping("user/basket.do")
 	public void basket(Model m, HttpSession session) {
-		//미완성
 		HashMap<String, Object> id = (HashMap<String, Object>)session.getAttribute("loginUserInfo");
 		String mem_id = (String)id.get("mem_id");
 		//사장님별 장바구니 리스트 받아오기 
@@ -79,14 +82,23 @@ public class UserController {
 		System.out.println(prodnums);
 		System.out.println(receipt);
 		//결제가 되면 장바구니 내역에서 삭제시켜야 한다. 
+		//아직 미완성
 		//return service.pay(receipt, baskets, prodnums);
 		return 8;
 	}
 	
 	//결제완료화면 직전에 구매한 장바구니를 가지고 간다. 
 	@RequestMapping("user/payComplete.do")
-	public void payComplete(@RequestParam(value = "receipt_id") List<Integer> receipt_id) {
+	public void payComplete(@RequestParam(value = "receipt_id") List<Integer> receipt_id, Model m) {
 		System.out.println(receipt_id);
+		m.addAttribute("receiptList", service.payComplete(receipt_id));
+	}
+	
+	//결제완료화면에 사장님정보 보낵
+	@RequestMapping("user/findSeller.do")
+	public @ResponseBody Seller findSeller(String sel_id) {
+		System.out.println(sel_id);
+		return service.getSeller(sel_id);
 	}
 	
 	//문의작성폼보기
@@ -117,8 +129,18 @@ public class UserController {
 	
 	//주문내역 보기
 	@RequestMapping("user/orderList.do")
-	public void orderList() {
+	public void orderList(Model m, HttpSession session) {
 		//미완성
+		HashMap<String, Object> id = (HashMap<String, Object>)session.getAttribute("loginUserInfo");
+		String mem_id = (String)id.get("mem_id");
+		service.getReceiptListByMember(mem_id);
+		m.addAttribute("receiptList", service.getReceiptListByMember(mem_id));
+	}
+	
+	//교환신청
+	@RequestMapping("user/changeOrder.do")
+	public void changeOrder(int receipt_id) {
+		System.out.println(receipt_id);
 	}
 	
 	//개인정보 수정 전 비밀번호 확인창

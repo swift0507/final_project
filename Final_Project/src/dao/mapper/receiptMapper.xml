@@ -4,7 +4,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     <mapper namespace="dao.ReceiptDao">
     <select id="selectReceiptListByMember" resultType="receipt">
-    	select * from receipt where mem_id=#{mem_id} order by receipt_orderdate desc
+    	select * from receipt where mem_id=#{mem_id} order by receipt_id desc
     </select>
     
     <insert id="insertReceipt">
@@ -14,4 +14,8 @@
 		insert into receipt values (#{receipt_id}, #{sel_id}, #{mem_id}, #{receipt_prod}, #{receipt_price}, #{receipt_fee}, default, null, #{receipt_name}
 		, #{receipt_zipcode}, #{receipt_addr}, #{receipt_phone}, #{receipt_request}, #{receipt_payoption}, #{receipt_delstatus}, #{receipt_bank}, #{receipt_account}, #{receipt_depositor}) 
     </insert>
+    
+    <select id="selectReceiptByReceiptId" resultType="receipt">
+    	select * from receipt where receipt_id=#{receipt_id}
+    </select>
     </mapper>

@@ -101,9 +101,9 @@
 		        		inputReview += '<th style = "width: 75px;" rowspan = 3><img src = "images/sk.png" style = "width: 50px; height: 50px;"></th>';
 		        		inputReview += '<th><h5><b>' + data.review[i].prod_name + '</b></h5></th>';	//상품명
 		        		if(data.review[i].review_writer == loginUser)
-		        			inputReview += '<th class = "text-right"><button class = "btn btn-sm btn-secondary">수정</button><button class = "btn btn-sm btn-danger">삭제</button></th>';
+		        			inputReview += '<th class = "text-right"><button id="' + data.review[i].review_id + '" class = "reviewModifyBtn btn-sm btn-secondary">수정</button><button id="' + data.review[i].review_id + '" class = "reviewDeleteBtn btn-sm btn-danger">삭제</button></th>';
 		        		else
-		        			inputReview += '<th class = "text-right"><button class = "btn btn-sm btn-danger">신고</button></th>';
+		        			inputReview += '<th class = "text-right"><button id="' + data.review[i].review_id + '" class = "reviewReportBtn btn-sm btn-danger">신고</button></th>';
 		    			inputReview += '</tr><tr style = "height: 10px;"></tr><tr><td><b>' + date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + '</b></td>';
 		        		inputReview += '<td colspan = 2 class="text-right"><b>작성자 : ' + data.review[i].review_writer + '</b>&nbsp;&nbsp;&nbsp;<span id = "star_rating">';	//별점부분
 	                	inputReview += '<span class="fa fa-star checked"></span>';
@@ -126,6 +126,23 @@
 		        	}
 
 			    	$('#reviewTable').html(inputReview);
+			    	
+			    	$(".reviewDeleteBtn").on("click", function() {
+			    		var review_id = $(this).attr('id');
+				    	if(confirm('정말로 삭제하시겠습니까?')) {
+				    		$.ajax({
+						        type		: "POST",
+						        url 		: "deleteReview.do",
+						        data		:  {review_id : review_id},
+						        success		: function(data) {
+						        	alert('삭제가 완료되었습니다!');
+						        	paging(totalBoards, boardsPerPage, offset, reviewCurrentPage);
+						        	Review(prod_id, reviewCurrentPage);
+					        	}
+					        });
+						        
+				    	}
+				    });
 		        }
 		    });
 		}
