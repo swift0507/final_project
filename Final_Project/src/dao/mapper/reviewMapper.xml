@@ -27,24 +27,29 @@
 	</update>
 
 	<delete id="deleteReview" parameterType="int">
-		delete from review where
-		review_id=#{review_id}
-
+		delete from review where review_id=#{review_id}
 	</delete>
-
-	<select id="selectAll" parameterType="int" resultType="review">
-		select *
-		from review
+	
+	<select id="selectOne" parameterType="int" resultType="review">
+		select * from review where review_id = #{review_id}
 	</select>
 
+	<select id="selectAll" resultType="review">
+		select * from (select rownum as rn, e.* from (select * from review order by
+		review_id desc) e) where rn between #{offset} and (#{offset} + #{boardsPerPage} - 1)
+	</select>
+
+	<select id="getCount" resultType="int">
+		select count(*) from review
+	</select>
 	
 	<select id="selectById" parameterType="java.util.HashMap" resultType="Review">
-    		select * from (select rownum as rn, e.* from (select * from review where prod_id = #{ prod_id } order by review_id desc) e) 
-    		where rn between #{offset} and (#{offset} + #{boardsPerPage} - 1)
-    	</select>
+    	select * from (select rownum as rn, e.* from (select * from review where prod_id = #{ prod_id } order by review_id desc) e) 
+    	where rn between #{offset} and (#{offset} + #{boardsPerPage} - 1)
+    </select>
     	
-    	<select id="getCountById" parameterType="int" resultType="int">
-   			select count(*) from review where prod_id = #{ prod_id }
-   		</select>
+    <select id="getCountById" parameterType="int" resultType="int">
+   		select count(*) from review where prod_id = #{ prod_id }
+   	</select>
 
 </mapper>

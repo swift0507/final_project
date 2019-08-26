@@ -143,16 +143,19 @@ public interface HSService {
 	//상품별 Q&A 가져오기
 	public HashMap<String, Object> getQnAById(int prod_id, int qnaPage);
 
+	//후기 작성,수정,삭제
 	public int writeReview(Review review);
-	public int modifyReview(Review review);
+//	public int modifyReview(Review review);
 	public int deleteReview(int review_id);
 
-	//
-	public List<Review> getReviewList();
+	//후기페이지의 리스트 출력
+//	public List<Review> getReviewList();
+	public HashMap<String, Object> getReviewList(int page);
 	
 	public int getQnACountById(int prod_id);
 	
 	public QnAComment getQnAComment(int qna_id);
+	
 
 	//상품별 후기 가져오기
 	public HashMap<String, Object> getReviewById(int prod_id, int reviewPage);

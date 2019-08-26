@@ -99,11 +99,12 @@
 						<tr>
 							<th style="width: 75px;">
 								<img src="images/sk.png" style="width: 50px; height: 50px;">
+								<%-- <img src="noticedownload.do?num=${notice.notice_id}" width="700px"> <br> --%>
 							</th>
 							<th>${m.review_id}</th>
 							<th class="text-right">
-								<button class="btn btn-sm btn-secondary" onclick="location.href='user/modifyReview.do'">수정</button>
-								<button class="btn btn-sm btn-danger" onclick="location.href='user/removeReview.do'">삭제</button>
+								<button class="btn btn-sm btn-secondary" onclick="location.href='modifyReview.do?review_id=${m.review_id}'">수정</button>
+								<button class="btn btn-sm btn-danger" onclick="location.href='deleteReview.do?review_id=${m.review_id}'">삭제</button>
 							</th>
 						</tr>
 						<tr style="height: 10px;"></tr>
