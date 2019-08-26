@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,11 +33,54 @@
 	</script>
 	<script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15.0.0/dist/smooth-scroll.polyfills.min.js">
 	</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 	<style>
 		text-center item_header {
 			background-color: lightgrey;
 		}
 	</style>
+	
+	<script type="text/javascript">
+	$(document).ready(function(){
+		
+		//마감날짜 설정
+		var date = new Date($("#duedate").text());
+		date.setDate(date.getDate()+7)
+		var month = date.getMonth()+1
+		var stringDate = date.getFullYear()+"-"+month+"-"+date.getDate();
+		$("#duedate").text(stringDate);
+		
+		$(".prod_name").each(function(){
+			var prod = this.innerHTML;
+			var elem = this;
+			//alert(prod);
+			$.ajax({
+				url : "findProdName.do",
+				data : {prod_id : prod},
+				type : "get",
+				success : function(data){
+					var id = "."+data.prod_id;
+					//alert(data.prod_name);
+					elem.innerHTML = data.prod_name
+					elem.style.visibility=""
+					$(id).attr("src", "../images/noimage.png")
+				}
+			})
+		})
+		
+		$(".receiptOrder_price").each(function(){
+			var num = parseInt($(this).parentsUntil("div").find(".prodnum").text())
+			var totalprice = parseInt($(this).parentsUntil("div").find(".prodTotal").text())
+			var eachprice = totalprice / num;
+			$(this).text(eachprice+"원")
+		})
+		//배송비 한 쪽으로 쏠린거 해결 안됌 
+		
+		$("#check").on("click", function(){
+			location.href="orderList.do"
+		})
+	})
+	</script>
 </head>
 <body>
 <!-- header -->
@@ -62,113 +107,92 @@
 					</tr>
 					<tr>
 						<td>
-							<span> 주문번호 : 123-45-678910 </span> &nbsp;&nbsp;&nbsp;
-							<span> 주문일 : 2019-08-16 </span>
+							<span> 주문번호 : ${receipt.receipt_id} </span> &nbsp;&nbsp;&nbsp;
+							<span> 주문일 : ${receipt.receipt_orderdate } </span>
 							<hr> 
 						</td>
 					</tr>
 				</table>
-				<!-- 주문 전체 정보 header table 종료 -->
 				
-				<!-- 사장님별 주문 내용 1 table -->
-				<table style = "width: 700px;">
+				<div> 
+				<!-- 사장님별 결제화면 header table -->
+				<table style = "width: 800px;">
 					<tr>
-						<td colspan = 5 style = "height: 50px;">
-							<h5><b>노라조 사장님</b></h5> 
+						<td colspan = 4 style = "height: 50px;">
+							<b>${receipt.sel_id} 사장님</b> 
+							<input type="hidden" class="sel_id" value="${receipt.sel_id}">
 						</td>
 					</tr>
-				
-					<tr class = "text-center" style = "background-color: lightgrey" >
-						<th colspan = 2> 상품정보 </th>
-						<th> 판매가 </th>
-						<th> 수량 </th>
-						<th> 합계 </th>
+					<tr style = "background-color: lightgrey" >
+						<th class = "text-center" style = "width: 45%;"> 상품정보 </th>
+						<th class = "text-center" style = "width: 20%;"> 판매가 </th>
+						<th class = "text-center" style = "width: 15%;"> 수량 </th>
+						<th class = "text-center" style = "width: 20%;"> 합계 </th>
 					</tr>
-					
+				</table>
+				<!-- 사장님별 결제화면 header table 종료 -->	
+				
+				<!-- 사장님1 Component -->
+				<c:forEach var="receiptOrder" items="${list}">
+				<!-- 사장님별 장바구니 상품 table -->
+				<div>
+				<table style = "width: 800px;">
+					<tr style = "height: 20px;">
+						<td>
+						<%-- <input type="hidden" class="basket_id" value="${recei.basket_id}"> --%>
+						</td>
+					</tr>	
 				    <tr>
-				      <td rowspan = 3>
-				      	<img src = "images/sk.png" width = 100 height = 100>
+				      <td rowspan = 3 style = "width: 20%;">
+				      	<%-- <input class="checkbox prodCheck" type="checkbox" value="${basket.prod_id}"> --%>
+				      	&nbsp;&nbsp;&nbsp; <img src = "images/sk.png" class="${receiptOrder.prod_id}" width = 100 height = 100>
 				      </td>
-				      <td> 상품명 : 카레 </td>
-				      <td rowspan = 3 class = "text-center">
-				      	<h5>1조 2500억 원</h5>
+				      <td style = "width: 25%;  visibility: hidden;" class="prod_name"> ${receiptOrder.prod_id} </td>
+				      <td rowspan = 3 class = "text-center" style = "width: 20%;">
+				      	<h5 class="receiptOrder_price">원</h5>
 				      </td>
-				      <td rowspan = 3 class = "text-center">
-				      	1
+				      <td rowspan = 3 class = "text-center" style = "width: 15%;">
+				      	<h5 class="prodnum">${receiptOrder.order_quantity }</h5>
 				      </td>
-				      <td rowspan = 3 class = "text-center">
-				      	<h5>1조 2500억 원</h5>
+				      <td rowspan = 3 class = "text-center" style = "width: 20%;">
+				      	<h5 class="prodTotal">${receiptOrder.order_price} 원</h5>
 				      </td>
 				    </tr>
 				    <tr>
-				      <td> 옵션 1 : 소고기 제외 </td>
+				      <td> ${receiptOrder.order_opt}</td>
 				    </tr>
 				    <tr>
-				      <td> 옵션 2 : 양파, 감자 </td>
 				    </tr>
+				    </table>
+				    </div>
+				    </c:forEach>
+				<table style = "width: 800px;">
+				    <tr style = "height: 20px;"></tr>
 				    <tr class = "text-right" style = "background-color: lightgrey">
-				      <td>배송비</td>
+				      <td>배송비 </td>
 				      <td colspan = 3></td>
-				      <td>3000 원</td>
+				      <td class="eachFee">${receipt.receipt_fee} 원</td>
 				    </tr>
 				</table>
 				<hr>
-				<!-- 사장님별 주문 내용 1 table 종료 -->
+				<!-- 사장님별 장바구니 상품 table 2 종료 -->
+				</div>
+				<!-- 사장님1 Component 종료 -->
 				
-				<!-- 사장님별 주문 내용 2 table -->
-				<table style = "width: 700px;">
-					<tr>
-						<td colspan = 5><h5><b>노라조 사장님</b></h5> </td>
-					</tr>
-				
-					<tr class = "text-center" style = "background-color: lightgrey" >
-						<th colspan = 2> 상품정보 </th>
-						<th> 판매가 </th>
-						<th> 수량 </th>
-						<th> 합계 </th>
-					</tr>
 					
-				    <tr>
-				      <td rowspan = 3>
-				      	<img src = "images/sk.png" width = 100 height = 100>
-				      </td>
-				      <td> 상품명 : 카레 </td>
-				      <td rowspan = 3 class = "text-center">
-				      	<h5>1조 2500억 원</h5>
-				      </td>
-				      <td rowspan = 3 class = "text-center">
-				      	1
-				      </td>
-				      <td rowspan = 3 class = "text-center">
-				      	<h5>1조 2500억 원</h5>
-				      </td>
-				    </tr>
-				    <tr>
-				      <td> 옵션 1 : 소고기 제외 </td>
-				    </tr>
-				    <tr>
-				      <td> 옵션 2 : 양파, 감자 </td>
-				    </tr>
-				    <tr class = "text-right" style = "background-color: lightgrey">
-				      <td>배송비</td>
-				      <td colspan = 3></td>
-				      <td>3000 원</td>
-				    </tr>
-				</table>
-				<hr>
-				<!-- 사장님별 주문 내용 2 table 종료 -->
+				
 				
 				<!-- 총 상품 금액 table -->
-				<table style = "width: 700px;">
+				<table style = "width: 800px;">
 					<tr class = "text-right">
 						<th colspan = 2 style = "width: 400px;">
-						<th style = "width: 100px;"> 사용 금액  </th>
-						<td style = "width: 200px;"> 2조 5000억 원 </td>
+						<th style = "width: 100px;"> 총 주문 금액  </th>
+						<td style = "width: 200px;" id="payPrice"> ${receipt.receipt_price}원 </td>
 					</tr>
 					<tr class = "text-right">
 						<th colspan = 2 style = "width: 400px;">
 						<th style = "width: 100px;"> 배송비  </th>
-						<td style = "width: 200px;"> 6000 원 </td>
+						<td style = "width: 200px;" id="totalFee"> ${receipt.receipt_fee}원 </td>
 					</tr>
 					<tr style = "height: 10px">
 						<td colspan = 4>
@@ -176,11 +200,12 @@
 						</td>
 					</tr>
 					<tr style = "font-size: 20px;">
-						<th colspan = 2 class = "text-left"> 총 상품 금액 </th>
+						<th colspan = 2 class = "text-left"> 결제 금액 </th>
 						
-						<th colspan = 2 class = "text-right"> 2조 5000억 6000원 </th>
+						<th colspan = 2 class = "text-right" id= "totalPayPrice"> ${receipt.receipt_price+receipt.receipt_fee}원</th>
 					</tr>
 				</table>
+				
 				<!-- 총 상품 금액 table 종료 -->
 				
 				<br><br>
@@ -190,11 +215,11 @@
 				<table class = "table" style = "width: 700px;">
 					<tr>
 						<th style = "width: 100px;"> 이름 </th>
-						<td style = "width: 600px;"> 이기훈 </td>
+						<td style = "width: 600px;"> ${member.mem_name} </td>
 					</tr>
 					<tr>
 						<th style = "width: 100px;"> 연락처 </th>
-						<td style = "width: 600px;"> 010-0000-0000 </td>
+						<td style = "width: 600px;"> ${member.mem_phone} </td>
 					</tr>
 				</table>
 				
@@ -207,19 +232,19 @@
 				<table class = "table" style = "width: 700px;">
 					<tr>
 						<th style = "width: 200px;"> 이름 </th>
-						<td style = "width: 500px;"> 이기훈 </td>
+						<td style = "width: 500px;"> ${receipt.receipt_name} </td>
 					</tr>
 					<tr>
 						<th style = "width: 200px;"> 주소 </th>
-						<td style = "width: 500px;"> 서울시 강남구 테헤란로 212 </td>
+						<td style = "width: 500px;"> ${receipt.receipt_addr} </td>
 					</tr>
 					<tr>
 						<th style = "width: 200px;"> 연락처 </th>
-						<td style = "width: 600px;"> 010-0000-0000 </td>
+						<td style = "width: 600px;"> ${receipt.receipt_phone} </td>
 					</tr>
 					<tr>
 						<th style = "width: 200px;"> 배송시 요청사항 </th>
-						<td style = "width: 500px;"> 부재시 경비실에 맡겨주세요 </td>
+						<td style = "width: 500px;"> ${receipt.receipt_request} </td>
 					</tr>
 				</table>
 				
@@ -232,23 +257,23 @@
 				<table class = "table" style = "width: 700px;">
 					<tr>
 						<th style = "width: 200px;"> 은행 </th>
-						<td style = "width: 500px; color: red;"> ㅇㅇ은행 </td>
+						<td style = "width: 500px; color: red;"> ${seller.sel_bank}은행 </td>
 					</tr>
 					<tr>
 						<th style = "width: 200px;"> 계좌번호 </th>
-						<td style = "width: 500px; color: red;"> 1234-56-789101 </td>
+						<td style = "width: 500px; color: red;"> ${seller.sel_account} </td>
 					</tr>
 					<tr>
 						<th style = "width: 200px;"> 예금주 </th>
-						<td style = "width: 600px; color: red;"> (주) 핸쇼 </td>
+						<td style = "width: 600px; color: red;"> ${seller.sel_id} </td>
 					</tr>
 					<tr>
 						<th style = "width: 200px;"> 금액 </th>
-						<td style = "width: 500px; color: red;"> 2조 5000억 6000원 </td>
+						<td style = "width: 500px; color: red;"> ${receipt.receipt_price+receipt.receipt_fee}원 </td>
 					</tr>
 					<tr>
 						<th style = "width: 200px;"> 입금 마감 </th>
-						<td style = "width: 500px; color: red;"> 2019-08-21 </td>
+						<td style = "width: 500px; color: red;" id="duedate"> ${receipt.receipt_orderdate} </td>
 					</tr>
 				</table>
 				<!-- 배송 정보 table 종료 -->
@@ -256,7 +281,7 @@
 				<br>
 				<!-- 확인 button -->
 				<div class = "container text-center">
-					<button class = "btn btn-secondary">확인</button>
+					<button class = "btn btn-secondary" id="check">확인</button>
 				</div>
 				<!-- 확인 button 종료 -->
 				

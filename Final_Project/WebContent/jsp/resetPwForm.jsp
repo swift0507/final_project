@@ -58,6 +58,7 @@
 					   if(data){
 						   alert("비밀번호 변경이 완료되었습니다.")
 						   window.opener.parent.location.href="loginForm.do";
+						   //window.opener.parent.history.go(-1);
 						   window.close();
 					   }
 				   }

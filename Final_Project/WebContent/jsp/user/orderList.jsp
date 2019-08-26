@@ -43,49 +43,87 @@
 			var elem = $(this).parentsUntil("div").find($(".statusText"))
 			if(delstatus ==0){
 				elem.text("결제 대기")
+				elem.attr("class", "btn btn-ml btn-dark statusText")
+				
 				$(this).parentsUntil("div").find($(".conditionBtn")).html("<button class = 'btn btn-sm btn-danger cancelOrder'>주문취소</button>")
 			}
 			else if(delstatus ==1){
 				elem.text("결제 완료")
+				elem.attr("class", "btn btn-ml btn-primary statusText")
 			}
 			else if(delstatus ==2){
 				elem.text("배송 준비중")
+				elem.attr("class", "btn btn-ml btn-secondary statusText")
 			}
 			else if(delstatus ==3){
 				elem.text("배송 중")
+				elem.attr("class", "btn btn-ml btn-secondary statusText")
 			}
 			else if(delstatus ==4){
-				$(this).parentsUntil("div").find($(".conditionBtn")).html("<button class = 'btn btn-sm btn-danger finalizeOrder'>구매확정</button> <button class = 'btn btn-sm btn-danger changeOrder'>교환신청</button>")
+				$(this).parentsUntil("div").find($(".conditionBtn")).html("<button class = 'btn btn-sm btn-secondary finalizeOrder'>구매확정</button> <button class = 'btn btn-sm btn-secondary changeOrder'>교환신청</button>")
 				elem.text("배송 완료")
+				elem.attr("class", "btn btn-ml btn-primary statusText")
 			}
 			else if(delstatus ==5){
 				elem.text("구매 확정")
+				elem.attr("class", "btn btn-ml btn-success statusText")
 			}
 			else if(delstatus ==6){
 				elem.text("교환 신청")
+				elem.attr("class", "btn btn-ml btn-warning statusText")
 			}
 			else if(delstatus ==7){
 				elem.text("교환 완료")
+				elem.attr("class", "btn btn-ml btn-primary statusText")
 			}
 		})
 		
 		$(".cancelOrder").on("click", function(){
 			var r = $(this).parentsUntil("div").find($(".receipt_id")).text().slice(8)
 			var receipt_id = parseInt(r);
-			alert(receipt_id)
+			$.ajax({
+				url : "cancelOrder.do",
+				data : {receipt_id : receipt_id},
+				type : "post",
+				success : function(data){
+					alert("주문이 취소되었습니다.")
+					location.href = "orderList.do"
+				}
+			})
 		})
 		$(".finalizeOrder").on("click", function(){
 			var r = $(this).parentsUntil("div").find($(".receipt_id")).text().slice(8)
 			var receipt_id = parseInt(r);
-			alert(receipt_id)
+			$.ajax({
+				url : "finalizeOrder.do",
+				data : {receipt_id : receipt_id},
+				type : "post",
+				success : function(data){
+					alert("구매가 확정되었습니다.")
+					location.href = "orderList.do"
+				}
+			})
 		})
 		$(".changeOrder").on("click", function(){
 			var r = $(this).parentsUntil("div").find($(".receipt_id")).text().slice(8)
 			var receipt_id = parseInt(r);
-			alert(receipt_id)
-			location.href = "changeOrder.do?receipt_id="+receipt_id;
+			$.ajax({
+				url : "changeOrder.do",
+				data : {receipt_id : receipt_id},
+				type : "post",
+				success : function(data){
+					alert("교환신청이 되었습니다.")
+					location.href = "orderList.do"
+				}
+			})
+			
 		})
 		
+		$(".prod_name").on("click", function(){
+			var r = $(this).parentsUntil("div").find($(".receipt_id")).text().slice(8)
+			var receipt_id = parseInt(r);
+			$(this).attr("href", "orderDetail.do?receipt_id="+receipt_id);
+		})
 	})
 </script>
 <body>
@@ -127,7 +165,7 @@
 				<table style = "width: 700px;">
 				    <tr style = "height: 40px;">
 				      <th colspan = 3>
-				      	${receipt.receipt_prod}
+				      <a href="#" class="text-decoration-none text-secondary prod_name">${receipt.receipt_prod}</a>
 				      </th>
 				      <th class = "text-right conditionBtn">
 				      	<!-- <button class = "btn btn-sm btn-danger">주문취소</button> -->
@@ -159,38 +197,7 @@
 				<hr>
 				</div>
 				</c:forEach>
-			<!-- 	
-				<table style = "width: 700px;">
-				    <tr height = 40>
-				      <th colspan = 3>
-				      	알록달록 캔들, 보라색 외 3개
-				      </th>
-				      <th class = "text-right">
-				      	
-				      </th>
-				    </tr>
-				    <tr>
-				      <td rowspan = 3>
-				      	<img src = "images/sk.png" width = 100 height = 100>
-				      </td>
-				      <td>  </td>
-				      <td rowspan = 3>
-				      	<h5>1조 2500억 원</h5>
-				      </td>
-				      
-				      <td rowspan = 3 class = "text-right">
-				      	<button type="button" class="btn btn-ml btn-success" disabled>구매 확정</button> 
-				      </td>
-				    </tr>
-				    <tr>
-				      <td> 주문날짜 : 2019-08-14 </td>
-				    </tr>
-				    <tr>
-				      <td> 주문번호 : 123-456-78910 </td>
-				    </tr>
-				</table>
-				<br>
-				<hr> -->
+			
 			</div>
 		</div>
 	</div>

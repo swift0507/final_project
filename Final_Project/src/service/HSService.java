@@ -67,6 +67,16 @@ public interface HSService {
 	//seller 받아오기
 	public Seller getSeller(String sel_id);
 	
+	//구매확정
+	public void finalizeOrder(int receipt_id);
+	//교환신청
+	public void changeOrder(int receipt_id);
+	//주문취소
+	public void cancelOrder(int receipt_id);
+	
+	//주문상세페이지 서비스
+	public HashMap<String, Object> orderDetail(int receipt_id, String mem_id);
+	
 	//이벤트 읽기
 	public Event readEvent(int event_id);
 	
