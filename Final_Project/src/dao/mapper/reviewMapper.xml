@@ -6,24 +6,16 @@
 <mapper namespace="dao.ReviewDao">
 	<insert id="insertReview" parameterType="review">
 		insert into review
-		values (#{review_id}, #{receiptorder_id}, #{prod_id}, #{prod_name},
-		#{review_writer}, #{review_score}, #{review_content}, #{review_date},
-		#{review_answer}, #{review_pict}, #{review_status})
+		values (review_id.nextval, receiptorder_id.nextval, prod_id.nextval, #{prod_name},
+		#{review_writer}, #{review_score}, #{review_content}, sysdate, #{review_pict})
 	</insert>
 
 	<update id="updateReview" parameterType="review">
-		update into review set
-		receiptorder_id=#{receiptorder_id},
-		prod_id=#{prod_id},
-		prod_name=#{prod_name},
-		review_writer=#{review_writer},
-		review_score=#{review_score},
-		review_content=#{review_content},
-		review_date=#{review_date},
-		review_answer=#{review_answer},
-		review_pict=#{review_pict},
-		review_status=#{review_status} where
-		review_id=#{review_id}
+		update review set
+		review_score = #{review_score},
+		review_content = #{review_content},
+		review_pict = #{review_pict}
+		where review_id = #{review_id}
 	</update>
 
 	<delete id="deleteReview" parameterType="int">

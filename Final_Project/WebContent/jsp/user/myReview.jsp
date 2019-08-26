@@ -97,12 +97,11 @@
 					<table style="width: 700px;">
 						<tr>
 							<th style="width: 75px;">
-								<img src="images/sk.png" style="width: 50px; height: 50px;">
-								<%-- <img src="noticedownload.do?num=${notice.notice_id}" width="700px"> <br> --%>
+								<img src="reviewdownload.do?num=${m.review_id}" style="width: 50px; height: 50px;">
 							</th>
-							<th>${m.review_id}</th>
+							<th>${m.prod_name}</th>
 							<th class="text-right">
-								<button class="btn btn-sm btn-secondary" onclick="location.href='reviewWriteForm.do?review_id=${m.review_id}'">수정</button>
+								<button class="btn btn-sm btn-secondary" onclick="location.href='reviewModifyForm.do?review_id=${m.review_id}'">수정</button>
 								<button class="btn btn-sm btn-danger" onclick="location.href='deleteReview.do?review_id=${m.review_id}'">삭제</button>
 							</th>
 						</tr>
@@ -130,38 +129,6 @@
 					<!-- 후기 table 1 종료-->
 						
 					</c:forEach>
-
-					<!-- 후기 table 2 -->
-			<!-- 		<table style="width: 700px;">
-						<tr>
-							<th style="width: 75px;"><img src="images/sk.png"
-								style="width: 50px; height: 50px;"></th>
-							<th>로즈마리 천연 비누 1개</th>
-							<th class="text-right">
-								<button class="btn btn-sm btn-secondary">수정</button>
-								<button class="btn btn-sm btn-danger">삭제</button>
-							</th>
-						</tr>
-						<tr style="height: 10px;"></tr>
-						<tr>
-							<td colspan=3><span id="star_rating"> <span
-									class="fa fa-star checked"></span> <span
-									class="fa fa-star checked"></span> <span
-									class="fa fa-star checked"></span> <span
-									class="fa fa-star checked"></span> <span class="fa fa-star"></span>
-							</span></td>
-						</tr>
-						<tr style="height: 10px;"></tr>
-						<tr>
-							<td colspan=3>
-								<p class="review">좋습니다. 비누로 세수하면 건조한 느낌이라 싫어하는데 이 비누는 촉촉하고
-									피부가 좋아지는 것이 느껴집니다.</p>
-							</td>
-						</tr>
-					</table>
-					<br>
-					<hr> -->
-					<!-- 후기 table 2 종료-->
 
 					<!-- 페이징 처리  -->
 					<div class="container">
@@ -197,11 +164,11 @@
 						</a></li>
 					</ul>
 				</nav>
-				시작페이지 : ${ start }<br>
+		<%-- 		시작페이지 : ${ start }<br>
 				끝페이지 : ${ end }<br>
 				마지막 : ${ last }<br>
 				전체리뷰갯수 : ${ totalBoards }<br>
-				현재 : ${ current }
+				현재 : ${ current } --%>
 				
 					</div>
 					<!-- 페이징 처리  종료 -->
