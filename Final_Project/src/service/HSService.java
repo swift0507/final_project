@@ -16,6 +16,7 @@ import model.Product;
 import model.QnAComment;
 import model.Receipt;
 import model.Review;
+import model.Seller;
 
 public interface HSService {
 	
@@ -56,6 +57,12 @@ public interface HSService {
 	
 	//결제버튼눌렀을때 영수증 넣고 영수증별 상품 넣기. 주문한 receipt_id 보내기 
 	public int pay(Receipt receipt, List<Integer> baskets, List<Integer> prodnums);
+	
+	//방금 주문한 receipt들 보내기
+	public List<Receipt> payComplete(List<Integer> receipt_id);
+	
+	//seller 받아오기
+	public Seller getSeller(String sel_id);
 	
 	//이벤트 읽기
 	public Event readEvent(int event_id);

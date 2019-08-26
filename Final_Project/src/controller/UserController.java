@@ -16,6 +16,7 @@ import model.Basket;
 import model.Member;
 import model.Product;
 import model.Receipt;
+import model.Seller;
 import service.HSService;
 
 @Controller
@@ -77,14 +78,23 @@ public class UserController {
 		System.out.println(prodnums);
 		System.out.println(receipt);
 		//결제가 되면 장바구니 내역에서 삭제시켜야 한다. 
+		//아직 미완성
 		//return service.pay(receipt, baskets, prodnums);
 		return 8;
 	}
 	
 	//결제완료화면 직전에 구매한 장바구니를 가지고 간다. 
 	@RequestMapping("user/payComplete.do")
-	public void payComplete(@RequestParam(value = "receipt_id") List<Integer> receipt_id) {
+	public void payComplete(@RequestParam(value = "receipt_id") List<Integer> receipt_id, Model m) {
 		System.out.println(receipt_id);
+		m.addAttribute("receiptList", service.payComplete(receipt_id));
+	}
+	
+	//결제완료화면에 사장님정보 보낵
+	@RequestMapping("user/findSeller.do")
+	public @ResponseBody Seller findSeller(String sel_id) {
+		System.out.println(sel_id);
+		return service.getSeller(sel_id);
 	}
 	
 	//문의작성폼보기

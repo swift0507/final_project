@@ -149,6 +149,24 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		}
 		return receipt.getReceipt_id();
 	}
+	
+	//receipt_id로 receipt list 주기
+	@Override
+	public List<Receipt> payComplete(List<Integer> receipt_id) {
+		// TODO Auto-generated method stub
+		List<Receipt> receiptList = new ArrayList<Receipt>();
+		for(int eachId : receipt_id) {
+			receiptList.add(receiptDao.selectReceiptByReceiptId(eachId));
+		}
+		return receiptList;
+	}
+	
+	//seller 하나 가져오기
+	@Override
+	public Seller getSeller(String sel_id) {
+		// TODO Auto-generated method stub
+		return sellerDao.selectOneSeller(sel_id);
+	}
 
 
 	//시작 페이지 번호
@@ -560,6 +578,9 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		// TODO Auto-generated method stub
 		return reviewDao.selectAll();
 	}
+
+
+	
 
 
 
