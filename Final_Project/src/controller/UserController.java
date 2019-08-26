@@ -90,7 +90,7 @@ public class UserController {
 		m.addAttribute("receiptList", service.payComplete(receipt_id));
 	}
 	
-	//결제완료화면에 사장님정보 보낵
+	//결제완료화면에 사장님정보 보내기
 	@RequestMapping("user/findSeller.do")
 	public @ResponseBody Seller findSeller(String sel_id) {
 		System.out.println(sel_id);
@@ -126,17 +126,41 @@ public class UserController {
 	//주문내역 보기
 	@RequestMapping("user/orderList.do")
 	public void orderList(Model m, HttpSession session) {
-		//미완성
 		HashMap<String, Object> id = (HashMap<String, Object>)session.getAttribute("loginUserInfo");
 		String mem_id = (String)id.get("mem_id");
 		service.getReceiptListByMember(mem_id);
 		m.addAttribute("receiptList", service.getReceiptListByMember(mem_id));
 	}
 	
+	//주문내역상세보기
+	@RequestMapping("user/orderDetail.do")
+	public void orderDetail(int receipt_id, Model m, HttpSession session) {
+		System.out.println(receipt_id);
+		HashMap<String, Object> id = (HashMap<String, Object>)session.getAttribute("loginUserInfo");
+		String mem_id = (String)id.get("mem_id");
+		m.addAllAttributes(service.orderDetail(receipt_id, mem_id));
+	}
+	
 	//교환신청
 	@RequestMapping("user/changeOrder.do")
-	public void changeOrder(int receipt_id) {
+	public @ResponseBody boolean changeOrder(int receipt_id) {
 		System.out.println(receipt_id);
+		service.changeOrder(receipt_id);
+		return true;
+	}
+	//구매확정
+	@RequestMapping("user/finalizeOrder.do")
+	public @ResponseBody boolean finalizeOrder(int receipt_id) {
+		System.out.println(receipt_id);
+		service.finalizeOrder(receipt_id);
+		return true;
+	}
+	//주문취소
+	@RequestMapping("user/cancelOrder.do")
+	public @ResponseBody boolean cancelOrder(int receipt_id) {
+		System.out.println(receipt_id);
+		service.cancelOrder(receipt_id);
+		return true;
 	}
 	
 	//개인정보 수정 전 비밀번호 확인창

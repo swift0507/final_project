@@ -174,7 +174,49 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		// TODO Auto-generated method stub
 		return sellerDao.selectOneSeller(sel_id);
 	}
-
+	
+	//구매확정
+	@Override
+	public void finalizeOrder(int receipt_id) {
+		// TODO Auto-generated method stub
+		receiptDao.finalizeOrder(receipt_id);
+	}
+	
+	//교환신청
+	@Override
+	public void changeOrder(int receipt_id) {
+		// TODO Auto-generated method stub
+		receiptDao.changeOrder(receipt_id);
+	}
+	
+	//주문취소
+	@Override
+	public void cancelOrder(int receipt_id) {
+		// TODO Auto-generated method stub
+		receiptDao.cancelOrder(receipt_id);
+	}
+	
+	//주문상세들어가기 
+	@Override
+	public HashMap<String, Object> orderDetail(int receipt_id, String mem_id) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		Receipt receipt = receiptDao.selectReceiptByReceiptId(receipt_id);
+		//영수증 넣기
+		data.put("receipt", receipt);
+		List<ReceiptOrder> list = receiptOrderDao.getReceiptOrderList(receipt.getReceipt_id());
+		//영수증상세품목 넣기
+		data.put("list", list);
+		Member m = new Member();
+		m.setMem_id(mem_id);
+		m = memberDao.selectId(m);
+		//주문자정보넣기
+		data.put("member", m);
+		//사장님정보 주기
+		Seller seller = sellerDao.selectOneSeller(receipt.getSel_id());
+		data.put("seller", seller);
+		return data;
+	}
 
 	//시작 페이지 번호
 	@Override
@@ -652,4 +694,6 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		// TODO Auto-generated method stub
 		return qnaDao.deleteQnAById(qna_id);
 	}
+
+
 }

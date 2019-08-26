@@ -18,4 +18,16 @@
     <select id="selectReceiptByReceiptId" resultType="receipt">
     	select * from receipt where receipt_id=#{receipt_id}
     </select>
+    
+    <update id="finalizeOrder">
+    	update receipt set receipt_delstatus = 5 where receipt_id = #{receipt_id}
+    </update>
+    
+    <update id="changeOrder">
+    	update receipt set receipt_delstatus = 6 where receipt_id = #{receipt_id}
+    </update>
+    
+    <delete id="cancelOrder">
+    	delete from receipt where receipt_id = #{receipt_id}
+    </delete>
     </mapper>
