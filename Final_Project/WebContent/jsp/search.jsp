@@ -130,16 +130,26 @@
 
 	&nbsp;
 	<div class="container">
-		<nav aria-label="Page navigation example">
+		<nav>
 			<ul class="pagination justify-content-center">
-				<li class="page-item"><a class="page-link" href="#"
-					aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+				<li class="page-item <c:if test="${ start == 1 }">disabled</c:if>"><a class="page-link" href="search.do?page=1&keyword=${ keyword }"> 
+				<span aria-hidden="true">&laquo;</span>
 				</a></li>
-				<li class="page-item"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item"><a class="page-link" href="#"
-					aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+				<li class="page-item <c:if test="${ start == 1 }">disabled</c:if>"><a class="page-link" href="search.do?page=${ start - 1 }&keyword=${ keyword }">이전</a></li>
+				<c:forEach begin="${ start }" end="${ end < last ? end : last }" var="i">
+					<c:choose>
+						<c:when test="${ i == current }">
+							<li class="page-item active" aria-current="page">
+      							<span class="page-link">${ current } <span class="sr-only">(current)</span></span>
+    						</li></c:when>
+						<c:otherwise>
+							<li class="page-item"><a class="page-link" href="search.do?page=${ i }&keyword=${ keyword }">${ i }</a></li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+
+				<li class="page-item <c:if test="${ last <= end }">disabled</c:if>"><a class="page-link" href="search.do?page=${ end + 1 }&keyword=${ keyword }">다음</a></li>
+				<li class="page-item <c:if test="${ last <= end }">disabled</c:if>"><a class="page-link" href="search.do?page=${ last }&keyword=${ keyword }"> <span>&raquo;</span>
 				</a></li>
 			</ul>
 		</nav>

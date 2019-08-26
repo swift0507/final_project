@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import dao.ReviewDao;
 import model.Basket;
 import model.Member;
 import model.Product;
@@ -95,8 +96,8 @@ public class UserController {
 	
 	//나의 후기 보기
 	@RequestMapping("user/myReview.do")
-	public void myReview(Model model) {
-		model.addAttribute("myReview",service.getReviewList());
+	public void myReview(Model model, @RequestParam(defaultValue="1")int page) {
+		model.addAllAttributes(service.getReviewList(page));
 	}
 	
 	//나의 Q&A 보기
@@ -130,5 +131,13 @@ public class UserController {
 	public void leaveForm() {
 		//미완성
 	}
+	
+	//review 글 삭제
+	@RequestMapping("user/deleteReview.do")
+	public String deledteReview(int review_id) { 
+		service.deleteReview(review_id);
+		return "redirect:myReview.do";
+	}
+	
 
 }

@@ -97,22 +97,27 @@
 					<!-- 후기 table 1 -->
 					<table style="width: 700px;">
 						<tr>
-							<th style="width: 75px;"><img src="images/sk.png"
-								style="width: 50px; height: 50px;"></th>
+							<th style="width: 75px;">
+								<img src="images/sk.png" style="width: 50px; height: 50px;">
+								<%-- <img src="noticedownload.do?num=${notice.notice_id}" width="700px"> <br> --%>
+							</th>
 							<th>${m.review_id}</th>
 							<th class="text-right">
-								<button class="btn btn-sm btn-secondary">수정</button>
-								<button class="btn btn-sm btn-danger">삭제</button>
+								<button class="btn btn-sm btn-secondary" onclick="location.href='modifyReview.do?review_id=${m.review_id}'">수정</button>
+								<button class="btn btn-sm btn-danger" onclick="location.href='deleteReview.do?review_id=${m.review_id}'">삭제</button>
 							</th>
 						</tr>
 						<tr style="height: 10px;"></tr>
 						<tr>
-							<td colspan=3><span id="star_rating"> <span
-									class="fa fa-star checked"></span> <span
-									class="fa fa-star checked"></span> <span
-									class="fa fa-star checked"></span> <span
-									class="fa fa-star checked"></span> <span class="fa fa-star"></span>
-							</span></td>
+							<td colspan=3>
+								<span id="star_rating"> 
+									<span class="fa fa-star checked"></span> 
+									<span class="fa fa-star checked"></span> 
+									<span class="fa fa-star checked"></span> 
+									<span class="fa fa-star checked"></span> 
+									<span class="fa fa-star"></span>
+								</span>
+							</td>
 						</tr>
 						<tr style="height: 10px;"></tr>
 						<tr>
