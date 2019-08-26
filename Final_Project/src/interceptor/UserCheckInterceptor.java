@@ -15,7 +15,9 @@ public class UserCheckInterceptor extends HandlerInterceptorAdapter{
 		// TODO Auto-generated method stub
 		//System.out.println(request.getSession().getAttribute("loginUserInfo"));
 		if(request.getSession().getAttribute("loginUserInfo")==null) {
-			response.sendRedirect("/Final_Project/loginForm.do?url="+request.getRequestURI());
+			String url = request.getRequestURI().toString();
+			if(request.getQueryString() != null) url = url + "?" + request.getQueryString();
+			response.sendRedirect("/Final_Project/loginForm.do?url=" + url);
 			return false;
 		}
 		return true;

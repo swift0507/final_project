@@ -84,6 +84,8 @@
 		
 		var reviewCurrentPage = 1;
 		
+		var loginUser = "${ loginUser }";
+		
 		function Review(prod_id, reviewCurrentPage){
 			$.ajax({
 		        type		: "POST",
@@ -98,9 +100,12 @@
 		        		inputReview += '<tr>';
 		        		inputReview += '<th style = "width: 75px;" rowspan = 3><img src = "images/sk.png" style = "width: 50px; height: 50px;"></th>';
 		        		inputReview += '<th><h5><b>' + data.review[i].prod_name + '</b></h5></th>';	//상품명
-		        		inputReview += '<th class = "text-right">작성자 : ' + data.review[i].review_writer + '&nbsp;&nbsp;&nbsp;<button class = "btn btn-sm btn-secondary">수정</button><button class = "btn btn-sm btn-danger">삭제</button></th>';
+		        		if(data.review[i].review_writer == loginUser)
+		        			inputReview += '<th class = "text-right"><button class = "btn btn-sm btn-secondary">수정</button><button class = "btn btn-sm btn-danger">삭제</button></th>';
+		        		else
+		        			inputReview += '<th class = "text-right"><button class = "btn btn-sm btn-danger">신고</button></th>';
 		    			inputReview += '</tr><tr style = "height: 10px;"></tr><tr><td><b>' + date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + '</b></td>';
-		        		inputReview += '<td colspan = 2 class="text-right"><span id = "star_rating">';	//별점부분
+		        		inputReview += '<td colspan = 2 class="text-right"><b>작성자 : ' + data.review[i].review_writer + '</b>&nbsp;&nbsp;&nbsp;<span id = "star_rating">';	//별점부분
 	                	inputReview += '<span class="fa fa-star checked"></span>';
 	                	inputReview += '<span class="fa fa-star checked"></span>';
 	                	inputReview += '<span class="fa fa-star checked"></span>';
@@ -140,7 +145,10 @@
 		        		var date = new Date(data.qna[i].qna_date);
 		        		inputQnA += '<tr>';
 		        		inputQnA += '<td style="width: 15%; text-align: center"><span class = "badge badge-primary">질문</span></td>';
-		        		inputQnA += '<td style="width: 55%">' + data.qna[i].qna_id + '.' + data.qna[i].qna_content + '</td>';
+		        		inputQnA += '<td style="width: 55%">' + data.qna[i].qna_id + '.' + data.qna[i].qna_content;
+		        		if(data.qna[i].mem_id == loginUser) 
+		        			inputQnA += '<span calss="text-right"><a href="#" class="text-secondary"><small>삭제</small></a></span>';
+		        		inputQnA += '</td>'
 		        		inputQnA += '<td style="width: 12%; text-align: center">' + data.qna[i].mem_id + '</td>';
 		        		inputQnA += '<td style="width: 18%; text-align: center">' + date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + '</td>';
 		    			inputQnA += '</tr>';
@@ -251,7 +259,7 @@
 			});
 		
 	    };
-			 
+	   
 	})
 	
 	</script>
@@ -306,6 +314,10 @@
 			        </tr>
 			        <tr>
 			            <td>
+			            	<c:choose>
+			            		<c:when test="${ product.sel_id == loginUser }">
+			            		</c:when>
+			            		<c:otherwise>
 			                <div id = "like_report">
 			                	<button class="btn btn-sm btn-secondary" id = "like_button">
 			                   		<i class="far fa-heart" id = "like_item"></i> 찜하기
@@ -315,6 +327,8 @@
 			                    	<i class="fa fa-warning"></i> 신고
 			                	</button>
 			                </div>
+			                </c:otherwise>
+			            	</c:choose>
 			            </td>
 			        </tr>
 			        <tr>
@@ -365,8 +379,17 @@
 			                <img src = "images/sk.png" width = 60 height = 40>
 			            </td>
 			            <td>
-			                <button class="btn btn-sm btn-secondary" style="width: 170px;" id = "add_item_button">장바구니 담기</button>
-			                <button class="btn btn-sm btn-secondary" style="width: 170px;">즉시 구매</button>
+			                
+			                <c:choose>
+			            		<c:when test="${ product.sel_id == loginUser }">
+			            		<button class="btn btn-sm btn-secondary" style="width: 170px;" id = "modify_product">편집</button>
+			                <button class="btn btn-sm btn-secondary" style="width: 170px;" id = "delete_product">삭제</button>
+			            		</c:when>
+			            		<c:otherwise>
+			                <button class="btn btn-sm btn-secondary" style="width: 170px;" id = "add_basket">장바구니 담기</button>
+			                <button class="btn btn-sm btn-secondary" style="width: 170px;" id = "buy_product">즉시 구매</button>
+			                </c:otherwise>
+			            	</c:choose>
 			            </td>
 			        </tr>
 			    </table>
@@ -388,7 +411,7 @@
 			            </div>
 			            <div class="tab-pane fade" id="nav-profile" role="tabpanel">
 			            	<br>
-			                <table style = "width: 700px;" id="reviewTable">
+			                <table class="table" style = "width: 700px;" id="reviewTable">
 								<!-- <tr>
 								    <th style = "width: 75px;" rowspan = 3>
 								    	<img src = "images/sk.png" style = "width: 50px; height: 50px;">

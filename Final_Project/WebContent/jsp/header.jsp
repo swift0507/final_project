@@ -63,7 +63,11 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
-	var loc = "/Final_Project/loginForm.do?url="+location.pathname;
+
+	var urlParams = new URLSearchParams(window.location.search);
+
+	var loc = "/Final_Project/loginForm.do?url="+location.pathname + "?" + urlParams;
+
 
 	$("#targetURL").attr("href", loc)
 	

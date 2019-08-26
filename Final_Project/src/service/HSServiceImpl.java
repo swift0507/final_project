@@ -20,6 +20,7 @@ import model.Product;
 import model.QnA;
 import model.QnAComment;
 import model.Receipt;
+import model.ReceiptOrder;
 import model.Review;
 import model.Seller;
 
@@ -121,6 +122,34 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 //		}
 		return list;
 	}
+	
+	//결제기능 receipt 먼저 넣고 receiptorder 넣는다. receipt은 만들어져 오고 baskets의 basket_id로 receiptorder를 만든다.
+	@Override
+	public int pay(Receipt receipt, List<Integer> baskets, List<Integer> prodnums) {
+		// TODO Auto-generated method stub
+		receiptDao.insertReceipt(receipt);
+		System.out.println(receipt);
+		int index = 0;
+		for(Integer basket_id : baskets) {
+			Basket basket = basketDao.selectByBasketId(basket_id);
+			ReceiptOrder receiptOrder = new ReceiptOrder();
+			receiptOrder.setReceipt_id(receipt.getReceipt_id());
+			receiptOrder.setSel_id(basket.getSel_id());
+			receiptOrder.setProd_id(basket.getProd_id());
+			receiptOrder.setMem_id(receipt.getMem_id());
+			receiptOrder.setOrder_opt(basket.getBasket_option());
+			//개수를 가져와야 해 
+			receiptOrder.setOrder_quantity(prodnums.get(index));
+			receiptOrder.setOrder_price(basket.getBasket_price()*prodnums.get(index));
+			index++;
+			
+			receiptOrderDao.insertReceiptOrder(receiptOrder);
+			//장바구니에서 삭제시키기 
+			basketDao.deleteByBasketId(basket_id);
+		}
+		return receipt.getReceipt_id();
+	}
+
 
 	//시작 페이지 번호
 	@Override
@@ -531,6 +560,7 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		// TODO Auto-generated method stub
 		return reviewDao.selectAll();
 	}
+
 
 
 }
