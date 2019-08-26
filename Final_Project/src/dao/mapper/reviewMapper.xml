@@ -43,8 +43,8 @@
     		where rn between #{offset} and (#{offset} + #{boardsPerPage} - 1)
     	</select>
     	
-    	<select id="getCountById" parameterType="int" resultType="int">
-   			select count(*) from review where prod_id = #{ prod_id }
-   		</select>
+    <select id="getCountById" parameterType="int" resultType="int">
+   		select count(*) from review where prod_id = #{ prod_id }
+   	</select>
 
 </mapper>

@@ -95,6 +95,13 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		return pickDao.selectPickList(mem_id);
 	}
 	
+	//상품의 찜갯수 가져오기
+	@Override
+	public int getPickCountByProdId(int prod_id) {
+		// TODO Auto-generated method stub
+		return pickDao.getCountById(prod_id);
+	}
+	
 	//맴버의 장바구니 가져오기
 	@Override
 	public List<HashMap<String, Object>> getBasketList(String mem_id) {
@@ -269,6 +276,13 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		params.put("offset", getProdOffset(page));
 		params.put("cardsPerPage", 12);
 		
+		List<Product> prodListByReadCount = productDao.selectByReadCount(params);
+		
+		for(int i = 0; i < prodListByReadCount.size(); i++) {
+			prodListByReadCount.get(i).setProd_pickCount(getPickCountByProdId(prodListByReadCount.get(i).getProd_id()));
+			prodListByReadCount.get(i).setProd_reviewCount(getReviewCountById(prodListByReadCount.get(i).getProd_id()));		
+		}
+
 		HashMap<String, Object> popularProd = new HashMap<String, Object>();
 		
 		popularProd.put("current", page);
@@ -276,7 +290,7 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		popularProd.put("end", getEndPage(page));
 		popularProd.put("last", getProdLastPage(productDao.getCount()));
 		popularProd.put("totalCards", productDao.getCount());
-		popularProd.put("popularProd", productDao.selectByReadCount(params));
+		popularProd.put("popularProd", prodListByReadCount);
 		
 		return popularProd;
 	}
@@ -289,6 +303,13 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		params.put("offset", getProdOffset(page));
 		params.put("cardsPerPage", 12);
 		
+		List<Product> prodListByLatest = productDao.selectByLatest(params);
+		
+		for(int i = 0; i < prodListByLatest.size(); i++) {
+			prodListByLatest.get(i).setProd_pickCount(getPickCountByProdId(prodListByLatest.get(i).getProd_id()));
+			prodListByLatest.get(i).setProd_reviewCount(getReviewCountById(prodListByLatest.get(i).getProd_id()));		
+		}
+		
 		HashMap<String, Object> latestProd = new HashMap<String, Object>();
 		
 		latestProd.put("current", page);
@@ -296,25 +317,66 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		latestProd.put("end", getEndPage(page));
 		latestProd.put("last", getProdLastPage(productDao.getCount()));
 		latestProd.put("totalCards", productDao.getCount());
-		latestProd.put("latestProd", productDao.selectByLatest(params));
+		latestProd.put("latestProd", prodListByLatest);
 		
 		return latestProd;
 	}
 	
+	//검색어에 따른 상품목록 가져오기
+		@Override
+		public HashMap<String, Object> getProdByKeyword(int page, String keyword) {
+			HashMap<String, Object> params = new HashMap<String, Object>();
+			
+			params.put("offset", getProdOffset(page));
+			params.put("cardsPerPage", 12);
+			params.put("keyword", keyword);
+			
+			List<Product> prodListByKeyword = productDao.selectByKeyword(params);
+			
+			for(int i = 0; i < prodListByKeyword.size(); i++) {
+				prodListByKeyword.get(i).setProd_pickCount(getPickCountByProdId(prodListByKeyword.get(i).getProd_id()));
+				prodListByKeyword.get(i).setProd_reviewCount(getReviewCountById(prodListByKeyword.get(i).getProd_id()));		
+			}
+			
+			HashMap<String, Object> searchProd = new HashMap<String, Object>();
+			
+			searchProd.put("current", page);
+			searchProd.put("start", getStartPage(page));
+			searchProd.put("end", getEndPage(page));
+			searchProd.put("last", getProdLastPage(productDao.getCount()));
+			searchProd.put("totalCards", productDao.getCount());
+			searchProd.put("searchProd", prodListByKeyword);
+			
+			return searchProd;
+		}
+
+	
 	//인기순 상품 가져오기(메인 5개)
 	@Override
 	public List<Product> getProdByReadCountForMain() {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub		
+		List<Product> prodListByReadCountForMain = productDao.selectByReadCountForMain();
 		
-		return productDao.selectByReadCountForMain();
+		for(int i = 0; i < prodListByReadCountForMain.size(); i++) {
+			prodListByReadCountForMain.get(i).setProd_pickCount(getPickCountByProdId(prodListByReadCountForMain.get(i).getProd_id()));
+			prodListByReadCountForMain.get(i).setProd_reviewCount(getReviewCountById(prodListByReadCountForMain.get(i).getProd_id()));		
+		}
+		
+		return prodListByReadCountForMain;
 	}
 
 	//최신순 상품 가져오기(메인 5개)
 	@Override
 	public List<Product> getProdByLatestForMain() {
 		// TODO Auto-generated method stub
+		List<Product> prodListByLatestForMain = productDao.selectByLatestForMain();
+		
+		for(int i = 0; i < prodListByLatestForMain.size(); i++) {
+			prodListByLatestForMain.get(i).setProd_pickCount(getPickCountByProdId(prodListByLatestForMain.get(i).getProd_id()));
+			prodListByLatestForMain.get(i).setProd_reviewCount(getReviewCountById(prodListByLatestForMain.get(i).getProd_id()));		
+		}
 			
-		return productDao.selectByLatestForMain();
+		return prodListByLatestForMain;
 	}
 
 
@@ -419,16 +481,7 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		return answerDao.selectByReviewId(review_id);
 	}	
 	
-	//검색어에 따른 상품목록 가져오기
-	@Override
-	public HashMap<String, Object> getProdByKeyword(String keyword) {
-		HashMap<String, Object> searchProd = new HashMap<String, Object>();
-		
-		searchProd.put("searchProd", productDao.selectByKeyword(keyword));
-		
-		return searchProd;
-	}
-
+	
 	//이벤트 조회수 증가
 	@Override
 	public int updateReadCount(int event_readcount) {
@@ -560,7 +613,6 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		// TODO Auto-generated method stub
 		return reviewDao.selectAll();
 	}
-
 
 
 }
