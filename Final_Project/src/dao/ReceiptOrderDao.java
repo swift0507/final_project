@@ -1,5 +1,8 @@
 package dao;
 
-public interface ReceiptOrderDao {
+import model.ReceiptOrder;
 
+public interface ReceiptOrderDao {
+	
+	public void insertReceiptOrder(ReceiptOrder receipitOrder);
 }

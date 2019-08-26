@@ -121,7 +121,7 @@
 	    		<h5><b>찜 목록</b></h5>
 			    <br><hr>
 	    	<div class = "row mx-auto">
-			    <c:forEach begin="1" end="3" var="pick" items="${ pickList }">
+			    <c:forEach begin="0" end="2" var="pick" items="${ pickList }">
 					<div class="card ml-3 mb-3" style="width : 14rem;">
 					<a class="text-decoration-none text-secondary" href="/Final_Project/prodView.do?prod_id=${ pick.prod_id }" target="_blank">
 						<img src="../images/noimage.png" class="card-img-top" style="width:100; height:100;">

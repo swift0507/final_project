@@ -163,8 +163,16 @@ public class AllController {
 	
 	
 	@RequestMapping("prodView.do")
-	public void prodView(int prod_id, Model model, @RequestParam(defaultValue="1")int qnaPage) {
+	public void prodView(int prod_id, Model model, @RequestParam(defaultValue="1")int qnaPage, HttpSession session) {
 		Product product = service.getOneProduct(prod_id);
+		
+		if(session.getAttribute("loginUserInfo") != null) {
+			HashMap<String, Object> id = (HashMap<String, Object>)session.getAttribute("loginUserInfo");
+			String mem_id = (String)id.get("mem_id");
+			System.out.println(mem_id);
+			model.addAttribute("loginUser", mem_id);
+		}
+		//로그인중일 때 현재 로그인중 ID 보내기
 		
 		//옵션 보내기
 		model.addAllAttributes(service.getProdOption(prod_id));
