@@ -16,12 +16,16 @@ public class Product {
 	private int prod_fee;
 	private String prod_content;
 	private Date prod_date;
+	private int prod_pickCount;
+	private int prod_reviewCount;
 
 	public Product() {}
 
+
 	public Product(int prod_id, String sel_id, String prod_name, int prod_price, int prod_readcount, int category_id,
 			String prod_bank, String prod_account, String prod_depositor, int prod_status, int prod_fee,
-			String prod_content, Date prod_date) {
+			String prod_content, Date prod_date, int prod_pickCount, int prod_reviewCount) {
+		super();
 		this.prod_id = prod_id;
 		this.sel_id = sel_id;
 		this.prod_name = prod_name;
@@ -35,7 +39,11 @@ public class Product {
 		this.prod_fee = prod_fee;
 		this.prod_content = prod_content;
 		this.prod_date = prod_date;
+		this.prod_pickCount = prod_pickCount;
+		this.prod_reviewCount = prod_reviewCount;
 	}
+
+
 
 
 	public int getProd_id() {
@@ -142,15 +150,36 @@ public class Product {
 		this.prod_date = prod_date;
 	}
 
+	public int getProd_pickCount() {
+		return prod_pickCount;
+	}
+
+
+	public void setProd_pickCount(int prod_pickCount) {
+		this.prod_pickCount = prod_pickCount;
+	}
+
+
+	public int getProd_reviewCount() {
+		return prod_reviewCount;
+	}
+
+
+	public void setProd_reviewCount(int prod_reviewCount) {
+		this.prod_reviewCount = prod_reviewCount;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Product [prod_id=" + prod_id + ", sel_id=" + sel_id + ", prod_name=" + prod_name + ", prod_price="
 				+ prod_price + ", prod_readcount=" + prod_readcount + ", category_id=" + category_id + ", prod_bank="
 				+ prod_bank + ", prod_account=" + prod_account + ", prod_depositor=" + prod_depositor + ", prod_status="
 				+ prod_status + ", prod_fee=" + prod_fee + ", prod_content=" + prod_content + ", prod_date=" + prod_date
-				+ "]";
+				+ ", prod_pickCount=" + prod_pickCount + ", prod_reviewCount=" + prod_reviewCount + "]";
 	}
 
 
+	
 	
 }

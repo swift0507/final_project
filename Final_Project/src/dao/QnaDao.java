@@ -16,4 +16,6 @@ public interface QnaDao {
 	//Q&A 답변 작성시 Q&A 답변상태 업데이트
 	public void updateQnaAnswerById(int qna_id);
 
+	public void deleteQnAById(int qna_id);
+
 }

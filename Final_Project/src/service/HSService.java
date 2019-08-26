@@ -51,6 +51,9 @@ public interface HSService {
 	//로그인 id의 찜리스트 가져오기
 	public List<Product> getPickList(String mem_id);
 	
+	//상품의 찜갯수 가져오기
+	public int getPickCountByProdId(int prod_id);
+	
 	//장바구니 가져오기 + 결제화면 가기
 	public List<HashMap<String, Object>> getBasketList(String mem_id);
 	
@@ -79,7 +82,7 @@ public interface HSService {
 	public Product getOneProduct(int prod_id);
 	
 	//검색어 기반 상품목록 가져오기
-	public HashMap<String, Object> getProdByKeyword(String keyword);
+	public HashMap<String, Object> getProdByKeyword(int page, String keyword);
 	
 	//상품 보기 조회수 증가
 	public void prodViewCount(int prod_id);
@@ -163,5 +166,8 @@ public interface HSService {
 	public int getReviewCountById(int prod_id);
 	
 	public Answer getReviewAnswer(int review_id);
+
+	//Q&A 삭제
+	public void deleteQnA(int qna_id);
 
 }
