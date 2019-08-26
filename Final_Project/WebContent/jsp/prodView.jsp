@@ -128,16 +128,16 @@
 			    	$('#reviewTable').html(inputReview);
 			    	
 			    	$(".reviewDeleteBtn").on("click", function() {
-			    		var qna_id = $(this).attr('id');
+			    		var review_id = $(this).attr('id');
 				    	if(confirm('정말로 삭제하시겠습니까?')) {
 				    		$.ajax({
 						        type		: "POST",
-						        url 		: "deleteQnA.do",
-						        data		:  {qna_id : qna_id},
+						        url 		: "deleteReview.do",
+						        data		:  {review_id : review_id},
 						        success		: function(data) {
 						        	alert('삭제가 완료되었습니다!');
-						        	paging(totalBoards, boardsPerPage, offset, qnaCurrentPage);
-									QnA(prod_id, qnaCurrentPage);
+						        	paging(totalBoards, boardsPerPage, offset, reviewCurrentPage);
+						        	Review(prod_id, reviewCurrentPage);
 					        	}
 					        });
 						        

@@ -205,8 +205,8 @@ public class AllController {
 	}
 	
 	@RequestMapping("deleteQnA.do")
-	public @ResponseBody void deleteQnA(int qna_id) {
-		service.deleteQnA(qna_id);
+	public @ResponseBody int deleteQnA(int qna_id) {
+		return service.deleteQnA(qna_id);
 	}
 	
 	//이벤트 목록 요청

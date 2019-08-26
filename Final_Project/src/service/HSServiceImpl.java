@@ -612,7 +612,6 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 
 	//후기 list 가져오기
 	@Override
-<<<<<<< HEAD
 	public HashMap<String, Object> getReviewList(int page) {
 			HashMap<String, Object> params = new HashMap<String, Object>();
 			
@@ -631,18 +630,11 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 			return reviewMap;
 		}
 		
-=======
-	public List<Review> getReviewList() {
-		// TODO Auto-generated method stub
-		return reviewDao.selectAll();
-	}
 
 	@Override
-	public void deleteQnA(int qna_id) {
+	public int deleteQnA(int qna_id) {
 		// TODO Auto-generated method stub
-		qnaDao.deleteQnAById(qna_id);
+		return qnaDao.deleteQnAById(qna_id);
 	}
-
->>>>>>> branch 'master' of https://github.com/swift0507/final_project.git
 
 }
