@@ -153,7 +153,7 @@
 		<tr style = "height: 20px;"></tr>
 		<tr>
 			<td colspan = 2 class = "text-center">
-				<button class="btn btn-sm btn-secondary" style = "width: 75px;" type="submit">등록</button>
+				<button class="btn btn-sm btn-secondary" style = "width: 75px;" type="submit">수정</button>
 				<button class="btn btn-sm btn-secondary" style = "width: 75px;" type="button" onclick="location.href='myReview.do'">취소</button>
 			</td>
 		</tr>

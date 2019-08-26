@@ -81,7 +81,7 @@
 							</td>
 							<td class="text-right">
 								<button class="btn btn-sm btn-secondary"
-									onclick="location.href='user/review.do'">후기 작성</button>
+									onclick="location.href='reviewWriteForm.do'">후기 작성</button>
 							</td>
 						</tr>
 						<tr>
@@ -89,10 +89,9 @@
 						</tr>
 					</table>
 					<!-- 후기 header / 작성 button 종료 -->
-					${myReview}
 
 					<!-- 자료넣기 -->
-					<c:forEach items="${myReview}" var="m">
+					<c:forEach items="${review}" var="m">
 					
 					<!-- 후기 table 1 -->
 					<table style="width: 700px;">
@@ -103,7 +102,7 @@
 							</th>
 							<th>${m.review_id}</th>
 							<th class="text-right">
-								<button class="btn btn-sm btn-secondary" onclick="location.href='modifyReview.do?review_id=${m.review_id}'">수정</button>
+								<button class="btn btn-sm btn-secondary" onclick="location.href='reviewWriteForm.do?review_id=${m.review_id}'">수정</button>
 								<button class="btn btn-sm btn-danger" onclick="location.href='deleteReview.do?review_id=${m.review_id}'">삭제</button>
 							</th>
 						</tr>
@@ -167,18 +166,46 @@
 					<!-- 페이징 처리  -->
 					<div class="container">
 						<nav>
-							<ul class="pagination justify-content-center">
-								<li class="page-item"><a class="page-link" href="#"> <span>&laquo;</span>
-								</a></li>
-								<li class="page-item"><a class="page-link" href="#">1</a></li>
-								<li class="page-item"><a class="page-link" href="#">2</a></li>
-								<li class="page-item"><a class="page-link" href="#">3</a></li>
-								<li class="page-item"><a class="page-link" href="#"> <span>&raquo;</span>
-								</a></li>
-							</ul>
-						</nav>
+					<ul class="pagination justify-content-center">
+						<li class="page-item <c:if test="${ start == 1 }">disabled</c:if>"><a
+							class="page-link" href="myReview.do?page=1"> <span
+								aria-hidden="true">&laquo;</span>
+						</a></li>
+						<li class="page-item <c:if test="${ start == 1 }">disabled</c:if>"><a
+							class="page-link" href="myReview.do?page=${ start - 1 }">이전</a></li>
+						<c:forEach begin="${ start }" end="${ end < last ? end : last }"
+							var="i">
+							<c:choose>
+								<c:when test="${ i == current }">
+									<li class="page-item active" aria-current="page"><span
+										class="page-link">${ current } <span class="sr-only">(current)</span></span>
+									</li>
+								</c:when>
+								<c:otherwise>
+									<li class="page-item"><a class="page-link"
+										href="myReview.do?page=${ i }">${ i }</a></li>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						<li
+							class="page-item <c:if test="${ last <= end }">disabled</c:if>"><a
+							class="page-link" href="myReview.do?page=${ end + 1 }">다음</a></li>
+						<li
+							class="page-item <c:if test="${ last <= end }">disabled</c:if>"><a
+							class="page-link" href="myReview.do?page=${ last }"
+							aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+						</a></li>
+					</ul>
+				</nav>
+				시작페이지 : ${ start }<br>
+				끝페이지 : ${ end }<br>
+				마지막 : ${ last }<br>
+				전체리뷰갯수 : ${ totalBoards }<br>
+				현재 : ${ current }
+				
 					</div>
 					<!-- 페이징 처리  종료 -->
+					<div class="col"></div>
 				</div>
 			</div>
 		</div>

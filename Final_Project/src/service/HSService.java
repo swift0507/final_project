@@ -148,9 +148,11 @@ public interface HSService {
 
 	//후기 작성,수정,삭제
 	public int writeReview(Review review);
-//	public int modifyReview(Review review);
+	public int modifyReview(Review review);
 	public int deleteReview(int review_id);
-
+	
+	public Review getReview(int review_id);
+	
 	//후기페이지의 리스트 출력
 //	public List<Review> getReviewList();
 	public HashMap<String, Object> getReviewList(int page);

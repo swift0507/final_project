@@ -17,6 +17,7 @@ import model.Basket;
 import model.Member;
 import model.Product;
 import model.Receipt;
+import model.Review;
 import service.HSService;
 
 @Controller
@@ -139,5 +140,24 @@ public class UserController {
 		return "redirect:myReview.do";
 	}
 	
+	//review 글 수정폼
+	@RequestMapping("user/reviewModifyForm.do")
+	public void modifyReviewForm(Model model, int review_id) {
+		model.addAttribute("review", service.getReview(review_id));
+	}
+	
+	
+	@RequestMapping("user/modifyReview.do")
+	public String modify(Review review, int page) {
+	
+		//파라미터로 가져온 데이터 (수정된 게시물)
+		//서비스의 modifyReview 메소드 호출
+		service.modifyReview(review);
+		
+		//게시물 상세보기 페이지 요청
+		return "redirect:myReview.do?review_id="+review.getReview_id()+"&page="+page;
+	}
 
+	@RequestMapping("user/reviewWriteForm.do")
+	public void modifyWriteForm() {}
 }
