@@ -40,7 +40,6 @@ public class UserController {
 	//장바구니보기
 	@RequestMapping("user/basket.do")
 	public void basket(Model m, HttpSession session) {
-		//미완성
 		HashMap<String, Object> id = (HashMap<String, Object>)session.getAttribute("loginUserInfo");
 		String mem_id = (String)id.get("mem_id");
 		//사장님별 장바구니 리스트 받아오기 
@@ -126,8 +125,18 @@ public class UserController {
 	
 	//주문내역 보기
 	@RequestMapping("user/orderList.do")
-	public void orderList() {
+	public void orderList(Model m, HttpSession session) {
 		//미완성
+		HashMap<String, Object> id = (HashMap<String, Object>)session.getAttribute("loginUserInfo");
+		String mem_id = (String)id.get("mem_id");
+		service.getReceiptListByMember(mem_id);
+		m.addAttribute("receiptList", service.getReceiptListByMember(mem_id));
+	}
+	
+	//교환신청
+	@RequestMapping("user/chageOrder.do")
+	public void changeOrder(int receipt_id) {
+		System.out.println("receipt_id");
 	}
 	
 	//개인정보 수정 전 비밀번호 확인창

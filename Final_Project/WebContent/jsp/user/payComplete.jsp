@@ -62,6 +62,13 @@
 			elem.parentsUntil("table").siblings().find($(".totalpay")).text("금액 : "+totalpay+"원")
 			elem.parentsUntil("table").siblings().find($(".duedate")).text("입금마감일 : "+stringDate)
 		})
+		
+		$("#orderList").on("click", function(){
+			location.href = "orderList.do"
+		})
+		$("#main").on("click", function(){
+			location.href = "/Final_Project/main.do"
+		})
 	})
 	
 	</script>
@@ -135,8 +142,8 @@
 				</table>
 				</c:forEach>
 				<div class="text-center">
-				<button class="btn btn-sm btn-secondary" type="button">주문내역 / 배송조회 </button>
-				<button class="btn btn-sm btn-secondary" type="button">쇼핑 계속하기 </button>
+				<button class="btn btn-sm btn-secondary" type="button" id="orderList">주문내역 / 배송조회 </button>
+				<button class="btn btn-sm btn-secondary" type="button" id="main">쇼핑 계속하기 </button>
 				
 				</div>
 			</div>
