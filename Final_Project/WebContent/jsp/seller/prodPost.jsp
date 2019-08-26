@@ -388,6 +388,7 @@
 					<td>
 						<input type = "text" class = "form-control" placeholder = "계좌번호 입력">
 					</td>
+				</tr>
 			</table>
 			<!-- 은행, 예금주, 계좌번호 입력 table 종료 -->
 			<br>
