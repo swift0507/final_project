@@ -134,9 +134,9 @@ public class UserController {
 	}
 	
 	//교환신청
-	@RequestMapping("user/chageOrder.do")
+	@RequestMapping("user/changeOrder.do")
 	public void changeOrder(int receipt_id) {
-		System.out.println("receipt_id");
+		System.out.println(receipt_id);
 	}
 	
 	//개인정보 수정 전 비밀번호 확인창
