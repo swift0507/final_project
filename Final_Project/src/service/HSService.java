@@ -175,6 +175,6 @@ public interface HSService {
 	public Answer getReviewAnswer(int review_id);
 
 	//Q&A 삭제
-	public void deleteQnA(int qna_id);
+	public int deleteQnA(int qna_id);
 
 }

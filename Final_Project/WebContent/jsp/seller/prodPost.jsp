@@ -76,15 +76,15 @@
 			detail_count += 1;
 		
 			/* detail 추가 폼 */
-			var input_detail_form = '<tr id = "detail' + (detail_count) + '">';
+			var input_detail_form = '<tr id = "detail">';
 				input_detail_form += '<td style = "width: 5%;" class= "text-center">';
 				input_detail_form += '<input type = "checkbox">'
 				input_detail_form += '</td>'
 				input_detail_form += '<td style = "width: 30%;">'
-				input_detail_form += '<input type="text" class="form-control" placeholder = "항목명" style = "width: 175px;"' + 'id = "detail_name' + (detail_count) + '">'
+				input_detail_form += '<input type="text" class="form-control" placeholder = "항목명" style = "width: 175px;"' + 'id = "detail_name">';
 				input_detail_form += '</td>'
 				input_detail_form += '<td style = "width: 65%;">'
-				input_detail_form += '<input type="text" class="form-control" placeholder = "설명"' + 'id = "detail_explain' + (detail_count) + '">';
+				input_detail_form += '<input type="text" class="form-control" placeholder = "설명"' + 'id = "detail_explain">';
 				input_detail_form += '</td>'
 				input_detail_form += '</tr>'
 			/* detail 추가 폼 종료 */
@@ -97,107 +97,164 @@
 		$('#del_detail').click(function(){
 			if(detail_count > 1) {
 				detail_count -= 1;
-				$('#detail_table tr').last().detach();
+				$('#detail_table tr').last().remove();
 			} else {
 				alert('한 개 이상의 옵션을 지정하셔야 합니다.');	
 			}
 		})
 		/* detail 입력 폼 삭제 Script 종료 */
 		
+		
+		/* 옵션 사용시 기본으로 생성될 테이블 */
+		var opt_default = '<table style = "width: 700px;" class = "opt_add_del">';
+		opt_default += '<tr>';
+		opt_default += '<td colspan = 5>';
+		opt_default += '<button class = "btn-secondary" id = "add_option">추가</button>';
+		opt_default += '&nbsp;';
+		opt_default += '<button class = "btn-danger" id = "del_option">삭제</button>';
+		opt_default += '</td>';
+		opt_default += '</tr>';
+		opt_default += '</table>';
+		opt_default += '<table style = "width: 700px;" class = "option_table">';
+		opt_default += '<tr style = "height: 75px;">';
+		opt_default += '<td class= "text-center" style = "width: 50px;">';
+		opt_default += '<input type = "checkbox">';
+		opt_default += '</td>';
+		opt_default += '<td colspan = 2 style = "width: 275px;">';
+		opt_default += '<input type="text" class="form-control" id = "opt_name" placeholder = "옵션명">';
+		opt_default += '</td>';
+		opt_default += '<td class = "text-right" colspan = 4 style = "width: 200px;">';
+		opt_default += '<input type = "hidden" value = 1>';
+		opt_default += '<button class = "btn-secondary" id = "add_optionDetail">상세옵션 추가</button>';
+		opt_default += '&nbsp;';
+		opt_default += '<button class = "btn-danger" id = "del_optionDetail">삭제</button>';
+		opt_default += '</td>';
+		opt_default += '</tr>';
+		opt_default += '';
+		opt_default += '<tr class = "sub_option">';
+		opt_default += '<td style = "width: 50px;"></td>';
+		opt_default += '<td style = "width: 200px;">';
+		opt_default += '<input type="text" class="form-control" id = "optd_choice" placeholder = "상세옵션명">';
+		opt_default += '</td>';
+		opt_default += '<th class = "text-center" style = "width: 75px;"> 추가 금액 </th>';
+		opt_default += '<td style = "width: 150px;">';
+		opt_default += '<input type="text" class="form-control" id = "optd_price" placeholder = "추가 금액">';
+		opt_default += '</td>';
+		opt_default += '<th class = "text-center" style = "width: 75px;"> 수량 </th>';
+		opt_default += '<td class = "text-center" style = "width: 75px;">';
+		opt_default += '<input type="text" class="form-control" id = "optd_quantity" placeholder = "수량">	';
+		opt_default += '</td>';
+		opt_default += '</tr>';
+		opt_default += '</table>';
+		/* 옵션 사용시 기본으로 생성될 테이블 종료 */
+		
 		/* 옵션 사용 여부 Script */
-		$('#use_option').click(function(){
-   			$('#select_opt_use').css('display', '');
+		$(document).on('click', '#use_option', function(){
+   			$('.option_area').append(opt_default);
    		})
    			
-   		$('#unused_option').click(function(){
-   			$('#select_opt_use').css('display', 'none');
+   		$(document).on('click', '#unused_option', function(){
+   			$('.option_area').children().remove();
    		})
    		/* 옵션 사용 여부 Script 종료 */
 		
 		
 		var option_count = 1;
-        var suboption_count = 1;
-        
+		
         /* 옵션 폼 추가 Script */
-        	$('#add_option').on('click', function(){
+        	$(document).on('click', '#add_option', function(){
         		option_count += 1;
     			
-        		var option = '<table style = "width: 700px;" class = "option_table'+ (option_count) +'">';
+        		var option = '<table style = "width: 700px;" class = "option_table">';
         		option += '<tr style = "height: 75px;">';
         		option += '<td class= "text-center" style = "width: 50px;">';
         		option += '<input type = "checkbox">';
         		option += '</td>';
         		option += '<td colspan = 2 style = "width: 275px;">';
-        		option += '<input type="text" class="form-control" id = "opt_name'+ (option_count) + '" placeholder = "옵션명">';
+        		option += '<input type="text" class="form-control" id = "opt_name" placeholder = "옵션명">';
         		option += '</td>';
         		option += '<td class = "text-right" colspan = 4 style = "width: 200px;">';
+        		option += '<input type = "hidden" value = 1>';
         		option += '<button class = "btn-secondary" id = "add_optionDetail">상세옵션 추가</button>';
-        		option += '&nbsp;'
+        		option += '&nbsp;';
         		option += '<button class = "btn-danger" id = "del_optionDetail">삭제</button>';
         		option += '</td>';
         		option += '</tr>';
         		option += '<tr>';
         		option += '<td style = "width: 50px;"></td>';
         		option += '<td style = "width: 200px;">';
-        		option += '<input type="text" class="form-control" id = "optd_choice' + (option_count) + '_' + (suboption_count) + '" placeholder = "상세옵션명">';
+        		option += '<input type="text" class="form-control" id = "optd_choice" placeholder = "상세옵션명">';
         		option += '</td>';
         		option += '<th class = "text-center" style = "width: 75px;"> 추가 금액 </th>';
         		option += '<td style = "width: 150px;">';
-        		option += '<input type="text" class="form-control" id = "optd_price' + (option_count) + '_' + (suboption_count) + '" placeholder = "추가 금액">';
+        		option += '<input type="text" class="form-control" id = "optd_price" placeholder = "추가 금액">';
         		option += '</td>';
         		option += '<th class = "text-center" style = "width: 75px;"> 수량 </th>';
         		option += '<td class = "text-center" style = "width: 75px;">';
-        		option += '<input type="text" class="form-control" id = "optd_quantity' + (option_count) + '_' + (suboption_count) + '" placeholder = "수량">';
+        		option += '<input type="text" class="form-control" id = "optd_quantity" placeholder = "수량">';
         		option += '</td>';
         		option += '</tr>';
         		option += '</table>';
         		
-        		$('.option_area').append(option);	
+        		$('.option_area').last().append(option);
+
         		console.log(option_count);
         	})
         	/* 옵션 폼 추가 Script 종료 */
         	
         	
         	/* 옵션 폼 삭제 Script */
-        	$('#del_option').on('click', function(){
-        		option_count -= 1;
-        		
-        		$('.option_area table').last().remove();
+        	$(document).on('click', '#del_option', function(){
+        		if(option_count > 1) {
+        			option_count -= 1;
+        			$('.option_area table').last().remove();
+    			} else {
+    				alert('한 개 이상의 옵션을 지정하셔야 합니다.');	
+    			}
         	})
         	/* 옵션 폼 삭제 Script 종료 */
         	
         	
         	/* 상세 옵션 폼 추가 Script */
         	$(document).on('click','#add_optionDetail', function(){
-        		var test = $(this).parent().parent().index();
-        		
-        		
+    
         		var sub_option = '<tr>';
         		sub_option += '<td style = "width: 50px;"></td>';
         		sub_option += '<td style = "width: 200px;">';
-        		sub_option += '<input type="text" class="form-control" id = "optd_choice' + (option_count) + '_' + (suboption_count) + '" placeholder = "상세옵션명">';
+        		sub_option += '<input type="text" class="form-control" id = "optd_choice" placeholder = "상세옵션명">';
         		sub_option += '</td>';
         		sub_option += '<th class = "text-center" style = "width: 75px;"> 추가 금액 </th>';
         		sub_option += '<td style = "width: 150px;">';
-        		sub_option += '<input type="text" class="form-control" id = "optd_price' + (option_count) + '_' + (suboption_count) + '" placeholder = "추가 금액">';
+        		sub_option += '<input type="text" class="form-control" id = "optd_price" placeholder = "추가 금액">';
         		sub_option += '</td>';
         		sub_option += '<th class = "text-center" style = "width: 75px;"> 수량 </th>';
         		sub_option += '<td class = "text-center" style = "width: 75px;">';
-        		sub_option += '<input type="text" class="form-control" id = "optd_quantity' + (option_count) + '_' + (suboption_count) + '" placeholder = "수량">';
+        		sub_option += '<input type="text" class="form-control" id = "optd_quantity" placeholder = "수량">';
         		sub_option += '</td>';
         		sub_option += '</tr>';
         		
+        		var suboption_count = parseInt($(this).prev().val());
+        		suboption_count += 1;
+        		$(this).prev().removeAttr('value');
+        		$(this).prev().attr('value', suboption_count);
         		$(this).parent().parent().parent().last().append(sub_option);
-        		console.log(test);
+        		console.log(suboption_count);
         	})
 			/* 상세 옵션 폼 추가 Script 종료 */
 
         	
         	/* 상세 옵션 폼 삭제 Script */
         	$(document).on('click', '#del_optionDetail', function(){
-        		suboption_count -= 1;
-        		
-        		$(this).parent().parent().siblings().last().remove();
+        		var suboption_count = parseInt($(this).prev().prev().val());
+        		if(suboption_count > 1) {
+        			suboption_count -= 1;
+            		$(this).prev().prev().removeAttr('value');
+            		$(this).prev().prev().attr('value', suboption_count);
+        			$(this).parent().parent().siblings().last().remove();
+    			} else {
+    				alert('한 개 이상의 옵션을 지정하셔야 합니다.');	
+    			}
+        		console.log(suboption_count);
         	})
         	/* 상세 옵션 폼 삭제 Script 종료 */
         	
@@ -416,10 +473,10 @@
 						<input type = "checkbox">
 					</td>
 					<td style = "width: 30%;">
-						<input type="text" class="form-control" placeholder = "항목명" style = "width: 175px;" id = "detail_name1">
+						<input type="text" class="form-control" placeholder = "항목명" style = "width: 175px;" id = "detail_name">
 					</td>
 					<td style = "width: 65%;">
-						<input type="text" class="form-control" placeholder = "설명" id = "detail_explain1">
+						<input type="text" class="form-control" placeholder = "설명" id = "detail_explain">
 					</td>
 				</tr>
 			</table>
@@ -449,55 +506,13 @@
 			
 			<br>
 			
-			<!-- 옵션 추가 여부 설정 table -->
-			<div id = "select_opt_use" style = "display: none;">
-				<!-- 옵션 추가 영역 -->
-				<div class = "option_area">
-				<table style = "width: 700px;" class = "opt_add_del">
-					<tr>
-						<td colspan = 5>
-							<button class = "btn-secondary" id = "add_option">추가</button>
-							<button class = "btn-danger" id = "del_option">삭제</button>
-						</td>
-					</tr>
-				</table>
-				<table style = "width: 700px;" class = "option_table1">
-					<tr style = "height: 75px;">
-						<td class= "text-center" style = "width: 50px;">
-							<input type = "checkbox">
-						</td>
-						<td colspan = 2 style = "width: 275px;">
-							<input type="text" class="form-control" id = "opt_name1" placeholder = "옵션명">
-						</td>
-						<td class = "text-right" colspan = 4 style = "width: 200px;">
-							<button class = "btn-secondary" id = "add_optionDetail">상세옵션 추가</button>
-							<button class = "btn-danger" id = "del_optionDetail">삭제</button>
-						</td>
-					</tr>
-					<!-- 상세옵션 추가 영역 -->
-					<tr class = "sub_option1_1">
-						<td style = "width: 50px;"></td>
-						
-						<td style = "width: 200px;">
-							<input type="text" class="form-control" id = "optd_choice1_1" placeholder = "상세옵션명">
-						</td>
-						<th class = "text-center" style = "width: 75px;"> 추가 금액 </th>
-						
-						<td style = "width: 150px;">
-							<input type="text" class="form-control" id = "optd_price1_1" placeholder = "추가 금액" >	
-						</td>
-						
-						<th class = "text-center" style = "width: 75px;"> 수량 </th>
-						
-						<td class = "text-center" style = "width: 75px;">
-							<input type="text" class="form-control" id = "optd_quantity1_1" placeholder = "수량">	
-						</td>
-					</tr>
-					<!-- 상세옵션 추가 영역 종료 -->
-				</table>
-				</div>
+			
+			<!-- 옵션 추가 영역 -->
+			<div class = "option_area">
+				
 			</div>
-				<!-- 옵션 추가 영역 종료 -->
+			<!-- 옵션 추가 영역 종료 -->
+		
 			<br><br>
 			
 			<!-- 상품 상세정보 textarea -->

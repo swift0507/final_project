@@ -194,14 +194,19 @@ public class AllController {
 		return service.getReviewById(prod_id, reviewPage);
 	}
 	
+	@RequestMapping("deleteReview.do")
+	public @ResponseBody void deleteReview(int review_id) {
+		service.deleteReview(review_id);
+	}
+	
 	@RequestMapping("qnaByProd.do")
 	public @ResponseBody HashMap<String, Object> qnaByProd(int prod_id, int qnaPage) {
 		return service.getQnAById(prod_id, qnaPage);
 	}
 	
 	@RequestMapping("deleteQnA.do")
-	public @ResponseBody void deleteQnA(int qna_id) {
-		service.deleteQnA(qna_id);
+	public @ResponseBody int deleteQnA(int qna_id) {
+		return service.deleteQnA(qna_id);
 	}
 	
 	//이벤트 목록 요청

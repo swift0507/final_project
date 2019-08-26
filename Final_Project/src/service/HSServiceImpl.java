@@ -629,7 +629,6 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 	}
 
 	//후기 list 가져오기
-	@Override
 	public HashMap<String, Object> getReviewList(int page) {
 			HashMap<String, Object> params = new HashMap<String, Object>();
 			
@@ -649,13 +648,8 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		}
 		
 	@Override
-	public void deleteQnA(int qna_id) {
+	public int deleteQnA(int qna_id) {
 		// TODO Auto-generated method stub
-		qnaDao.deleteQnAById(qna_id);
+		return qnaDao.deleteQnAById(qna_id);
 	}
-
-	
-
-
-
 }
