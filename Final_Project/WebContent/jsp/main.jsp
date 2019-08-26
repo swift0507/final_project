@@ -103,9 +103,9 @@
 			<h5 class="card-price">${ popular.prod_price }원</h5>
           </div>
           <div class="card-footer text-right">
-           	<i class = "far fa-heart">10</i>
+           	<i class = "far fa-heart">${ popular.prod_pickCount }</i>
            	&nbsp;
-            <i class = "far fa-comment-dots">12</i>
+            <i class = "far fa-comment-dots">${ popular.prod_reviewCount }</i>
           </div>
           </a>
         </div>
@@ -180,9 +180,9 @@
 				<h5 class="card-price">${ latest.prod_price }원</h5>
 	          </div>
 	          <div class="card-footer text-right">
-	           	<i class = "far fa-heart">10</i>
+	           	<i class = "far fa-heart">${ latest.prod_pickCount }</i>
 	           	&nbsp;
-	            <i class = "far fa-comment-dots">12</i>
+	            <i class = "far fa-comment-dots">${ latest.prod_reviewCount }</i>
 	          </div>
 	          </a>
 	        </div>

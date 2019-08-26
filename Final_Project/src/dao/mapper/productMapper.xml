@@ -20,10 +20,8 @@
     	select * from (select rownum as rn, e.* from (select * from product order by prod_date desc) e) where rn between #{offset} and (#{offset} + #{cardsPerPage} - 1)
     </select>
     
-    <select id="selectByKeyword" parameterType="String" resultType="product">
-    	<if test="value != null">
-    	    select * from product where prod_name like '%${ value }%' or sel_id like '%${ value }%'
-    	</if>
+    <select id="selectByKeyword" parameterType="java.util.HashMap" resultType="product">
+    	    select * from (select rownum as rn, e.* from (select * from product where prod_name like '%${ keyword }%' or sel_id like '%${ keyword }%') e) where rn between #{offset} and (#{offset} + #{cardsPerPage} - 1)
     </select>
 
 	<select id="getCount" resultType="int">

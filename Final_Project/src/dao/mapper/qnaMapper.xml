@@ -15,4 +15,8 @@
     	<update id="updateQnaAnswerById" parameterType="int">
     		update qna set qna_answer = 1 where qna_id = #{ qna_id }
     	</update>
+    	
+    	<delete id="deleteQnAById" parameterType="int">
+    		delete from qna where qna_id = #{ qna_id }
+    	</delete>
     </mapper>

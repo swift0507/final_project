@@ -75,9 +75,9 @@
 						<h5 class="card-price">${ prod.prod_price }원</h5>
 					</div>
 					<div class="card-footer text-right">
-						<i class = "far fa-heart">10</i>
+						<i class = "far fa-heart">${ prod.prod_pickCount }</i>
            	 	 		&nbsp;
-              			<i class = "far fa-comment-dots">12</i>
+              			<i class = "far fa-comment-dots">${ prod.prod_reviewCount }</i>
 					</div>
 				</a>	
 				</div>	

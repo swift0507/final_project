@@ -2,6 +2,8 @@ package controller;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.View;
 
 import model.Member;
+import model.Pick;
 import model.Product;
 import service.HSService;
 
@@ -62,9 +65,8 @@ public class AllController {
 	
 	//검색어 기반 상품 목록
 	@RequestMapping("search.do")
-	public void search(Model model, String keyword) {
-		System.out.println(keyword);
-		model.addAllAttributes(service.getProdByKeyword(keyword));
+	public void search(Model model, @RequestParam(defaultValue="1")int page, String keyword) {
+		model.addAllAttributes(service.getProdByKeyword(page, keyword));
 		model.addAttribute("keyword", keyword);
 	}
 	
@@ -197,6 +199,11 @@ public class AllController {
 		return service.getQnAById(prod_id, qnaPage);
 	}
 	
+	@RequestMapping("deleteQnA.do")
+	public @ResponseBody void deleteQnA(int qna_id) {
+		service.deleteQnA(qna_id);
+	}
+	
 	//이벤트 목록 요청
 	@RequestMapping("eventList.do")
 	public void eventList(Model model, @RequestParam(defaultValue="1")int page) {
@@ -254,6 +261,8 @@ public class AllController {
 		model.addAttribute("faq", service.getsupportfaqList());
 	}
 
+	
+	
 	
 }
 
