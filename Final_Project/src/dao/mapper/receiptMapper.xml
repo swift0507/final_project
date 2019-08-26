@@ -6,4 +6,12 @@
     <select id="selectReceiptListByMember" resultType="receipt">
     	select * from receipt where mem_id=#{mem_id} order by receipt_orderdate desc
     </select>
+    
+    <insert id="insertReceipt">
+    	<selectKey resultType="int" keyProperty="receipt_id" order="BEFORE">
+    	select receiptid_seq.nextval from dual
+    	</selectKey>
+		insert into receipt values (#{receipt_id}, #{sel_id}, #{mem_id}, #{receipt_prod}, #{receipt_price}, #{receipt_fee}, default, null, #{receipt_name}
+		, #{receipt_zipcode}, #{receipt_addr}, #{receipt_phone}, #{receipt_request}, #{receipt_payoption}, #{receipt_delstatus}, #{receipt_bank}, #{receipt_account}, #{receipt_depositor}) 
+    </insert>
     </mapper>
