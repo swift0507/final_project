@@ -141,13 +141,12 @@
 					</tr>
 				</table>
 				</c:forEach>
-				<div class="text-center">
+				
 				<button class="btn btn-sm btn-secondary" type="button" id="orderList">주문내역 / 배송조회 </button>
 				<button class="btn btn-sm btn-secondary" type="button" id="main">쇼핑 계속하기 </button>
 				
 				</div>
-			</div>
-			<div class="col"></div>
+				<div class="col"></div>
 		</div>
 	</div>
 </div>
