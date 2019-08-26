@@ -82,16 +82,22 @@
 	
 <!-- main body -->
 <div class = "content">
-	<div class="container">
-		<div class="row"> 
+	<!-- <div class="container"> -->
+		<div class="row">
 			<div class="col"></div>
 			<div class="col-8">
-				<h5><b>주문 완료</b></h5>
-				<hr>
+				<!-- <h5><b>주문 완료</b></h5>
+				<hr> -->
 				<i class = "far fa-thumbs-up" style = "font-size: 30px;"> 주문이 완료되었습니다.</i> <br>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<b class = "indent">주문내역은 [마이페이지 > 구매내역] 에서 확인 가능합니다.</b>
 				<br><br>
+				<table style = "width: 700px;">
+				<tr>
+					<td><h5><b>주문 완료</b></h5>
+				<hr></td>
+				</tr>
+				</table>
 				<c:forEach var="receipt" items="${receiptList}">
 				<table style = "width: 700px; margin-left:auto; margin-right:auto;">
 					<tr>
@@ -141,14 +147,20 @@
 					</tr>
 				</table>
 				</c:forEach>
-				
-				<button class="btn btn-sm btn-secondary" type="button" id="orderList">주문내역 / 배송조회 </button>
-				<button class="btn btn-sm btn-secondary" type="button" id="main">쇼핑 계속하기 </button>
-				
+
+				<table style = "width: 700px;">
+				<tr>
+					<td class="text-center">
+						<button class="btn btn-sm btn-secondary" type="button" id="orderList">주문내역 / 배송조회 </button>
+						<button class="btn btn-sm btn-secondary" type="button" id="main">쇼핑 계속하기 </button>
+					</td>
+				</tr>
+				</table>
+
 				</div>
 				<div class="col"></div>
 		</div>
-	</div>
+	<!-- </div> -->
 </div>
 <!-- main body 종료-->
 	<!-- footer -->
