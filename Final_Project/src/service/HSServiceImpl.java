@@ -596,19 +596,42 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		return 0;
 	}
 
-	@Override
-	public int modifyReview(Review review) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+//	@Override
+//	public int modifyReview(Review review) {
+//		// TODO Auto-generated method stub
+//		List<Review> originReview = reviewDao.selectAll();
+//		if(originReview.get(index).equals(review.get))
+//		return 0;
+//	}
 
 	@Override
 	public int deleteReview(int review_id) {
 		// TODO Auto-generated method stub
-		return 0;
+		return reviewDao.deleteReview(review_id);
 	}
 
+	//후기 list 가져오기
 	@Override
+<<<<<<< HEAD
+	public HashMap<String, Object> getReviewList(int page) {
+			HashMap<String, Object> params = new HashMap<String, Object>();
+			
+			params.put("offset", getProdOffset(page));
+			params.put("boardsPerPage", 10);
+			
+			HashMap<String, Object> reviewMap = new HashMap<String, Object>();
+			
+			reviewMap.put("current", page);
+			reviewMap.put("start", getStartPage(page));
+			reviewMap.put("end", getEndPage(page));
+			reviewMap.put("last", getProdLastPage(reviewDao.getCount()));
+			reviewMap.put("totalBoards", reviewDao.getCount());
+			reviewMap.put("review", reviewDao.selectAll(params));
+			
+			return reviewMap;
+		}
+		
+=======
 	public List<Review> getReviewList() {
 		// TODO Auto-generated method stub
 		return reviewDao.selectAll();
@@ -620,5 +643,6 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		qnaDao.deleteQnAById(qna_id);
 	}
 
+>>>>>>> branch 'master' of https://github.com/swift0507/final_project.git
 
 }
