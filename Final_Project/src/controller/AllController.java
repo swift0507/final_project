@@ -194,6 +194,11 @@ public class AllController {
 		return service.getReviewById(prod_id, reviewPage);
 	}
 	
+	@RequestMapping("deleteReview.do")
+	public @ResponseBody void deleteReview(int review_id) {
+		service.deleteReview(review_id);
+	}
+	
 	@RequestMapping("qnaByProd.do")
 	public @ResponseBody HashMap<String, Object> qnaByProd(int prod_id, int qnaPage) {
 		return service.getQnAById(prod_id, qnaPage);
