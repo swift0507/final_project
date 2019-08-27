@@ -82,9 +82,44 @@ public class SellerController {
 		HashMap<String, Object> id = (HashMap<String, Object>)session.getAttribute("loginUserInfo");
 		String mem_id = (String)id.get("mem_id");
 		
-		m.addAllAttributes(service.getReceiptListBySeller(mem_id));
+		m.addAttribute("newTotalBoards", service.getNewReceiptCount());
+		m.addAttribute("deliveryTotalBoards", service.getDeliveryReceiptCount());
+		m.addAttribute("completedTotalBoards", service.getCompletedReceiptCount());
+		m.addAttribute("applyTotalBoards", service.getApplyReceiptCount());
+		m.addAttribute("exchangeTotalBoards", service.getExchangeReceiptCount());
 	}
 	
+	//신규주문
+	@RequestMapping("seller/newReceiptList.do")
+	public @ResponseBody HashMap<String, Object> newReceiptList(String sel_id, int page) {
+		return service.getNewReceiptList(sel_id, page);
+	}
+	
+	//배송중
+	@RequestMapping("seller/deliveryReceiptList.do")
+	public @ResponseBody HashMap<String, Object> deliveryReceiptList(String sel_id, int page) {
+		return service.getDeliveryReceiptList(sel_id, page);
+	}
+	
+	//배송완료
+	@RequestMapping("seller/completedReceiptList.do")
+	public @ResponseBody HashMap<String, Object> completedReceiptList(String sel_id, int page) {
+		return service.getCompletedReceiptList(sel_id, page);
+	}
+	
+	//교환신청
+	@RequestMapping("seller/applyReceiptList.do")
+	public @ResponseBody HashMap<String, Object> applyReceiptList(String sel_id, int page) {
+		return service.getApplyReceiptList(sel_id, page);
+	}
+	
+	//교환완료
+	@RequestMapping("seller/exchangeReceiptList.do")
+	public @ResponseBody HashMap<String, Object> exchangeReceiptList(String sel_id, int page) {
+		return service.getExchangeReceiptList(sel_id, page);
+	}
+	
+
 	//판매상품등록폼
 	@RequestMapping("seller/prodPost.do")
 	public void prodPost(Model m) {

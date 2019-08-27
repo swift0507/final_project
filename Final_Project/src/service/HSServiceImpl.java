@@ -265,6 +265,12 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		// TODO Auto-generated method stub
 		return (page - 1) * 10 + 1;
 	}
+	
+	//seller orderManage의 영수증을 위한 첫번째 게시물 번호
+	public int getSellerBoardOffset(int page) {
+		// TODO Auto-generated method stub
+		return (page - 1) * 5 + 1;
+	}
 
 	
 	//이벤트 읽기
@@ -924,20 +930,123 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		return receiptOrderDao.getOrderPriceSum(prod_id);
 	}
 
+
 	@Override
-	public HashMap<String, Object> getReceiptListBySeller(String mem_id) {
+	public HashMap<String, Object> getNewReceiptList(String sel_id, int page) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		
-		params.put("offset", getBoardOffset(1));
-		params.put("boardsPerPage", 10);
+		params.put("offset", getSellerBoardOffset(page));
+		params.put("boardsPerPage", 5);
+		params.put("sel_id", sel_id);
 		
-		HashMap<String, Object> receiptMap = new HashMap<String, Object>();
-
-		receiptMap.put("receipt", receiptDao.selectReceiptListBySeller(mem_id));
-			
-		return receiptMap;
+		HashMap<String, Object> receiptProd = new HashMap<String, Object>();
+		
+		receiptProd.put("newTotalBoards", receiptDao.getCountNew());
+		receiptProd.put("receipt", receiptDao.selectNewReceipt(params));
+		
+		return receiptProd;
 	}
+
+	@Override
+	public HashMap<String, Object> getDeliveryReceiptList(String sel_id, int page) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		
+		params.put("offset", getSellerBoardOffset(page));
+		params.put("boardsPerPage", 5);
+		params.put("sel_id", sel_id);
+		
+		HashMap<String, Object> receiptProd = new HashMap<String, Object>();
+		
+		receiptProd.put("deliveryTotalBoards", receiptDao.getCountDelivery());
+		receiptProd.put("receipt", receiptDao.selectDeliveryReceipt(params));
+		
+		return receiptProd;
+	}
+
+	@Override
+	public HashMap<String, Object> getCompletedReceiptList(String sel_id, int page) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		
+		params.put("offset", getSellerBoardOffset(page));
+		params.put("boardsPerPage", 5);
+		params.put("sel_id", sel_id);
+		
+		HashMap<String, Object> receiptProd = new HashMap<String, Object>();
+		
+		receiptProd.put("completedTotalBoards", receiptDao.getCountCompleted());
+		receiptProd.put("receipt", receiptDao.selectCompletedReceipt(params));
+		
+		return receiptProd;
+	}
+
+	@Override
+	public HashMap<String, Object> getApplyReceiptList(String sel_id, int page) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		
+		params.put("offset", getSellerBoardOffset(page));
+		params.put("boardsPerPage", 5);
+		params.put("sel_id", sel_id);
+		
+		HashMap<String, Object> receiptProd = new HashMap<String, Object>();
+		
+		receiptProd.put("applyTotalBoards", receiptDao.getCountApply());
+		receiptProd.put("receipt", receiptDao.selectApplyReceipt(params));
+		
+		return receiptProd;
+	}
+
+	@Override
+	public HashMap<String, Object> getExchangeReceiptList(String sel_id, int page) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		
+		params.put("offset", getSellerBoardOffset(page));
+		params.put("boardsPerPage", 5);
+		params.put("sel_id", sel_id);
+		
+		HashMap<String, Object> receiptProd = new HashMap<String, Object>();
+		
+		receiptProd.put("exchangeTotalBoards", receiptDao.getCountExchange());
+		receiptProd.put("receipt", receiptDao.selectExchangeReceipt(params));
+		
+		return receiptProd;
+	}
+
+	@Override
+	public int getNewReceiptCount() {
+		// TODO Auto-generated method stub
+		return receiptDao.getCountNew();
+	}
+
+	@Override
+	public int getDeliveryReceiptCount() {
+		// TODO Auto-generated method stub
+		return receiptDao.getCountDelivery();
+	}
+
+	@Override
+	public int getCompletedReceiptCount() {
+		// TODO Auto-generated method stub
+		return receiptDao.getCountCompleted();
+	}
+
+	@Override
+	public int getApplyReceiptCount() {
+		// TODO Auto-generated method stub
+		return receiptDao.getCountApply();
+	}
+
+	@Override
+	public int getExchangeReceiptCount() {
+		// TODO Auto-generated method stub
+		return receiptDao.getCountExchange();
+	}
+	
+	
 
 
 

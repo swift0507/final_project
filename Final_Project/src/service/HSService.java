@@ -245,6 +245,24 @@ public interface HSService {
 	//상품id로 receiptorder 테이블에서 상품별 매출 가져오기
 	public int getSellSales(int category_id);
 
-	public HashMap<String, Object> getReceiptListBySeller(String mem_id);
+	public HashMap<String, Object> getNewReceiptList(String sel_id, int page);
+
+	public HashMap<String, Object> getDeliveryReceiptList(String sel_id, int page);
+
+	public HashMap<String, Object> getCompletedReceiptList(String sel_id, int page);
+
+	public HashMap<String, Object> getApplyReceiptList(String sel_id, int page);
+
+	public HashMap<String, Object> getExchangeReceiptList(String sel_id, int page);
+
+	public int getNewReceiptCount();
+
+	public int getDeliveryReceiptCount();
+
+	public int getCompletedReceiptCount();
+
+	public int getApplyReceiptCount();
+
+	public int getExchangeReceiptCount();
 
 }
