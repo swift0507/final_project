@@ -59,14 +59,16 @@
 				<!-- 사장님 정보 수정 header table 종료-->
 				
 				<!-- 사장님 정보 수정 table -->
-				<table style = "width: 700px;" border = 1>
+				<table style = "width: 700px;">
 					<tr>
 						<th style = "width: 25%;">아이디 : ID</th>
 						<th style = "width: 25%;">이름 : 이름</th>
 						<td style = "width: 30%;"></td>
 						<td style = "width: 20%;"></td>
-						
 					</tr>
+					
+					<tr style = "height: 10px;"></tr>
+					
 					<tr>
 						<th> 
 							이메일 : 
@@ -76,6 +78,9 @@
 						</td>
 						<td></td>
 					</tr>
+					
+					<tr style = "height: 10px;"></tr>
+					
 					<tr>
 						<th> 
 							휴대폰번호 : 
@@ -85,6 +90,9 @@
 						</td>
 						<td></td>
 					</tr>
+					
+					<tr style = "height: 10px;"></tr>
+					
 					<tr>
 						<th> 
 							개별 배송비 설정 : 
@@ -94,6 +102,9 @@
 						</td>
 						<td class = "text-left">원</td>
 					</tr>
+					
+					<tr style = "height: 10px;"></tr>
+					
 					<tr>
 						<th> 
 							배송비 무료 조건 : 
@@ -103,6 +114,9 @@
 						</td>
 						<td class = "text-left">원</td>
 					</tr>
+					
+					<tr style = "height: 10px;"></tr>
+					
 					<tr>
 						<th> 도서산간 배송비 설정 : </th>
 						<td colspan = 2>
@@ -110,6 +124,9 @@
 						</td>
 						<td class = "text-left">원</td>
 					</tr>
+					
+					<tr style = "height: 10px;"></tr>
+					
 					<tr class = "text-center" style = "height: 75px;">
 						<td colspan = 4>
 							<button class = "btn btn-sm btn-secondary"> 저장 </button>
@@ -121,7 +138,7 @@
 				
 				
 				<!-- 사장님 정보 수정 요청 form -->
-				<table class = "mt-5" style = "width: 700px;" border = 1>
+				<table class = "mt-5" style = "width: 700px;">
 					<tr>
 						<th style = "width: 25%"> 
 							은행 선택 :
