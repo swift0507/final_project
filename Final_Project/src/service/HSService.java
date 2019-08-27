@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import model.Answer;
 import model.Basket;
 import model.Event;
@@ -168,10 +170,12 @@ public interface HSService {
 	public HashMap<String, Object> getQnAById(int prod_id, int qnaPage);
 
 	//후기 작성,수정,삭제
-	public int writeReview(Review review);
-//	public int modifyReview(Review review);
+	public int writeReview(Review review, MultipartFile file);
+	public int modifyReview(Review review);
 	public int deleteReview(int review_id);
-
+	
+	public Review getReview(int review_id);
+	
 	//후기페이지의 리스트 출력
 //	public List<Review> getReviewList();
 	public HashMap<String, Object> getReviewList(int page);
@@ -190,6 +194,12 @@ public interface HSService {
 
 	//Q&A 삭제
 	public int deleteQnA(int qna_id);
+	
+	//후기_첨부파일을 가져다 주는 기능
+	public File getReviewFile(int num);
+
+	//나의 후기 가져오기
+	public HashMap<String, Object> getmyReview(String loginID, int page);
 
 	//장바구니 상품 추가
 	public int addBasket(Basket basket);
