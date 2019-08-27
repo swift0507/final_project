@@ -28,6 +28,10 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/user/*" />
 			<ref bean="userCheckInterceptor"/>	
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/seller/*" />
+			<ref bean="sellerCheckInterceptor"/>	
 			<!-- <mvc:mapping path="/seller/*" />
 			<mvc:mapping path="/admin/*" /> -->
 		</mvc:interceptor>

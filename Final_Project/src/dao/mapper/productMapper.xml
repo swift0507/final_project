@@ -36,4 +36,7 @@
     	select * from (select rownum as rn, e.* from (select * from product order by prod_date desc) e) where rn between 1 and 5
     </select>
     
+    <select id="selectProdIds" resultType="java.lang.Integer">
+    	select prod_id from product where sel_id=#{sel_id}
+    </select>
     </mapper>

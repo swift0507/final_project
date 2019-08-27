@@ -142,7 +142,7 @@ $(document).ready(function(){
 				</c:when>
 				<c:otherwise>
 				<!-- herehereplzplzplz -->
-				<a href="#" class="text-decoration-none text-dark"><i class = "fas fa-user" style = "font-size: 24px;"></i></a>
+				<a href="/Final_Project/user/myPage.do" class="text-decoration-none text-dark"><i class = "fas fa-user" style = "font-size: 24px;"></i></a>
 				&nbsp;&nbsp;&nbsp;
 				</c:otherwise>
 			</c:choose>

@@ -1,7 +1,10 @@
 package service;
 
 import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -294,6 +297,54 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 	public int countBasket(String mem_id) {
 		// TODO Auto-generated method stub
 		return basketDao.countBasket(mem_id);
+	}
+	
+	//사장님 메인 페이지
+	@Override
+	public HashMap<String, Object> sellerMain(String sel_id) {
+		// TODO Auto-generated method stub
+		//오늘의 매출 / 오늘의 주문 건 / 미 답변 후기
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		
+		//오늘의 매출
+		HashMap<String, Object> param = new HashMap<String, Object>();
+		Date today = new Date();
+		int date = today.getDate() + 1;
+		Date tomorrow = new Date();
+		tomorrow.setDate(date);
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		
+		param.put("sel_id", sel_id);
+		param.put("today", df.format(today));
+		param.put("tomorrow", df.format(tomorrow));
+		//값 넣기
+		data.put("todaySales", receiptDao.todaySales(param));
+		//오늘의 주문 건
+		data.put("todayOrder", receiptDao.todayOrder(param));
+		
+		//미 답변 후기
+		//내가 올린 상품을 찾은 후 그 상품에 대한 리뷰를 보고 그 리뷰에대한 앤서가 없는 것을 판단
+		int noanswer = 0;
+		System.out.println(productDao.selectProdIds(sel_id));
+		for(int prod_id : productDao.selectProdIds(sel_id)) {
+			List<Integer> eachReviewId = reviewDao.selectReview(prod_id);
+			if(eachReviewId==null) {
+				//그냥 넘어감
+			}
+			else {
+				//값이 있으면 반복을 돌면서 답변이 있는지 아닌지를 찾기
+				for(int n : eachReviewId) {
+					if(answerDao.selectByReviewId(n)==null) {
+						noanswer++;
+					}
+				}
+			}
+		}
+		data.put("noanswer", noanswer);
+		//나에게 온 영수증리스트 보여주기
+		data.put("receiptList", receiptDao.selectReceiptListBySeller(sel_id));
+		System.out.println(data);
+		return data;
 	}
 
 	//상품ID로 상품1개 가져오기 (prodView)
@@ -701,6 +752,7 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		// TODO Auto-generated method stub
 		return qnaDao.deleteQnAById(qna_id);
 	}
+
 
 
 

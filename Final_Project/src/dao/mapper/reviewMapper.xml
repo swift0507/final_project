@@ -52,4 +52,7 @@
    		select count(*) from review where prod_id = #{ prod_id }
    	</select>
 
+	<select id="selectReview" resultType="java.lang.Integer">
+		select review_id from review where prod_id=#{prod_id}
+	</select>
 </mapper>

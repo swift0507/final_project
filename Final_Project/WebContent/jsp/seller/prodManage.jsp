@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,6 +38,13 @@
 		background-color : lightgrey;
 	}
 	</style>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$("#post").on("click", function(){
+			location.href = "prodPost.do";
+		})
+	})
+	</script>
 </head>
 <body>
 <!-- header -->
@@ -62,7 +71,7 @@
 					</tr>
 					<tr>
 						<td class = "text-right">
-							<button class = "btn btn-sm btn-secondary">상품 등록</button>
+							<button class = "btn btn-sm btn-secondary" id="post">상품 등록</button>
 						</td>
 					</tr>
 				</table>

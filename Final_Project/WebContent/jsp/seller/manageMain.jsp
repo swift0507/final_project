@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,6 +33,53 @@
 	</script>
 	<script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15.0.0/dist/smooth-scroll.polyfills.min.js">
 	</script>
+	
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$(".receipt_delstatus").each(function(){
+			var delstatus = parseInt($(this).val());
+			var elem = $(this).parentsUntil("div").find($(".statusText"))
+			if(delstatus ==0){
+				elem.text("결제 대기")
+				elem.attr("class", "btn btn-dark statusText")
+				
+			}
+			else if(delstatus ==1){
+				elem.text("결제 완료")
+				elem.attr("class", "btn btn-primary statusText")
+			}
+			else if(delstatus ==2){
+				elem.text("배송 준비중")
+				elem.attr("class", "btn btn-secondary statusText")
+			}
+			else if(delstatus ==3){
+				elem.text("배송 중")
+				elem.attr("class", "btn btn-secondary statusText")
+			}
+			else if(delstatus ==4){
+				elem.text("배송 완료")
+				elem.attr("class", "btn btn-primary statusText")
+			}
+			else if(delstatus ==5){
+				elem.text("구매 확정")
+				elem.attr("class", "btn btn-success statusText")
+			}
+			else if(delstatus ==6){
+				elem.text("교환 신청")
+				elem.attr("class", "btn btn-warning statusText")
+			}
+			else if(delstatus ==7){
+				elem.text("교환 완료")
+				elem.attr("class", "btn btn-primary statusText")
+			}
+		})
+		
+		$("#more").on("click",function(){
+			location.href = "prodManage.do"
+		})
+	})
+	
+	</script>
 </head>
 <body>
 <!-- header -->
@@ -58,7 +107,7 @@
 	 						<hr>
 	    					<h5 class="card-title"> <b>오늘의 매출</b> </h5>
 	    					<hr>
-	    					<p class="card-text"> 428,000 원 </p>
+	    					<p class="card-text"> ${todaySales} 원 </p>
 	  					</div>
 					</div>
 					<!-- 매출 요약 정보 종료 -->
@@ -70,7 +119,7 @@
 	 						<hr>
 	    					<h5 class="card-title"> <b>오늘의 주문 건</b> </h5>
 	    					<hr>
-	    					<p class="card-text"> 82 건 </p>
+	    					<p class="card-text"> ${todayOrder} 건 </p>
 	  					</div>
 					</div>
 					<!-- 주문 건수 요약 정보 종료 -->
@@ -82,7 +131,7 @@
 	 						<hr>
 	    					<h5 class="card-title"> <b>미답변 후기 / Q&A</b> </h5>
 	    					<hr>
-	    					<p class="card-text"> 14 개 </p>
+	    					<p class="card-text"> ${noanswer} 개 </p>
 	  					</div>
 					</div>
 					<!-- 미처리 건수 요약 정보 종료 -->
@@ -94,111 +143,36 @@
 				
 				<!-- 더보기 button -->
 				<div class = "more_button text-right">
-					<button class = "btn btn-secondary" style = "width: 100px;">더보기</button>
+					<button class = "btn btn-secondary" id="more" style = "width: 100px;">더보기</button>
 				</div>
 				<!-- 더보기 button 종료 -->
 			
 				<hr>
 				
+				<c:forEach var="receipt" items="${receiptList}">
 				<!-- 주문 1 카드 table -->
 				<div class = "order1">
 					<div class = "card">
 						<div class = "card-body">
 							<table style = "width: 700px;">
 								<tr>
-									<td> 알록달록 캔들 외 3개 </td>
+									<td> ${receipt.receipt_prod} </td>
 									<td class = "text-center" rowspan = 2 style = "vertical-align: middle;">
-										<button class = "btn btn-success" style = "width: 150px;" disabled> 결제 완료 </button>	
+										<input type="hidden" value="${receipt.receipt_delstatus}" class="receipt_delstatus">
+										<button class = "btn btn-success statusText" style = "width: 150px;" disabled> 결제 완료 </button>	
 									</td>
 								</tr>
 								<tr>
-									<td> 주문날짜 : 2019-08-18 &nbsp;&nbsp;&nbsp; 주문번호 : 123-45678-9012 </td>
+									<td> 주문날짜 : ${receipt.receipt_orderdate} &nbsp;&nbsp;&nbsp; 주문번호 : ${receipt.receipt_id} </td>
 								</tr>
 							</table>
 						</div>
 					</div>
 				</div>
 				<!-- 주문 1 카드 table 종료 -->
+				</c:forEach>
 				
-				<!-- 주문 2 카드 table -->
-				<div class = "order2">
-					<div class = "card">
-						<div class = "card-body">
-							<table style = "width: 700px;">
-								<tr>
-									<td> 알록달록 캔들 외 3개 </td>
-									<td class = "text-center" rowspan = 2 style = "vertical-align: middle;">
-										<button class = "btn btn-warning" style = "width: 150px;" disabled> 결제 미완료 </button>	
-									</td>
-								</tr>
-								<tr>
-									<td> 주문날짜 : 2019-08-18 &nbsp;&nbsp;&nbsp; 주문번호 : 123-45678-9012 </td>
-								</tr>
-							</table>
-						</div>
-					</div>
-				</div>
-				<!-- 주문 2 카드 table 종료 -->
-				
-				<!-- 주문 3 카드 table -->
-				<div class = "order3">
-					<div class = "card">
-						<div class = "card-body">
-							<table style = "width: 700px;">
-								<tr>
-									<td> 알록달록 캔들 외 3개 </td>
-									<td class = "text-center" rowspan = 2 style = "vertical-align: middle;">
-										<button class = "btn btn-success" style = "width: 150px;" disabled> 결제 완료 </button>	
-									</td>
-								</tr>
-								<tr>
-									<td> 주문날짜 : 2019-08-18 &nbsp;&nbsp;&nbsp; 주문번호 : 123-45678-9012 </td>
-								</tr>
-							</table>
-						</div>
-					</div>
-				</div>
-				<!-- 주문 3 카드 table 종료 -->
-				
-				<!-- 주문 4 카드 table -->
-				<div class = "order4">
-					<div class = "card">
-						<div class = "card-body">
-							<table style = "width: 700px;">
-								<tr>
-									<td> 알록달록 캔들 외 3개 </td>
-									<td class = "text-center" rowspan = 2 style = "vertical-align: middle;">
-										<button class = "btn btn-info" style = "width: 150px;" disabled> 배송중 </button>	
-									</td>
-								</tr>
-								<tr>
-									<td> 주문날짜 : 2019-08-18 &nbsp;&nbsp;&nbsp; 주문번호 : 123-45678-9012 </td>
-								</tr>
-							</table>
-						</div>
-					</div>
-				</div>
-				<!-- 주문 4 카드 table 종료 -->
-				
-				<!-- 주문 5 카드 table -->
-				<div class = "order5">
-					<div class = "card">
-						<div class = "card-body">
-							<table style = "width: 700px;">
-								<tr>
-									<td> 알록달록 캔들 외 3개 </td>
-									<td class = "text-center" rowspan = 2 style = "vertical-align: middle;">
-										<button class = "btn btn-secondary" style = "width: 150px;" disabled> 배송 완료 </button>	
-									</td>
-								</tr>
-								<tr>
-									<td> 주문날짜 : 2019-08-18 &nbsp;&nbsp;&nbsp; 주문번호 : 123-45678-9012 </td>
-								</tr>
-							</table>
-						</div>
-					</div>
-				</div>
-				<!-- 주문 5 카드 table 종료 -->
+							
 				
 				<br><br>
 				
