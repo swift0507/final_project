@@ -18,4 +18,7 @@
     <delete id="deleteByBasketId">
     	delete from basket where basket_id = #{basket_id}
     </delete>
+    <insert id="insertBasket" parameterType="basket">
+    	insert into basket values(#{mem_id}, #{sel_id}, #{prod_id}, basketid_seq.nextval, #{basket_option}, #{basket_price})
+    </insert>
     </mapper>

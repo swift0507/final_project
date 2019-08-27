@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+   <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,7 +33,99 @@
 	</script>
 	<script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15.0.0/dist/smooth-scroll.polyfills.min.js">
 	</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 </head>
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		$(".receipt_delstatus").each(function(){
+			var delstatus = parseInt($(this).val());
+			var elem = $(this).parentsUntil("div").find($(".statusText"))
+			if(delstatus ==0){
+				elem.text("결제 대기")
+				elem.attr("class", "btn btn-ml btn-dark statusText")
+				
+				$(this).parentsUntil("div").find($(".conditionBtn")).html("<button class = 'btn btn-sm btn-danger cancelOrder'>주문취소</button>")
+			}
+			else if(delstatus ==1){
+				elem.text("결제 완료")
+				elem.attr("class", "btn btn-ml btn-primary statusText")
+			}
+			else if(delstatus ==2){
+				elem.text("배송 준비중")
+				elem.attr("class", "btn btn-ml btn-secondary statusText")
+			}
+			else if(delstatus ==3){
+				elem.text("배송 중")
+				elem.attr("class", "btn btn-ml btn-secondary statusText")
+			}
+			else if(delstatus ==4){
+				$(this).parentsUntil("div").find($(".conditionBtn")).html("<button class = 'btn btn-sm btn-secondary finalizeOrder'>구매확정</button> <button class = 'btn btn-sm btn-secondary changeOrder'>교환신청</button>")
+				elem.text("배송 완료")
+				elem.attr("class", "btn btn-ml btn-primary statusText")
+			}
+			else if(delstatus ==5){
+				elem.text("구매 확정")
+				elem.attr("class", "btn btn-ml btn-success statusText")
+			}
+			else if(delstatus ==6){
+				elem.text("교환 신청")
+				elem.attr("class", "btn btn-ml btn-warning statusText")
+			}
+			else if(delstatus ==7){
+				elem.text("교환 완료")
+				elem.attr("class", "btn btn-ml btn-primary statusText")
+			}
+		})
+		
+		$(".cancelOrder").on("click", function(){
+			var r = $(this).parentsUntil("div").find($(".receipt_id")).text().slice(8)
+			var receipt_id = parseInt(r);
+			$.ajax({
+				url : "cancelOrder.do",
+				data : {receipt_id : receipt_id},
+				type : "post",
+				success : function(data){
+					alert("주문이 취소되었습니다.")
+					location.href = "orderList.do"
+				}
+			})
+		})
+		$(".finalizeOrder").on("click", function(){
+			var r = $(this).parentsUntil("div").find($(".receipt_id")).text().slice(8)
+			var receipt_id = parseInt(r);
+			$.ajax({
+				url : "finalizeOrder.do",
+				data : {receipt_id : receipt_id},
+				type : "post",
+				success : function(data){
+					alert("구매가 확정되었습니다.")
+					location.href = "orderList.do"
+				}
+			})
+		})
+		$(".changeOrder").on("click", function(){
+			var r = $(this).parentsUntil("div").find($(".receipt_id")).text().slice(8)
+			var receipt_id = parseInt(r);
+			$.ajax({
+				url : "changeOrder.do",
+				data : {receipt_id : receipt_id},
+				type : "post",
+				success : function(data){
+					alert("교환신청이 되었습니다.")
+					location.href = "orderList.do"
+				}
+			})
+			
+		})
+		
+		$(".prod_name").on("click", function(){
+			var r = $(this).parentsUntil("div").find($(".receipt_id")).text().slice(8)
+			var receipt_id = parseInt(r);
+			$(this).attr("href", "orderDetail.do?receipt_id="+receipt_id);
+		})
+	})
+</script>
 <body>
 <!-- header -->
 <header>
@@ -66,71 +160,44 @@
 						<td><hr></td>
 					</tr>
 				</table>
-				
+				<c:forEach var="receipt" items="${receiptList}">
+				<div>
 				<table style = "width: 700px;">
 				    <tr style = "height: 40px;">
 				      <th colspan = 3>
-				      	알록달록 캔들, 보라색 외 3개
+				      <a href="#" class="text-decoration-none text-secondary prod_name">${receipt.receipt_prod}</a>
 				      </th>
-				      <th class = "text-right">
-				      	<button class = "btn btn-sm btn-danger">주문취소</button>
+				      <th class = "text-right conditionBtn">
+				      	<!-- <button class = "btn btn-sm btn-danger">주문취소</button> -->
 				      </th>
 				    </tr>
 				    <tr>
 				      <td rowspan = 3>
-				      	<img src = "images/sk.png" width = 100 height = 100>
+				      	<!--receipt에는 이미지가 없음 <img src = "images/sk.png" width = 100 height = 100> -->
 				      </td>
-				      <td> 상품명 : SK Wyverns </td>
+				      <td> </td>
 				      <td rowspan = 3>
-				      	<h5>1조 2500억 원</h5>
+				      	<h5>${receipt.receipt_price+receipt.receipt_fee}원</h5>
 				      </td>
 				      
 				      <td rowspan = 3 class = "text-right">
-				      	<button type="button" class="btn btn-ml btn-info" disabled>배송 준비중</button> 
+				     	<input type="hidden" value="${receipt.receipt_delstatus}" class="receipt_delstatus">
+				      	<button type="button" class="btn btn-ml btn-info statusText" disabled></button> 
 				      </td>
 				    </tr>
 				    <tr>
-				      <td> 주문날짜 : 2019-08-14 </td>
+				      <td> 주문날짜 : ${receipt.receipt_orderdate} </td>
 				    </tr>
 				    <tr>
-				      <td> 주문번호 : 123-456-78910 </td>
+				      <td class="receipt_id"> 주문번호 : ${receipt.receipt_id} </td>
 				    </tr>
 				</table>
 				
 				<br>
 				<hr>
-				
-				<table style = "width: 700px;">
-				    <tr height = 40>
-				      <th colspan = 3>
-				      	알록달록 캔들, 보라색 외 3개
-				      </th>
-				      <th class = "text-right">
-				      	
-				      </th>
-				    </tr>
-				    <tr>
-				      <td rowspan = 3>
-				      	<img src = "images/sk.png" width = 100 height = 100>
-				      </td>
-				      <td> 상품명 : SK Wyverns </td>
-				      <td rowspan = 3>
-				      	<h5>1조 2500억 원</h5>
-				      </td>
-				      
-				      <td rowspan = 3 class = "text-right">
-				      	<button type="button" class="btn btn-ml btn-success" disabled>구매 확정</button> 
-				      </td>
-				    </tr>
-				    <tr>
-				      <td> 주문날짜 : 2019-08-14 </td>
-				    </tr>
-				    <tr>
-				      <td> 주문번호 : 123-456-78910 </td>
-				    </tr>
-				</table>
-				<br>
-				<hr>
+				</div>
+				</c:forEach>
+			
 			</div>
 		</div>
 	</div>

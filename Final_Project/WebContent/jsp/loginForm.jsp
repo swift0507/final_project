@@ -33,6 +33,14 @@
 	</script>
 	<script type="text/javascript">
 	$(document).ready(function(){
+		$("#mem_id").focus();
+		$("#mem_pw").keyup(function(key){
+			if(key.keyCode==13){
+				$("#loginCheck").trigger("click");
+			}
+		})
+		
+		
 		$("#loginCheck").on("click", function(){
 			if($("#mem_id").val()==""){
 				alert("아이디를 입력해주세요.");
