@@ -85,8 +85,8 @@ public class UserController {
 		System.out.println(receipt);
 		//결제가 되면 장바구니 내역에서 삭제시켜야 한다. 
 		//아직 미완성
-		//return service.pay(receipt, baskets, prodnums);
-		return 8;
+		return service.pay(receipt, baskets, prodnums);
+		//return 8;
 	}
 	
 	//결제완료화면 직전에 구매한 장바구니를 가지고 간다. 
@@ -106,6 +106,12 @@ public class UserController {
 	//문의작성폼보기
 	@RequestMapping("user/contactWriteForm.do")
 	public void contactWriteForm() {
+		//미완성
+	}
+	
+	//나의 문의내역 보기
+	@RequestMapping("user/myContact.do")
+	public void myContact() {
 		//미완성
 	}
 	
@@ -195,6 +201,14 @@ public class UserController {
 		Member member = new Member();
 		member.setMem_id(mem_id);
 		m.addAttribute("member", service.idCheck(member));
+	}
+	
+	//회원정보 수정요청
+	@RequestMapping("user/modify.do")
+	public @ResponseBody boolean modify(Member m) {
+		System.out.println(m);
+		service.updateMember(m);
+		return true;
 	}
 	
 	//회원탈퇴창

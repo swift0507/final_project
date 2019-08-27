@@ -135,8 +135,17 @@ $(document).ready(function(){
 			<td class = "blank">
 			</td>
 			<td class= "icon text-center">
+			<c:choose>
+				<c:when test="${loginUserInfo.mem_grade==0}">
 				<a href="/Final_Project/user/myPage.do" class="text-decoration-none text-dark"><i class = "fas fa-user" style = "font-size: 24px;"></i></a>
 				&nbsp;&nbsp;&nbsp;
+				</c:when>
+				<c:otherwise>
+				<!-- herehereplzplzplz -->
+				<a href="#" class="text-decoration-none text-dark"><i class = "fas fa-user" style = "font-size: 24px;"></i></a>
+				&nbsp;&nbsp;&nbsp;
+				</c:otherwise>
+			</c:choose>
 				<a href="/Final_Project/user/basket.do" class="text-decoration-none text-dark"><i class = "fas fa-shopping-cart" style = "font-size: 24px;"><span class="badge badge-pill badge-danger" id = "cart_amt" style='font-size: 12px'>${loginUserInfo.countBasket}</span></i></a>
 			</td>
 		</tr>
