@@ -74,6 +74,9 @@ public interface HSService {
 	//주문취소
 	public void cancelOrder(int receipt_id);
 	
+	//회원정보수정
+	public void updateMember(Member m);
+	
 	//주문상세페이지 서비스
 	public HashMap<String, Object> orderDetail(int receipt_id, String mem_id);
 	

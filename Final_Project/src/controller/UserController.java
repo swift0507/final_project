@@ -103,6 +103,12 @@ public class UserController {
 		//미완성
 	}
 	
+	//나의 문의내역 보기
+	@RequestMapping("user/myContact.do")
+	public void myContact() {
+		//미완성
+	}
+	
 	//나의 후기 보기
 	@RequestMapping("user/myReview.do")
 	public void myReview(Model model, @RequestParam(defaultValue="1")int page) {
@@ -189,6 +195,14 @@ public class UserController {
 		Member member = new Member();
 		member.setMem_id(mem_id);
 		m.addAttribute("member", service.idCheck(member));
+	}
+	
+	//회원정보 수정요청
+	@RequestMapping("user/modify.do")
+	public @ResponseBody boolean modify(Member m) {
+		System.out.println(m);
+		service.updateMember(m);
+		return true;
 	}
 	
 	//회원탈퇴창

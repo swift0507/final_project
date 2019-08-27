@@ -281,6 +281,13 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		}
 		return true;
 	}
+	
+	//회원정보수정
+	@Override
+	public void updateMember(Member m) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	//장바구니개수출력
 	@Override
@@ -694,6 +701,7 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		// TODO Auto-generated method stub
 		return qnaDao.deleteQnAById(qna_id);
 	}
+
 
 
 }

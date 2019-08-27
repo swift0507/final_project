@@ -8,11 +8,12 @@ public class ReceiptOrder {
 	private String order_opt;
 	private int order_quantity;
 	private int order_price;
+	private int order_review;
 	
 	public ReceiptOrder() {}
 
 	public ReceiptOrder(int receipt_id, String sel_id, int prod_id, String mem_id, String order_opt, int order_quantity,
-			int order_price) {
+			int order_price, int order_review) {
 		this.receipt_id = receipt_id;
 		this.sel_id = sel_id;
 		this.prod_id = prod_id;
@@ -20,6 +21,7 @@ public class ReceiptOrder {
 		this.order_opt = order_opt;
 		this.order_quantity = order_quantity;
 		this.order_price = order_price;
+		this.order_review = order_review;
 	}
 
 	public int getReceipt_id() {
@@ -78,12 +80,22 @@ public class ReceiptOrder {
 		this.order_price = order_price;
 	}
 
+	public int getOrder_review() {
+		return order_review;
+	}
+
+	public void setOrder_review(int order_review) {
+		this.order_review = order_review;
+	}
+
 	@Override
 	public String toString() {
 		return "ReceiptOrder [receipt_id=" + receipt_id + ", sel_id=" + sel_id + ", prod_id=" + prod_id + ", mem_id="
 				+ mem_id + ", order_opt=" + order_opt + ", order_quantity=" + order_quantity + ", order_price="
-				+ order_price + "]";
+				+ order_price + ", order_review=" + order_review + "]";
 	}
+
+
 	
 	
 }
