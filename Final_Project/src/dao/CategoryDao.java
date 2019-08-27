@@ -1,5 +1,10 @@
 package dao;
 
-public interface CategoryDao {
+import java.util.List;
 
+import model.Category;
+
+public interface CategoryDao {
+	
+	public List<Category> getCategoryList();
 }

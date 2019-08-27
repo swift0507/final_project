@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import model.Answer;
 import model.Banner;
 import model.Basket;
+import model.Category;
 import model.Event;
 import model.FAQ;
 import model.Member;
@@ -349,6 +350,38 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		System.out.println(data);
 		return data;
 	}
+	
+	//카테고리리스트 가져오기
+	@Override
+	public List<Category> getCategoryList() {
+		// TODO Auto-generated method stub
+		return categoryDao.getCategoryList();
+	}
+
+	//상품등록하기
+	@Override
+	public Product insertProd(Product p) {
+		// TODO Auto-generated method stub
+		productDao.insertProd(p);
+		return p;
+	}
+	
+	//큰 옵션 집어넣기
+	@Override
+	public ProdOption insertProdOption(ProdOption option) {
+		// TODO Auto-generated method stub
+		prodOptionDao.insertProdOption(option);
+		return option;
+	}
+	
+	//작은 옵션 집어넣기
+	@Override
+	public OptionDetail insertOptionDetail(OptionDetail detail) {
+		// TODO Auto-generated method stub
+		optionDetailDao.insertOptionDetail(detail);
+		return detail;
+	}
+
 
 	//상품ID로 상품1개 가져오기 (prodView)
 	@Override
@@ -836,6 +869,10 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		return pickDao.deletePick(pick);
 	}
 
+
+
+
+	
 
 
 

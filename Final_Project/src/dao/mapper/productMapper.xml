@@ -39,4 +39,30 @@
     <select id="selectProdIds" resultType="java.lang.Integer">
     	select prod_id from product where sel_id=#{sel_id}
     </select>
+    
+    <insert id="insertProd">
+    	<selectKey resultType="int" keyProperty="prod_id" order="BEFORE">
+    	select prodid_seq.nextval from dual
+    	</selectKey>
+    	insert into product values (#{prod_id}, #{sel_id}, #{prod_name}, #{prod_content},
+    	 #{prod_price}, default, default, #{category_id}, #{prod_bank}, #{prod_account},
+    	  #{prod_depositor}, 0, #{prod_fee})
+    </insert>
+    <!-- 
+PROD_ID        NOT NULL NUMBER         
+SEL_ID         NOT NULL VARCHAR2(20)   
+PROD_NAME      NOT NULL VARCHAR2(50)   
+PROD_CONTENT   NOT NULL VARCHAR2(4000) 
+PROD_PRICE     NOT NULL NUMBER         
+PROD_DATE      NOT NULL DATE           
+PROD_READCOUNT NOT NULL NUMBER         
+CATEGORY_ID    NOT NULL NUMBER         
+PROD_BANK      NOT NULL VARCHAR2(10)   
+PROD_ACCOUNT   NOT NULL VARCHAR2(20)   
+PROD_DEPOSITOR NOT NULL VARCHAR2(30)   
+PROD_STATUS    NOT NULL NUMBER(1)      
+PROD_FEE       NOT NULL NUMBER    -->
+    
+    
+    
     </mapper>

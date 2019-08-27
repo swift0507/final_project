@@ -7,4 +7,11 @@
     	select * from optiondetail where opt_id = #{opt_id}
     </select>
     
+    <insert id="insertOptionDetail">
+    	<selectKey keyProperty="optd_id" resultType="int" order="BEFORE">
+    	select optdid_seq.nextval from dual
+    	</selectKey>
+    	insert into optiondetail values (#{opt_id}, #{optd_id}, #{optd_choice}, #{optd_price}, #{optd_quantity})
+    </insert>
+    
     </mapper>
