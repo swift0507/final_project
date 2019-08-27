@@ -48,9 +48,33 @@
 		    $('#like_item').toggleClass("far fa-heart fas fa-heart");
 		});
 		
-		$(".custom-select-sm").change(function(){
-			var s = $(".custom-select-sm").val();
-			$("#selected_opt").text(s);
+		$(".select_option").find("select").first().removeAttr('disabled');
+		
+		var prodname = "${ product.prod_name }";
+		var selectprod = "";
+		var totalPrice = parseInt(${ product.prod_price }, 10);
+		var quantity = 0;
+		
+		$(".select_option").find("select").change(function(){
+			$(this).attr('disabled', true);
+			$(this).attr('selected', 'selected');
+			$(this).parent().nextAll().find('select').first().removeAttr('disabled');
+			selectprod += "[" + $(this).val() + "]";
+			var id = $(this).val();
+			totalPrice += parseInt($("#" + id).attr('class'), 10);
+			console.log("selectprod : " + selectprod);
+			console.log("totalPrice : " + totalPrice);
+			console.log("next : " + $(this).parent().nextAll().find('select').first().text().length);
+			console.log("label : " + $(this).html());
+			
+			if($(this).parent().nextAll().find('select').first().text().length == 0) {
+				var prodAndOption = "";
+				prodAndOption += "상품 : " + prodname;
+				prodAndOption += "<br>선택 옵션 : " + selectprod;
+				prodAndOption += "<br>가격 : " + totalPrice + "원";
+				
+				$("#selected_opt").append(prodAndOption);
+			}
 		});
 		
 		$('#report_button').click(function(){
@@ -373,31 +397,33 @@
 			            </td>
 			        </tr>
 			        <tr>
-			            <td>옵션 &nbsp;&nbsp;&nbsp;
-			            	<span id = "selected_opt"></span> 
-			            	<hr>
-			            </td>
-			        </tr>
-			        <tr>
 			            <td>
 			            	<!-- 옵션 선택 부분 -->
-			                <div id = "select_option">
+			               		옵션
 				                <c:forEach var="option" items="${ option }">
-				               	${ option.opt_name }
-				               		<select id = "${ option.opt_id }" class="custom-select-sm" style="width: 250px;"> 
-				               		<option disabled selected hidden>옵션을 선택해주세요</option>
-				               	<c:forEach var="optiondetail" items="${ option.optiondetail }">
-				                    <option id="${ optiondetail.optd_id }">${ optiondetail.optd_choice }</option>
-				                    <br>
-				               	</c:forEach>
-				                </select>
-				                <br>
+				                <div class = "select_option">
+				               		<select id = "${ option.opt_id }" class="option custom-select-sm" style="width: 250px;" disabled> 
+				               			<option disabled selected hidden="" label="${ option.opt_name }"></option>
+					               	<c:forEach var="optiondetail" items="${ option.optiondetail }">
+					                    <option id="${ optiondetail.optd_choice }" value="${ optiondetail.optd_choice }" class="${ optiondetail.optd_price }" label="${ optiondetail.optd_choice }"></option>
+					                    <br>
+					               	</c:forEach>
+					                </select>
+					            </div>
+				                	<br>
 				                </c:forEach>
-			                </div>
+			                
 			                <hr>
 			            </td>
 			        </tr>
-			        
+			        <tr>
+			            <td><b>선택 상품</b> &nbsp;&nbsp;&nbsp;
+			            <div>
+			            	<span id = "selected_opt"></span> 
+			            	
+			            </div>
+			            </td>
+			        </tr>
 			        <tr>
 			            <td>
 			                <img src = "images/sk.png" width = 60 height = 40>

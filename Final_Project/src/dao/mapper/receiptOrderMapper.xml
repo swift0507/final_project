@@ -4,16 +4,9 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     <mapper namespace="dao.ReceiptOrderDao">
     <insert id="insertReceiptOrder">
-    insert into receiptorder values (#{receipt_id}, receiptorderid_seq.nextval, #{sel_id}, #{prod_id}, #{mem_id}, #{order_opt}, #{order_quantity}, #{order_price})
+    insert into receiptorder values (#{receipt_id}, receiptorderid_seq.nextval, #{sel_id}, #{prod_id}, #{mem_id}, #{order_opt}, #{order_quantity}, #{order_price}, default)
     </insert>
-    <!-- 
-RECEIPT_ID      NOT NULL NUMBER        
-RECEIPTORDER_ID NOT NULL NUMBER        
-SEL_ID          NOT NULL VARCHAR2(20)  
-PROD_ID         NOT NULL NUMBER        
-MEM_ID          NOT NULL VARCHAR2(20)  
-ORDER_OPT       NOT NULL VARCHAR2(500) 
-ORDER_QUANTITY  NOT NULL NUMBER        
-ORDER_PRICE     NOT NULL NUMBER 
-     -->
+    <select id="getReceiptOrderList" resultType="receiptOrder">
+    select * from receiptorder where receipt_id=#{receipt_id}
+    </select>
     </mapper>

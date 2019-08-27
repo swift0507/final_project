@@ -82,7 +82,7 @@
 	
 <!-- main body -->
 <div class = "content">
-	<!-- <div class="container"> -->
+	<div class="container">
 		<div class="row">
 			<div class="col"></div>
 			<div class="col-8">
@@ -147,6 +147,7 @@
 					</tr>
 				</table>
 				</c:forEach>
+
 				<table style = "width: 700px;">
 				<tr>
 					<td class="text-center">
@@ -155,11 +156,11 @@
 					</td>
 				</tr>
 				</table>
-				
-			<div class="col"></div>
-			</div>
-		</div> 
-	<!-- </div> -->
+
+				</div>
+				<div class="col"></div>
+		</div>
+	</div>
 </div>
 <!-- main body 종료-->
 	<!-- footer -->

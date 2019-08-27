@@ -155,6 +155,7 @@
 			<th> 사진 첨부 </th>
 			<td>
 				<input type="file" name="review_pict" class="form-control-file" id="review_pict">
+				<%-- <img src="reviewdownload.do?num=${review.review_id}" width="700px"> --%>
 			</td>
 		</tr>
 		<tr style = "height: 20px;"></tr>

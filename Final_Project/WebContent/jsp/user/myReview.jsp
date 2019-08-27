@@ -119,11 +119,21 @@
 						</tr>
 						<tr style="height: 10px;"></tr>
 						<tr>
-							<td colspan=3>
+							<td colspan="3">
 								<p class="review">${m.review_content}</p>
+								<br>
+								<img src="reviewdownload.do?num=${m.review_id}"  width="700px">
 							</td>
 						</tr>
-					</table>
+						
+						<%-- <tr style="height: 10px;"></tr>
+						<tr>
+							<td colspan=3>
+								${m.review_pict}
+<!-- problem -->				<img src="reviewdownload.do?num=${m.review_id}"  alt="안불러와지는중" style="width: 50px; height: 50px;">
+							</td>
+						</tr> --%>
+						</table>
 					<br>
 					<hr>
 					<!-- 후기 table 1 종료-->

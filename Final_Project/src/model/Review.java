@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class Review {
 	private int review_id;
+	private int receiptorder_id;
 	private int prod_id;
 	private String prod_name;
 	private String review_writer;
@@ -17,10 +18,11 @@ public class Review {
 
 	public Review() {}
 
-	public Review(int review_id, int prod_id, String prod_name, String review_writer, int review_score,
-			String review_content, Date review_date, int review_answer, String review_pict, int review_status,
-			Answer answer) {
+	public Review(int review_id, int receiptorder_id, int prod_id, String prod_name, String review_writer,
+			int review_score, String review_content, Date review_date, int review_answer, String review_pict,
+			int review_status, Answer answer) {
 		this.review_id = review_id;
+		this.receiptorder_id = receiptorder_id;
 		this.prod_id = prod_id;
 		this.prod_name = prod_name;
 		this.review_writer = review_writer;
@@ -39,6 +41,14 @@ public class Review {
 
 	public void setReview_id(int review_id) {
 		this.review_id = review_id;
+	}
+
+	public int getReceiptorder_id() {
+		return receiptorder_id;
+	}
+
+	public void setReceiptorder_id(int receiptorder_id) {
+		this.receiptorder_id = receiptorder_id;
 	}
 
 	public int getProd_id() {
@@ -123,10 +133,11 @@ public class Review {
 
 	@Override
 	public String toString() {
-		return "Review [review_id=" + review_id + ", prod_id=" + prod_id + ", prod_name=" + prod_name
-				+ ", review_writer=" + review_writer + ", review_score=" + review_score + ", review_content="
-				+ review_content + ", review_date=" + review_date + ", review_answer=" + review_answer
-				+ ", review_pict=" + review_pict + ", review_status=" + review_status + ", answer=" + answer + "]";
+		return "Review [review_id=" + review_id + ", receiptorder_id=" + receiptorder_id + ", prod_id=" + prod_id
+				+ ", prod_name=" + prod_name + ", review_writer=" + review_writer + ", review_score=" + review_score
+				+ ", review_content=" + review_content + ", review_date=" + review_date + ", review_answer="
+				+ review_answer + ", review_pict=" + review_pict + ", review_status=" + review_status + ", answer="
+				+ answer + "]";
 	}
 	
 }

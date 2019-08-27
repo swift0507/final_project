@@ -35,10 +35,24 @@
  
  <script type="text/javascript">
  $(document).ready(function(){
+	 
 	$("#cancel").on("click", function(){
 		window.close();
 	})
+	
+	$("#password").focus();
 	 
+	$("#password").keyup(function(key){
+			if(key.keyCode==13){
+				$("#resetPw").trigger("click");
+			}
+		})
+	$("#passwordCheck").keyup(function(key){
+			if(key.keyCode==13){
+				$("#resetPw").trigger("click");
+			}
+		})
+	
 	$("#resetPw").on("click", function(){
 		   if($("#password").val()==""){
 			   alert("비밀번호를 입력하세요")
@@ -57,13 +71,17 @@
 				   success : function(data){
 					   if(data){
 						   alert("비밀번호 변경이 완료되었습니다.")
-						   window.opener.parent.location.href="loginForm.do";
-						   window.close();
+						   //alert(${loginUserInfo.mem_id});
+						   if("${loginUserInfo.mem_id}"==""){
+							window.opener.parent.location.href="loginForm.do";
+						   }
+						   	window.close();
 					   }
 				   }
 			   })
 		   }
 	   })
+	   
  });
  
  </script>
