@@ -79,8 +79,8 @@ public class UserController {
 		System.out.println(receipt);
 		//결제가 되면 장바구니 내역에서 삭제시켜야 한다. 
 		//아직 미완성
-		//return service.pay(receipt, baskets, prodnums);
-		return 8;
+		return service.pay(receipt, baskets, prodnums);
+		//return 8;
 	}
 	
 	//결제완료화면 직전에 구매한 장바구니를 가지고 간다. 
