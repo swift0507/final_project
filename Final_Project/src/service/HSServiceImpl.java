@@ -1,11 +1,16 @@
 package service;
 
 import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import model.Answer;
 import model.Banner;
@@ -15,6 +20,7 @@ import model.FAQ;
 import model.Member;
 import model.Notice;
 import model.OptionDetail;
+import model.Pick;
 import model.ProdOption;
 import model.Product;
 import model.QnA;
@@ -294,6 +300,54 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 	public int countBasket(String mem_id) {
 		// TODO Auto-generated method stub
 		return basketDao.countBasket(mem_id);
+	}
+	
+	//사장님 메인 페이지
+	@Override
+	public HashMap<String, Object> sellerMain(String sel_id) {
+		// TODO Auto-generated method stub
+		//오늘의 매출 / 오늘의 주문 건 / 미 답변 후기
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		
+		//오늘의 매출
+		HashMap<String, Object> param = new HashMap<String, Object>();
+		Date today = new Date();
+		int date = today.getDate() + 1;
+		Date tomorrow = new Date();
+		tomorrow.setDate(date);
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		
+		param.put("sel_id", sel_id);
+		param.put("today", df.format(today));
+		param.put("tomorrow", df.format(tomorrow));
+		//값 넣기
+		data.put("todaySales", receiptDao.todaySales(param));
+		//오늘의 주문 건
+		data.put("todayOrder", receiptDao.todayOrder(param));
+		
+		//미 답변 후기
+		//내가 올린 상품을 찾은 후 그 상품에 대한 리뷰를 보고 그 리뷰에대한 앤서가 없는 것을 판단
+		int noanswer = 0;
+		System.out.println(productDao.selectProdIds(sel_id));
+		for(int prod_id : productDao.selectProdIds(sel_id)) {
+			List<Integer> eachReviewId = reviewDao.selectReview(prod_id);
+			if(eachReviewId==null) {
+				//그냥 넘어감
+			}
+			else {
+				//값이 있으면 반복을 돌면서 답변이 있는지 아닌지를 찾기
+				for(int n : eachReviewId) {
+					if(answerDao.selectByReviewId(n)==null) {
+						noanswer++;
+					}
+				}
+			}
+		}
+		data.put("noanswer", noanswer);
+		//나에게 온 영수증리스트 보여주기
+		data.put("receiptList", receiptDao.selectReceiptListBySeller(sel_id));
+		System.out.println(data);
+		return data;
 	}
 
 	//상품ID로 상품1개 가져오기 (prodView)
@@ -629,7 +683,6 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 	@Override
 	public File getNoticeFile(int num) {
 		// TODO Auto-generated method stub
-		
 		Notice notice = noticeDao.selectOne(num);
 		String notice_pict = notice.getNotice_pict();
 		String path = "C:\\Temp\\attach\\";
@@ -657,20 +710,39 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		return faqDao.selectsupport();
 	}
 
+	//후기 작성
 	@Override
-	public int writeReview(Review review) {
+	public int writeReview(Review review, MultipartFile file) {	
 		// TODO Auto-generated method stub
-		return 0;
+		String path = "C:\\Temp\\attach\\";
+		File dir = new File(path);
+		if(!dir.exists()) dir.mkdirs();
+		String review_pict = file.getOriginalFilename();
+		File attachFile = new File(path+review_pict);
+		try {
+			file.transferTo(attachFile);  //웹으로 받아온 파일을 복사
+			review.setReview_pict(review_pict);  //db에 파일 정보 저장을 하기위해 모델객체에 setting하기
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//게시물을 DB에 저장
+		reviewDao.insertReview(review);
+		return review.getReview_id();
 	}
 
-//	@Override
-//	public int modifyReview(Review review) {
-//		// TODO Auto-generated method stub
-//		List<Review> originReview = reviewDao.selectAll();
-//		if(originReview.get(index).equals(review.get))
-//		return 0;
-//	}
+	//후기 수정
+	@Override
+	public int modifyReview(Review review) {
+		// TODO Auto-generated method stub
+		return reviewDao.updateReview(review);
+		
+	}
 
+	//후기 삭제
 	@Override
 	public int deleteReview(int review_id) {
 		// TODO Auto-generated method stub
@@ -678,36 +750,92 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 	}
 
 	//후기 list 가져오기
+	@Override
 	public HashMap<String, Object> getReviewList(int page) {
-			HashMap<String, Object> params = new HashMap<String, Object>();
-			
-			params.put("offset", getProdOffset(page));
-			params.put("boardsPerPage", 10);
-			
-			HashMap<String, Object> reviewMap = new HashMap<String, Object>();
-			
-			reviewMap.put("current", page);
-			reviewMap.put("start", getStartPage(page));
-			reviewMap.put("end", getEndPage(page));
-			reviewMap.put("last", getProdLastPage(reviewDao.getCount()));
-			reviewMap.put("totalBoards", reviewDao.getCount());
-			reviewMap.put("review", reviewDao.selectAll(params));
-			
-			return reviewMap;
-		}
-		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+
+		params.put("offset", getBoardOffset(page));
+		params.put("boardsPerPage", 10);
+
+		HashMap<String, Object> reviewMap = new HashMap<String, Object>();
+
+		reviewMap.put("current", page);
+		reviewMap.put("start", getStartPage(page));
+		reviewMap.put("end", getEndPage(page));
+		reviewMap.put("last", getBoardLastPage(reviewDao.getCount()));
+		reviewMap.put("totalBoards", reviewDao.getCount());
+		reviewMap.put("review", reviewDao.selectAll(params));
+
+		return reviewMap;
+	}
+
+	
 	@Override
 	public int deleteQnA(int qna_id) {
 		// TODO Auto-generated method stub
+		qnaDao.deleteQnAById(qna_id);
 		return qnaDao.deleteQnAById(qna_id);
 	}
 
+	//후기 가져오기
+	@Override
+	public Review getReview(int review_id) {
+		// TODO Auto-generated method stub
+		return reviewDao.selectOne(review_id);
+	}
+
+	//후기 첨부파일
+	@Override
+	public File getReviewFile(int num) {
+		// TODO Auto-generated method stub
+		Review review = reviewDao.selectOne(num);
+		String review_pict = review.getReview_pict();
+		System.out.println(review_pict);
+		String path = "C:\\Temp\\attach\\";
+		return new File(path+review_pict);
+	}
+
+	@Override
+	public HashMap<String, Object> getmyReview(String loginID, int page) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("review_writer", loginID);
+		params.put("offset", getBoardOffset(page));
+		params.put("boardsPerPage", 10);
+		
+		HashMap<String, Object> myReviews = new HashMap<String, Object>();
+
+		myReviews.put("current", page);
+		myReviews.put("start", getStartPage(page));
+		myReviews.put("end", getEndPage(page));
+		myReviews.put("last", getBoardLastPage(reviewDao.getCount()));
+		myReviews.put("totalBoards", reviewDao.getCount());
+		myReviews.put("review", reviewDao.getmyReview(params));
+		
+		return myReviews;
+	}
+	
 	//장바구니에 상품 추가
 	@Override
 	public int addBasket(Basket basket) {
 		// TODO Auto-generated method stub
 		return basketDao.insertBasket(basket);
 	}
+
+	//찜목록 추가
+	@Override
+	public int addPick(Pick pick) {
+		// TODO Auto-generated method stub
+		return pickDao.insertPick(pick);
+	}
+
+	//찜목록 삭제
+	@Override
+	public int deletePick(Pick pick) {
+		// TODO Auto-generated method stub
+		return pickDao.deletePick(pick);
+	}
+
 
 
 

@@ -20,5 +20,9 @@ public interface ReviewDao {
 
 	//상품별 후기 갯수
 	public int getCountById(int prod_id);
+	//prod_Id로 후기가져오기
+	public List<Integer> selectReview(int prod_id);
 
+	//나의 후기 가져오기
+	public List<Review> getmyReview(HashMap<String, Object> params);
 }

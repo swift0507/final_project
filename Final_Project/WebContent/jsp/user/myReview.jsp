@@ -81,7 +81,7 @@
 							</td>
 							<td class="text-right">
 								<button class="btn btn-sm btn-secondary"
-									onclick="location.href='user/review.do'">후기 작성</button>
+									onclick="location.href='reviewWriteForm.do'">후기 작성</button>
 							</td>
 						</tr>
 						<tr>
@@ -89,22 +89,20 @@
 						</tr>
 					</table>
 					<!-- 후기 header / 작성 button 종료 -->
-					${myReview}
 
 					<!-- 자료넣기 -->
-					<c:forEach items="${myReview}" var="m">
-					
+					<c:forEach items="${review}" var="m">
 					<!-- 후기 table 1 -->
 					<table style="width: 700px;">
 						<tr>
 							<th style="width: 75px;">
-								<img src="images/sk.png" style="width: 50px; height: 50px;">
-								<%-- <img src="noticedownload.do?num=${notice.notice_id}" width="700px"> <br> --%>
+								<img src="reviewdownload.do?num=${m.REVIEW_ID}" style="width: 50px; height: 50px;">
 							</th>
-							<th>${m.review_id}</th>
+							<th>${m.PROD_NAME}</th>
+							<th>${m.REVIEW_WRITER}</th>
 							<th class="text-right">
-								<button class="btn btn-sm btn-secondary" onclick="location.href='modifyReview.do?review_id=${m.review_id}'">수정</button>
-								<button class="btn btn-sm btn-danger" onclick="location.href='deleteReview.do?review_id=${m.review_id}'">삭제</button>
+								<button class="btn btn-sm btn-secondary" onclick="location.href='reviewModifyForm.do?review_id=${m.REVIEW_ID}'">수정</button>
+								<button class="btn btn-sm btn-danger" onclick="location.href='deleteReview.do?review_id=${m.REVIEW_ID}'">삭제</button>
 							</th>
 						</tr>
 						<tr style="height: 10px;"></tr>
@@ -121,64 +119,70 @@
 						</tr>
 						<tr style="height: 10px;"></tr>
 						<tr>
-							<td colspan=3>
-								<p class="review">${m.review_content}</p>
+							<td colspan="3">
+								<p class="review">${m.REVIEW_CONTENT}</p>
+								<br>
+								<img src="reviewdownload.do?num=${m.REVIEW_ID}"  style="width: 550px; height: 300px;">
 							</td>
 						</tr>
-					</table>
+						
+						<%-- <tr style="height: 10px;"></tr>
+						<tr>
+							<td colspan=3>
+								${m.review_pict}
+<!-- problem -->				<img src="reviewdownload.do?num=${m.review_id}"  alt="안불러와지는중" style="width: 50px; height: 50px;">
+							</td>
+						</tr> --%>
+						</table>
 					<br>
 					<hr>
 					<!-- 후기 table 1 종료-->
 						
 					</c:forEach>
 
-					<!-- 후기 table 2 -->
-			<!-- 		<table style="width: 700px;">
-						<tr>
-							<th style="width: 75px;"><img src="images/sk.png"
-								style="width: 50px; height: 50px;"></th>
-							<th>로즈마리 천연 비누 1개</th>
-							<th class="text-right">
-								<button class="btn btn-sm btn-secondary">수정</button>
-								<button class="btn btn-sm btn-danger">삭제</button>
-							</th>
-						</tr>
-						<tr style="height: 10px;"></tr>
-						<tr>
-							<td colspan=3><span id="star_rating"> <span
-									class="fa fa-star checked"></span> <span
-									class="fa fa-star checked"></span> <span
-									class="fa fa-star checked"></span> <span
-									class="fa fa-star checked"></span> <span class="fa fa-star"></span>
-							</span></td>
-						</tr>
-						<tr style="height: 10px;"></tr>
-						<tr>
-							<td colspan=3>
-								<p class="review">좋습니다. 비누로 세수하면 건조한 느낌이라 싫어하는데 이 비누는 촉촉하고
-									피부가 좋아지는 것이 느껴집니다.</p>
-							</td>
-						</tr>
-					</table>
-					<br>
-					<hr> -->
-					<!-- 후기 table 2 종료-->
-
 					<!-- 페이징 처리  -->
 					<div class="container">
 						<nav>
-							<ul class="pagination justify-content-center">
-								<li class="page-item"><a class="page-link" href="#"> <span>&laquo;</span>
-								</a></li>
-								<li class="page-item"><a class="page-link" href="#">1</a></li>
-								<li class="page-item"><a class="page-link" href="#">2</a></li>
-								<li class="page-item"><a class="page-link" href="#">3</a></li>
-								<li class="page-item"><a class="page-link" href="#"> <span>&raquo;</span>
-								</a></li>
-							</ul>
-						</nav>
+					<ul class="pagination justify-content-center">
+						<li class="page-item <c:if test="${ start == 1 }">disabled</c:if>"><a
+							class="page-link" href="myReview.do?page=1"> <span
+								aria-hidden="true">&laquo;</span>
+						</a></li>
+						<li class="page-item <c:if test="${ start == 1 }">disabled</c:if>"><a
+							class="page-link" href="myReview.do?page=${ start - 1 }">이전</a></li>
+						<c:forEach begin="${ start }" end="${ end < last ? end : last }"
+							var="i">
+							<c:choose>
+								<c:when test="${ i == current }">
+									<li class="page-item active" aria-current="page"><span
+										class="page-link">${ current } <span class="sr-only">(current)</span></span>
+									</li>
+								</c:when>
+								<c:otherwise>
+									<li class="page-item"><a class="page-link"
+										href="myReview.do?page=${ i }">${ i }</a></li>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						<li
+							class="page-item <c:if test="${ last <= end }">disabled</c:if>"><a
+							class="page-link" href="myReview.do?page=${ end + 1 }">다음</a></li>
+						<li
+							class="page-item <c:if test="${ last <= end }">disabled</c:if>"><a
+							class="page-link" href="myReview.do?page=${ last }"
+							aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+						</a></li>
+					</ul>
+				</nav>
+				시작페이지 : ${ start }<br>
+				끝페이지 : ${ end }<br>
+				마지막 : ${ last }<br>
+				전체리뷰갯수 : ${ totalBoards }<br>
+				현재 : ${ current } 
+				
 					</div>
 					<!-- 페이징 처리  종료 -->
+					<div class="col"></div>
 				</div>
 			</div>
 		</div>

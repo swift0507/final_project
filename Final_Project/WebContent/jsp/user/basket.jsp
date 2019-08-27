@@ -199,7 +199,9 @@
 				    </tr>
 				    <tr>
 				    </tr>
+				   </table>
 				    </c:forEach>
+				    <table style = "width: 800px;">
 				    <tr style = "height: 20px;"></tr>
 				    <tr class = "text-right" style = "background-color: lightgrey">
 				      <td>배송비 </td>

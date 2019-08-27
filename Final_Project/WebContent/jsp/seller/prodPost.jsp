@@ -106,7 +106,8 @@
 		
 		
 		/* 옵션 사용시 기본으로 생성될 테이블 */
-		var opt_default = '<table style = "width: 700px;" class = "opt_add_del">';
+		var opt_default = '<div>';
+		opt_default += '<table style = "width: 700px;" class = "opt_add_del">';
 		opt_default += '<tr>';
 		opt_default += '<td colspan = 5>';
 		opt_default += '<button class = "btn-secondary" id = "add_option">추가</button>';
@@ -121,7 +122,7 @@
 		opt_default += '<input type = "checkbox">';
 		opt_default += '</td>';
 		opt_default += '<td colspan = 2 style = "width: 275px;">';
-		opt_default += '<input type="text" class="form-control" id = "opt_name" placeholder = "옵션명">';
+		opt_default += '<input type="text" class="form-control opt_name" id = "opt_name" placeholder = "옵션명">';
 		opt_default += '</td>';
 		opt_default += '<td class = "text-right" colspan = 4 style = "width: 200px;">';
 		opt_default += '<input type = "hidden" value = 1>';
@@ -134,18 +135,19 @@
 		opt_default += '<tr class = "sub_option">';
 		opt_default += '<td style = "width: 50px;"></td>';
 		opt_default += '<td style = "width: 200px;">';
-		opt_default += '<input type="text" class="form-control" id = "optd_choice" placeholder = "상세옵션명">';
+		opt_default += '<input type="text" class="form-control optd_choice" id = "optd_choice" placeholder = "상세옵션명">';
 		opt_default += '</td>';
 		opt_default += '<th class = "text-center" style = "width: 75px;"> 추가 금액 </th>';
 		opt_default += '<td style = "width: 150px;">';
-		opt_default += '<input type="text" class="form-control" id = "optd_price" placeholder = "추가 금액">';
+		opt_default += '<input type="text" class="form-control optd_price" id = "optd_price" placeholder = "추가 금액">';
 		opt_default += '</td>';
 		opt_default += '<th class = "text-center" style = "width: 75px;"> 수량 </th>';
 		opt_default += '<td class = "text-center" style = "width: 75px;">';
-		opt_default += '<input type="text" class="form-control" id = "optd_quantity" placeholder = "수량">	';
+		opt_default += '<input type="text" class="form-control optd_quantity" id = "optd_quantity" placeholder = "수량">	';
 		opt_default += '</td>';
 		opt_default += '</tr>';
 		opt_default += '</table>';
+		opt_default += '</div>';
 		/* 옵션 사용시 기본으로 생성될 테이블 종료 */
 		
 		/* 옵션 사용 여부 Script */
@@ -258,7 +260,13 @@
         	})
         	/* 상세 옵션 폼 삭제 Script 종료 */
         	
+        	
+        	$(document).on("click", "#post", function(){
+        		alert("hi")
+        	})
 		})
+		
+		
 		</script>
 	
 		<!-- 대표 사진 미리보기 Script -->
@@ -533,7 +541,7 @@
 			
 			<!-- 등록 / 취소 button -->
 			<div class = "text-center">
-				<button class = "btn-secondary"> 등록 </button>
+				<button class = "btn-secondary" id="post"> 등록 </button>
 				<button class = "btn-secondary"> 취소 </button>
 			</div>
 			<!-- 등록 / 취소 button 종료-->
