@@ -55,6 +55,12 @@ public class UserController {
 		return p;
 	}
 	
+	//장바구니에 상품 담기
+	@RequestMapping("user/addBasket.do")
+	public @ResponseBody int addBasket(Basket basket) {
+		return service.addBasket(basket);
+	}
+	
 	//결제화면가기
 	@RequestMapping("user/payment.do")
 	public void payment(Model m, HttpSession session) {

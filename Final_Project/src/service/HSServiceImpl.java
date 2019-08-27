@@ -695,5 +695,12 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		return qnaDao.deleteQnAById(qna_id);
 	}
 
+	//장바구니에 상품 추가
+	@Override
+	public int addBasket(Basket basket) {
+		// TODO Auto-generated method stub
+		return basketDao.insertBasket(basket);
+	}
+
 
 }
