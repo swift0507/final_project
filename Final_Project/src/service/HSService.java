@@ -199,4 +199,8 @@ public interface HSService {
 
 	//나의 후기 가져오기
 	public HashMap<String, Object> getmyReview(String loginID, int page);
+
+	//장바구니 상품 추가
+	public int addBasket(Basket basket);
+
 }

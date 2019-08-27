@@ -101,14 +101,6 @@ $(document).ready(function(){
 						<a href="/Final_Project/signUpForm.do" class="nav-link">회원가입</a>
 					</li>
 				</c:when>
-				<c:when test="${loginuserInfo.mem_grade==1}">
-					<li class="nav-item">
-						<b class="nav-link" style="color : white;">${loginUserInfo.mem_name}님</b>
-					</li>
-					<li class="nav-item">
-						<a href="/Final_Project/logout.do" class="nav-link" id="logout">test</a>
-					</li>
-				</c:when>
 				<c:otherwise>
 					<li class="nav-item">
 						<b class="nav-link" style="color : white;">${loginUserInfo.mem_name}님</b>
@@ -143,8 +135,17 @@ $(document).ready(function(){
 			<td class = "blank">
 			</td>
 			<td class= "icon text-center">
+			<c:choose>
+				<c:when test="${loginUserInfo.mem_grade==0}">
 				<a href="/Final_Project/user/myPage.do" class="text-decoration-none text-dark"><i class = "fas fa-user" style = "font-size: 24px;"></i></a>
 				&nbsp;&nbsp;&nbsp;
+				</c:when>
+				<c:otherwise>
+				<!-- herehereplzplzplz -->
+				<a href="#" class="text-decoration-none text-dark"><i class = "fas fa-user" style = "font-size: 24px;"></i></a>
+				&nbsp;&nbsp;&nbsp;
+				</c:otherwise>
+			</c:choose>
 				<a href="/Final_Project/user/basket.do" class="text-decoration-none text-dark"><i class = "fas fa-shopping-cart" style = "font-size: 24px;"><span class="badge badge-pill badge-danger" id = "cart_amt" style='font-size: 12px'>${loginUserInfo.countBasket}</span></i></a>
 			</td>
 		</tr>

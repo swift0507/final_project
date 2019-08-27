@@ -195,8 +195,8 @@ public class AllController {
 	}
 	
 	@RequestMapping("deleteReview.do")
-	public @ResponseBody void deleteReview(int review_id) {
-		service.deleteReview(review_id);
+	public @ResponseBody int deleteReview(int review_id) {
+		return service.deleteReview(review_id);
 	}
 	
 	@RequestMapping("qnaByProd.do")
