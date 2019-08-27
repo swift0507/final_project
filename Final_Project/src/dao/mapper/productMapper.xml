@@ -39,4 +39,8 @@
     <select id="selectProdIds" resultType="java.lang.Integer">
     	select prod_id from product where sel_id=#{sel_id}
     </select>
+    
+    <select id="selectForSeller" resultType="product">
+    	select * from (select rownum as rn, e.* from (select * from product where sel_id = #{sel_id} order by prod_date desc) e) where rn between #{offset} and (#{offset} + #{boardsPerPage} - 1)
+    </select>
     </mapper>

@@ -836,6 +836,62 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		return pickDao.deletePick(pick);
 	}
 
+	@Override
+	public HashMap<String, Object> getProdList(String mem_id, int page) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		
+		params.put("offset", getBoardOffset(page));
+		params.put("boardsPerPage", 10);
+		params.put("sel_id", mem_id);
+		
+		List<Product> prodListForSeller = productDao.selectForSeller(params);
+		
+		for(int i = 0; i < prodListForSeller.size(); i++) {
+			prodListForSeller.get(i).setProd_pickCount(getPickCountByProdId(prodListForSeller.get(i).getProd_id()));
+			prodListForSeller.get(i).setProd_reviewCount(getReviewCountById(prodListForSeller.get(i).getProd_id()));		
+		}
+		
+		HashMap<String, Object> sellerProd = new HashMap<String, Object>();
+		
+		sellerProd.put("current", page);
+		sellerProd.put("start", getStartPage(page));
+		sellerProd.put("end", getEndPage(page));
+		sellerProd.put("last", getBoardLastPage(productDao.getCount()));
+		sellerProd.put("totalBoards", productDao.getCount());
+		sellerProd.put("sellerProd", prodListForSeller);
+		
+		return sellerProd;
+	}
+
+	//카테고리 id로 카테고리명 가져오기
+	@Override
+	public String getCategoryName(int category_id) {
+		// TODO Auto-generated method stub
+		return categoryDao.selectNameById(category_id);
+	}
+
+	//상품id별로 receiptorder 테이블에서 상품별 판매수량 판매수량
+	@Override
+	public int getSellCount(int prod_id) {
+		// TODO Auto-generated method stub
+		return receiptOrderDao.getOrderQuantitySum(prod_id);
+	}
+
+	//상품id로 첫번째 옵션, 그리고 첫번째 옵션의 옵션상세의 재고수량 가져오기
+	@Override
+	public int getSellRemain(int prod_id) {
+		// TODO Auto-generated method stub
+		return optionDetailDao.getOptionDQuantitySum(prod_id);
+	}
+
+	//상품id로 receiptorder 테이블에서 상품별 매출 가져오기
+	@Override
+	public int getSellSales(int prod_id) {
+		// TODO Auto-generated method stub
+		return receiptOrderDao.getOrderPriceSum(prod_id);
+	}
+
 
 
 

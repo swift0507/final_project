@@ -6,5 +6,8 @@
     <select id="selectByOption" parameterType="int" resultType="optionDetail">
     	select * from optiondetail where opt_id = #{opt_id}
     </select>
+    <select id="getOptionDQuantitySum" parameterType="int" resultType="int">
+    	select nvl(sum(optd_quantity), 0) from optiondetail where opt_id = (select opt_id from prodoption where prod_id=#{prod_id} and opt_order = 1)
+    </select>
     
     </mapper>

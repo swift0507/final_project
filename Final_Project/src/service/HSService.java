@@ -1,6 +1,7 @@
 package service;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -215,5 +216,20 @@ public interface HSService {
 
 	//찜목록 삭제
 	public int deletePick(Pick pick);
+
+	//사장님 등록상품목록 가져오기
+	public HashMap<String, Object> getProdList(String mem_id, int page);
+
+	//카테고리 id로 카테고리명 가져오기
+	public String getCategoryName(int category_id);
+
+	//상품id별로 receiptorder 테이블에서 상품별 판매수량 판매수량
+	public int getSellCount(int category_id);
+
+	//상품id로 첫번째 옵션, 그리고 첫번째 옵션의 옵션상세의 재고수량 가져오기
+	public int getSellRemain(int category_id);
+
+	//상품id로 receiptorder 테이블에서 상품별 매출 가져오기
+	public int getSellSales(int category_id);
 
 }

@@ -54,6 +54,9 @@
 <!-- header 종료 -->
 
 <!-- main body -->
+
+
+${ sellerProduct.sel_count[0] }
 <div class = "content">
 	<div class = "container">
 		<div class = "row">
@@ -79,7 +82,7 @@
 				<br>
 				
 				<!-- 등록 상품 List table -->
-				
+				<c:forEach var="prod" items="${ sellerProd }" varStatus="i">
 				<table style = "width: 700px; height: 175px;">
 					<tr class = "text-center">
 						<th style = "width: 25%"></th>
@@ -89,29 +92,30 @@
 					</tr>
 					<tr>
 						<td rowspan = 3  class = "text-center">
-							<img src = "/jsp/images/sk.png" style = "width: 125px; height: 125px;">
+							<img src = "images/sk.png" style = "width: 125px; height: 125px;">
 						</td>
-						<td> 상품명 : 알록달록 캔들</td>
-						<td> 판매수량 : ㅇㅇ 개 </td>
+						<td> 상품명 : ${ sellerProduct.prod_name[i.index] }</td>
+						<td> 판매수량 : ${ sellerProduct.sel_count[i.index] }개 </td>
 						<td>
 							<button class = "btn btn-sm btn-warning" style = "width: 100px;"> 편집 </button>
 						</td>
 					</tr>
 					<tr>
-						<td> 카테고리 : ㅇㅇㅇ </td>
-						<td> 재고 : xx 개 </td>
+						<td> 카테고리 : ${ sellerProduct.prod_category[i.index] } </td>
+						<td> 재고 : ${ sellerProduct.sel_remain[i.index] } 개 </td>
 						<td>
 							<button class = "btn btn-sm btn-danger" style = "width: 100px;"> 일시정지 </button>
 						</td>
 					</tr>
 					<tr>
-						<td> 게시일 : 2019-08-26</td>
-						<td> 매출 : ㅇㅇㅇㅇㅇ 원 </td>
+						<td> 게시일 : ${ sellerProduct.prod_date[i.index] }</td>
+						<td> 매출 : ${ sellerProduct.sel_sales[i.index] }원 </td>
 						<td>
 							<button class = "btn btn-sm btn-info" style = "width: 100px;"> 후기 / Q&A </button>
 						</td>
 					</tr>
 				</table>
+				</c:forEach>
 				<!-- 등록 상품 List table 종료-->
 				
 				<br><br>
@@ -119,28 +123,28 @@
 				<!-- 페이징 처리  -->
 				<div class = "container">
 					<nav>
-						<ul class="pagination justify-content-center">
-							<li class="page-item">
-								<a class="page-link" href="#"> 
-								<span>&laquo;</span>
-								</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">1</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">2</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">3</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#"> 
-								<span>&raquo;</span>
-								</a>
-							</li>
-						</ul>
-					</nav>
+			<ul class="pagination justify-content-center">
+				<li class="page-item <c:if test="${ start == 1 }">disabled</c:if>"><a class="page-link" href="prodManage.do?page=1"> 
+				<span aria-hidden="true">&laquo;</span>
+				</a></li>
+				<li class="page-item <c:if test="${ start == 1 }">disabled</c:if>"><a class="page-link" href="prodManage.do?page=${ start - 1 }">이전</a></li>
+				<c:forEach begin="${ start }" end="${ end < last ? end : last }" var="i">
+					<c:choose>
+						<c:when test="${ i == current }">
+							<li class="page-item active" aria-current="page">
+      							<span class="page-link">${ current } <span class="sr-only">(current)</span></span>
+    						</li></c:when>
+						<c:otherwise>
+							<li class="page-item"><a class="page-link" href="prodManage.do?page=${ i }">${ i }</a></li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+				<li class="page-item <c:if test="${ last <= end }">disabled</c:if>"><a class="page-link" href="prodManage.do?page=${ end + 1 }">다음</a></li>
+				<li class="page-item <c:if test="${ last <= end }">disabled</c:if>"><a class="page-link" href="prodManage.do?page=${ last }"
+					aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+				</a></li>
+			</ul>
+		</nav>
 				</div>
 				<!-- 페이징 처리  종료 -->
 				
