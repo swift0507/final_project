@@ -11,8 +11,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.RequestParam;
+=======
+import org.springframework.web.bind.annotation.ResponseBody;
+>>>>>>> branch 'master' of https://github.com/swift0507/final_project.git
 
+<<<<<<< HEAD
+=======
+import model.OptionDetail;
+import model.ProdOption;
+>>>>>>> branch 'master' of https://github.com/swift0507/final_project.git
 import model.Product;
 import service.HSService;
 
@@ -79,10 +88,38 @@ public class SellerController {
 		
 	}
 	
-	//판매상품등록
+	//판매상품등록폼
 	@RequestMapping("seller/prodPost.do")
-	public void prodPost() {
+	public void prodPost(Model m) {
 		//미완성
+		m.addAttribute("categoryList", service.getCategoryList());
+	}
+	
+	//상품등록 ajax
+	@RequestMapping("seller/insertProd.do")
+	public @ResponseBody Product insertProd(Product p) {
+		System.out.println(p);
+		//추가적으로 넣어야 하는 데이터
+		//배송비
+		p.setProd_fee(service.getSeller(p.getSel_id()).getSel_fee());
+		
+		return service.insertProd(p);
+	}
+	
+	//prodoption 넣기
+	@RequestMapping("seller/prodoptionInsert.do")
+	public @ResponseBody ProdOption insertProdOption(ProdOption option) {
+		System.out.println(option);
+		//return option;
+		return service.insertProdOption(option);
+	}
+	
+	//optiondetail 넣기
+	@RequestMapping("seller/optionDetailInsert.do")
+	public @ResponseBody OptionDetail insertOptionDetail(OptionDetail detail) {
+		System.out.println(detail);
+		//여기할차례
+		return service.insertOptionDetail(detail);
 	}
 	
 	//상품상세
