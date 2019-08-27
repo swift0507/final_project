@@ -31,4 +31,8 @@
 	    insert into member values(#{mem_id}, #{mem_pw}, #{mem_name}, #{mem_birth}, #{mem_gender}, #{mem_email}, #{mem_phone},
 	    #{mem_zipcode}, #{mem_addr}, #{mem_remainaddr}, default, #{mem_marketing}, default, default, default)
     </insert>
+    <update id="updateMember">
+    	update member set mem_email=#{mem_email}, mem_phone=#{mem_phone}, mem_zipcode=#{mem_zipcode}, mem_addr=#{mem_addr},
+    	mem_remainaddr=#{mem_remainaddr}
+    </update>
     </mapper>
