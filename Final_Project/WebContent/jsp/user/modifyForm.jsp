@@ -65,8 +65,17 @@
    	});
 		
 		//엔터키랑 
+		$("#mem_pw").keyup(function(key){
+			if(key.keyCode==13){
+				$("#resetPw").trigger("click");
+			}
+		})
 		
 		$("#resetPw").on("click", function(){
+			if($("#resetPw").val()==""){
+				alert("비밀번호를 입력하세요")
+				return 
+			}
 			$.ajax({
 				url : "passCheck.do",
 				data : {mem_pw : $("#mem_pw").val()},
@@ -76,12 +85,38 @@
 						alert("비밀번호가 틀립니다.")
 					}
 					else{
-						 window.open("/Final_Project/resetPwForm.do?mem_id="+$("#mem_id").val(), "비밀번호 재설정",'width=500, height=500')
+						 window.open("/Final_Project/resetPwForm.do?mem_id="+$("#mem_id").text(), "비밀번호 재설정",'width=500, height=500')
 					}
 				}
 			})
 		})
+		$("#mem_pw").focus();
 		
+		//제출버튼
+		$("#submit").on("click", function(){
+			if($("#mem_email").val()==""){
+				alert("이메일을 입력해주세요.")
+			}
+			else if($("#mem_phone").val()==""){
+				alert("휴대폰 번호를 입력해주세요.")
+			}
+			else if($("#mem_remainaddr").val()==""){
+				alert("주소를 입력해주세요.")
+			}
+			else{
+				$.ajax({
+					url : "modify.do",
+					data : {mem_id : $("#mem_id").text(), mem_email : $("#mem_email").val(),
+						mem_phone : $("#mem_phone").val(), mem_zipcode : $("#mem_zipcode").val(),
+						mem_addr : $("#mem_addr").val(), mem_remainaddr : $("#mem_remainaddr").val()},
+					type : "post",
+					success : function(data){
+						alert("수정이 완료되었습니다.")
+						history.go(-1);
+					}
+				})
+			}
+		})
 	})
 	
 	</script>
@@ -91,7 +126,9 @@
 		<tr style = "width: 30px;"></tr>
 		<tr>
 			<td colspan = 2 class = "text-center" style = "height: 100px;">
-				<img src = "../images/logo.png" style = "width: 160px; height: 60px;">
+				<a class="navbar-brand" href="/Final_Project/main.do">
+					<img src = "../images/logo.png" style = "width: 160px; height: 60px;">
+				</a>
 			</td>
 		</tr>
 		<tr>
@@ -104,7 +141,7 @@
 		</tr>
 		<tr>
 			<th> 아이디 :  </th> 
-			<td id="mem_id"> ${member.mem_id} </td>
+			<td id="mem_id">${member.mem_id}</td>
 		</tr>
 		<tr style = "height: 10px;"></tr>
 		<tr>
@@ -131,12 +168,12 @@
 		<tr style = "height: 20px;"></tr>
 		<tr>
 			<td colspan = 2>
-				<input type = "email" class = "form-control" placeholder="이메일" value="${member.mem_email}">
+				<input type = "email" class = "form-control" id="mem_email" placeholder="이메일" value="${member.mem_email}">
 			</td>
 		</tr>
 		<tr style = "height: 50px;">
 			<td colspan = 2>
-				<input type = "text" class = "form-control" placeholder = "휴대전화" value="${member.mem_phone}">
+				<input type = "text" class = "form-control" id="mem_phone" placeholder = "휴대전화" value="${member.mem_phone}">
 			</td>
 		</tr>
 		<tr style = "height: 20px;"></tr>
@@ -162,7 +199,7 @@
 		<tr style = "height: 20px;"></tr>
 		<tr>
 			<td colspan = 2>
-				<button class = "btn btn-sm btn-secondary" type = "submit" style = "width: 170px;">수정</button>
+				<button class = "btn btn-sm btn-secondary" type = "button" id="submit" style = "width: 170px;">수정</button>
 				<button class = "btn btn-sm btn-secondary" type = "button"
 						onclick = "history.go(-1)" style = "width: 170px;">취소</button>
 			</td>

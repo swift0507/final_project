@@ -4,13 +4,17 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import model.Answer;
 import model.Basket;
+import model.Category;
 import model.Event;
 import model.FAQ;
 import model.Member;
 import model.Notice;
 import model.OptionDetail;
+import model.Pick;
 import model.ProdOption;
 import model.Product;
 import model.QnAComment;
@@ -73,6 +77,27 @@ public interface HSService {
 	public void changeOrder(int receipt_id);
 	//주문취소
 	public void cancelOrder(int receipt_id);
+	
+	//회원정보수정
+	public void updateMember(Member m);
+	
+	/*
+	 seller
+	 */
+	//사장님 메인
+	public HashMap<String, Object> sellerMain(String sel_id);
+	
+	//카테고리목록불러오기
+	public List<Category> getCategoryList();
+	
+	//상품 넣기
+	public Product insertProd(Product p);
+	
+	//큰 옵션 넣기
+	public ProdOption insertProdOption(ProdOption option);
+	
+	//작은옵션넣기
+	public OptionDetail insertOptionDetail(OptionDetail detail);
 	
 	//주문상세페이지 서비스
 	public HashMap<String, Object> orderDetail(int receipt_id, String mem_id);
@@ -164,10 +189,12 @@ public interface HSService {
 	public HashMap<String, Object> getQnAById(int prod_id, int qnaPage);
 
 	//후기 작성,수정,삭제
-	public int writeReview(Review review);
-//	public int modifyReview(Review review);
+	public int writeReview(Review review, MultipartFile file);
+	public int modifyReview(Review review);
 	public int deleteReview(int review_id);
-
+	
+	public Review getReview(int review_id);
+	
 	//후기페이지의 리스트 출력
 //	public List<Review> getReviewList();
 	public HashMap<String, Object> getReviewList(int page);
@@ -186,5 +213,35 @@ public interface HSService {
 
 	//Q&A 삭제
 	public int deleteQnA(int qna_id);
+	
+	//후기_첨부파일을 가져다 주는 기능
+	public File getReviewFile(int num);
+
+	//나의 후기 가져오기
+	public HashMap<String, Object> getmyReview(String loginID, int page);
+
+	//장바구니 상품 추가
+	public int addBasket(Basket basket);
+
+	//찜목록 추가
+	public int addPick(Pick pick);
+
+	//찜목록 삭제
+	public int deletePick(Pick pick);
+
+	//사장님 등록상품목록 가져오기
+	public HashMap<String, Object> getProdList(String mem_id, int page);
+
+	//카테고리 id로 카테고리명 가져오기
+	public String getCategoryName(int category_id);
+
+	//상품id별로 receiptorder 테이블에서 상품별 판매수량 판매수량
+	public int getSellCount(int category_id);
+
+	//상품id로 첫번째 옵션, 그리고 첫번째 옵션의 옵션상세의 재고수량 가져오기
+	public int getSellRemain(int category_id);
+
+	//상품id로 receiptorder 테이블에서 상품별 매출 가져오기
+	public int getSellSales(int category_id);
 
 }

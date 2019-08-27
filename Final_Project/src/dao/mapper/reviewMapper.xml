@@ -6,24 +6,16 @@
 <mapper namespace="dao.ReviewDao">
 	<insert id="insertReview" parameterType="review">
 		insert into review
-		values (#{review_id}, #{receiptorder_id}, #{prod_id}, #{prod_name},
-		#{review_writer}, #{review_score}, #{review_content}, #{review_date},
-		#{review_answer}, #{review_pict}, #{review_status})
+		values (review_id.nextval, receiptorder_id.nextval, prod_id.nextval, #{prod_name},
+		#{review_writer}, #{review_score}, #{review_content}, sysdate, #{review_pict})
 	</insert>
 
 	<update id="updateReview" parameterType="review">
-		update into review set
-		receiptorder_id=#{receiptorder_id},
-		prod_id=#{prod_id},
-		prod_name=#{prod_name},
-		review_writer=#{review_writer},
-		review_score=#{review_score},
-		review_content=#{review_content},
-		review_date=#{review_date},
-		review_answer=#{review_answer},
-		review_pict=#{review_pict},
-		review_status=#{review_status} where
-		review_id=#{review_id}
+		update review set
+		review_score = #{review_score},
+		review_content = #{review_content},
+		review_pict = #{review_pict}
+		where review_id = #{review_id}
 	</update>
 
 	<delete id="deleteReview" parameterType="int">
@@ -43,6 +35,12 @@
 		select count(*) from review
 	</select>
 	
+	<select id="getmyReview" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select * from (select rownum as rn, e.* from (select * from review where review_writer = #{review_writer} 
+		order by review_id desc) e) where rn between #{offset} and (#{offset} + #{boardsPerPage} - 1)
+		
+	</select>
+	
 	<select id="selectById" parameterType="java.util.HashMap" resultType="Review">
     	select * from (select rownum as rn, e.* from (select * from review where prod_id = #{ prod_id } order by review_id desc) e) 
     	where rn between #{offset} and (#{offset} + #{boardsPerPage} - 1)
@@ -52,4 +50,7 @@
    		select count(*) from review where prod_id = #{ prod_id }
    	</select>
 
+	<select id="selectReview" resultType="java.lang.Integer">
+		select review_id from review where prod_id=#{prod_id}
+	</select>
 </mapper>

@@ -12,4 +12,5 @@ public interface MemberDao {
 	public void updateLoginDate(Member m);
 	public void updateMemberHistory(Member m);
 	public void signUp(Member m);
+	public void updateMember(Member m);
 }

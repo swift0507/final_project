@@ -79,7 +79,9 @@
 	</style>
 </head>
 <body>
-<form action="ReviewWrite.do" enctype="multipart/form-data" method="post">
+
+<form action="modifyReview.do" method = "post">
+	<input type = "hidden" name = "review_id" value = "${review.review_id}">
 	<table style = "width: 500px; margin-left: auto; margin-right: auto;">
 		<tr>
 			<td>
@@ -93,72 +95,77 @@
 				<hr> 
 			</td>
 		</tr>
-		<tr>
+		
+	
+ 		<tr>
 			<td colspan = 2>
-				<select class="custom-select" style = "width: 500px;">
+			<h5><b>${review.prod_name}</b></h5>
+				<!-- <select class="custom-select" style = "width: 500px;">
 					<option value="buy_item_01">내가 산 상품 1 / 옵션 1 / 옵션 2</option>
 					<option value="buy_item_02">내가 산 상품 2 / 옵션 1 / 옵션 2</option>
 					<option value="buy_item_03">내가 산 상품 3 / 옵션 1 / 옵션 2</option>
-				</select>
+				</select> -->
 			</td>
 		</tr>
+		
 		<tr style = "height: 75px;">
 			<th style = "width: 25%"> 별점 </th>
 			<td style = "width: 75%">
 				<fieldset class = "rating">
-				    <input type = "radio" id = "star5" name = "review_score" value = 10 />
+				    <input type = "radio" id = "star5" name = "review_score" value = "10" />
 				    <label class = "full" for = "star5"></label>
 				    
-				    <input type = "radio" id = "star4half" name = "review_score" value = 9 />
+				    <input type = "radio" id = "star4half" name = "review_score" value = "9" />
 				    <label class = "half" for = "star4half"></label>
 				    
-				    <input type = "radio" id = "star4" name = "review_score" value = 8/>
+				    <input type = "radio" id = "star4" name = "review_score" value = "8"/>
 				    <label class = "full" for = "star4"></label>
 				    
-				    <input type = "radio" id = "star3half" name = "review_score" value = 7 />
+				    <input type = "radio" id = "star3half" name = "review_score" value = "7" />
 				    <label class = "half" for = "star3half"></label>
 				    
-				    <input type = "radio" id = "star3" name = "review_score" value= 6 />
+				    <input type = "radio" id = "star3" name = "review_score" value= "6" />
 				    <label class = "full" for = "star3"></label>
 				    
-				    <input type = "radio" id = "star2half" name = "review_score" value = 5 />
+				    <input type = "radio" id = "star2half" name = "review_score" value = "5" />
 				    <label class = "half" for = "star2half"></label>
 				    
-				    <input type = "radio" id = "star2" name = "review_score" value = 4 />
+				    <input type = "radio" id = "star2" name = "review_score" value = "4" />
 				    <label class = "full" for = "star2"></label>
 				    
-				    <input type = "radio" id = "star1half" name = "review_score" value = 3 />
+				    <input type = "radio" id = "star1half" name = "review_score" value = "3" />
 				    <label class = "half" for = "star1half"></label>
 				    
-				    <input type = "radio" id = "star1" name = "review_score" value = 2 />
+				    <input type = "radio" id = "star1" name = "review_score" value = "2" />
 				    <label class = "full" for = "star1"></label>
 				    
-				    <input type = "radio" id = "starhalf" name = "review_score" value = 1 />
+				    <input type = "radio" id = "starhalf" name = "review_score" value = "1" />
 				    <label class = "half" for = "starhalf"></label>
 				</fieldset>
 			</td>
 		</tr>
 		<tr>
-			<th class = "align-text-top"></th>
+			<th class = "align-text-top">리뷰 내용</th>
 			<td>
-				<textarea class = "form-control" rows = "10" id = "review_content" name = "review_content" placeholder = "내용을 입력해주세요"></textarea>
+				<textarea class = "form-control" rows = "10" name = "review_content" id = "review_content" >${review.review_content}</textarea>
 			</td>
 		</tr>
 		<tr style = "height: 20px;"></tr>
 		<tr>
 			<th> 사진 첨부 </th>
 			<td>
-				<input type="file" name="ufile" class="form-control-file" id="inputFile">
+				<input type="file" name="review_pict" class="form-control-file" id="review_pict">
+				<%-- <img src="reviewdownload.do?num=${review.review_id}" width="700px"> --%>
 			</td>
 		</tr>
 		<tr style = "height: 20px;"></tr>
 		<tr>
 			<td colspan = 2 class = "text-center">
-				<input class="btn btn-sm btn-secondary" style = "width: 75px;" type="submit" value="등록">
+				<input class="btn btn-sm btn-secondary" style = "width: 75px;" type="submit" value="수정">
 				<button class="btn btn-sm btn-secondary" style = "width: 75px;" type="button" onclick="location.href='myReview.do'">취소</button>
 			</td>
 		</tr>
 	</table>
-	</form>	
+</form>	
 </body>
 </html>

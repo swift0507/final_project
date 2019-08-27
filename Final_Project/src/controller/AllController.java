@@ -173,6 +173,11 @@ public class AllController {
 			String mem_id = (String)id.get("mem_id");
 			System.out.println(mem_id);
 			model.addAttribute("loginUser", mem_id);
+			
+			List<Product> getPickList = service.getPickList(mem_id);
+			for(int i = 0; i < getPickList.size(); i++) {
+				if(getPickList.get(i).getProd_id() == prod_id) model.addAttribute("isPick", true);
+			}
 		}
 		//로그인중일 때 현재 로그인중 ID 보내기
 		
@@ -195,8 +200,8 @@ public class AllController {
 	}
 	
 	@RequestMapping("deleteReview.do")
-	public @ResponseBody void deleteReview(int review_id) {
-		service.deleteReview(review_id);
+	public @ResponseBody int deleteReview(int review_id) {
+		return service.deleteReview(review_id);
 	}
 	
 	@RequestMapping("qnaByProd.do")

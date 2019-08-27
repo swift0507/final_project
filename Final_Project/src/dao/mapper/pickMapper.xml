@@ -11,4 +11,12 @@
     	select count(*) from pick where prod_id = #{ prod_id }
     </select>
     
+    <insert id="insertPick" parameterType="pick">
+    	insert into pick values (#{prod_id}, #{mem_id})
+    </insert>
+    
+    <delete id="deletePick" parameterType="pick">
+    	delete from pick where prod_id = #{prod_id} and mem_id = #{mem_id}
+    </delete>
+    
     </mapper>

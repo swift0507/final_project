@@ -7,6 +7,10 @@
     	select * from receipt where mem_id=#{mem_id} order by receipt_id desc
     </select>
     
+    <select id="selectReceiptListBySeller" resultType="receipt">
+    	select * from receipt where sel_id=#{sel_id} order by receipt_id desc
+    </select>
+    
     <insert id="insertReceipt">
     	<selectKey resultType="int" keyProperty="receipt_id" order="BEFORE">
     	select receiptid_seq.nextval from dual
@@ -30,4 +34,12 @@
     <delete id="cancelOrder">
     	delete from receipt where receipt_id = #{receipt_id}
     </delete>
+    
+    <select id="todaySales" resultType="java.lang.Integer">
+    	select sum(receipt_price) from receipt where sel_id=#{sel_id} and receipt_orderdate between #{today} and #{tomorrow}
+    </select>
+    
+    <select id="todayOrder" resultType="java.lang.Integer">
+    	select count(*) from receipt where sel_id = #{sel_id} and receipt_orderdate between #{today} and #{tomorrow}
+    </select>
     </mapper>
