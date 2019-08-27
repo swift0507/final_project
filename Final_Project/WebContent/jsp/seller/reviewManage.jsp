@@ -31,6 +31,39 @@
 	</script>
 	<script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15.0.0/dist/smooth-scroll.polyfills.min.js">
 	</script>
+	<script src = "https://cdn.jsdelivr.net/npm/sweetalert2@7.33.1/dist/sweetalert2.all.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$('#report_button').click(function(){
+				Swal.fire(
+						  '신고 완료',
+						  '신고가 정상적으로 완료되었습니다.',
+						  'success'
+						)
+			});	
+		})
+	</script>
+	
+	<script>
+		$(document).ready(function(){
+			$(document).on('click', '#add_Reply', function(){
+				$('.review_answer').toggle();
+				$(this).val() == "△" ? play_int() : play_pause();
+  
+			})
+			
+			function play_int() {
+				$('#add_Reply').val("▽");
+				   
+				}
+				
+			function play_pause() {
+				$('#add_Reply').val("△");
+				 
+				}
+			
+		});
+	</script>
 </head>
 <body>
 <!-- header -->
@@ -49,31 +82,46 @@
 			<div class = "col-8">
 				<ul class="nav nav-tabs" id="myTab" role="tablist">
 					<li class="nav-item">
-						<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"> 후기 </a>
+						<a class="nav-link active" id="review-tab" data-toggle="tab" href="#review" role="tab"> 후기 </a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"> Q&A </a>
+						<a class="nav-link" id="qna-tab" data-toggle="tab" href="#qna" role="tab"> Q&A </a>
 					</li>
 				</ul>
 				
 				<div class="tab-content" id="myTabContent">
-					<div class="tab-pane fade show active" id="home" role="tabpanel">
+					<!-- 후기 영역 -->
+					<div class="tab-pane fade show active" id="review" role="tabpanel">
 						<!-- 후기 table 1 -->
 						<table class = "mt-5" style="width: 700px;">
 						<tr>
-							<th style="width: 75px;">
-								<%-- <img src="noticedownload.do?num=${notice.notice_id}" width="700px"> <br> --%>
+							<td style = "width: 20%;">
 								<img src="images/sk.png" style="width: 50px; height: 50px;">
+							</td>
+							<th >
+								로즈마리 천연 비누
 							</th>
-							<th>${m.review_id}</th>
-							<th class="text-right">
-								<button class="btn btn-sm btn-secondary" onclick="location.href='modifyReview.do?review_id=${m.review_id}'">수정</button>
-								<button class="btn btn-sm btn-danger" onclick="location.href='deleteReview.do?review_id=${m.review_id}'">삭제</button>
+							<th class="text-right" style = "width: 30%;">
+								<button class="btn btn-sm btn-danger" id = "report_button">
+									<i class="fa fa-warning"></i> 신고
+								</button>
 							</th>
 						</tr>
-						<tr style="height: 10px;"></tr>
+						
+						<tr style="height: 10px;">
+							<td></td>
+						</tr>
+						
 						<tr>
-							<td colspan=3>
+							<td>아이디</td>
+							<td></td>
+							<td rowspan = 5 class = "text-center">
+								<img src = "" style = "width: 150px; height: 200px;">
+							</td>
+						</tr>
+						
+						<tr>
+							<td>
 								<span id="star_rating"> 
 									<span class="fa fa-star checked"></span> 
 									<span class="fa fa-star checked"></span> 
@@ -82,94 +130,85 @@
 									<span class="fa fa-star"></span>
 								</span>
 							</td>
+							<td></td>
 						</tr>
 						<tr style="height: 10px;"></tr>
 						<tr>
-							<td colspan=3>
-								<p class="review"> Review Contents</p>
+							<td colspan = 2>
+								2019-08-27
+							</td>
+						</tr>
+						<tr>
+							<td colspan = 2>
+								제품 만족합니다.
+									
+								비누로 세수하면 건조한 느낌이라 싫어하는데 <br>
+								이 비누는 촉촉하고 피부가 좋아지는 것이 느껴집니다.
+							</td>
+						</tr>
+						
+						<tr style = "height: 50px;">
+							<td colspan = 3 class = "text-right">
+								<input type = "button" id = "add_Reply" class = "btn btn-sm btn-secondary" value = "▽">
+							</td>
+						</tr>
+						
+						<tr class = "review_answer" style = "display: none;">
+							<td colspan = 3>
+								<span class="badge badge-success">답변</span>
+							</td>
+						</tr>
+						
+						<tr class = "review_answer" style = "display: none;">
+							<td colspan = 3>
+								<textarea class="form-control" id="" rows="5"></textarea>
+							</td>
+						</tr>
+						<tr class = "review_answer" style = "display: none;">
+							<td colspan = 3 class = "text-right">
+								<button class = "btn btn-sm btn-secondary">작성</button>
 							</td>
 						</tr>
 					</table>
 					<br>
 					<hr>
+						<!-- 페이징 처리  -->
+						<div class = "container">
+							<nav>
+								<ul class="pagination justify-content-center">
+									<li class="page-item">
+										<a class="page-link" href="#"> 
+										<span>&laquo;</span>
+										</a>
+									</li>
+									<li class="page-item">
+										<a class="page-link" href="#">1</a>
+									</li>
+									<li class="page-item">
+										<a class="page-link" href="#">2</a>
+									</li>
+									<li class="page-item">
+										<a class="page-link" href="#">3</a>
+									</li>
+									<li class="page-item">
+										<a class="page-link" href="#"> 
+										<span>&raquo;</span>
+										</a>
+									</li>
+								</ul>
+							</nav>
+						</div>
+						<!-- 페이징 처리  종료 -->
 					<!-- 후기 table 1 종료-->
 					</div>
+					<!-- 후기 영역 종료-->
 					
-					
-					<div class="tab-pane fade" id="profile" role="tabpanel">
-						<!-- QnA table 1 -->
-						<table class = "mt-5" style = "width: 700px;">
-							<tr>
-							    <th>
-							    	<img src = "images/sk.png" style = "width: 50px; height: 50px;">
-							    	&nbsp;&nbsp;
-							      	로즈마리 천연 비누 1개
-							    </th>
-						    </tr>
-						    <tr style = "height: 10px;"></tr>
-						    <tr>
-						    	<td style = "width: 700px;">
-						    		<span class = "badge badge-primary">질문</span>
-						    	</td>
-						 
-						    </tr>
-						    <tr>
-						    	<td style = "width: 700px;">
-						    		<input type = "text" class = "form-control" style = "width: 700px;" value = "얼굴에 써도 되나요!?">
-						    	</td>
-						    </tr>
-						  	
-						  	<tr style = "height: 10px;"></tr>
-						  	
-						    <tr>
-						    	<td style = "width: 700px;">
-						    		<span class="badge badge-success">답변</span>
-						    	</td>
-						    </tr>
-						    <tr>
-						    	<td>
-						    		<input type = "text" class = "form-control" style = "width: 700px;" placeholder = "답변 작성">
-						    	</td>
-						    </tr>
-			
-						</table>
-						<br>
-						<hr>
-						<!-- QnA table 1 종료-->	
+					<div class="tab-pane fade" id="qna" role="tabpanel">
+						<!-- Q&A 영역 -->
+						
+						<!-- Q&A 영역 종료-->
 					</div>
 				</div>
-
-				
-				<br><br>
-				
-				<!-- 페이징 처리  -->
-				<div class = "container">
-					<nav>
-						<ul class="pagination justify-content-center">
-							<li class="page-item">
-								<a class="page-link" href="#"> 
-								<span>&laquo;</span>
-								</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">1</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">2</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">3</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#"> 
-								<span>&raquo;</span>
-								</a>
-							</li>
-						</ul>
-					</nav>
-				</div>
-				<!-- 페이징 처리  종료 -->
-				
 				<br><br>
 				
 			</div>

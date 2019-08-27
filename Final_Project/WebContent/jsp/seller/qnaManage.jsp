@@ -31,6 +31,29 @@
 	</script>
 	<script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15.0.0/dist/smooth-scroll.polyfills.min.js">
 	</script>
+	
+	<script>
+		$(document).ready(function(){
+			$(document).on('click', '#add_Reply', function(){
+				$('.answer').toggle();
+				$(this).val() == "△" ? play_int() : play_pause();
+  
+			})
+			
+			function play_int() {
+				$('#add_Reply').val("▽");
+				   
+				}
+				
+			function play_pause() {
+				$('#add_Reply').val("△");
+				 
+				}
+			
+		});
+	</script>
+	
+	
 </head>
 <body>
 <!-- header -->
@@ -47,191 +70,153 @@
 				<jsp:include page = "sideBar.jsp"></jsp:include>
 			</div>
 			<div class = "col-8">
-				<br>
-				<!-- 요약 정보 List -->
-				<div class="card-deck justify-content-center">
+				<ul class="nav nav-tabs" id="myTab" role="tablist">
+					<li class="nav-item">
+						<a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab"> 후기 </a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" id="qna-tab" data-toggle="tab" href="#qna" role="tab"> Q&A </a>
+					</li>
+				</ul>
 				
-					<!-- 매출 요약 정보 -->
-					<div class = "card bg-primary text-white text-center" style = "width: 150px;">
-	 					<div class="card-body">
-	 						<i class = "fas fa-money-bill-wave" style = "font-size: 60px;"></i>
-	 						<hr>
-	    					<h5 class="card-title"> <b>오늘의 매출</b> </h5>
-	    					<hr>
-	    					<p class="card-text"> 428,000 원 </p>
-	  					</div>
+				<div class="tab-content" id="myTabContent">
+					<!-- 후기 영역 -->
+					<div class="tab-pane fade" id="review" role="tabpanel">
+						
 					</div>
-					<!-- 매출 요약 정보 종료 -->
+					<!-- 후기 영역 종료-->
 					
-					<!-- 주문 건수 요약 정보 -->
-					<div class = "card bg-info text-white text-center" style = "width: 150px;">
-	 					<div class="card-body">
-	 						<i class = "fas fa-truck" style = "font-size: 60px;"></i>
-	 						<hr>
-	    					<h5 class="card-title"> <b>오늘의 주문 건</b> </h5>
-	    					<hr>
-	    					<p class="card-text"> 82 건 </p>
-	  					</div>
+					<!-- Q&A 영역 -->
+					<div class="tab-pane fade show active" id="qna" role="tabpanel">
+						<!-- QnA table toggle ver -->
+						<table class = "mt-5" style = "width: 700px;">
+							<tr>
+							    <th colspan = 2>
+							    	<img src = "images/sk.png" style = "width: 50px; height: 50px;">
+							    	&nbsp;&nbsp;
+							      	로즈마리 천연 비누 1개
+							    </th>
+						    </tr>
+						    <tr style = "height: 10px;"></tr>
+						    <tr>
+						    	<td colspan = 2 style = "width: 700px;">
+						    		<span class = "badge badge-primary">질문</span>
+						    	</td>
+						 
+						    </tr>
+						    <tr>
+						    	<td style = "width: 600px;">
+						    		<input type = "text" class = "form-control" style = "width: 600px;" value = "얼굴에 써도 되나요!?" readonly>
+						    	</td>
+						    	<td class = "text-center">
+						    		<input type = "button" id = "add_Reply" class = "btn btn-sm btn-secondary" value = "▽">
+						    	</td>
+						    </tr>
+						  	
+						  	<tr style = "height: 10px;"></tr>
+						  	
+						    <tr class = "answer" style = "display: none;">
+						    	<td colspan = 2 style = "width: 700px;">
+						    		<span class="badge badge-success">답변</span>
+						    	</td>
+						    </tr>
+						    <tr class = "answer" style = "display: none;">
+						    	<td>
+						    		<input type = "text" class = "form-control" style = "width: 500px;" placeholder = "답변 작성">
+						    	</td>
+						    	<td class = "text-center">
+						    		<button class = "btn btn-sm btn-secondary">확인</button>
+						    		<button class = "btn btn-sm btn-danger">삭제</button>
+						    	</td>
+						    </tr>
+							
+						</table>
+						<br>
+						<hr>
+						<!-- QnA table toggle ver 종료 -->
+						
+						
+						
+						<!-- QnA table non-toggle ver -->
+						<table class = "mt-5" style = "width: 700px;">
+							<tr>
+							    <th colspan = 2>
+							    	<img src = "images/sk.png" style = "width: 50px; height: 50px;">
+							    	&nbsp;&nbsp;
+							      	로즈마리 천연 비누 1개
+							    </th>
+						    </tr>
+						    <tr style = "height: 10px;"></tr>
+						    <tr>
+						    	<td colspan = 2 style = "width: 700px;">
+						    		<span class = "badge badge-primary">질문</span>
+						    	</td>
+						 
+						    </tr>
+						    <tr>
+						    	<td style = "width: 500px;">
+						    		<input type = "text" class = "form-control" style = "width: 500px;" value = "얼굴에 써도 되나요!?" readonly>
+						    	</td>
+						    	<td class = "text-center">
+						    		
+						    	</td>
+						    </tr>
+						  	
+						  	<tr style = "height: 10px;"></tr>
+						  	
+						    <tr>
+						    	<td colspan = 2 style = "width: 500px;">
+						    		<span class="badge badge-success">답변</span>
+						    	</td>
+						    </tr>
+						    <tr>
+						    	<td>
+						    		<input type = "text" class = "form-control" style = "width: 500px;" placeholder = "답변 작성">
+						    	</td>
+						    	<td class = "text-center" colspan = 2>
+						    		<button class="btn btn-sm btn-secondary">답변 달기</button>
+						    		<button class = "btn btn-sm btn-danger">삭제</button>
+						    	</td>
+						    </tr>
+							
+						</table>
+						<br>
+						<hr>	
+						<!-- QnA table non-toggle ver 종료 -->
+						
+						<!-- 페이징 처리  -->
+						<div class = "container">
+							<nav>
+								<ul class="pagination justify-content-center">
+									<li class="page-item">
+										<a class="page-link" href="#"> 
+										<span>&laquo;</span>
+										</a>
+									</li>
+									<li class="page-item">
+										<a class="page-link" href="#">1</a>
+									</li>
+									<li class="page-item">
+										<a class="page-link" href="#">2</a>
+									</li>
+									<li class="page-item">
+										<a class="page-link" href="#">3</a>
+									</li>
+									<li class="page-item">
+										<a class="page-link" href="#"> 
+										<span>&raquo;</span>
+										</a>
+									</li>
+								</ul>
+							</nav>
+						</div>
+						<!-- 페이징 처리  종료 -->
 					</div>
-					<!-- 주문 건수 요약 정보 종료 -->
+					<!-- Q&A 영역 종료-->
 					
-					<!-- 미처리 건수 요약 정보 -->
-					<div class = "card bg-warning text-white text-center" style = "width: 150px;">
-	 					<div class="card-body">
-	 						<i class = "fas fa-comment-slash" style = "font-size: 60px;"></i>
-	 						<hr>
-	    					<h5 class="card-title"> <b>미답변 후기 / Q&A</b> </h5>
-	    					<hr>
-	    					<p class="card-text"> 14 개 </p>
-	  					</div>
-					</div>
-					<!-- 미처리 건수 요약 정보 종료 -->
-					
 				</div>
-				<!-- 요약 정보 List 종료 -->
-				
-				<br>
-				
-				<!-- 더보기 button -->
-				<div class = "more_button text-right">
-					<button class = "btn btn-secondary" style = "width: 100px;">더보기</button>
-				</div>
-				<!-- 더보기 button 종료 -->
-			
-				<hr>
-				
-				<!-- 주문 1 카드 table -->
-				<div class = "order1">
-					<div class = "card">
-						<div class = "card-body">
-							<table style = "width: 700px;">
-								<tr>
-									<td> 알록달록 캔들 외 3개 </td>
-									<td class = "text-center" rowspan = 2 style = "vertical-align: middle;">
-										<button class = "btn btn-success" style = "width: 150px;" disabled> 결제 완료 </button>	
-									</td>
-								</tr>
-								<tr>
-									<td> 주문날짜 : 2019-08-18 &nbsp;&nbsp;&nbsp; 주문번호 : 123-45678-9012 </td>
-								</tr>
-							</table>
-						</div>
-					</div>
-				</div>
-				<!-- 주문 1 카드 table 종료 -->
-				
-				<!-- 주문 2 카드 table -->
-				<div class = "order2">
-					<div class = "card">
-						<div class = "card-body">
-							<table style = "width: 700px;">
-								<tr>
-									<td> 알록달록 캔들 외 3개 </td>
-									<td class = "text-center" rowspan = 2 style = "vertical-align: middle;">
-										<button class = "btn btn-warning" style = "width: 150px;" disabled> 결제 미완료 </button>	
-									</td>
-								</tr>
-								<tr>
-									<td> 주문날짜 : 2019-08-18 &nbsp;&nbsp;&nbsp; 주문번호 : 123-45678-9012 </td>
-								</tr>
-							</table>
-						</div>
-					</div>
-				</div>
-				<!-- 주문 2 카드 table 종료 -->
-				
-				<!-- 주문 3 카드 table -->
-				<div class = "order3">
-					<div class = "card">
-						<div class = "card-body">
-							<table style = "width: 700px;">
-								<tr>
-									<td> 알록달록 캔들 외 3개 </td>
-									<td class = "text-center" rowspan = 2 style = "vertical-align: middle;">
-										<button class = "btn btn-success" style = "width: 150px;" disabled> 결제 완료 </button>	
-									</td>
-								</tr>
-								<tr>
-									<td> 주문날짜 : 2019-08-18 &nbsp;&nbsp;&nbsp; 주문번호 : 123-45678-9012 </td>
-								</tr>
-							</table>
-						</div>
-					</div>
-				</div>
-				<!-- 주문 3 카드 table 종료 -->
-				
-				<!-- 주문 4 카드 table -->
-				<div class = "order4">
-					<div class = "card">
-						<div class = "card-body">
-							<table style = "width: 700px;">
-								<tr>
-									<td> 알록달록 캔들 외 3개 </td>
-									<td class = "text-center" rowspan = 2 style = "vertical-align: middle;">
-										<button class = "btn btn-info" style = "width: 150px;" disabled> 배송중 </button>	
-									</td>
-								</tr>
-								<tr>
-									<td> 주문날짜 : 2019-08-18 &nbsp;&nbsp;&nbsp; 주문번호 : 123-45678-9012 </td>
-								</tr>
-							</table>
-						</div>
-					</div>
-				</div>
-				<!-- 주문 4 카드 table 종료 -->
-				
-				<!-- 주문 5 카드 table -->
-				<div class = "order5">
-					<div class = "card">
-						<div class = "card-body">
-							<table style = "width: 700px;">
-								<tr>
-									<td> 알록달록 캔들 외 3개 </td>
-									<td class = "text-center" rowspan = 2 style = "vertical-align: middle;">
-										<button class = "btn btn-secondary" style = "width: 150px;" disabled> 배송 완료 </button>	
-									</td>
-								</tr>
-								<tr>
-									<td> 주문날짜 : 2019-08-18 &nbsp;&nbsp;&nbsp; 주문번호 : 123-45678-9012 </td>
-								</tr>
-							</table>
-						</div>
-					</div>
-				</div>
-				<!-- 주문 5 카드 table 종료 -->
 				
 				<br><br>
-				
-				<!-- 페이징 처리  -->
-				<div class = "container">
-					<nav>
-						<ul class="pagination justify-content-center">
-							<li class="page-item">
-								<a class="page-link" href="#"> 
-								<span>&laquo;</span>
-								</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">1</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">2</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">3</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#"> 
-								<span>&raquo;</span>
-								</a>
-							</li>
-						</ul>
-					</nav>
-				</div>
-				<!-- 페이징 처리  종료 -->
-				
-				<br><br>
-				
 			</div>
 			
 		</div>
