@@ -662,7 +662,7 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 	@Override
 	public int writeReview(Review review, MultipartFile file) {	
 		// TODO Auto-generated method stub
-		String path = "C:/Temp/attach/";
+		String path = "C:\\Temp\\attach\\";
 		File dir = new File(path);
 		if(!dir.exists()) dir.mkdirs();
 		String review_pict = file.getOriginalFilename();
@@ -738,8 +738,29 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		// TODO Auto-generated method stub
 		Review review = reviewDao.selectOne(num);
 		String review_pict = review.getReview_pict();
+		System.out.println(review_pict);
 		String path = "C:\\Temp\\attach\\";
 		return new File(path+review_pict);
+	}
+
+	@Override
+	public HashMap<String, Object> getmyReview(String loginID, int page) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("review_writer", loginID);
+		params.put("offset", getBoardOffset(page));
+		params.put("boardsPerPage", 10);
+		
+		HashMap<String, Object> myReviews = new HashMap<String, Object>();
+
+		myReviews.put("current", page);
+		myReviews.put("start", getStartPage(page));
+		myReviews.put("end", getEndPage(page));
+		myReviews.put("last", getBoardLastPage(reviewDao.getCount()));
+		myReviews.put("totalBoards", reviewDao.getCount());
+		myReviews.put("review", reviewDao.getmyReview(params));
+		
+		return myReviews;
 	}
 	
 

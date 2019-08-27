@@ -196,6 +196,7 @@ public interface HSService {
 	
 	//후기_첨부파일을 가져다 주는 기능
 	public File getReviewFile(int num);
-	
 
+	//나의 후기 가져오기
+	public HashMap<String, Object> getmyReview(String loginID, int page);
 }

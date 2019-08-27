@@ -117,9 +117,22 @@ public class UserController {
 	
 	//나의 후기 보기
 	@RequestMapping("user/myReview.do")
-	public void myReview(Model model, @RequestParam(defaultValue="1")int page) {
-		model.addAllAttributes(service.getReviewList(page));
+	public void myReview(Model model, HttpSession session, @RequestParam(defaultValue="1")int page) {
+		HashMap<String, Object> id = (HashMap<String, Object>)session.getAttribute("loginUserInfo");
+		String loginID = (String)id.get("mem_id");
+		
+		model.addAllAttributes(service.getmyReview(loginID, page));
+
 	}
+	
+//	//나의 후기 불러오기
+//	@RequestMapping("getmyReview.do")
+//	public String getmyReview(Model model, HttpSession session) {
+//		//게시물 번호에 해당하느 게시물을 가져오기
+//		String loginID = session.getId();
+//		model.addAttribute("review", service.getmyReview(loginID));
+//		return "redirect: myReview.do";
+//	}
 	
 	//나의 Q&A 보기
 	@RequestMapping("user/myQnA.do")
@@ -256,9 +269,10 @@ public class UserController {
 	}
 	
 	
-	@RequestMapping("reviewdownload.do")
+	@RequestMapping("user/reviewdownload.do")
 	public View reviewdownload(int num) {
 		File attachFile = service.getReviewFile(num);
+		System.out.println(attachFile);
 		View view = new DownloadView(attachFile);
 		return view; 
 	}

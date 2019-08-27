@@ -92,17 +92,17 @@
 
 					<!-- 자료넣기 -->
 					<c:forEach items="${review}" var="m">
-					
 					<!-- 후기 table 1 -->
 					<table style="width: 700px;">
 						<tr>
 							<th style="width: 75px;">
-								<img src="reviewdownload.do?num=${m.review_id}" style="width: 50px; height: 50px;">
+								<img src="reviewdownload.do?num=${m.REVIEW_ID}" style="width: 50px; height: 50px;">
 							</th>
-							<th>${m.prod_name}</th>
+							<th>${m.PROD_NAME}</th>
+							<th>${m.REVIEW_WRITER}</th>
 							<th class="text-right">
-								<button class="btn btn-sm btn-secondary" onclick="location.href='reviewModifyForm.do?review_id=${m.review_id}'">수정</button>
-								<button class="btn btn-sm btn-danger" onclick="location.href='deleteReview.do?review_id=${m.review_id}'">삭제</button>
+								<button class="btn btn-sm btn-secondary" onclick="location.href='reviewModifyForm.do?review_id=${m.REVIEW_ID}'">수정</button>
+								<button class="btn btn-sm btn-danger" onclick="location.href='deleteReview.do?review_id=${m.REVIEW_ID}'">삭제</button>
 							</th>
 						</tr>
 						<tr style="height: 10px;"></tr>
@@ -120,9 +120,9 @@
 						<tr style="height: 10px;"></tr>
 						<tr>
 							<td colspan="3">
-								<p class="review">${m.review_content}</p>
+								<p class="review">${m.REVIEW_CONTENT}</p>
 								<br>
-								<img src="reviewdownload.do?num=${m.review_id}"  width="700px">
+								<img src="reviewdownload.do?num=${m.REVIEW_ID}"  style="width: 550px; height: 300px;">
 							</td>
 						</tr>
 						
@@ -174,11 +174,11 @@
 						</a></li>
 					</ul>
 				</nav>
-		<%-- 		시작페이지 : ${ start }<br>
+				시작페이지 : ${ start }<br>
 				끝페이지 : ${ end }<br>
 				마지막 : ${ last }<br>
 				전체리뷰갯수 : ${ totalBoards }<br>
-				현재 : ${ current } --%>
+				현재 : ${ current } 
 				
 					</div>
 					<!-- 페이징 처리  종료 -->
