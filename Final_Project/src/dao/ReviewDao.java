@@ -3,7 +3,6 @@ package dao;
 import java.util.HashMap;
 import java.util.List;
 
-import model.Notice;
 import model.Review;
 
 public interface ReviewDao {

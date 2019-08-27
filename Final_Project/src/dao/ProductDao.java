@@ -16,9 +16,7 @@ public interface ProductDao {
 	public List<Product> selectByReadCountForMain();
 	public List<Product> selectByLatestForMain();
 	public List<Integer> selectProdIds(String sel_id);
-<<<<<<< HEAD
 	public List<Product> selectForSeller(HashMap<String, Object> params);
-=======
 	public int insertProd(Product p);
->>>>>>> branch 'master' of https://github.com/swift0507/final_project.git
+
 }
