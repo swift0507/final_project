@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import model.Detail;
 import model.OptionDetail;
 import model.ProdOption;
 import model.Product;
@@ -108,13 +109,20 @@ public class SellerController {
 		return service.insertProdOption(option);
 	}
 	
-	//optiondetail 넣기
+	//optiondetail 넣기 ajax
 	@RequestMapping("seller/optionDetailInsert.do")
 	public @ResponseBody OptionDetail insertOptionDetail(OptionDetail detail) {
 		System.out.println(detail);
 		//여기할차례
 		//return detail;
 		return service.insertOptionDetail(detail);
+	}
+	
+	//상품 상세정보 넣기
+	@RequestMapping("seller/detailInsert.do")
+	public @ResponseBody boolean insertDetail(Detail detail) {
+		System.out.println(detail);
+		return true;
 	}
 	
 	//상품상세

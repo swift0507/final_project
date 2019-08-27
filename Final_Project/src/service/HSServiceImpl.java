@@ -15,6 +15,7 @@ import model.Answer;
 import model.Banner;
 import model.Basket;
 import model.Category;
+import model.Detail;
 import model.Event;
 import model.FAQ;
 import model.Member;
@@ -379,6 +380,13 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		// TODO Auto-generated method stub
 		optionDetailDao.insertOptionDetail(detail);
 		return detail;
+	}
+	
+	//상품디테일 넣기
+	@Override
+	public void insertDetail(Detail detail) {
+		// TODO Auto-generated method stub
+		
 	}
 
 
@@ -923,6 +931,7 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		// TODO Auto-generated method stub
 		return receiptOrderDao.getOrderPriceSum(prod_id);
 	}
+
 
 
 

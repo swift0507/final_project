@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import model.Answer;
 import model.Basket;
 import model.Category;
+import model.Detail;
 import model.Event;
 import model.FAQ;
 import model.Member;
@@ -98,6 +99,9 @@ public interface HSService {
 	
 	//작은옵션넣기
 	public OptionDetail insertOptionDetail(OptionDetail detail);
+	
+	//상품상세정보 넣기
+	public void insertDetail(Detail detail);
 	
 	//주문상세페이지 서비스
 	public HashMap<String, Object> orderDetail(int receipt_id, String mem_id);
