@@ -11,6 +11,7 @@ import model.FAQ;
 import model.Member;
 import model.Notice;
 import model.OptionDetail;
+import model.Pick;
 import model.ProdOption;
 import model.Product;
 import model.QnAComment;
@@ -192,5 +193,11 @@ public interface HSService {
 
 	//장바구니 상품 추가
 	public int addBasket(Basket basket);
+
+	//찜목록 추가
+	public int addPick(Pick pick);
+
+	//찜목록 삭제
+	public int deletePick(Pick pick);
 
 }

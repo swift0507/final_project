@@ -44,8 +44,60 @@
 	</style>
 	<script>
 	$(document).ready(function(){
+		var loginUser = "${ loginUser }";
+		var sel_id = "${ product.sel_id }";
+		var prod_id = ${ product.prod_id };
+		var prodname = "${ product.prod_name }";
+		var selectprod = "";
+		var sumPrice = parseInt(${ product.prod_price });
+		var quantity = 0;
+		var buyProdList = "";
+		var totalPrice = parseInt(0);
+		
 		$("#like_button").click(function(){
 		    $('#like_item').toggleClass("far fa-heart fas fa-heart");
+		    console.log("toggle : " + $('#like_item').attr('class'))
+		    var toggle = $('#like_item').attr('class');
+		    if(toggle == "fas fa-heart") {
+		    	$.ajax({
+		        	type		: "POST",
+			        url 		: "user/addPick.do",
+			        data		:  {prod_id : prod_id, mem_id : loginUser},
+			        success		: function(data) {
+			        	const Toast = Swal.mixin({
+							  toast: true,
+							  position: 'top-end',
+							  showConfirmButton: false,
+							  timer: 3000
+						});
+				
+						Toast.fire({
+							type: 'success',
+							title: '상품을 찜 목록에 추가하였습니다!'
+						})
+			        }
+		        });
+		    }
+		    else {
+		    	$.ajax({
+		        	type		: "POST",
+			        url 		: "user/deletePick.do",
+			        data		:  {prod_id : prod_id, mem_id : loginUser},
+			        success		: function(data) {
+			        	const Toast = Swal.mixin({
+							  toast: true,
+							  position: 'top-end',
+							  showConfirmButton: false,
+							  timer: 3000
+						});
+				
+						Toast.fire({
+							type: 'error',
+							title: '상품을 찜 목록에서 삭제하였습니다!'
+						})
+			        }
+		        });
+		    }
 		});
 		
 		$(".select_option").find("select").first().removeAttr('disabled');
@@ -66,16 +118,7 @@
 			$(".select_option").find("select").first().removeAttr('disabled');
 		} */
 		
-		var loginUser = "${ loginUser }";
-		var sel_id = "${ product.sel_id }";
-		var prod_id = ${ product.prod_id };
-		var prodname = "${ product.prod_name }";
-		var selectprod = "";
-		var sumPrice = parseInt(${ product.prod_price });
-		var quantity = 0;
-		var buyProdList = "";
-		var totalPrice = parseInt(0);
-		
+
 		$(".select_option").find("select").change(function(){
 			$(this).attr('disabled', true);
 			$(this).attr('selected', 'selected');
@@ -420,7 +463,7 @@
 			            		<c:otherwise>
 			                <div id = "like_report">
 			                	<button class="btn btn-sm btn-secondary" id = "like_button">
-			                   		<i class="far fa-heart" id = "like_item"></i> 찜하기
+			                   		<i <c:choose><c:when test = "${ isPick == true }">class="fas fa-heart"</c:when><c:otherwise>class="far fa-heart"</c:otherwise></c:choose> id = "like_item"></i> 찜하기
 			                	</button>
 			               
 			                	<button class="btn btn-sm btn-danger" id = "report_button"> 

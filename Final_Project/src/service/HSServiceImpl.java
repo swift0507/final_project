@@ -15,6 +15,7 @@ import model.FAQ;
 import model.Member;
 import model.Notice;
 import model.OptionDetail;
+import model.Pick;
 import model.ProdOption;
 import model.Product;
 import model.QnA;
@@ -707,6 +708,20 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 	public int addBasket(Basket basket) {
 		// TODO Auto-generated method stub
 		return basketDao.insertBasket(basket);
+	}
+
+	//찜목록 추가
+	@Override
+	public int addPick(Pick pick) {
+		// TODO Auto-generated method stub
+		return pickDao.insertPick(pick);
+	}
+
+	//찜목록 삭제
+	@Override
+	public int deletePick(Pick pick) {
+		// TODO Auto-generated method stub
+		return pickDao.deletePick(pick);
 	}
 
 
