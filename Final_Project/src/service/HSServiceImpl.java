@@ -386,7 +386,7 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 	@Override
 	public void insertDetail(Detail detail) {
 		// TODO Auto-generated method stub
-		
+		detailDao.insertDetail(detail);
 	}
 
 

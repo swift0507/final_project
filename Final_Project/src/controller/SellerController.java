@@ -118,10 +118,11 @@ public class SellerController {
 		return service.insertOptionDetail(detail);
 	}
 	
-	//상품 상세정보 넣기
+	//상품 상세정보 넣기 ajax
 	@RequestMapping("seller/detailInsert.do")
 	public @ResponseBody boolean insertDetail(Detail detail) {
 		System.out.println(detail);
+		service.insertDetail(detail);
 		return true;
 	}
 	

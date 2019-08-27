@@ -283,10 +283,9 @@
         	})
         	
         	$(document).on("click", "#post", function(){
-        		var prod_id = 6;
-        		//상품 넣고
+        		var prod_id = 0;
         		
-        		/*
+        		//상품 넣고
         		$.ajax({
         			url : "insertProd.do",
         			data : {sel_id : "${loginUserInfo.mem_id}", prod_name : $("#prod_name").val(),
@@ -301,24 +300,21 @@
         				alert(prod_id)
         			}
         		})
-        		*/
+        		
         		
         		//배송비조건
         		$('input[name="delivery_cost"]:checked').val();
-        		//상품을 다 넣으면 prod_id를 리턴. 받은 prod_id로 사진, 옵션을 넣는다
     			
         		//사진 넣고
         		
         		
+        		
+        		
+        		//상품을 다 넣으면 prod_id를 리턴. 받은 prod_id로 사진, 옵션을 넣는다
         		//alert($('input[name="use_option"]:checked').val()); //이 값이 0이면 미사용 1이면 사용
         		//옵션 미사용이면 옵션 이름은 '상품을 선택하세요' / '위의 수량이 옵션 수량으로'
-        		
-        		/*
         		//옵션 미사용일 때 작업
         		if($('input[name="use_option"]:checked').val()==0){
-        			//alert("상품을 선택하세요") //옵션명 이름으로 들어갈 문자열
-        			//alert($("#nooption_quantity").val()) //옵션 수량으로 들어갈 수량
-        			//alert($("#prod_name").val()) //상세옵션명으로 들어갈 이름
         			$.ajax({
         				url : "prodoptionInsert.do",
         				data : {prod_id : prod_id, opt_name : "상품을 선택하세요", opt_order : 1},
@@ -363,7 +359,7 @@
 	        				//얘가 여러 개가 들어감
 	        				optd_quantity_array.push($(this).val())
 	        			})
-	        			//여기까지 잘 받아와짐 
+	        			//테스트완료 ------------------------------------------------------------------------------
 	        			//옵션넣기
 	        			$.ajax({
         				url : "prodoptionInsert.do",
@@ -389,28 +385,32 @@
 		        			}
         					
         				}
-        				//순서버튼
         			})
+        				//순서올리기
         				order++;
 	        		})
         		}//else 종료 옵션 넣기 종료 여기까지 테스트 완료 ---------------------------------------------------------------------------------
-        		*/
+        		
         		
         		//세부설명 넣기
         		//detail_name : 항목명 / detail_explain : 설명
         		$(".detail_name").each(function(){
-        			alert($(this).val())
-        			alert($(this).parentsUntil("div").find(".detail_explain").val())
+        			//alert($(this).val())
+        			//alert($(this).parentsUntil("div").find(".detail_explain").val())
         			$.ajax({
         				url : "detailInsert.do",
         				data : {prod_id : prod_id, detail_name : $(this).val(), detail_explain : $(this).parentsUntil("div").find(".detail_explain").val()},
         				type : "post",
         				async : true,
         				success : function(data){
-        					alert("성공");
         				}
         			})
         		})
+        		//테스트완료 --------------------------------------------------------------------------------------------
+        		
+        		
+        		alert("주문이 완료되었습니다.");
+        		location.href = "prodManage.do"
         	})
         	
         	$("#cancel").on("click", function(){
