@@ -136,6 +136,10 @@ $(document).ready(function(){
 			</td>
 			<td class= "icon text-center">
 			<c:choose>
+				<c:when test="${loginUserInfo==null}">
+					<a href="/Final_Project/user/myPage.do" class="text-decoration-none text-dark"><i class = "fas fa-user" style = "font-size: 24px;"></i></a>
+					&nbsp;&nbsp;&nbsp;
+				</c:when>
 				<c:when test="${loginUserInfo.mem_grade==0}">
 					<a href="/Final_Project/user/myPage.do" class="text-decoration-none text-dark"><i class = "fas fa-user" style = "font-size: 24px;"></i></a>
 					&nbsp;&nbsp;&nbsp;
