@@ -136,21 +136,24 @@ $(document).ready(function(){
 			</td>
 			<td class= "icon text-center">
 			<c:choose>
+				<c:when test="${loginUserInfo==null}">
+					<a href="/Final_Project/user/myPage.do" class="text-decoration-none text-dark"><i class = "fas fa-user" style = "font-size: 24px;"></i></a>
+					&nbsp;&nbsp;&nbsp;
+				</c:when>
 				<c:when test="${loginUserInfo.mem_grade==0}">
-				<a href="/Final_Project/user/myPage.do" class="text-decoration-none text-dark"><i class = "fas fa-user" style = "font-size: 24px;"></i></a>
-				&nbsp;&nbsp;&nbsp;
+					<a href="/Final_Project/user/myPage.do" class="text-decoration-none text-dark"><i class = "fas fa-user" style = "font-size: 24px;"></i></a>
+					&nbsp;&nbsp;&nbsp;
 				</c:when>
 				<c:otherwise>
-				<!-- herehereplzplzplz -->
+			        <a href="/Final_Project/user/myPage.do" class = "dropdown-toggle text-decoration-none text-dark" data-toggle = "dropdown" >
+						<i class = "fas fa-user" style = "font-size: 24px;"></i>
+					</a>
 				
-				<a href="#" class="dropdown-toggle text-decoration-none text-dark" data-toggle = "dropdown" >
-					<i class = "fas fa-user" style = "font-size: 24px;"></i>
-				</a>
-			        <div class = "dropdown-menu dropdown-secondary">
-    					<a class="dropdown-item" href="/Final_Project/user/myPage.do">
+			        <div class = "dropdown-menu">
+    					<a class="dropdown-item" href = "/Final_Project/user/myPage.do">
     					<i class = "fas fa-user-circle"> 마이 페이지 </i>
     					</a>
-				        <a class="dropdown-item" href="/Final_Project/seller/manageMain.do">
+				        <a class="dropdown-item" href = "/Final_Project/seller/manageMain.do">
 				        	<i class = "fas fa-coins"> 사장님 마이페이지</i>
 				        </a>
   					</div>
