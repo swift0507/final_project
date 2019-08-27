@@ -100,7 +100,7 @@ public class SellerController {
 		return service.insertProd(p);
 	}
 	
-	//prodoption 넣기
+	//prodoption 넣기 ajax
 	@RequestMapping("seller/prodoptionInsert.do")
 	public @ResponseBody ProdOption insertProdOption(ProdOption option) {
 		System.out.println(option);
@@ -113,6 +113,7 @@ public class SellerController {
 	public @ResponseBody OptionDetail insertOptionDetail(OptionDetail detail) {
 		System.out.println(detail);
 		//여기할차례
+		//return detail;
 		return service.insertOptionDetail(detail);
 	}
 	
