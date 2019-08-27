@@ -75,7 +75,11 @@
 							type: 'success',
 							title: '상품을 찜 목록에 추가하였습니다!'
 						})
-			        }
+			        },
+			        error:function(request,status,error){
+			            alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+			           }
+			        
 		        });
 		    }
 		    else {
@@ -131,12 +135,14 @@
 				var prodAndOption = "";
 				prodAndOption += "상품 : " + prodname;
 				prodAndOption += "<br>선택 옵션 : " + selectprod;
-				prodAndOption += "<br>가격 : " + sumPrice + "원<br>";
+				prodAndOption += "<br>가격 : " + sumPrice + "원<br><hr>";
 				
 				buyProdList += selectprod + "," + sumPrice + "/";
 				selectprod = "";
 				totalPrice += sumPrice
 				sumPrice = parseInt(${ product.prod_price });
+				
+				$("#total_price").html("총합 : " + totalPrice + "원<br>")
 				
 				$("#selected_opt").append(prodAndOption);
 				
@@ -169,6 +175,7 @@
 								);
 			        	buyProdList = "";
 			        	$("#selected_opt").empty();
+			        	$("#total_price").empty();
 			        }
 		        });
 		    }
@@ -183,23 +190,6 @@
 		});
 		
 		var s = 0;
-		
-		$('#add_item_button').click(function(){
-			s++;
-			$("#cart_amt").text(s);
-			
-			const Toast = Swal.mixin({
-				  toast: true,
-				  position: 'top-end',
-				  showConfirmButton: false,
-				  timer: 3000
-			});
-	
-			Toast.fire({
-				type: 'success',
-				title: '장바구니에 아이템이 추가되었습니다.'
-			})
-		});
 		
 		var reviewCurrentPage = 1;
 		
@@ -503,9 +493,10 @@
 			        </tr>
 			        <tr>
 			            <td><b>선택 상품</b> &nbsp;&nbsp;&nbsp;
+			            <hr>
 			            <div>
 			            	<span id = "selected_opt"></span> 
-			            	
+			            	<span id = "total_price"></span>
 			            </div>
 			            </td>
 			        </tr>

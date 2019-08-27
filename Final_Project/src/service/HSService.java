@@ -1,6 +1,7 @@
 package service;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -243,5 +244,7 @@ public interface HSService {
 
 	//상품id로 receiptorder 테이블에서 상품별 매출 가져오기
 	public int getSellSales(int category_id);
+
+	public HashMap<String, Object> getReceiptListBySeller(String mem_id);
 
 }

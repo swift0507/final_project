@@ -78,8 +78,11 @@ public class SellerController {
 	
 	//주문관리
 	@RequestMapping("seller/orderManage.do")
-	public void orderManage() {
+	public void orderManage(Model m, HttpSession session) {
+		HashMap<String, Object> id = (HashMap<String, Object>)session.getAttribute("loginUserInfo");
+		String mem_id = (String)id.get("mem_id");
 		
+		m.addAllAttributes(service.getReceiptListBySeller(mem_id));
 	}
 	
 	//판매상품등록폼

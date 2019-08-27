@@ -158,7 +158,7 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 			
 			receiptOrderDao.insertReceiptOrder(receiptOrder);
 			//장바구니에서 삭제시키기 
-			//basketDao.deleteByBasketId(basket_id);
+			basketDao.deleteByBasketId(basket_id);
 		}
 		return receipt.getReceipt_id();
 	}
@@ -922,6 +922,21 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 	public int getSellSales(int prod_id) {
 		// TODO Auto-generated method stub
 		return receiptOrderDao.getOrderPriceSum(prod_id);
+	}
+
+	@Override
+	public HashMap<String, Object> getReceiptListBySeller(String mem_id) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		
+		params.put("offset", getBoardOffset(1));
+		params.put("boardsPerPage", 10);
+		
+		HashMap<String, Object> receiptMap = new HashMap<String, Object>();
+
+		receiptMap.put("receipt", receiptDao.selectReceiptListBySeller(mem_id));
+			
+		return receiptMap;
 	}
 
 
