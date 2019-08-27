@@ -12,4 +12,5 @@ public interface BasketDao {
 	public List<Basket> selectBySeller(HashMap<String, String> param);
 	public Basket selectByBasketId(int basket_id);
 	public void deleteByBasketId(int basket_id);
+	public int insertBasket(Basket basket);
 }

@@ -190,4 +190,7 @@ public interface HSService {
 	//Q&A 삭제
 	public int deleteQnA(int qna_id);
 
+	//장바구니 상품 추가
+	public int addBasket(Basket basket);
+
 }
