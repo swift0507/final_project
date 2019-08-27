@@ -142,15 +142,26 @@ $(document).ready(function(){
 				</c:when>
 				<c:otherwise>
 				<!-- herehereplzplzplz -->
-				<a href="/Final_Project/user/myPage.do" class="text-decoration-none text-dark"><i class = "fas fa-user" style = "font-size: 24px;"></i></a>
-				&nbsp;&nbsp;&nbsp;
+				
+				<a href="#" class="dropdown-toggle text-decoration-none text-dark" data-toggle = "dropdown" >
+					<i class = "fas fa-user" style = "font-size: 24px;"></i>
+				</a>
+			        <div class = "dropdown-menu dropdown-secondary">
+    					<a class="dropdown-item" href="/Final_Project/user/myPage.do">
+    					<i class = "fas fa-user-circle"> 마이 페이지 </i>
+    					</a>
+				        <a class="dropdown-item" href="/Final_Project/seller/manageMain.do">
+				        	<i class = "fas fa-coins"> 사장님 마이페이지</i>
+				        </a>
+  					</div>
+					&nbsp;&nbsp;&nbsp;
 				</c:otherwise>
 			</c:choose>
 				<a href="/Final_Project/user/basket.do" class="text-decoration-none text-dark"><i class = "fas fa-shopping-cart" style = "font-size: 24px;"><span class="badge badge-pill badge-danger" id = "cart_amt" style='font-size: 12px'>${loginUserInfo.countBasket}</span></i></a>
 			</td>
 		</tr>
 	</table>
-
+	
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="mx-auto d-sm-flex d-block flex-sm-nowrap">
 			<div class="navbar-nav">
