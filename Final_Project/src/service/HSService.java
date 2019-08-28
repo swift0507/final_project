@@ -276,4 +276,7 @@ public interface HSService {
 	public void updateReceiptStatus(int receipt_id, int delstatus);
 	
 	public void deleteReceipt(int receipt_id);
+	
+	public List<Detail> getDetailByProd(int prod_id);
+
 }

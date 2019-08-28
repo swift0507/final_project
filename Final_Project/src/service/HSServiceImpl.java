@@ -380,7 +380,7 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		}
 		data.put("noanswer", noanswer);
 		//나에게 온 영수증리스트 보여주기
-		data.put("receiptList", receiptDao.selectReceiptListBySeller(sel_id));
+		data.put("receiptList", receiptDao.selectReceiptListBySellerMain(sel_id));
 		System.out.println(data);
 		return data;
 	}
@@ -1098,6 +1098,10 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		receiptDao.deleteReceipt(receipt_id);
 	}
 
+	public List<Detail> getDetailByProd(int prod_id) {
+		// TODO Auto-generated method stub
+		return detailDao.selectDetailByProdId(prod_id);
+	}
 	
 	
 

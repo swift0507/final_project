@@ -8,6 +8,7 @@ import model.Receipt;
 public interface ReceiptDao {
 	public List<Receipt> selectReceiptListByMember(String mem_id);
 	public List<Receipt> selectReceiptListBySeller(String sel_id);
+	public List<Receipt> selectReceiptListBySellerMain(String sel_id);
 	public int insertReceipt(Receipt receipt);
 	public Receipt selectReceiptByReceiptId(int receipt_id);
 	public void finalizeOrder(int receipt_id);

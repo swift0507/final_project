@@ -7,4 +7,7 @@
     	insert into detail values(#{prod_id}, detailid_seq.nextval, #{detail_name}, #{detail_explain})
     </insert>
     
+    <select id="selectDetailByProdId" parameterType="int" resultType="detail">
+    	select * from detail where prod_id = #{prod_id}
+    </select>
     </mapper>
