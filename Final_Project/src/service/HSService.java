@@ -280,18 +280,15 @@ public interface HSService {
 	
 	public int getExchangeReceiptCount();
 
-<<<<<<< HEAD
 	public List<Detail> getDetailByProd(int prod_id);
 
 	public List<Review> getReviewByStatus(int prod_id);
-=======
+
 	HashMap<String, Object> sellerOrderDetail(int receipt_id);
 	
 	public void updateReceiptStatus(int receipt_id, int delstatus);
 	
 	public void deleteReceipt(int receipt_id);
-	
-	public List<Detail> getDetailByProd(int prod_id);
->>>>>>> branch 'master' of https://github.com/swift0507/final_project.git
+
 
 }

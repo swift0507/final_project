@@ -59,11 +59,10 @@
 		select review_id from review where prod_id=#{prod_id}
 	</select>
 	
-<<<<<<< HEAD
 	<select id="selectByStatus" parameterType="int" resultType="review">
 		select * from review where review_status = 0 order by review_id
 	</select>
-=======
+
 	<select id="getProdid" parameterType="int" resultType="int">
 		select prod_id from receiptorder where receiptorder_id =#{receiptorder_id} 
 	</select>
@@ -72,5 +71,4 @@
 		select prod_name from product where prod_id =#{prod_id}
 	</select>
 	
->>>>>>> branch 'master' of https://github.com/swift0507/final_project.git
 </mapper>
