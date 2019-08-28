@@ -76,7 +76,6 @@
 							title: '상품을 찜 목록에 추가하였습니다!'
 						})
 			        }
-			    
 			        
 		        });
 		    }
@@ -464,7 +463,7 @@
 				               		<select id = "${ option.opt_id }" class="option custom-select-sm" style="width: 250px;" disabled> 
 				               			<option disabled selected hidden="" label="${ option.opt_name }"></option>
 					               	<c:forEach var="optiondetail" items="${ option.optiondetail }">
-					                    <option id="${ optiondetail.optd_choice }" value="${ optiondetail.optd_choice }" class="${ optiondetail.optd_price }" label="${ optiondetail.optd_choice } : 추가금액 ${ optiondetail.optd_price }원"></option>
+					                    <option id="${ optiondetail.optd_choice }" value="${ optiondetail.optd_choice }" class="${ optiondetail.optd_price }" label="${ optiondetail.optd_choice }"></option>
 					                    <br>
 					               	</c:forEach>
 					                </select>
