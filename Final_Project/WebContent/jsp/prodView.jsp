@@ -198,7 +198,7 @@
 		        			inputReview += '<th class = "text-right"><button id="' + data.review[i].review_id + '" class = "reviewReportBtn btn-sm btn-danger">신고</button></th>';
 		    			inputReview += '</tr><tr style = "height: 10px;"></tr><tr><td><b>' + date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + '</b></td>';
 		        		inputReview += '<td colspan = 2 class="text-right"><b>작성자 : ' + data.review[i].review_writer + '</b>&nbsp;&nbsp;&nbsp;<span id = "star_rating">';	//별점부분
-	                	inputReview += '<span class="fa fa-star checked"></span>';
+		        		inputReview += '<span class="fa fa-star checked"></span>';
 	                	inputReview += '<span class="fa fa-star checked"></span>';
 	                	inputReview += '<span class="fa fa-star checked"></span>';
 	                	inputReview += '<span class="fa fa-star checked"></span>';

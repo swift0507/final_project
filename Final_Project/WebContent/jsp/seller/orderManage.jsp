@@ -85,7 +85,7 @@
 		        	}
 		        	console.log("length : " + data.receipt.length);
 
-		        	$('#newReceipt').html(newHtml);
+		        	$('#receipt').html(newHtml);
 		        }
 			});
 		}
@@ -104,7 +104,7 @@
 		        	console.log("length : " + data.receipt.length);
 		        	console.log("deliveryHtml : " + deliveryHtml);
 
-		        	$('#newReceipt').html(deliveryHtml);
+		        	$('#receipt').html(deliveryHtml);
 		        }
 			});
 		}
@@ -121,7 +121,7 @@
 		        		completedHtml += htmlText(data, i);
 		        	}
 		        	
-		        	$('#newReceipt').html(completedHtml);
+		        	$('#receipt').html(completedHtml);
 		        }
 			});
 		}
@@ -138,7 +138,7 @@
 		        		applyHtml += htmlText(data, i);
 		        	}
 		        	
-		        	$('#newReceipt').html(applyHtml);
+		        	$('#receipt').html(applyHtml);
 		        }
 			});
 		}
@@ -155,7 +155,7 @@
 		        		exchangeHtml += htmlText(data, i);
 		        	}
 		        	
-		        	$('#newReceipt').html(exchangeHtml);
+		        	$('#receipt').html(exchangeHtml);
 		        }
 			});
 		}
@@ -272,7 +272,7 @@
 	        }
 	        pagingLayout += '</ul>';
 	            
-	        $("#newPaging").html(pagingLayout);    // 페이지 목록 생성
+	        $("#paging").html(pagingLayout);    // 페이지 목록 생성
 	        /* $("#deliveryPaging").html(pagingLayout);    // 페이지 목록 생성
 	        $("#completedPaging").html(pagingLayout);    // 페이지 목록 생성
 	        $("#applyPaging").html(pagingLayout);    // 페이지 목록 생성
@@ -356,72 +356,10 @@
 					<div class="tab-pane fade show active" role="tabpanel">
 					
 						<!-- 주문 상품 table 1 -->
-						<table class = "mt-3" style = "width: 700px;" id="newReceipt">
-							<!-- <tr>
-								<td style = "width: 55%;">
-									<h5><b>주문 상품 정보</b></h5>
-								</td>
-								<td class = "text-right" colspan = 2 style = "width: 45%;">
-									<button class = "btn-secondary">주문 내역 상세보기</button>
-									<button class = "btn-danger">주문 취소</button>
-								</td>
-							</tr>
+						<table class = "mt-3" style = "width: 700px;" id="receipt">
 							
-							<tr style = "height: 20px;">
-								<td colspan = 3></td>
-							</tr>
-							
-							<tr>
-								<th> 알록달록 캔들 그 외 3개 </th>
-								<th class = "text-center" style = "background-color: lightgrey;"> 
-									결제 금액
-								</th>
-								<th class = "text-center" style = "background-color: lightgrey;">
-									결제 / 배송 상태
-								</th>
-							</tr>
-							<tr>
-								<td> <b>주문날짜 :</b> 2019-08-27 </td>
-								<td class = "text-center align-middle" rowspan = 3> <h5><b>15,000 원</b></h5> </td>
-								<td class = "text-center align-middle" rowspan = 3>  
-									<button type="button" class="btn btn-ml btn-success" disabled>결제 완료</button>	
-								</td>
-							</tr>
-							<tr>
-								<td> <b>주문번호 :</b> 1234-5678-90 </td>
-							</tr>
-							<tr>
-								<td colspan = 2> <b>주문자명 :</b> ㅇㅇㅇ </td>
-							</tr>
-							
-							<tr style = "height: 30px;">
-								<td colspan = 3>
-									<hr>
-								</td>
-							</tr>
-							<tr>
-								<td style = "width: 55%;">
-									<h5><b>주문 상품 정보</b></h5>
-								</td>
-								<td colspan = 2 style = "width: 45%;">
-							</tr>
-							<tr>
-								<td> <b>이름 :</b> ㅇㅇㅇ </td>
-								<td colspan = 2 rowspan = 2> <b>거래방법 : </b> ㅇㅇㅇ </td>
-							</tr>
-							<tr>
-								<td> <b>주소 :</b> ㅇㅇㅇ </td>
-							</tr>
-							<tr>
-								<td> <b>휴대폰 번호 :</b> ㅇㅇㅇ </td>
-								<td colspan = 2></td>
-							</tr>
-							<tr>
-								<td> <b>배송지 요청사항 :</b> ㅇㅇㅇ </td>
-								<td colspan = 2></td>
-							</tr> -->
 						</table>
-						<nav id="newPaging">
+						<nav id="paging">
 					
 						</nav>
 						<!-- 주문 상품 table 1 종료-->
@@ -431,33 +369,6 @@
 				
 				<br><br>
 				
-				<!-- 페이징 처리  -->
-				<!-- <div class = "container">
-					<nav>
-						<ul class="pagination justify-content-center">
-							<li class="page-item">
-								<a class="page-link" href="#"> 
-								<span>&laquo;</span>
-								</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">1</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">2</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">3</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#"> 
-								<span>&raquo;</span>
-								</a>
-							</li>
-						</ul>
-					</nav>
-				</div> -->
-				<!-- 페이징 처리  종료 -->
 				
 				<br><br>
 				
