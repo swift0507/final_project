@@ -1,7 +1,6 @@
 package service;
 
 import java.io.File;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,6 +15,7 @@ import model.Answer;
 import model.Banner;
 import model.Basket;
 import model.Category;
+import model.Detail;
 import model.Event;
 import model.FAQ;
 import model.Member;
@@ -159,7 +159,7 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 			
 			receiptOrderDao.insertReceiptOrder(receiptOrder);
 			//장바구니에서 삭제시키기 
-			//basketDao.deleteByBasketId(basket_id);
+			basketDao.deleteByBasketId(basket_id);
 		}
 		return receipt.getReceipt_id();
 	}
@@ -265,6 +265,12 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 	public int getBoardOffset(int page) {
 		// TODO Auto-generated method stub
 		return (page - 1) * 10 + 1;
+	}
+	
+	//seller orderManage의 영수증을 위한 첫번째 게시물 번호
+	public int getSellerBoardOffset(int page) {
+		// TODO Auto-generated method stub
+		return (page - 1) * 5 + 1;
 	}
 
 	
@@ -380,6 +386,13 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		// TODO Auto-generated method stub
 		optionDetailDao.insertOptionDetail(detail);
 		return detail;
+	}
+	
+	//상품디테일 넣기
+	@Override
+	public void insertDetail(Detail detail) {
+		// TODO Auto-generated method stub
+		detailDao.insertDetail(detail);
 	}
 
 
@@ -868,6 +881,181 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		// TODO Auto-generated method stub
 		return pickDao.deletePick(pick);
 	}
+
+	@Override
+	public HashMap<String, Object> getProdList(String mem_id, int page) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		
+		params.put("offset", getBoardOffset(page));
+		params.put("boardsPerPage", 10);
+		params.put("sel_id", mem_id);
+		
+		List<Product> prodListForSeller = productDao.selectForSeller(params);
+		
+		for(int i = 0; i < prodListForSeller.size(); i++) {
+			prodListForSeller.get(i).setProd_pickCount(getPickCountByProdId(prodListForSeller.get(i).getProd_id()));
+			prodListForSeller.get(i).setProd_reviewCount(getReviewCountById(prodListForSeller.get(i).getProd_id()));		
+		}
+		
+		HashMap<String, Object> sellerProd = new HashMap<String, Object>();
+		
+		sellerProd.put("current", page);
+		sellerProd.put("start", getStartPage(page));
+		sellerProd.put("end", getEndPage(page));
+		sellerProd.put("last", getBoardLastPage(productDao.getCount()));
+		sellerProd.put("totalBoards", productDao.getCount());
+		sellerProd.put("sellerProd", prodListForSeller);
+		
+		return sellerProd;
+	}
+
+	//카테고리 id로 카테고리명 가져오기
+	@Override
+	public String getCategoryName(int category_id) {
+		// TODO Auto-generated method stub
+		return categoryDao.selectNameById(category_id);
+	}
+
+	//상품id별로 receiptorder 테이블에서 상품별 판매수량 판매수량
+	@Override
+	public int getSellCount(int prod_id) {
+		// TODO Auto-generated method stub
+		return receiptOrderDao.getOrderQuantitySum(prod_id);
+	}
+
+	//상품id로 첫번째 옵션, 그리고 첫번째 옵션의 옵션상세의 재고수량 가져오기
+	@Override
+	public int getSellRemain(int prod_id) {
+		// TODO Auto-generated method stub
+		return optionDetailDao.getOptionDQuantitySum(prod_id);
+	}
+
+	//상품id로 receiptorder 테이블에서 상품별 매출 가져오기
+	@Override
+	public int getSellSales(int prod_id) {
+		// TODO Auto-generated method stub
+		return receiptOrderDao.getOrderPriceSum(prod_id);
+	}
+
+
+	@Override
+	public HashMap<String, Object> getNewReceiptList(String sel_id, int page) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		
+		params.put("offset", getSellerBoardOffset(page));
+		params.put("boardsPerPage", 5);
+		params.put("sel_id", sel_id);
+		
+		HashMap<String, Object> receiptProd = new HashMap<String, Object>();
+		
+		receiptProd.put("newTotalBoards", receiptDao.getCountNew());
+		receiptProd.put("receipt", receiptDao.selectNewReceipt(params));
+		
+		return receiptProd;
+	}
+
+	@Override
+	public HashMap<String, Object> getDeliveryReceiptList(String sel_id, int page) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		
+		params.put("offset", getSellerBoardOffset(page));
+		params.put("boardsPerPage", 5);
+		params.put("sel_id", sel_id);
+		
+		HashMap<String, Object> receiptProd = new HashMap<String, Object>();
+		
+		receiptProd.put("deliveryTotalBoards", receiptDao.getCountDelivery());
+		receiptProd.put("receipt", receiptDao.selectDeliveryReceipt(params));
+		
+		return receiptProd;
+	}
+
+	@Override
+	public HashMap<String, Object> getCompletedReceiptList(String sel_id, int page) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		
+		params.put("offset", getSellerBoardOffset(page));
+		params.put("boardsPerPage", 5);
+		params.put("sel_id", sel_id);
+		
+		HashMap<String, Object> receiptProd = new HashMap<String, Object>();
+		
+		receiptProd.put("completedTotalBoards", receiptDao.getCountCompleted());
+		receiptProd.put("receipt", receiptDao.selectCompletedReceipt(params));
+		
+		return receiptProd;
+	}
+
+	@Override
+	public HashMap<String, Object> getApplyReceiptList(String sel_id, int page) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		
+		params.put("offset", getSellerBoardOffset(page));
+		params.put("boardsPerPage", 5);
+		params.put("sel_id", sel_id);
+		
+		HashMap<String, Object> receiptProd = new HashMap<String, Object>();
+		
+		receiptProd.put("applyTotalBoards", receiptDao.getCountApply());
+		receiptProd.put("receipt", receiptDao.selectApplyReceipt(params));
+		
+		return receiptProd;
+	}
+
+	@Override
+	public HashMap<String, Object> getExchangeReceiptList(String sel_id, int page) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		
+		params.put("offset", getSellerBoardOffset(page));
+		params.put("boardsPerPage", 5);
+		params.put("sel_id", sel_id);
+		
+		HashMap<String, Object> receiptProd = new HashMap<String, Object>();
+		
+		receiptProd.put("exchangeTotalBoards", receiptDao.getCountExchange());
+		receiptProd.put("receipt", receiptDao.selectExchangeReceipt(params));
+		
+		return receiptProd;
+	}
+
+	@Override
+	public int getNewReceiptCount() {
+		// TODO Auto-generated method stub
+		return receiptDao.getCountNew();
+	}
+
+	@Override
+	public int getDeliveryReceiptCount() {
+		// TODO Auto-generated method stub
+		return receiptDao.getCountDelivery();
+	}
+
+	@Override
+	public int getCompletedReceiptCount() {
+		// TODO Auto-generated method stub
+		return receiptDao.getCountCompleted();
+	}
+
+	@Override
+	public int getApplyReceiptCount() {
+		// TODO Auto-generated method stub
+		return receiptDao.getCountApply();
+	}
+
+	@Override
+	public int getExchangeReceiptCount() {
+		// TODO Auto-generated method stub
+		return receiptDao.getCountExchange();
+	}
+	
+	
+
 
 
 

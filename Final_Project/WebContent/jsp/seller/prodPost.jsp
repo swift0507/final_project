@@ -283,10 +283,9 @@
         	})
         	
         	$(document).on("click", "#post", function(){
-        		var prod_id = 7;
-        		//상품 넣고
+        		var prod_id = 0;
         		
-        		/*
+        		//상품 넣고
         		$.ajax({
         			url : "insertProd.do",
         			data : {sel_id : "${loginUserInfo.mem_id}", prod_name : $("#prod_name").val(),
@@ -301,24 +300,21 @@
         				alert(prod_id)
         			}
         		})
-        		*/
+        		
         		
         		//배송비조건
         		$('input[name="delivery_cost"]:checked').val();
-        		//상품을 다 넣으면 prod_id를 리턴. 받은 prod_id로 사진, 옵션을 넣는다
     			
         		//사진 넣고
         		
         		
+        		
+        		
+        		//상품을 다 넣으면 prod_id를 리턴. 받은 prod_id로 사진, 옵션을 넣는다
         		//alert($('input[name="use_option"]:checked').val()); //이 값이 0이면 미사용 1이면 사용
         		//옵션 미사용이면 옵션 이름은 '상품을 선택하세요' / '위의 수량이 옵션 수량으로'
-        		
-        		
-        		if($('input[name="use_option"]:checked').val()==0){
         		//옵션 미사용일 때 작업
-        			//alert("상품을 선택하세요") //옵션명 이름으로 들어갈 문자열
-        			//alert($("#nooption_quantity").val()) //옵션 수량으로 들어갈 수량
-        			//alert($("#prod_name").val()) //상세옵션명으로 들어갈 이름
+        		if($('input[name="use_option"]:checked').val()==0){
         			$.ajax({
         				url : "prodoptionInsert.do",
         				data : {prod_id : prod_id, opt_name : "상품을 선택하세요", opt_order : 1},
@@ -339,12 +335,12 @@
         			})
         		}
         		
-        		else{
         		//옵션사용일때
+        		else{
 					//opt_name : 옵션명 / optd_choice : 상세옵션명 / optd_price : 추가금액 / optd_quantity : 수량
 	        		//옵션별로 가지고 온다. 
+	        		var order = 1;
 	        		$(".opt_name").each(function(){
-	        			alert($(this).val()) //옵션 이름
 	        			//개수를 구해서 배열의 index로 집어넣는다. 
 	        			var length = $(this).parentsUntil("div").find($(".optd_choice")).length
 	        			var optd_choice_array =  new Array();
@@ -353,45 +349,68 @@
 	        			//길이를 기억해두고 배열에 각자 넣고 포문돌면서 넣으면 돼
 	        			$(this).parentsUntil("div").find($(".optd_choice")).each(function(){
 	        				//얘가 여러 개가 들어감
-	        				//alert($(this).val())
 	        				optd_choice_array.push($(this).val())
 	        			})
 	        			$(this).parentsUntil("div").find($(".optd_price")).each(function(){
 	        				//얘가 여러 개가 들어감
-	        				//alert($(this).val())
 	        				optd_price_array.push($(this).val())
 	        			})
 	        			$(this).parentsUntil("div").find($(".optd_quantity")).each(function(){
 	        				//얘가 여러 개가 들어감
-	        				//alert($(this).val())
 	        				optd_quantity_array.push($(this).val())
 	        			})
-	        			alert(optd_choice_array)
-	        			alert(optd_price_array)
-	        			alert(optd_quantity_array)
-	        			//여기까지 잘 받아와짐 
-	        			for(var i=0; i<length; i++){
-	        				//이거도 잘 됌 다받아옴
-	        				alert(optd_choice_array[i])
-	        				alert(optd_price_array[i])
-	        				alert(optd_quantity_array[i])
-	        			}
+	        			//테스트완료 ------------------------------------------------------------------------------
+	        			//옵션넣기
+	        			$.ajax({
+        				url : "prodoptionInsert.do",
+        				data : {prod_id : prod_id, opt_name : $(this).val(), opt_order : order},
+        				type : "post",
+        				async : true,
+        				success : function(data){
+        					//data는 opt_id를 들고 와야 한다. 잘 가져왔다.
+        					alert(data.opt_id)
+        					//옵션상세 넣기
+		        			for(var i=0; i<length; i++){
+		        				//이거도 잘 됌 다받아옴
+		        				//옵션디테일 넣기
+	        					$.ajax({
+	        						url : "optionDetailInsert.do",
+	        						data : {opt_id : data.opt_id, optd_choice : optd_choice_array[i], optd_price : optd_price_array[i], optd_quantity : optd_quantity_array[i]},
+	        						type : "post",
+	        						async : true,
+	        						success : function(data){
+	        							//alert(data.optd_id)
+	        						}
+	        					})
+		        			}
+        					
+        				}
+        			})
+        				//순서올리기
+        				order++;
 	        		})
-        			
-        		}
+        		}//else 종료 옵션 넣기 종료 여기까지 테스트 완료 ---------------------------------------------------------------------------------
         		
         		
-        		//옵션넣고
-        		
-        		//옵션 상세 넣고 
-        		
-        		
-        		
+        		//세부설명 넣기
         		//detail_name : 항목명 / detail_explain : 설명
         		$(".detail_name").each(function(){
         			//alert($(this).val())
         			//alert($(this).parentsUntil("div").find(".detail_explain").val())
+        			$.ajax({
+        				url : "detailInsert.do",
+        				data : {prod_id : prod_id, detail_name : $(this).val(), detail_explain : $(this).parentsUntil("div").find(".detail_explain").val()},
+        				type : "post",
+        				async : true,
+        				success : function(data){
+        				}
+        			})
         		})
+        		//테스트완료 --------------------------------------------------------------------------------------------
+        		
+        		
+        		alert("주문이 완료되었습니다.");
+        		location.href = "prodManage.do"
         	})
         	
         	$("#cancel").on("click", function(){

@@ -107,7 +107,14 @@
 	 						<hr>
 	    					<h5 class="card-title"> <b>오늘의 매출</b> </h5>
 	    					<hr>
-	    					<p class="card-text"> ${todaySales} 원 </p>
+	    					<c:choose>
+		    					<c:when test="${todaySales==null}">
+		    					<p class="card-text"> 0 원 </p>
+		    					</c:when>
+		    					<c:otherwise>
+		    					<p class="card-text"> ${todaySales} 원 </p>
+		    					</c:otherwise>
+	    					</c:choose>
 	  					</div>
 					</div>
 					<!-- 매출 요약 정보 종료 -->

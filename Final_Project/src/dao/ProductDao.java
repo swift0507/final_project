@@ -16,5 +16,7 @@ public interface ProductDao {
 	public List<Product> selectByReadCountForMain();
 	public List<Product> selectByLatestForMain();
 	public List<Integer> selectProdIds(String sel_id);
+	public List<Product> selectForSeller(HashMap<String, Object> params);
 	public int insertProd(Product p);
+
 }

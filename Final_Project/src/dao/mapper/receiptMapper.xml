@@ -42,4 +42,59 @@
     <select id="todayOrder" resultType="java.lang.Integer">
     	select count(*) from receipt where sel_id = #{sel_id} and receipt_orderdate between #{today} and #{tomorrow}
     </select>
+    
+    <select id="getCountNew" resultType="int">
+		select count(*) from receipt where receipt_delstatus = 0 or receipt_delstatus = 1
+	</select>
+	
+	<select id="selectNewReceipt" parameterType="java.util.HashMap" resultType="receipt">
+		select * from (select rownum as rn, e.* from (select * from receipt where (receipt_delstatus = 0 or receipt_delstatus = 1) and sel_id = #{sel_id} 
+		order by receipt_id desc) e) where rn between #{offset} and (#{offset} + #{boardsPerPage} - 1)		
+	</select>
+	<select id="getCountDelivery" resultType="int">
+		select count(*) from receipt where receipt_delstatus = 2 or receipt_delstatus = 3
+	</select>
+	
+	<select id="selectDeliveryReceipt" parameterType="java.util.HashMap" resultType="receipt">
+		select * from (select rownum as rn, e.* from (select * from receipt where (receipt_delstatus = 2 or receipt_delstatus = 3) and sel_id = #{sel_id} 
+		order by receipt_id desc) e) where rn between #{offset} and (#{offset} + #{boardsPerPage} - 1)			
+	</select>
+	
+	<select id="getCountCompleted" resultType="int">
+		select count(*) from receipt where receipt_delstatus = 4 or receipt_delstatus = 5
+	</select>
+	
+	<select id="selectCompletedReceipt" parameterType="java.util.HashMap" resultType="receipt">
+		select * from (select rownum as rn, e.* from (select * from receipt where (receipt_delstatus = 4 or receipt_delstatus = 5) and sel_id = #{sel_id} 
+		order by receipt_id desc) e) where rn between #{offset} and (#{offset} + #{boardsPerPage} - 1)			
+	</select>
+	
+	<select id="getCountApply" resultType="int">
+		select count(*) from receipt where receipt_delstatus = 6
+	</select>
+	
+	<select id="selectApplyReceipt" parameterType="java.util.HashMap" resultType="receipt">
+		select * from (select rownum as rn, e.* from (select * from receipt where receipt_delstatus = 6 and sel_id = #{sel_id} 
+		order by receipt_id desc) e) where rn between #{offset} and (#{offset} + #{boardsPerPage} - 1)			
+	</select>
+	
+	<select id="getCountExchange" resultType="int">
+		select count(*) from receipt where receipt_delstatus = 7
+	</select>
+	
+	<select id="selectExchangeReceipt" parameterType="java.util.HashMap" resultType="receipt">
+		select * from (select rownum as rn, e.* from (select * from receipt where receipt_delstatus = 7 and sel_id = #{sel_id} 
+		order by receipt_id desc) e) where rn between #{offset} and (#{offset} + #{boardsPerPage} - 1)			
+	</select>
+	
+	<!-- public int getCountNew();
+	public List<Receipt> selectNewReceipt(HashMap<String, Object> params);
+	public int getCountDelivery();
+	public List<Receipt> selectDeliveryReceipt(HashMap<String, Object> params);
+	public int getCountCompleted();
+	public List<Receipt> selectCompletedReceipt(HashMap<String, Object> params);
+	public int getCountApply();
+	public List<Receipt> selectApplyReceipt(HashMap<String, Object> params);
+	public int getCountExchange();
+	public List<Receipt> selectExchangeReceipt(HashMap<String, Object> params); -->
     </mapper>

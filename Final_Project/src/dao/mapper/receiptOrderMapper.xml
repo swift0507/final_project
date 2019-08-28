@@ -9,4 +9,10 @@
     <select id="getReceiptOrderList" resultType="receiptOrder">
     select * from receiptorder where receipt_id=#{receipt_id}
     </select>
+    <select id="getOrderQuantitySum" parameterType="int" resultType="int">
+    select nvl(sum(order_quantity), 0) from receiptorder where prod_id = #{prod_id}
+    </select>
+    <select id="getOrderPriceSum" parameterType="int" resultType="int">
+    select nvl(sum(order_price), 0) from receiptorder where prod_id = #{prod_id}
+    </select>
     </mapper>

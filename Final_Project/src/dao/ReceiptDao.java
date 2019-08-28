@@ -15,4 +15,15 @@ public interface ReceiptDao {
 	public void cancelOrder(int receipt_id);
 	public Integer todaySales(HashMap<String, Object> param);
 	public Integer todayOrder(HashMap<String, Object> param);
+	
+	public int getCountNew();
+	public List<Receipt> selectNewReceipt(HashMap<String, Object> params);
+	public int getCountDelivery();
+	public List<Receipt> selectDeliveryReceipt(HashMap<String, Object> params);
+	public int getCountCompleted();
+	public List<Receipt> selectCompletedReceipt(HashMap<String, Object> params);
+	public int getCountApply();
+	public List<Receipt> selectApplyReceipt(HashMap<String, Object> params);
+	public int getCountExchange();
+	public List<Receipt> selectExchangeReceipt(HashMap<String, Object> params);
 }
