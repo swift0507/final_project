@@ -38,7 +38,12 @@
 	<select id="getmyReview" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 		select * from (select rownum as rn, e.* from (select * from review where review_writer = #{review_writer} 
 		order by review_id desc) e) where rn between #{offset} and (#{offset} + #{boardsPerPage} - 1)
-		
+	</select>
+	
+	<!-- 후기 작성 시 구매한 상품 가져오기  -->
+	<select id="getReviewProd" parameterType="String" resultType="java.util.HashMap">
+		select receipt_orderdate, receipt_prod, order_opt, receiptorder_id, prod_id from receipt a, receiptorder b 
+		where a.mem_id = #{mem_id} and a.receipt_delstatus >= 5 and b.order_review = 0
 	</select>
 	
 	<select id="selectById" parameterType="java.util.HashMap" resultType="Review">

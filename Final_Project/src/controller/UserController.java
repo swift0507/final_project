@@ -128,17 +128,7 @@ public class UserController {
 		String loginID = (String)id.get("mem_id");
 		
 		model.addAllAttributes(service.getmyReview(loginID, page));
-
 	}
-	
-//	//나의 후기 불러오기
-//	@RequestMapping("getmyReview.do")
-//	public String getmyReview(Model model, HttpSession session) {
-//		//게시물 번호에 해당하느 게시물을 가져오기
-//		String loginID = session.getId();
-//		model.addAttribute("review", service.getmyReview(loginID));
-//		return "redirect: myReview.do";
-//	}
 	
 	//나의 Q&A 보기
 	@RequestMapping("user/myQnA.do")
@@ -262,26 +252,48 @@ public class UserController {
 	}
 
 	//후기 작성 폼 요청
-	@RequestMapping("user/reviewWriteForm.do")
-	public void modifyWriteForm() {}
+//	@RequestMapping("user/reviewWriteForm.do")
+//	public void modifyWriteForm() {}
 	
 	//후기 작성 첨부 파일
 	@RequestMapping("user/ReviewWrite.do")
 	public void ReviewWrite (Review review, 
-			@RequestParam("ufile") MultipartFile file) {
+			@RequestParam("review_pict") MultipartFile file) {
 			System.out.println(review.getReview_score());
 			System.out.println(review.getReview_content());
 			System.out.println(review.getReview_pict());
 	}
 	
-	
+	//후기 사진 불러오기
 	@RequestMapping("user/reviewdownload.do")
 	public View reviewdownload(int num) {
 		File attachFile = service.getReviewFile(num);
-		System.out.println(attachFile);
+//		System.out.println(attachFile);
 		View view = new DownloadView(attachFile);
 		return view; 
 	}
 	
+	//후기 작성 시 구매한 상품 가져오기
+	@RequestMapping("user/reviewWriteForm.do")
+	public void reviewWriteForm(Model model, HttpSession session) {
+		HashMap<String, Object> id = (HashMap<String, Object>)session.getAttribute("loginUserInfo");
+		String mem_id = (String)id.get("mem_id");
+		System.out.println(mem_id);
+		model.addAttribute("review", service.getReviewProd(mem_id));
+	}
+	
+	//후기 작성 등록
+	@RequestMapping("user/write.do")
+	public void writeReview(@RequestParam("review_score") int review_score ,@RequestParam("review_content") String review_content ,@RequestParam("review_pict") String review_pict , @RequestParam("review_pict") MultipartFile file) {
+		
+		//System.out.println(receiptorder_id);
+		System.out.println(review_score);
+		System.out.println(review_content);
+		System.out.println(review_pict);
+		System.out.println(file.getOriginalFilename());
+		//service.writeReview(review, file);
+		//return "redirect: myReview.do";
+
+	}
 
 }

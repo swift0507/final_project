@@ -79,7 +79,9 @@
 	</style>
 </head>
 <body>
-<form action="ReviewWrite.do" enctype="multipart/form-data" method="post">
+<form action="write.do" enctype="multipart/form-data" method="post">
+	${review}
+	
 	<table style = "width: 500px; margin-left: auto; margin-right: auto;">
 		<tr>
 			<td>
@@ -93,15 +95,20 @@
 				<hr> 
 			</td>
 		</tr>
+		
+		
 		<tr>
 			<td colspan = 2>
 				<select class="custom-select" style = "width: 500px;">
-					<option value="buy_item_01">내가 산 상품 1 / 옵션 1 / 옵션 2</option>
-					<option value="buy_item_02">내가 산 상품 2 / 옵션 1 / 옵션 2</option>
-					<option value="buy_item_03">내가 산 상품 3 / 옵션 1 / 옵션 2</option>
+					<c:forEach items="${review}" var="r">
+						<!--<option value="${RECEIPTORDER_ID}"> ${r.RECEIPT_PROD} / ${r.ORDER_OPT} </option> -->
+						
+					</c:forEach>
 				</select>
 			</td>
 		</tr>
+		
+		
 		<tr style = "height: 75px;">
 			<th style = "width: 25%"> 별점 </th>
 			<td style = "width: 75%">
@@ -148,7 +155,7 @@
 		<tr>
 			<th> 사진 첨부 </th>
 			<td>
-				<input type="file" name="ufile" class="form-control-file" id="inputFile">
+				<input type="file" name="review_pict" class="form-control-file" id="review_pict">
 			</td>
 		</tr>
 		<tr style = "height: 20px;"></tr>

@@ -743,6 +743,7 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		return new File(path+review_pict);
 	}
 
+	//내가 작성한 후기 가져오기
 	@Override
 	public HashMap<String, Object> getmyReview(String loginID, int page) {
 		// TODO Auto-generated method stub
@@ -768,6 +769,14 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 	public int addBasket(Basket basket) {
 		// TODO Auto-generated method stub
 		return basketDao.insertBasket(basket);
+	}
+
+	//후기 작성 시 구매한 상품 가져오기
+	@Override
+	public List<HashMap<String, Object>> getReviewProd(String mem_id) {
+		// TODO Auto-generated method stub
+		System.out.println("test"+reviewDao.getReviewProd(mem_id));
+		return reviewDao.getReviewProd(mem_id); 
 	}
 
 

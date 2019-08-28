@@ -237,6 +237,7 @@ public class AllController {
 
 	}
 	
+	//이벤트 사진 불러오기
 	@RequestMapping("eventdownload.do")
 	public View eventdownload(int num) {
 		File attachFile = service.getEventFile(num);
@@ -244,6 +245,7 @@ public class AllController {
 		return view; 
 	}
 	
+	//공지사항 사진 불러오기
 	@RequestMapping("noticedownload.do")
 	public View noticedownload(int num) {
 		File attachFile = service.getNoticeFile(num);
@@ -266,9 +268,6 @@ public class AllController {
 		model.addAttribute("faq", service.getsupportfaqList());
 	}
 
-	
-	
-	
 }
 
 

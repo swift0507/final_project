@@ -202,5 +202,8 @@ public interface HSService {
 
 	//장바구니 상품 추가
 	public int addBasket(Basket basket);
+	
+	//후기 작성 시 구매한 상품 가져오기
+	public List<HashMap<String, Object>> getReviewProd(String mem_id); //여기여기여기
 
 }
