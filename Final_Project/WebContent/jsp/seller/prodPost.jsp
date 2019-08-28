@@ -297,7 +297,7 @@
         			success : function(data){
         				//prod_id를 리턴한다. 
         				prod_id = data.prod_id;
-        				alert(prod_id)
+        				//alert(prod_id)
         			}
         		})
         		
@@ -321,14 +321,14 @@
         				type : "post",
         				success : function(data){
         					//data는 opt_id를 들고 와야 한다. 잘 가져왔다.
-        					alert(data.opt_id)
+        					//alert(data.opt_id)
         					//옵션상세 넣기
         					$.ajax({
         						url : "optionDetailInsert.do",
         						data : {opt_id : data.opt_id, optd_choice : $("#prod_name").val(), optd_price : 0, optd_quantity : $("#nooption_quantity").val()},
         						type : "post",
         						success : function(data){
-        							alert(data.optd_id)
+        							//alert(data.optd_id)
         						}
         					})
         				}
@@ -368,7 +368,7 @@
         				async : true,
         				success : function(data){
         					//data는 opt_id를 들고 와야 한다. 잘 가져왔다.
-        					alert(data.opt_id)
+        					//alert(data.opt_id)
         					//옵션상세 넣기
 		        			for(var i=0; i<length; i++){
 		        				//이거도 잘 됌 다받아옴
@@ -409,7 +409,7 @@
         		//테스트완료 --------------------------------------------------------------------------------------------
         		
         		
-        		alert("주문이 완료되었습니다.");
+        		alert("등록이 완료되었습니다.");
         		location.href = "prodManage.do"
         	})
         	

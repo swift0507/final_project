@@ -60,7 +60,7 @@
             <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
             <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a> -->
             <!-- <img src="images/horizonbanner1.PNG" width=100% height=500px> -->
-            <a href="${ mainbanner.banner_url }"><img src="images/${ mainbanner.banner_pict }" width=100% height=500px></a>
+            <a href="${ mainbanner.banner_url }"><img src="images/${ mainbanner.banner_pict }" width=100%; height=300px;></a>
           </div>
         </div>
         <c:forEach var="banner" items="${ banners }">
@@ -72,7 +72,7 @@
             <hr class="my-4">
             <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
             <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a> -->
-            <a href="${ banner.banner_url }"><img src="images/${ banner.banner_pict }" width=100% height=500px></a>
+            <a href="${ banner.banner_url }"><img src="images/${ banner.banner_pict }" width=100%; height=300px;></a>
           </div>
         </div>     
         </c:forEach>
