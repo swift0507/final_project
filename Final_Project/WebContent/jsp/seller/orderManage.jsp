@@ -34,7 +34,6 @@
 	<script>
 	$(document).ready(function(){	
 		
-		var html = "";
 		var sel_id = "${ loginUser }";
 		
 		function delstatus(status) {
@@ -49,7 +48,8 @@
 		}
 		
 		function htmlText(data, i) {
-			html += '<table class = "mt-3" style = "width: 700px;">';
+			var html = "";
+			html += '<table class = "mt-7" style = "width: 700px;">';
 			html += '<tr><td style = "width: 55%;"><h5><b>주문 상품 정보</b></h5></td>';
 			html += '<td class = "text-right" colspan = 2 style = "width: 45%;">';
 			html += '<button class = "btn-secondary">주문 내역 상세보기</button><button class = "btn-danger">주문 취소</button></td></tr>';
@@ -62,9 +62,9 @@
 			html += '<tr><td> <b>주문날짜 :</b>' + data.receipt[i].receipt_orderdate + '</td><td class = "text-center align-middle" rowspan = 3> <h5><b>' + data.receipt[i].receipt_price + '원</b></h5> </td>';
 			html += '<td class = "text-center align-middle" rowspan = 3><button type="button" class="btn btn-ml btn-success" disabled>' + delstatus(data.receipt[i].receipt_delstatus) + '</button></td></tr>';
 			html += '<tr><td> <b>주문번호 :</b>' + data.receipt[i].receipt_id + '</td></tr><tr><td colspan = 2> <b>주문자명 :</b>' + data.receipt[i].mem_id + '</td></tr>';
-			html += '<tr style = "height: 30px;"><td colspan = 3><hr></td></tr><tr><td style = "width: 55%;"><h5><b>주문 상품 정보</b></h5></td><td colspan = 2 style = "width: 45%;"></tr>';
-			html += '<tr><td> <b>이름 :</b>' + data.receipt[i].receipt_name + '</td><td colspan = 2 rowspan = 2> <b>거래방법 : </b>' + data.receipt[i].receipt_payoption + '</td></tr><tr><td> <b>주소 :</b>' + data.receipt[i].receipt_attr + '</td></tr>';
-			html += '<tr><td> <b>휴대폰 번호 :</b>' + data.receipt[i].receipt_phone + '</td><td colspan = 2></td></tr><tr><td> <b>배송지 요청사항 :</b>' + data.receipt[i].receipt_request + '</td><td colspan = 2></td></tr></table>' 
+			html += '<tr style = "height: 30px;"><td colspan = 3><hr></td></tr><tr><td style = "width: 55%;"><h5><b>택배 수신인 정보</b></h5></td><td colspan = 2 style = "width: 45%;"></tr>';
+			html += '<tr><td> <b>이름 :</b>' + data.receipt[i].receipt_name + '</td><td colspan = 2 rowspan = 2> <b>거래방법 : </b>' + data.receipt[i].receipt_payoption + '</td></tr><tr><td> <b>주소 :</b>' + data.receipt[i].receipt_addr + '</td></tr>';
+			html += '<tr><td> <b>휴대폰 번호 :</b>' + data.receipt[i].receipt_phone + '</td><td colspan = 2></td></tr><tr><td> <b>배송지 요청사항 :</b>' + data.receipt[i].receipt_request + '</td><td colspan = 2></td></tr></table><hr>' 
 				
 			return html;
 		}
@@ -78,11 +78,13 @@
 		        data		:  {sel_id : sel_id, page : page},
 		        success		: function(data) {	 
 		        	var newHtml = "";
-		        	
+
 		        	for(var i = 0; i < data.receipt.length; i++) {
 		        		newHtml += htmlText(data, i);
+		        		console.log("htmlText : " + htmlText(data, i));
 		        	}
-		        	
+		        	console.log("length : " + data.receipt.length);
+
 		        	$('#newReceipt').html(newHtml);
 		        }
 			});
@@ -95,12 +97,14 @@
 		        data		:  {sel_id : sel_id, page : page},
 		        success		: function(data) {	   
 					var deliveryHtml = "";
-		        	
+
 		        	for(var i = 0; i < data.receipt.length; i++) {
 		        		deliveryHtml += htmlText(data, i);
 		        	}
-		        	
-		        	$('#deliveryReceipt').html(deliveryHtml);
+		        	console.log("length : " + data.receipt.length);
+		        	console.log("deliveryHtml : " + deliveryHtml);
+
+		        	$('#newReceipt').html(deliveryHtml);
 		        }
 			});
 		}
@@ -112,12 +116,12 @@
 		        data		:  {sel_id : sel_id, page : page},
 		        success		: function(data) {	   
 					var completedHtml = "";
-		        	
+
 		        	for(var i = 0; i < data.receipt.length; i++) {
 		        		completedHtml += htmlText(data, i);
 		        	}
 		        	
-		        	$('#completedReceipt').html(completedHtml);
+		        	$('#newReceipt').html(completedHtml);
 		        }
 			});
 		}
@@ -129,12 +133,12 @@
 		        data		:  {sel_id : sel_id, page : page},
 		        success		: function(data) {	   
 					var applyHtml = "";
-		        	
+					
 		        	for(var i = 0; i < data.receipt.length; i++) {
 		        		applyHtml += htmlText(data, i);
 		        	}
 		        	
-		        	$('#applyReceipt').html(applyHtml);
+		        	$('#newReceipt').html(applyHtml);
 		        }
 			});
 		}
@@ -146,12 +150,12 @@
 		        data		:  {sel_id : sel_id, page : page},
 		        success		: function(data) {	   
 					var exchangeHtml = "";
-		        	
+
 		        	for(var i = 0; i < data.receipt.length; i++) {
 		        		exchangeHtml += htmlText(data, i);
 		        	}
 		        	
-		        	$('#exchangeReceipt').html(exchangeHtml);
+		        	$('#newReceipt').html(exchangeHtml);
 		        }
 			});
 		}
@@ -159,46 +163,67 @@
 		
 		
 		var totalBoards;
+		var status = "";
+		var boardsPerPage = 5;    // 한 페이지에 나타낼 데이터 수
+	    var offset = 5;        // 한 화면에 나타낼 페이지 수
+		
+		totalBoards = ${ newTotalBoards };
+		newReceipt(sel_id, page);
+		if(totalBoards != 0)
+			paging(totalBoards, boardsPerPage, offset, 1, "new");
 		
 		$("#new-tab").on("click", function() {
+			$("#myTabContent div table").empty();
+			$("#myTabContent div nav").empty();
 			totalBoards = ${ newTotalBoards };
 			newReceipt(sel_id, page);
+			status = "new";
 			if(totalBoards != 0)
-				paging(totalBoards, boardsPerPage, offset, 1);
+				paging(totalBoards, boardsPerPage, offset, 1, status);
 		});
 		
 		$("#delivery-tab").on("click", function() {
+			$("#myTabContent div table").empty();
+			$("#myTabContent div nav").empty();
 			totalBoards = ${ deliveryTotalBoards };
 			deliveryReceipt(sel_id, page);
+			status = "delivery";
 			if(totalBoards != 0)
-				paging(totalBoards, boardsPerPage, offset, 1);
+				paging(totalBoards, boardsPerPage, offset, 1, status);
 		});
 		
 		$("#completed-tab").on("click", function() {
+			$("#myTabContent div table").empty();
+			$("#myTabContent div nav").empty();
 			totalBoards = ${ completedTotalBoards };
 			completedReceipt(sel_id, page);
+			status = "completed";
 			if(totalBoards != 0)
-				paging(totalBoards, boardsPerPage, offset, 1);
+				paging(totalBoards, boardsPerPage, offset, 1, status);
 		});
 		
 		$("#apply-tab").on("click", function() {
+			$("#myTabContent div table").empty();
+			$("#myTabContent div nav").empty();
 			totalBoards = ${ applyTotalBoards };
 			applyReceipt(sel_id, page);
+			status = "apply";
 			if(totalBoards != 0)
-				paging(totalBoards, boardsPerPage, offset, 1);
+				paging(totalBoards, boardsPerPage, offset, 1, status);
 		});
 		
 		$("#exchange-tab").on("click", function() {
+			$("#myTabContent div table").empty();
+			$("#myTabContent div nav").empty();
 			totalBoards = ${ exchangeTotalBoards };
 			exchangeReceipt(sel_id, page);
+			status = "exchange";
 			if(totalBoards != 0)
-				paging(totalBoards, boardsPerPage, offset, 1);
+				paging(totalBoards, boardsPerPage, offset, 1, status);
 		});
 		
-		var boardsPerPage = 10;    // 한 페이지에 나타낼 데이터 수
-	    var offset = 5;        // 한 화면에 나타낼 페이지 수
 	    
-	    function paging(totalBoards, boardsPerPage, offset, current) {
+	    function paging(totalBoards, boardsPerPage, offset, current, status) {
 
 	        var last = Math.ceil(totalBoards / boardsPerPage);    // 총 페이지 수
 	        var pageGroup = Math.ceil(current / offset);    // 페이지 그룹
@@ -237,7 +262,7 @@
 				}
 	        }
 	        
-	        if((pageGroup * offset) > last) {
+	        if((pageGroup * offset) >= last) {
 	            pagingLayout += '<li class="page-item disabled"><a class="page-link" id=' + next + '>다음</a></li>';
 	            pagingLayout += '<li class="page-item disabled"><a class="page-link" id=' + last + '><span>&raquo;</span></a></li>';
 	        }
@@ -248,19 +273,19 @@
 	        pagingLayout += '</ul>';
 	            
 	        $("#newPaging").html(pagingLayout);    // 페이지 목록 생성
-	        $("#deliveryPaging").html(pagingLayout);    // 페이지 목록 생성
+	        /* $("#deliveryPaging").html(pagingLayout);    // 페이지 목록 생성
 	        $("#completedPaging").html(pagingLayout);    // 페이지 목록 생성
 	        $("#applyPaging").html(pagingLayout);    // 페이지 목록 생성
-	        $("#exchangePaging").html(pagingLayout);    // 페이지 목록 생성
+	        $("#exchangePaging").html(pagingLayout);    // 페이지 목록 생성 */
 	       
 	        $(".page-link").on("click", function() {
 				var CurrentPage = $(this).attr('id');
-				paging(totalBoards, boardsPerPage, offset, CurrentPage);
-				newReceipt(sel_id, CurrentPage)
-				deliveryReceipt(sel_id, CurrentPage)
-				completedReceipt(sel_id, CurrentPage)
-				applyReceipt(sel_id, CurrentPage)
-				exchangeReceipt(sel_id, CurrentPage)
+				if(status == "new")	newReceipt(sel_id, CurrentPage);
+				else if (status == "delivery") deliveryReceipt(sel_id, CurrentPage);
+				else if (status == "completed")	completedReceipt(sel_id, CurrentPage);
+				else if (status == "apply") applyReceipt(sel_id, CurrentPage);
+				else exchangeReceipt(sel_id, CurrentPage);
+				paging(totalBoards, boardsPerPage, offset, CurrentPage, status);
 			});
 		
 	    };
@@ -401,63 +426,7 @@
 						</nav>
 						<!-- 주문 상품 table 1 종료-->
 					</div>
-					<!-- tab 1 area 종료 -->
 					
-					<!-- tab 2 area -->
-					<div class="tab-pane fade" role="tabpanel">
-					
-						<!-- 주문 상품 table 1 -->
-						<table class = "mt-3" style = "width: 700px;" id="deliveryReceipt">
-							
-						</table>
-						<nav id="deliveryPaging">
-					
-						</nav>
-						<!-- 주문 상품 table 1 종료-->
-					</div>
-					<!-- tab 2 area 종료 -->
-					
-					<!-- tab 3 area -->
-					<div class="tab-pane fade" role="tabpanel">
-					
-						<!-- 주문 상품 table 1 -->
-						<table class = "mt-3" style = "width: 700px;" id="completedReceipt">
-							
-						</table>
-						<nav id="completedPaging">
-					
-						</nav>
-						<!-- 주문 상품 table 1 종료-->
-					</div>
-					<!-- tab 3 area 종료 -->
-					
-					<!-- tab 4 area -->
-					<div class="tab-pane fade" role="tabpanel">
-					
-						<!-- 주문 상품 table 1 -->
-						<table class = "mt-3" style = "width: 700px;" id="applyReceipt">
-							
-						</table>
-						<nav id="applyPaging">
-					
-						</nav>
-						<!-- 주문 상품 table 1 종료-->
-					</div>
-					<!-- tab 4 area 종료 -->
-					
-					<!-- tab 5 area -->
-					<div class="tab-pane fade" role="tabpanel">
-					
-						<!-- 주문 상품 table 1 -->
-						<table class = "mt-3" style = "width: 700px;" id="exchangeReceipt">
-							
-						</table>
-						<nav id="exchangePaging">
-					
-						</nav>
-						<!-- 주문 상품 table 1 종료-->
-					</div>
-					<!-- tab 5 area 종료 -->
 				</div>
 				
 				<br><br>

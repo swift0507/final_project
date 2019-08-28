@@ -356,7 +356,7 @@
 				}
 	        }
 	        
-	        if((pageGroup * offset) > last) {
+	        if((pageGroup * offset) >= last) {
 	            pagingLayout += '<li class="page-item disabled"><a class="page-link" id=' + next + '>다음</a></li>';
 	            pagingLayout += '<li class="page-item disabled"><a class="page-link" id=' + last + '><span>&raquo;</span></a></li>';
 	        }

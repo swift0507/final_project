@@ -62,8 +62,6 @@ public class SellerController {
 			sellCount.add(i, service.getSellCount(sellerProdList.get(i).getProd_id()));
 			sellRemain.add(i, service.getSellRemain(sellerProdList.get(i).getProd_id()));
 			sellSales.add(i, service.getSellSales(sellerProdList.get(i).getProd_id()));
-			
-			System.out.println(prodName);
 		}
 		
 		sellerManageMap.put("prod_name", prodName);	//상품목록에서 상품명만 가져오고
@@ -82,6 +80,8 @@ public class SellerController {
 	public void orderManage(Model m, HttpSession session) {
 		HashMap<String, Object> id = (HashMap<String, Object>)session.getAttribute("loginUserInfo");
 		String mem_id = (String)id.get("mem_id");
+		
+		m.addAttribute("loginUser", mem_id);
 		
 		m.addAttribute("newTotalBoards", service.getNewReceiptCount());
 		m.addAttribute("deliveryTotalBoards", service.getDeliveryReceiptCount());
