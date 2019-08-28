@@ -6,7 +6,7 @@
 <mapper namespace="dao.ReviewDao">
 	<insert id="insertReview" parameterType="review">
 		insert into review
-		values (review_id.nextval, receiptorder_id.nextval, prod_id.nextval, #{prod_name},
+		values (reviewid_seq.nextval, #{receiptorder_id}, #{prod_id}, #{prod_name},
 		#{review_writer}, #{review_score}, #{review_content}, sysdate, #{review_pict})
 	</insert>
 
@@ -38,7 +38,12 @@
 	<select id="getmyReview" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 		select * from (select rownum as rn, e.* from (select * from review where review_writer = #{review_writer} 
 		order by review_id desc) e) where rn between #{offset} and (#{offset} + #{boardsPerPage} - 1)
-		
+	</select>
+	
+	<!-- 후기 작성 시 구매한 상품 가져오기  -->
+	<select id="getReviewProd" parameterType="String" resultType="java.util.HashMap">
+		select receipt_orderdate, receipt_prod, order_opt, receiptorder_id, prod_id from receipt a, receiptorder b 
+		where a.mem_id = #{mem_id} and a.receipt_delstatus >= 5 and b.order_review = 0
 	</select>
 	
 	<select id="selectById" parameterType="java.util.HashMap" resultType="Review">
@@ -54,7 +59,18 @@
 		select review_id from review where prod_id=#{prod_id}
 	</select>
 	
+<<<<<<< HEAD
 	<select id="selectByStatus" parameterType="int" resultType="review">
 		select * from review where review_status = 0 order by review_id
 	</select>
+=======
+	<select id="getProdid" parameterType="int" resultType="int">
+		select prod_id from receiptorder where receiptorder_id =#{receiptorder_id} 
+	</select>
+	
+	<select id="getProdname" parameterType="int" resultType="String">
+		select prod_name from product where prod_id =#{prod_id}
+	</select>
+	
+>>>>>>> branch 'master' of https://github.com/swift0507/final_project.git
 </mapper>

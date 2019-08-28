@@ -121,19 +121,10 @@
 						<tr>
 							<td colspan="3">
 								<p class="review">${m.REVIEW_CONTENT}</p>
-								<br>
-								<img src="reviewdownload.do?num=${m.REVIEW_ID}"  style="width: 550px; height: 300px;">
+								<img src="reviewdownload.do?num=${m.REVIEW_ID}"  style="width: 450px; height: 250px;">
 							</td>
 						</tr>
-						
-						<%-- <tr style="height: 10px;"></tr>
-						<tr>
-							<td colspan=3>
-								${m.review_pict}
-<!-- problem -->				<img src="reviewdownload.do?num=${m.review_id}"  alt="안불러와지는중" style="width: 50px; height: 50px;">
-							</td>
-						</tr> --%>
-						</table>
+					</table>
 					<br>
 					<hr>
 					<!-- 후기 table 1 종료-->
@@ -174,11 +165,11 @@
 						</a></li>
 					</ul>
 				</nav>
-				시작페이지 : ${ start }<br>
+		<%-- 		시작페이지 : ${ start }<br>
 				끝페이지 : ${ end }<br>
 				마지막 : ${ last }<br>
 				전체리뷰갯수 : ${ totalBoards }<br>
-				현재 : ${ current } 
+				현재 : ${ current }  --%>
 				
 					</div>
 					<!-- 페이징 처리  종료 -->
@@ -194,6 +185,7 @@
 		<jsp:include page="/jsp/footer.jsp"></jsp:include>
 	</footer>
 	<!-- footer 종료 -->
+	
 </body>
 </html>
 

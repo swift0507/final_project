@@ -230,6 +230,28 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		data.put("seller", seller);
 		return data;
 	}
+	
+	//추가된거 mem_id가 달라야 한다. 
+	@Override
+	public HashMap<String, Object> sellerOrderDetail(int receipt_id) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		Receipt receipt = receiptDao.selectReceiptByReceiptId(receipt_id);
+		//영수증 넣기
+		data.put("receipt", receipt);
+		List<ReceiptOrder> list = receiptOrderDao.getReceiptOrderList(receipt.getReceipt_id());
+		//영수증상세품목 넣기
+		data.put("list", list);
+		Member m = new Member();
+		m.setMem_id(receipt.getMem_id());
+		m = memberDao.selectId(m);
+		//주문자정보넣기
+		data.put("member", m);
+		//사장님정보 주기
+		Seller seller = sellerDao.selectOneSeller(receipt.getSel_id());
+		data.put("seller", seller);
+		return data;
+	}
 
 	//시작 페이지 번호
 	@Override
@@ -361,6 +383,16 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		data.put("receiptList", receiptDao.selectReceiptListBySellerMain(sel_id));
 		System.out.println(data);
 		return data;
+	}
+	
+	//주문상태바꾸기
+	@Override
+	public void updateReceiptStatus(int receipt_id, int delstatus) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("receipt_id", receipt_id);
+		params.put("receipt_delstatus", delstatus);
+		receiptDao.updateReceiptStatus(params);
 	}
 	
 	//카테고리리스트 가져오기
@@ -764,23 +796,9 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 
 	//후기 작성
 	@Override
-	public int writeReview(Review review, MultipartFile file) {	
+	public int writeReview(Review review) {	
 		// TODO Auto-generated method stub
-		String path = "C:\\Temp\\attach\\";
-		File dir = new File(path);
-		if(!dir.exists()) dir.mkdirs();
-		String review_pict = file.getOriginalFilename();
-		File attachFile = new File(path+review_pict);
-		try {
-			file.transferTo(attachFile);  //웹으로 받아온 파일을 복사
-			review.setReview_pict(review_pict);  //db에 파일 정보 저장을 하기위해 모델객체에 setting하기
-		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 		//게시물을 DB에 저장
 		reviewDao.insertReview(review);
 		return review.getReview_id();
@@ -847,6 +865,7 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		return new File(path+review_pict);
 	}
 
+	//내가 작성한 후기 가져오기
 	@Override
 	public HashMap<String, Object> getmyReview(String loginID, int page) {
 		// TODO Auto-generated method stub
@@ -874,6 +893,14 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		return basketDao.insertBasket(basket);
 	}
 
+//@@@@@@@@ 후기 작성 시 구매한 상품 가져오기
+	@Override
+	public List<HashMap<String, Object>> getReviewProd(String mem_id) {
+		// TODO Auto-generated method stub
+		System.out.println("test"+reviewDao.getReviewProd(mem_id));
+		return reviewDao.getReviewProd(mem_id); 
+	}
+	
 	//찜목록 추가
 	@Override
 	public int addPick(Pick pick) {
@@ -1061,6 +1088,24 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 	}
 
 	@Override
+	public int getProdid(int receiptorder_id) {
+		// TODO Auto-generated method stub
+		return reviewDao.getProdid(receiptorder_id);
+	}
+
+	@Override
+	public String getProdname(int prod_id ) {
+		// TODO Auto-generated method stub
+		return reviewDao.getProdname(prod_id);
+	}
+	
+	@Override
+	public void deleteReceipt(int receipt_id) {
+		// TODO Auto-generated method stub
+		receiptDao.deleteReceipt(receipt_id);
+	}
+	
+	@Override
 	public List<Detail> getDetailByProd(int prod_id) {
 		// TODO Auto-generated method stub
 		return detailDao.selectDetailByProdId(prod_id);
@@ -1072,14 +1117,5 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		return reviewDao.selectByStatus(prod_id);
 	}
 	
-	
-
-
-
-
-
-	
-
-
 
 }

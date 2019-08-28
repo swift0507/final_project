@@ -24,5 +24,19 @@ public interface ReviewDao {
 
 	//나의 후기 가져오기
 	public List<Review> getmyReview(HashMap<String, Object> params);
+<<<<<<< HEAD
 	public List<Review> selectByStatus(int prod_id);
+=======
+	
+	//후기 작성 시 구매한 상품 가져오기
+	public List<HashMap<String, Object>> getReviewProd(String mem_id); //여기여기여기여기
+	
+	//후기 작성 시 상품 아이디 가져오기
+	public int getProdid(int receiptorder_id);
+
+	//후기 작성 시 상품 아이디 가져오기
+	public String getProdname(int prod_id);
+	
+	
+>>>>>>> branch 'master' of https://github.com/swift0507/final_project.git
 }
