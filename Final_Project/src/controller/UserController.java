@@ -64,8 +64,11 @@ public class UserController {
 	
 	//장바구니에 상품 담기
 	@RequestMapping("user/addBasket.do")
-	public @ResponseBody int addBasket(Basket basket) {
-		return service.addBasket(basket);
+	public @ResponseBody int addBasket(Basket basket, HttpSession session) {
+		int n = service.addBasket(basket);
+		HashMap<String, Object> id = (HashMap<String, Object>)session.getAttribute("loginUserInfo");
+		id.put("countBasket", service.countBasket((String)id.get("mem_id")));
+		return n;
 	}
 	
 	//결제화면가기
