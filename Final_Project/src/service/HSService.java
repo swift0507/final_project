@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import model.Answer;
@@ -65,7 +67,7 @@ public interface HSService {
 	public List<HashMap<String, Object>> getBasketList(String mem_id);
 	
 	//결제버튼눌렀을때 영수증 넣고 영수증별 상품 넣기. 주문한 receipt_id 보내기 
-	public int pay(Receipt receipt, List<Integer> baskets, List<Integer> prodnums);
+	public int pay(Receipt receipt, List<Integer> baskets, List<Integer> prodnums, HttpSession session);
 	
 	//방금 주문한 receipt들 보내기
 	public List<Receipt> payComplete(List<Integer> receipt_id);
