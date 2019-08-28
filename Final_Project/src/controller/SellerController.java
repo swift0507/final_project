@@ -90,6 +90,12 @@ public class SellerController {
 		m.addAttribute("exchangeTotalBoards", service.getExchangeReceiptCount());
 	}
 	
+	//주문상세
+	@RequestMapping("seller/orderDetail.do")
+	public void orderDetail() {
+		//미완성
+	}
+	
 	//신규주문
 	@RequestMapping("seller/newReceiptList.do")
 	public @ResponseBody HashMap<String, Object> newReceiptList(String sel_id, int page) {
