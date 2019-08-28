@@ -44,28 +44,6 @@
 	</style>
 	<script>
 	$(document).ready(function(){
-		$("#like_button").click(function(){
-		    $('#like_item').toggleClass("far fa-heart fas fa-heart");
-		});
-		
-		$(".select_option").find("select").first().removeAttr('disabled');
-		
-		var selectOptionHtml = "";
-		
-		
-		/* function selectOption() {
-			selectOptionHtml += '<c:forEach var="option" items="${ option }">';
-			selectOptionHtml += '<div class = "select_option">';
-			selectOptionHtml += '<select id = "${ option.opt_id }" class="option custom-select-sm" style="width: 250px;" disabled> ';
-			selectOptionHtml += '<option disabled selected hidden="" label="${ option.opt_name }"></option>';
-			selectOptionHtml += '<c:forEach var="optiondetail" items="${ option.optiondetail }">';
-			selectOptionHtml += '<option id="${ optiondetail.optd_choice }" value="${ optiondetail.optd_choice }" class="${ optiondetail.optd_price }" label="${ optiondetail.optd_choice }"></option>';
-			selectOptionHtml += '<br></c:forEach></select></div><br></c:forEach>';
-			$("#selectOption").html(selectOptionHtml);
-			
-			$(".select_option").find("select").first().removeAttr('disabled');
-		} */
-		
 		var loginUser = "${ loginUser }";
 		var sel_id = "${ product.sel_id }";
 		var prod_id = ${ product.prod_id };
@@ -76,6 +54,58 @@
 		var buyProdList = "";
 		var totalPrice = parseInt(0);
 		
+		$("#like_button").click(function(){
+		    $('#like_item').toggleClass("far fa-heart fas fa-heart");
+		    console.log("toggle : " + $('#like_item').attr('class'))
+		    var toggle = $('#like_item').attr('class');
+		    if(toggle == "fas fa-heart") {
+		    	$.ajax({
+		        	type		: "POST",
+			        url 		: "user/addPick.do",
+			        data		:  {prod_id : prod_id, mem_id : loginUser},
+			        success		: function(data) {
+			        	const Toast = Swal.mixin({
+							  toast: true,
+							  position: 'top-end',
+							  showConfirmButton: false,
+							  timer: 3000
+						});
+				
+						Toast.fire({
+							type: 'success',
+							title: '상품을 찜 목록에 추가하였습니다!'
+						})
+			        },
+			        error:function(request,status,error){
+			            alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+			           }
+			        
+		        });
+		    }
+		    else {
+		    	$.ajax({
+		        	type		: "POST",
+			        url 		: "user/deletePick.do",
+			        data		:  {prod_id : prod_id, mem_id : loginUser},
+			        success		: function(data) {
+			        	const Toast = Swal.mixin({
+							  toast: true,
+							  position: 'top-end',
+							  showConfirmButton: false,
+							  timer: 3000
+						});
+				
+						Toast.fire({
+							type: 'error',
+							title: '상품을 찜 목록에서 삭제하였습니다!'
+						})
+			        }
+		        });
+		    }
+		});
+		
+		$(".select_option").find("select").first().removeAttr('disabled');
+
 		$(".select_option").find("select").change(function(){
 			$(this).attr('disabled', true);
 			$(this).attr('selected', 'selected');
@@ -88,12 +118,14 @@
 				var prodAndOption = "";
 				prodAndOption += "상품 : " + prodname;
 				prodAndOption += "<br>선택 옵션 : " + selectprod;
-				prodAndOption += "<br>가격 : " + sumPrice + "원<br>";
+				prodAndOption += "<br>가격 : " + sumPrice + "원<br><hr>";
 				
 				buyProdList += selectprod + "," + sumPrice + "/";
 				selectprod = "";
 				totalPrice += sumPrice
 				sumPrice = parseInt(${ product.prod_price });
+				
+				$("#total_price").html("총합 : " + totalPrice + "원<br>")
 				
 				$("#selected_opt").append(prodAndOption);
 				
@@ -126,6 +158,7 @@
 								);
 			        	buyProdList = "";
 			        	$("#selected_opt").empty();
+			        	$("#total_price").empty();
 			        }
 		        });
 		    }
@@ -140,23 +173,6 @@
 		});
 		
 		var s = 0;
-		
-		$('#add_item_button').click(function(){
-			s++;
-			$("#cart_amt").text(s);
-			
-			const Toast = Swal.mixin({
-				  toast: true,
-				  position: 'top-end',
-				  showConfirmButton: false,
-				  timer: 3000
-			});
-	
-			Toast.fire({
-				type: 'success',
-				title: '장바구니에 아이템이 추가되었습니다.'
-			})
-		});
 		
 		var reviewCurrentPage = 1;
 		
@@ -287,13 +303,15 @@
 		$("#nav-review-tab").on("click", function() {
 			totalBoards = ${ reviewTotalBoards };
 			Review(prod_id, reviewCurrentPage);
-			paging(totalBoards, boardsPerPage, offset, 1);
+			if(totalBoards != 0)
+				paging(totalBoards, boardsPerPage, offset, 1);
 		});
 		
 		$("#nav-qna-tab").on("click", function() {
 			totalBoards = ${ qnaTotalBoards };
 			QnA(prod_id, qnaCurrentPage);
-			paging(totalBoards, boardsPerPage, offset, 1);
+			if(totalBoards != 0)
+				paging(totalBoards, boardsPerPage, offset, 1);
 		});
 		
 	    var boardsPerPage = 10;    // 한 페이지에 나타낼 데이터 수
@@ -308,6 +326,8 @@
 	        if(end > last)
 	            end = last;
 	        var start = end - (offset - 1);    // 화면에 보여질 첫번째 페이지 번호
+	        if(start < 1)
+	        	start = 1;
 	        var next = end + 1;
 	        var prev = start - 1;
 	        var pagingLayout = "";
@@ -360,7 +380,7 @@
 	    
 	    
 	   
-	})
+	});
 	
 	</script>
 </head>
@@ -420,7 +440,7 @@
 			            		<c:otherwise>
 			                <div id = "like_report">
 			                	<button class="btn btn-sm btn-secondary" id = "like_button">
-			                   		<i class="far fa-heart" id = "like_item"></i> 찜하기
+			                   		<i <c:choose><c:when test = "${ isPick == true }">class="fas fa-heart"</c:when><c:otherwise>class="far fa-heart"</c:otherwise></c:choose> id = "like_item"></i> 찜하기
 			                	</button>
 			               
 			                	<button class="btn btn-sm btn-danger" id = "report_button"> 
@@ -460,9 +480,10 @@
 			        </tr>
 			        <tr>
 			            <td><b>선택 상품</b> &nbsp;&nbsp;&nbsp;
+			            <hr>
 			            <div>
 			            	<span id = "selected_opt"></span> 
-			            	
+			            	<span id = "total_price"></span>
 			            </div>
 			            </td>
 			        </tr>

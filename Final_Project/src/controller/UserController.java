@@ -19,6 +19,7 @@ import org.springframework.web.servlet.View;
 import dao.ReviewDao;
 import model.Basket;
 import model.Member;
+import model.Pick;
 import model.Product;
 import model.Receipt;
 import model.Review;
@@ -142,6 +143,18 @@ public class UserController {
 		HashMap<String, Object> id = (HashMap<String, Object>)session.getAttribute("loginUserInfo");
 		String mem_id = (String)id.get("mem_id");
 		m.addAttribute("pickList", service.getPickList(mem_id));
+	}
+	
+	//찜목록 추가
+	@RequestMapping("user/addPick.do")
+	public @ResponseBody int addPick(Pick pick) {
+		return service.addPick(pick);
+	}
+	
+	//찜목록 삭제
+	@RequestMapping("user/deletePick.do")
+	public @ResponseBody int deletePick(Pick pick) {
+		return service.deletePick(pick);
 	}
 	
 	//주문내역 보기
