@@ -11,6 +11,10 @@
     	select * from receipt where sel_id=#{sel_id} order by receipt_id desc
     </select>
     
+    <select id="selectReceiptListBySellerMain" resultType="receipt">
+    	select * from (select rownum as rn, e.* from (select * from receipt where sel_id = #{sel_id} order by receipt_delstatus) e) where rn between 1 and 10
+    </select>
+    
     <insert id="insertReceipt">
     	<selectKey resultType="int" keyProperty="receipt_id" order="BEFORE">
     	select receiptid_seq.nextval from dual

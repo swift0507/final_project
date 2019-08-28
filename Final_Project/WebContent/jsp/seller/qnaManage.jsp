@@ -102,13 +102,12 @@
 						    	<td colspan = 2 style = "width: 700px;">
 						    		<span class = "badge badge-primary">질문</span>
 						    	</td>
-						 
 						    </tr>
 						    <tr>
-						    	<td style = "width: 600px;">
-						    		<input type = "text" class = "form-control" style = "width: 600px;" value = "얼굴에 써도 되나요!?" readonly>
+						    	<td style = "width: 500px;">
+						    		<input type = "text" class = "form-control" style = "width: 500px;" value = "얼굴에 써도 되나요!?" readonly>
 						    	</td>
-						    	<td class = "text-center">
+						    	<td class = "text-left">
 						    		<input type = "button" id = "add_Reply" class = "btn btn-sm btn-secondary" value = "▽">
 						    	</td>
 						    </tr>
@@ -124,7 +123,7 @@
 						    	<td>
 						    		<input type = "text" class = "form-control" style = "width: 500px;" placeholder = "답변 작성">
 						    	</td>
-						    	<td class = "text-center">
+						    	<td class = "text-center" style = "width: 200px;">
 						    		<button class = "btn btn-sm btn-secondary">확인</button>
 						    		<button class = "btn btn-sm btn-danger">삭제</button>
 						    	</td>

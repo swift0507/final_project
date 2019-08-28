@@ -8,6 +8,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -139,7 +141,7 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 	
 	//결제기능 receipt 먼저 넣고 receiptorder 넣는다. receipt은 만들어져 오고 baskets의 basket_id로 receiptorder를 만든다.
 	@Override
-	public int pay(Receipt receipt, List<Integer> baskets, List<Integer> prodnums) {
+	public int pay(Receipt receipt, List<Integer> baskets, List<Integer> prodnums, HttpSession session) {
 		// TODO Auto-generated method stub
 		receiptDao.insertReceipt(receipt);
 		System.out.println(receipt);
@@ -161,6 +163,10 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 			//장바구니에서 삭제시키기 
 			basketDao.deleteByBasketId(basket_id);
 		}
+		//세션 장바구니개수 리셋하기
+		HashMap<String, Object> id = (HashMap<String, Object>)session.getAttribute("loginUserInfo");
+		id.put("countBasket", countBasket((String)id.get("mem_id")));
+		
 		return receipt.getReceipt_id();
 	}
 	
@@ -352,7 +358,7 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		}
 		data.put("noanswer", noanswer);
 		//나에게 온 영수증리스트 보여주기
-		data.put("receiptList", receiptDao.selectReceiptListBySeller(sel_id));
+		data.put("receiptList", receiptDao.selectReceiptListBySellerMain(sel_id));
 		System.out.println(data);
 		return data;
 	}
@@ -1059,6 +1065,12 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 	public String getProdname(int prod_id ) {
 		// TODO Auto-generated method stub
 		return reviewDao.getProdname(prod_id);
+	}
+	
+	@Override
+	public List<Detail> getDetailByProd(int prod_id) {
+		// TODO Auto-generated method stub
+		return detailDao.selectDetailByProdId(prod_id);
 	}
 	
 

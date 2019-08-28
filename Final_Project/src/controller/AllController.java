@@ -187,6 +187,9 @@ public class AllController {
 		//상품 보내기
 		model.addAttribute("product", product);
 		
+		//상품상세 보내기
+		model.addAttribute("detail", service.getDetailByProd(prod_id));
+		
 		//해당 상품의 후기 전체 갯수 model에 담기
 		model.addAttribute("reviewTotalBoards", service.getReviewCountById(prod_id));
 		

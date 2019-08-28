@@ -198,7 +198,7 @@
 		        			inputReview += '<th class = "text-right"><button id="' + data.review[i].review_id + '" class = "reviewReportBtn btn-sm btn-danger">신고</button></th>';
 		    			inputReview += '</tr><tr style = "height: 10px;"></tr><tr><td><b>' + date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + '</b></td>';
 		        		inputReview += '<td colspan = 2 class="text-right"><b>작성자 : ' + data.review[i].review_writer + '</b>&nbsp;&nbsp;&nbsp;<span id = "star_rating">';	//별점부분
-	                	inputReview += '<span class="fa fa-star checked"></span>';
+		        		inputReview += '<span class="fa fa-star checked"></span>';
 	                	inputReview += '<span class="fa fa-star checked"></span>';
 	                	inputReview += '<span class="fa fa-star checked"></span>';
 	                	inputReview += '<span class="fa fa-star checked"></span>';
@@ -356,7 +356,7 @@
 				}
 	        }
 	        
-	        if((pageGroup * offset) > last) {
+	        if((pageGroup * offset) >= last) {
 	            pagingLayout += '<li class="page-item disabled"><a class="page-link" id=' + next + '>다음</a></li>';
 	            pagingLayout += '<li class="page-item disabled"><a class="page-link" id=' + last + '><span>&raquo;</span></a></li>';
 	        }
@@ -531,6 +531,20 @@
 			                    <div id = "content">
 			                    <span>
 			                    <br>
+			                    	<h4><b>상품 정보제공 고시</b></h4><br>
+			                    </span>
+			                    <table class="table table-bordered">
+			                    <c:forEach var="detail" items="${ detail }">
+			                    	<tr>
+								      <th class="table-active" scope="row">${ detail.detail_name }</th>
+								      <td>${ detail.detail_explain }</td>
+								    </tr>
+			                    </c:forEach>
+								</table>
+			                    <span>
+			                    <br>
+			                    <h4><b>상품 설명</b></h4>
+			                    <br><br>
 			                    ${ product.prod_content }
 			                    </span>
 			                    </div>
