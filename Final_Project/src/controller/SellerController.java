@@ -92,9 +92,27 @@ public class SellerController {
 	
 	//주문상세
 	@RequestMapping("seller/orderDetail.do")
-	public void orderDetail(int receipt_id) {
+	public void orderDetail(int receipt_id, Model m, HttpSession session) {
 		//미완성
 		System.out.println(receipt_id);
+		m.addAllAttributes(service.sellerOrderDetail(receipt_id));
+	}
+	
+	//주문상태업데이트
+	@RequestMapping("seller/updateDelStatus.do")
+	public @ResponseBody boolean updateDelStatus(int delstatus, int receipt_id) {
+		System.out.println(delstatus);
+		System.out.println(receipt_id);
+		service.updateReceiptStatus(receipt_id, delstatus);
+		return true;
+	}
+	
+	//주문삭제
+	@RequestMapping("seller/deleteReceipt.do")
+	public @ResponseBody boolean deleteReceipt(int receipt_id) {
+		System.out.println(receipt_id);
+		service.deleteReceipt(receipt_id);
+		return true;
 	}
 	
 	//신규주문

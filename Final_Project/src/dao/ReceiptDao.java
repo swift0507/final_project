@@ -26,4 +26,7 @@ public interface ReceiptDao {
 	public List<Receipt> selectApplyReceipt(HashMap<String, Object> params);
 	public int getCountExchange();
 	public List<Receipt> selectExchangeReceipt(HashMap<String, Object> params);
+	
+	public void updateReceiptStatus(HashMap<String, Object> params);
+	public void deleteReceipt(int receipt_id);
 }
