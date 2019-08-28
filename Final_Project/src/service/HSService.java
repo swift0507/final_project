@@ -280,6 +280,12 @@ public interface HSService {
 	
 	public int getExchangeReceiptCount();
 
+	HashMap<String, Object> sellerOrderDetail(int receipt_id);
+	
+	public void updateReceiptStatus(int receipt_id, int delstatus);
+	
+	public void deleteReceipt(int receipt_id);
+	
 	public List<Detail> getDetailByProd(int prod_id);
 
 }

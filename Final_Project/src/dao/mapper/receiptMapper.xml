@@ -6,6 +6,14 @@
     <select id="selectReceiptListByMember" resultType="receipt">
     	select * from receipt where mem_id=#{mem_id} order by receipt_id desc
     </select>
+	
+	<update id="updateReceiptStatus">
+		update receipt set receipt_delstatus=#{receipt_delstatus} where receipt_id=#{receipt_id}
+	</update> 
+	
+	<delete id="deleteReceipt">
+		delete from receipt where receipt_id=#{receipt_id}
+	</delete>   
     
     <select id="selectReceiptListBySeller" resultType="receipt">
     	select * from receipt where sel_id=#{sel_id} order by receipt_id desc

@@ -230,6 +230,28 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		data.put("seller", seller);
 		return data;
 	}
+	
+	//추가된거 mem_id가 달라야 한다. 
+	@Override
+	public HashMap<String, Object> sellerOrderDetail(int receipt_id) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		Receipt receipt = receiptDao.selectReceiptByReceiptId(receipt_id);
+		//영수증 넣기
+		data.put("receipt", receipt);
+		List<ReceiptOrder> list = receiptOrderDao.getReceiptOrderList(receipt.getReceipt_id());
+		//영수증상세품목 넣기
+		data.put("list", list);
+		Member m = new Member();
+		m.setMem_id(receipt.getMem_id());
+		m = memberDao.selectId(m);
+		//주문자정보넣기
+		data.put("member", m);
+		//사장님정보 주기
+		Seller seller = sellerDao.selectOneSeller(receipt.getSel_id());
+		data.put("seller", seller);
+		return data;
+	}
 
 	//시작 페이지 번호
 	@Override
@@ -361,6 +383,16 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		data.put("receiptList", receiptDao.selectReceiptListBySellerMain(sel_id));
 		System.out.println(data);
 		return data;
+	}
+	
+	//주문상태바꾸기
+	@Override
+	public void updateReceiptStatus(int receipt_id, int delstatus) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("receipt_id", receipt_id);
+		params.put("receipt_delstatus", delstatus);
+		receiptDao.updateReceiptStatus(params);
 	}
 	
 	//카테고리리스트 가져오기
@@ -1065,6 +1097,12 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 	public String getProdname(int prod_id ) {
 		// TODO Auto-generated method stub
 		return reviewDao.getProdname(prod_id);
+	}
+	
+	@Override
+	public void deleteReceipt(int receipt_id) {
+		// TODO Auto-generated method stub
+		receiptDao.deleteReceipt(receipt_id);
 	}
 	
 	@Override
