@@ -271,4 +271,6 @@ public interface HSService {
 
 	public int getExchangeReceiptCount();
 
+	public List<Detail> getDetailByProd(int prod_id);
+
 }

@@ -529,22 +529,22 @@
 			        <div class="tab-content" id="nav-tabContent">
 			            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" style="height: 500px">
 			                    <div id = "content">
-			                    <table class="table table-striped">
-								    <tr>
-								      <th scope="row">${ product. }</th>
-								      <td>Mark</td>
+			                    <span>
+			                    <br>
+			                    	<h4><b>상품 정보제공 고시</b></h4><br>
+			                    </span>
+			                    <table class="table table-bordered">
+			                    <c:forEach var="detail" items="${ detail }">
+			                    	<tr>
+								      <th class="table-active" scope="row">${ detail.detail_name }</th>
+								      <td>${ detail.detail_explain }</td>
 								    </tr>
-								    <tr>
-								      <th scope="row">2</th>
-								      <td>Jacob</td>
-								    </tr>
-								    <tr>
-								      <th scope="row">3</th>
-								      <td>Larry</td>
-								    </tr>
+			                    </c:forEach>
 								</table>
 			                    <span>
 			                    <br>
+			                    <h4><b>상품 설명</b></h4>
+			                    <br><br>
 			                    ${ product.prod_content }
 			                    </span>
 			                    </div>

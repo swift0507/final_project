@@ -183,33 +183,11 @@
 				
 				<br><br>
 				
-				<!-- 페이징 처리  -->
-				<div class = "container">
-					<nav>
-						<ul class="pagination justify-content-center">
-							<li class="page-item">
-								<a class="page-link" href="#"> 
-								<span>&laquo;</span>
-								</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">1</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">2</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">3</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#"> 
-								<span>&raquo;</span>
-								</a>
-							</li>
-						</ul>
-					</nav>
+				<!-- 더보기 button -->
+				<div class = "more_button text-right">
+					<button class = "btn btn-secondary" style = "width: 100px;" onclick="location.href='orderManage.do'">더보기</button>
 				</div>
-				<!-- 페이징 처리  종료 -->
+				<!-- 더보기 button 종료 -->
 				
 				<br><br>
 				
