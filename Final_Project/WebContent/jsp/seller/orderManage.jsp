@@ -52,7 +52,7 @@
 			html += '<table class = "mt-7" style = "width: 700px;">';
 			html += '<tr><td style = "width: 55%;"><h5><b>주문 상품 정보</b></h5></td>';
 			html += '<td class = "text-right" colspan = 2 style = "width: 45%;">';
-			html += '<button class = "btn-secondary">주문 내역 상세보기</button><button class = "btn-danger">주문 취소</button></td></tr>';
+			html += '<button class = "btn-secondary" onclick="location.href=\'orderDetail.do?receipt_id=' + data.receipt[i].receipt_id + '\'">주문 내역 상세보기</button><button class = "btn-danger">주문 취소</button></td></tr>';
 					
 			html += '<tr style = "height: 20px;"><td colspan = 3></td></tr>';
 			
