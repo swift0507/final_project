@@ -92,8 +92,9 @@ public class SellerController {
 	
 	//주문상세
 	@RequestMapping("seller/orderDetail.do")
-	public void orderDetail() {
+	public void orderDetail(int receipt_id) {
 		//미완성
+		System.out.println(receipt_id);
 	}
 	
 	//신규주문
