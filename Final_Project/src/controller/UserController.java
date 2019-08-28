@@ -19,7 +19,6 @@ import org.springframework.web.servlet.View;
 import dao.ReviewDao;
 import model.Basket;
 import model.Member;
-import model.Pick;
 import model.Product;
 import model.Receipt;
 import model.Review;
@@ -143,18 +142,6 @@ public class UserController {
 		HashMap<String, Object> id = (HashMap<String, Object>)session.getAttribute("loginUserInfo");
 		String mem_id = (String)id.get("mem_id");
 		m.addAttribute("pickList", service.getPickList(mem_id));
-	}
-	
-	//찜목록 추가
-	@RequestMapping("user/addPick.do")
-	public @ResponseBody int addPick(Pick pick) {
-		return service.addPick(pick);
-	}
-	
-	//찜목록 삭제
-	@RequestMapping("user/deletePick.do")
-	public @ResponseBody int deletePick(Pick pick) {
-		return service.deletePick(pick);
 	}
 	
 	//주문내역 보기
@@ -297,16 +284,37 @@ public class UserController {
 	
 	//후기 작성 등록
 	@RequestMapping("user/write.do")
-	public void writeReview(@RequestParam("review_score") int review_score ,@RequestParam("review_content") String review_content ,@RequestParam("review_pict") String review_pict , @RequestParam("review_pict") MultipartFile file) {
+	public String writeReview(Model model, HttpSession session, @RequestParam("receiptorder_id") String receiptorder_id,@RequestParam("review_score") int review_score ,@RequestParam("review_content") String review_content) {
+		HashMap<String, Object> id = (HashMap<String, Object>)session.getAttribute("loginUserInfo");
+		String mem_id = (String)id.get("mem_id");
 		
-		//System.out.println(receiptorder_id);
+		System.out.println(receiptorder_id);
 		System.out.println(review_score);
 		System.out.println(review_content);
-		System.out.println(review_pict);
-		System.out.println(file.getOriginalFilename());
-		//service.writeReview(review, file);
-		//return "redirect: myReview.do";
-
+//		System.out.println(review_pict);
+//		System.out.println(file.getOriginalFilename());
+//		service.writeReview(prod_id);
+		int ro_id = Integer.parseInt(receiptorder_id);
+		int prod_id = service.getProdid(ro_id);
+		String prod_name = service.getProdname(prod_id);
+		
+		Review review = new Review();
+		review.setReceiptorder_id(ro_id);
+		review.setProd_id(prod_id);
+		review.setProd_name(prod_name);
+		review.setReview_writer(mem_id);
+		review.setReview_score(review_score);
+		review.setReview_content(review_content);
+		review.setReview_pict("abc.jpg");
+		model.addAttribute("review", service.writeReview(review));
+		
+		System.out.println(prod_id);
+		System.out.println(prod_name);
+		
+		return "redirect: myReview.do";
+		
 	}
+	
+	
 
 }

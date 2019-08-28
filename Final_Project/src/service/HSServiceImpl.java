@@ -758,23 +758,9 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 
 	//후기 작성
 	@Override
-	public int writeReview(Review review, MultipartFile file) {	
+	public int writeReview(Review review) {	
 		// TODO Auto-generated method stub
-		String path = "C:\\Temp\\attach\\";
-		File dir = new File(path);
-		if(!dir.exists()) dir.mkdirs();
-		String review_pict = file.getOriginalFilename();
-		File attachFile = new File(path+review_pict);
-		try {
-			file.transferTo(attachFile);  //웹으로 받아온 파일을 복사
-			review.setReview_pict(review_pict);  //db에 파일 정보 저장을 하기위해 모델객체에 setting하기
-		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 		//게시물을 DB에 저장
 		reviewDao.insertReview(review);
 		return review.getReview_id();
@@ -869,15 +855,14 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		return basketDao.insertBasket(basket);
 	}
 
-<<<<<<< HEAD
-	//후기 작성 시 구매한 상품 가져오기
+//@@@@@@@@ 후기 작성 시 구매한 상품 가져오기
 	@Override
 	public List<HashMap<String, Object>> getReviewProd(String mem_id) {
 		// TODO Auto-generated method stub
 		System.out.println("test"+reviewDao.getReviewProd(mem_id));
 		return reviewDao.getReviewProd(mem_id); 
 	}
-=======
+	
 	//찜목록 추가
 	@Override
 	public int addPick(Pick pick) {
@@ -1063,16 +1048,18 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		// TODO Auto-generated method stub
 		return receiptDao.getCountExchange();
 	}
+
+	@Override
+	public int getProdid(int receiptorder_id) {
+		// TODO Auto-generated method stub
+		return reviewDao.getProdid(receiptorder_id);
+	}
+
+	@Override
+	public String getProdname(int prod_id ) {
+		// TODO Auto-generated method stub
+		return reviewDao.getProdname(prod_id);
+	}
 	
-	
-
-
-
-
-
-	
->>>>>>> branch 'master' of https://github.com/swift0507/final_project.git
-
-
 
 }

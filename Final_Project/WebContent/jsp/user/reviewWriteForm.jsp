@@ -33,6 +33,16 @@
 	</script>
 	<script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15.0.0/dist/smooth-scroll.polyfills.min.js">
 	</script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$("#submit").on("click", function(){
+			$("#receiptorder_id").val($("#select").val());
+			alert($("#receiptorder_id").val())
+		})
+	})
+	
+	</script>
+	
 	<style>
 		@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 	
@@ -79,9 +89,7 @@
 	</style>
 </head>
 <body>
-<form action="write.do" enctype="multipart/form-data" method="post">
-	${review}
-	
+<form action="write.do"  method="post">
 	<table style = "width: 500px; margin-left: auto; margin-right: auto;">
 		<tr>
 			<td>
@@ -99,12 +107,12 @@
 		
 		<tr>
 			<td colspan = 2>
-				<select class="custom-select" style = "width: 500px;">
+				<select id="select" class="custom-select" style = "width: 500px;">
 					<c:forEach items="${review}" var="r">
-						<!--<option value="${RECEIPTORDER_ID}"> ${r.RECEIPT_PROD} / ${r.ORDER_OPT} </option> -->
-						
+						<option id="${r.RECEIPTORDER_ID}" value="${r.RECEIPTORDER_ID}"> ${r.RECEIPT_PROD} / ${r.ORDER_OPT} </option>
 					</c:forEach>
 				</select>
+				<input type="hidden" name="receiptorder_id" id="receiptorder_id" value="">
 			</td>
 		</tr>
 		
@@ -156,12 +164,12 @@
 			<th> 사진 첨부 </th>
 			<td>
 				<input type="file" name="review_pict" class="form-control-file" id="review_pict">
-			</td>
+ 			</td>
 		</tr>
 		<tr style = "height: 20px;"></tr>
 		<tr>
 			<td colspan = 2 class = "text-center">
-				<input class="btn btn-sm btn-secondary" style = "width: 75px;" type="submit" value="등록">
+				<input class="btn btn-sm btn-secondary" style = "width: 75px;" type="submit" id="submit" value="등록">
 				<button class="btn btn-sm btn-secondary" style = "width: 75px;" type="button" onclick="location.href='myReview.do'">취소</button>
 			</td>
 		</tr>

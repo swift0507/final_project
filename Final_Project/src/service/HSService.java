@@ -194,7 +194,7 @@ public interface HSService {
 	public HashMap<String, Object> getQnAById(int prod_id, int qnaPage);
 
 	//후기 작성,수정,삭제
-	public int writeReview(Review review, MultipartFile file);
+	public int writeReview(Review review) ;
 	public int modifyReview(Review review);
 	public int deleteReview(int review_id);
 	
@@ -272,4 +272,9 @@ public interface HSService {
 
 	public int getExchangeReceiptCount();
 
+	//후기 작성 시 상품 아이디 가져오기
+	public int getProdid(int receiptorder_id);
+	
+	//후기 작성 시 상품 이름 가져오기
+	public String getProdname(int prod_id);
 }

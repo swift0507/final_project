@@ -121,8 +121,7 @@
 						<tr>
 							<td colspan="3">
 								<p class="review">${m.REVIEW_CONTENT}</p>
-								<br>
-								<img src="reviewdownload.do?num=${m.REVIEW_ID}"  style="width: 550px; height: 300px;">
+								<img src="reviewdownload.do?num=${m.REVIEW_ID}"  style="width: 450px; height: 250px;">
 							</td>
 						</tr>
 					</table>

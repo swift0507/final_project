@@ -6,7 +6,7 @@
 <mapper namespace="dao.ReviewDao">
 	<insert id="insertReview" parameterType="review">
 		insert into review
-		values (review_id.nextval, receiptorder_id.nextval, prod_id.nextval, #{prod_name},
+		values (reviewid_seq.nextval, #{receiptorder_id}, #{prod_id}, #{prod_name},
 		#{review_writer}, #{review_score}, #{review_content}, sysdate, #{review_pict})
 	</insert>
 
@@ -58,4 +58,13 @@
 	<select id="selectReview" resultType="java.lang.Integer">
 		select review_id from review where prod_id=#{prod_id}
 	</select>
+	
+	<select id="getProdid" parameterType="int" resultType="int">
+		select prod_id from receiptorder where receiptorder_id =#{receiptorder_id} 
+	</select>
+	
+	<select id="getProdname" parameterType="int" resultType="String">
+		select prod_name from product where prod_id =#{prod_id}
+	</select>
+	
 </mapper>

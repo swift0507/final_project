@@ -27,4 +27,12 @@ public interface ReviewDao {
 	
 	//후기 작성 시 구매한 상품 가져오기
 	public List<HashMap<String, Object>> getReviewProd(String mem_id); //여기여기여기여기
+	
+	//후기 작성 시 상품 아이디 가져오기
+	public int getProdid(int receiptorder_id);
+
+	//후기 작성 시 상품 아이디 가져오기
+	public String getProdname(int prod_id);
+	
+	
 }
