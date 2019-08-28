@@ -111,7 +111,7 @@ ${ sellerProduct.sel_count[0] }
 						<td> 게시일 : ${ sellerProduct.prod_date[i.index] }</td>
 						<td> 매출 : ${ sellerProduct.sel_sales[i.index] }원 </td>
 						<td>
-							<button class = "btn btn-sm btn-info" style = "width: 100px;"> 후기 / Q&A </button>
+							<button class = "btn btn-sm btn-info" style = "width: 100px;" onclick="location.href='reviewManage.do?prod_id=${sellerProduct.prod_id[i.index]}'"> 후기 / Q&A </button>
 						</td>
 					</tr>
 				</table>

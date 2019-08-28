@@ -24,4 +24,5 @@ public interface ReviewDao {
 
 	//나의 후기 가져오기
 	public List<Review> getmyReview(HashMap<String, Object> params);
+	public List<Review> selectByStatus(int prod_id);
 }

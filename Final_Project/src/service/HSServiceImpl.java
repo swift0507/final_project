@@ -1065,6 +1065,12 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		// TODO Auto-generated method stub
 		return detailDao.selectDetailByProdId(prod_id);
 	}
+
+	@Override
+	public List<Review> getReviewByStatus(int prod_id) {
+		// TODO Auto-generated method stub
+		return reviewDao.selectByStatus(prod_id);
+	}
 	
 	
 

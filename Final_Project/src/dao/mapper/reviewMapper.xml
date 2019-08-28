@@ -53,4 +53,8 @@
 	<select id="selectReview" resultType="java.lang.Integer">
 		select review_id from review where prod_id=#{prod_id}
 	</select>
+	
+	<select id="selectByStatus" parameterType="int" resultType="review">
+		select * from review where review_status = 0 order by review_id
+	</select>
 </mapper>

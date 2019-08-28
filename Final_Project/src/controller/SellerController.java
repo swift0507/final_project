@@ -46,6 +46,7 @@ public class SellerController {
 		HashMap<String, Object> sellerManageMap = new HashMap<String, Object>();
 		
 		List<Product> sellerProdList = (List<Product>)service.getProdList(mem_id, page).get("sellerProd");
+		List<Integer> prodId = new ArrayList<Integer>();
 		List<String> prodName = new ArrayList<String>();
 		List<String> categoryName = new ArrayList<String>();
 		List<Date> prodDate = new ArrayList<Date>();
@@ -56,6 +57,7 @@ public class SellerController {
 		System.out.println(sellerProdList.size());
 		
 		for(int i = 0; i < sellerProdList.size(); i++) {
+			prodId.add(i, sellerProdList.get(i).getProd_id());
 			prodName.add(i, sellerProdList.get(i).getProd_name());
 			categoryName.add(i, service.getCategoryName(sellerProdList.get(i).getCategory_id()));
 			prodDate.add(i, sellerProdList.get(i).getProd_date());
@@ -64,6 +66,7 @@ public class SellerController {
 			sellSales.add(i, service.getSellSales(sellerProdList.get(i).getProd_id()));
 		}
 		
+		sellerManageMap.put("prod_id", prodId);
 		sellerManageMap.put("prod_name", prodName);	//상품목록에서 상품명만 가져오고
 		sellerManageMap.put("prod_category", categoryName);	//상품목록의 카테고리 id로 카테고리명 뽑아오고
 		sellerManageMap.put("prod_date", prodDate);	//상품목록의 상품게시일
@@ -182,5 +185,30 @@ public class SellerController {
 	@RequestMapping("seller/modifyInfoForm.do")
 	public void modifyInfoForm() {
 		//미완성
+	}
+	
+	@RequestMapping("seller/reviewManage.do")
+	public void reviewManage(Model m, int prod_id, HttpSession session) {
+		HashMap<String, Object> id = (HashMap<String, Object>)session.getAttribute("loginUserInfo");
+		String mem_id = (String)id.get("mem_id");
+		
+		System.out.println(service.getReviewByStatus(prod_id));
+		
+		m.addAttribute("review", service.getReviewByStatus(prod_id));
+	}
+	
+	@RequestMapping("seller/reviewByProd.do")
+	public @ResponseBody HashMap<String, Object> reviewByProd(int prod_id, int reviewPage) {		
+		return service.getReviewById(prod_id, reviewPage);
+	}
+	
+	@RequestMapping("seller/qnaByProd.do")
+	public @ResponseBody HashMap<String, Object> qnaByProd(int prod_id, int qnaPage) {
+		return service.getQnAById(prod_id, qnaPage);
+	}
+	
+	@RequestMapping("seller/qnaManage.do")
+	public void qnaManage() {
+		
 	}
 }

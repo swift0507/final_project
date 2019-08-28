@@ -273,4 +273,6 @@ public interface HSService {
 
 	public List<Detail> getDetailByProd(int prod_id);
 
+	public List<Review> getReviewByStatus(int prod_id);
+
 }
