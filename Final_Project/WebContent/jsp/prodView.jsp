@@ -529,6 +529,20 @@
 			        <div class="tab-content" id="nav-tabContent">
 			            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" style="height: 500px">
 			                    <div id = "content">
+			                    <table class="table table-striped">
+								    <tr>
+								      <th scope="row">${ product. }</th>
+								      <td>Mark</td>
+								    </tr>
+								    <tr>
+								      <th scope="row">2</th>
+								      <td>Jacob</td>
+								    </tr>
+								    <tr>
+								      <th scope="row">3</th>
+								      <td>Larry</td>
+								    </tr>
+								</table>
 			                    <span>
 			                    <br>
 			                    ${ product.prod_content }
