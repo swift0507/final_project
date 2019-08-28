@@ -85,14 +85,14 @@ public class UserController {
 	
 	//영수증 하나 주문하기
 	@RequestMapping("user/order.do")
-	public @ResponseBody int order(@RequestParam(value="baskets[]") List<Integer> baskets, Receipt receipt, @RequestParam(value="prodnum[]") List<Integer> prodnums) {
+	public @ResponseBody int order(@RequestParam(value="baskets[]") List<Integer> baskets, Receipt receipt, @RequestParam(value="prodnum[]") List<Integer> prodnums, HttpSession session) {
 		
 		System.out.println(baskets);
 		System.out.println(prodnums);
 		System.out.println(receipt);
 		//결제가 되면 장바구니 내역에서 삭제시켜야 한다. 
 		//아직 미완성
-		return service.pay(receipt, baskets, prodnums);
+		return service.pay(receipt, baskets, prodnums, session);
 		//return 8;
 	}
 	
