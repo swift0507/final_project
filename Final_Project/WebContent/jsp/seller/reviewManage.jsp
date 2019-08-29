@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,11 +42,6 @@
 						  'success'
 						)
 			});	
-		})
-	</script>
-	
-	<script>
-		$(document).ready(function(){
 			$(document).on('click', '#add_Reply', function(){
 				$('.review_answer').toggle();
 				$(this).val() == "△" ? play_int() : play_pause();
@@ -85,13 +81,14 @@
 						<a class="nav-link active" id="review-tab" data-toggle="tab" href="#review" role="tab"> 후기 </a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" id="qna-tab" data-toggle="tab" href="#qna" role="tab"> Q&A </a>
+						<a class="nav-link" id="qna-tab" data-toggle="tab" href="qna" role="tab"> Q&A </a>
 					</li>
 				</ul>
 				
 				<div class="tab-content" id="myTabContent">
 					<!-- 후기 영역 -->
-					<div class="tab-pane fade show active" id="review" role="tabpanel">
+					<c:forEach var="review" items="${ review }" varStatus="i">
+						<div class="tab-pane fade show active" id="review${ i.index }" role="tabpanel">
 						<!-- 후기 table 1 -->
 						<table class = "mt-5" style="width: 700px;">
 						<tr>
@@ -99,7 +96,7 @@
 								<img src="images/sk.png" style="width: 50px; height: 50px;">
 							</td>
 							<th >
-								로즈마리 천연 비누
+								${ review.prod_name }
 							</th>
 							<th class="text-right" style = "width: 30%;">
 								<button class="btn btn-sm btn-danger" id = "report_button">
@@ -113,7 +110,7 @@
 						</tr>
 						
 						<tr>
-							<td>아이디</td>
+							<td>${ review.review_writer }</td>
 							<td></td>
 							<td rowspan = 5 class = "text-center">
 								<img src = "" style = "width: 150px; height: 200px;">
@@ -135,15 +132,12 @@
 						<tr style="height: 10px;"></tr>
 						<tr>
 							<td colspan = 2>
-								2019-08-27
+								${ review.review_date }
 							</td>
 						</tr>
 						<tr>
 							<td colspan = 2>
-								제품 만족합니다.
-									
-								비누로 세수하면 건조한 느낌이라 싫어하는데 <br>
-								이 비누는 촉촉하고 피부가 좋아지는 것이 느껴집니다.
+								${ review.review_content }
 							</td>
 						</tr>
 						
@@ -153,54 +147,29 @@
 							</td>
 						</tr>
 						
-						<tr class = "review_answer" style = "display: none;">
+						<tr style = "display: none;">
 							<td colspan = 3>
 								<span class="badge badge-success">답변</span>
 							</td>
 						</tr>
 						
-						<tr class = "review_answer" style = "display: none;">
+						<tr style = "display: none;">
 							<td colspan = 3>
-								<textarea class="form-control" id="" rows="5"></textarea>
+								<textarea class="review_answer form-control" rows="5"></textarea>
 							</td>
 						</tr>
-						<tr class = "review_answer" style = "display: none;">
+						<tr style = "display: none;">
 							<td colspan = 3 class = "text-right">
-								<button class = "btn btn-sm btn-secondary">작성</button>
+								<button class = "answer_button btn-sm btn-secondary">작성</button>
 							</td>
 						</tr>
 					</table>
-					<br>
-					<hr>
-						<!-- 페이징 처리  -->
-						<div class = "container">
-							<nav>
-								<ul class="pagination justify-content-center">
-									<li class="page-item">
-										<a class="page-link" href="#"> 
-										<span>&laquo;</span>
-										</a>
-									</li>
-									<li class="page-item">
-										<a class="page-link" href="#">1</a>
-									</li>
-									<li class="page-item">
-										<a class="page-link" href="#">2</a>
-									</li>
-									<li class="page-item">
-										<a class="page-link" href="#">3</a>
-									</li>
-									<li class="page-item">
-										<a class="page-link" href="#"> 
-										<span>&raquo;</span>
-										</a>
-									</li>
-								</ul>
-							</nav>
-						</div>
+					</div>
+					</c:forEach>
+					
+				
 						<!-- 페이징 처리  종료 -->
 					<!-- 후기 table 1 종료-->
-					</div>
 					<!-- 후기 영역 종료-->
 					
 					<div class="tab-pane fade" id="qna" role="tabpanel">

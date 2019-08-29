@@ -187,6 +187,9 @@ public class AllController {
 		//상품 보내기
 		model.addAttribute("product", product);
 		
+		//상품상세 보내기
+		model.addAttribute("detail", service.getDetailByProd(prod_id));
+		
 		//해당 상품의 후기 전체 갯수 model에 담기
 		model.addAttribute("reviewTotalBoards", service.getReviewCountById(prod_id));
 		
@@ -242,6 +245,7 @@ public class AllController {
 
 	}
 	
+	//이벤트 사진 불러오기
 	@RequestMapping("eventdownload.do")
 	public View eventdownload(int num) {
 		File attachFile = service.getEventFile(num);
@@ -249,6 +253,7 @@ public class AllController {
 		return view; 
 	}
 	
+	//공지사항 사진 불러오기
 	@RequestMapping("noticedownload.do")
 	public View noticedownload(int num) {
 		File attachFile = service.getNoticeFile(num);
@@ -271,9 +276,6 @@ public class AllController {
 		model.addAttribute("faq", service.getsupportfaqList());
 	}
 
-	
-	
-	
 }
 
 

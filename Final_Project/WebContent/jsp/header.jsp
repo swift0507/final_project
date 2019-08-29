@@ -19,7 +19,7 @@
 	
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.4.1.js"
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
  		integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
  		crossorigin="anonymous">
 	</script>
@@ -101,9 +101,21 @@ $(document).ready(function(){
 						<a href="/Final_Project/signUpForm.do" class="nav-link">회원가입</a>
 					</li>
 				</c:when>
+				<c:when test="${loginUserInfo.mem_grade==0}">
+					<li class="nav-item">
+						<b class="nav-link" style="color : white;">
+						<span class="badge badge-primary">일반회원</span>
+						${loginUserInfo.mem_name}님</b>
+					</li>
+					<li class="nav-item">
+						<a href="/Final_Project/logout.do" class="nav-link" id="logout">로그아웃</a>
+					</li>	
+				</c:when>
 				<c:otherwise>
 					<li class="nav-item">
-						<b class="nav-link" style="color : white;">${loginUserInfo.mem_name}님</b>
+						<b class="nav-link" style="color : white;">
+						<span class="badge badge-success">사장님</span>
+						${loginUserInfo.mem_name}님</b>
 					</li>
 					<li class="nav-item">
 						<a href="/Final_Project/logout.do" class="nav-link" id="logout">로그아웃</a>
