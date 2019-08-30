@@ -1,8 +1,11 @@
 package service;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -64,7 +67,7 @@ public interface HSService {
 	public List<HashMap<String, Object>> getBasketList(String mem_id);
 	
 	//결제버튼눌렀을때 영수증 넣고 영수증별 상품 넣기. 주문한 receipt_id 보내기 
-	public int pay(Receipt receipt, List<Integer> baskets, List<Integer> prodnums);
+	public int pay(Receipt receipt, List<Integer> baskets, List<Integer> prodnums, HttpSession session);
 	
 	//방금 주문한 receipt들 보내기
 	public List<Receipt> payComplete(List<Integer> receipt_id);
@@ -193,7 +196,7 @@ public interface HSService {
 	public HashMap<String, Object> getQnAById(int prod_id, int qnaPage);
 
 	//후기 작성,수정,삭제
-	public int writeReview(Review review, MultipartFile file);
+	public int writeReview(Review review) ;
 	public int modifyReview(Review review);
 	public int deleteReview(int review_id);
 	
@@ -226,6 +229,9 @@ public interface HSService {
 
 	//장바구니 상품 추가
 	public int addBasket(Basket basket);
+	
+	//후기 작성 시 구매한 상품 가져오기
+	public List<HashMap<String, Object>> getReviewProd(String mem_id); //여기여기여기
 
 	//찜목록 추가
 	public int addPick(Pick pick);
@@ -247,5 +253,42 @@ public interface HSService {
 
 	//상품id로 receiptorder 테이블에서 상품별 매출 가져오기
 	public int getSellSales(int category_id);
+
+	public HashMap<String, Object> getNewReceiptList(String sel_id, int page);
+
+	public HashMap<String, Object> getDeliveryReceiptList(String sel_id, int page);
+
+	public HashMap<String, Object> getCompletedReceiptList(String sel_id, int page);
+
+	public HashMap<String, Object> getApplyReceiptList(String sel_id, int page);
+
+	public HashMap<String, Object> getExchangeReceiptList(String sel_id, int page);
+
+	public int getNewReceiptCount();
+
+	public int getDeliveryReceiptCount();
+
+	public int getCompletedReceiptCount();
+
+	public int getApplyReceiptCount();
+
+	//후기 작성 시 상품 아이디 가져오기
+	public int getProdid(int receiptorder_id);
+	
+	//후기 작성 시 상품 이름 가져오기
+	public String getProdname(int prod_id);
+	
+	public int getExchangeReceiptCount();
+
+	public List<Detail> getDetailByProd(int prod_id);
+
+	public List<Review> getReviewByStatus(int prod_id);
+
+	HashMap<String, Object> sellerOrderDetail(int receipt_id);
+	
+	public void updateReceiptStatus(int receipt_id, int delstatus);
+	
+	public void deleteReceipt(int receipt_id);
+
 
 }

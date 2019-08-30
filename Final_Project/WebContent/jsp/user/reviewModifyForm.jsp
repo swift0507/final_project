@@ -95,16 +95,9 @@
 				<hr> 
 			</td>
 		</tr>
-		
-	
  		<tr>
 			<td colspan = 2>
 			<h5><b>${review.prod_name}</b></h5>
-				<!-- <select class="custom-select" style = "width: 500px;">
-					<option value="buy_item_01">내가 산 상품 1 / 옵션 1 / 옵션 2</option>
-					<option value="buy_item_02">내가 산 상품 2 / 옵션 1 / 옵션 2</option>
-					<option value="buy_item_03">내가 산 상품 3 / 옵션 1 / 옵션 2</option>
-				</select> -->
 			</td>
 		</tr>
 		
@@ -155,7 +148,6 @@
 			<th> 사진 첨부 </th>
 			<td>
 				<input type="file" name="review_pict" class="form-control-file" id="review_pict">
-				<%-- <img src="reviewdownload.do?num=${review.review_id}" width="700px"> --%>
 			</td>
 		</tr>
 		<tr style = "height: 20px;"></tr>

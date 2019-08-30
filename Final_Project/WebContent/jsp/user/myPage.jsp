@@ -98,7 +98,7 @@
 						<th scope="col">구매 내역</th>
 						<th scope="col">배송 상태</th>
 					</tr>
-					<c:forEach begin="1" end="3" var="receipt" items="${receiptList}">
+					<c:forEach begin="0" end="2" var="receipt" items="${receiptList}">
 						<tr>
 							<td>${receipt.receipt_orderdate}</td>
 							<td>${receipt.receipt_prod}</td>
