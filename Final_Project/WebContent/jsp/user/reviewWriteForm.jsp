@@ -37,7 +37,7 @@
 	$(document).ready(function(){
 		$("#submit").on("click", function(){
 			$("#receiptorder_id").val($("#select").val());
-			alert($("#receiptorder_id").val())
+			//alert($("#receiptorder_id").val())
 		})
 	})
 	
