@@ -92,34 +92,36 @@
 
 				<nav>
 					<ul class="pagination justify-content-center">
-						<li class="page-item <c:if test="${ start == 1 }">disabled</c:if>"><a
-							class="page-link" href="noticeList.do?page=1"> <span
-								aria-hidden="true">&laquo;</span>
-						</a></li>
-						<li class="page-item <c:if test="${ start == 1 }">disabled</c:if>"><a
-							class="page-link" href="noticeList.do?page=${ start - 1 }">이전</a></li>
-						<c:forEach begin="${ start }" end="${ end < last ? end : last }"
-							var="i">
+						<li class="page-item <c:if test="${ start == 1 }">disabled</c:if>">
+							<a class="page-link" href="noticeList.do?page=1"> 
+								<span>&laquo;</span>
+							</a>
+						</li>
+						<li class="page-item <c:if test="${ start == 1 }">disabled</c:if>">
+							<a class="page-link" href="noticeList.do?page=${ start - 1 }">이전</a>
+						</li>
+						<c:forEach begin="${ start }" end="${ end < last ? end : last }" var="i">
 							<c:choose>
 								<c:when test="${ i == current }">
-									<li class="page-item active" aria-current="page"><span
-										class="page-link">${ current } <span class="sr-only">(current)</span></span>
+									<li class="page-item active" aria-current="page">
+										<span class="page-link">${ current } <span class="sr-only">(current)</span></span>
 									</li>
 								</c:when>
 								<c:otherwise>
-									<li class="page-item"><a class="page-link"
-										href="noticeList.do?page=${ i }">${ i }</a></li>
+									<li class="page-item">
+										<a class="page-link" href="noticeList.do?page=${ i }">${ i }</a>
+									</li>
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
-						<li
-							class="page-item <c:if test="${ last <= end }">disabled</c:if>"><a
-							class="page-link" href="noticeList.do?page=${ end + 1 }">다음</a></li>
-						<li
-							class="page-item <c:if test="${ last <= end }">disabled</c:if>"><a
-							class="page-link" href="notice.do?page=${ last }"
-							aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-						</a></li>
+						<li class="page-item <c:if test="${ last <= end }">disabled</c:if>">
+							<a class="page-link" href="noticeList.do?page=${ end + 1 }">다음</a>
+						</li>
+						<li class="page-item <c:if test="${ last <= end }">disabled</c:if>">
+							<a class="page-link" href="notice.do?page=${ last }"> 
+								<span>&raquo;</span>
+							</a>
+						</li>
 					</ul>
 				</nav>
 			</div>
