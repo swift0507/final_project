@@ -34,7 +34,7 @@ $(document).ready(function(){
 				<table>
 					<tr>
 						<td style = "width: 300px;">
-							<img src="images/logo.png" id="footerlogo" style = "width: 150px; height: 50px;">
+							<img src="/Final_Project/images/logo.png" id="footerlogo" style = "width: 150px; height: 50px;">
 						</td>
 						<td style = "width: 500px;">
 							<large>(주) 핸쇼</large>
