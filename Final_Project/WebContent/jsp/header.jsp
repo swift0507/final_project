@@ -19,7 +19,7 @@
 	
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+	<script src="https://code.jquery.com/jquery-3.4.1.js"
  		integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
  		crossorigin="anonymous">
 	</script>
@@ -135,7 +135,7 @@ $(document).ready(function(){
 			</td>
 			<td class = "logo text-center">
 				<a class="navbar-brand" href="/Final_Project/main.do">
-					<img src="images/logo.png" id="logo" style = "width: 150px; height: 50px;">
+					<img src="/Final_Project/images/logo.png" id="logo" style = "width: 150px; height: 50px;">
 				</a>
 			</td>
 			<td class = "search_form">
