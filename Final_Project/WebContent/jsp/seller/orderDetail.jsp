@@ -50,7 +50,7 @@
 					//alert(data.prod_name);
 					elem.innerHTML = data.prod_name
 					elem.style.visibility=""
-					$(id).attr("src", "../images/noimage.png")
+					$(id).attr("src", "/Final_Project/getRepresentivePic.do?prod_id="+data.prod_id)
 				}
 			})
 	})

@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import model.Detail;
 import model.OptionDetail;
@@ -96,7 +97,6 @@ public class SellerController {
 	//주문상세
 	@RequestMapping("seller/orderDetail.do")
 	public void orderDetail(int receipt_id, Model m, HttpSession session) {
-		//미완성
 		System.out.println(receipt_id);
 		m.addAllAttributes(service.sellerOrderDetail(receipt_id));
 	}
@@ -167,6 +167,15 @@ public class SellerController {
 		return service.insertProd(p);
 	}
 	
+	//사진업로드
+	@RequestMapping("seller/uploadFile.do")
+	public @ResponseBody boolean insertPic(List<MultipartFile> uploadfile, int prod_id, HttpSession session) {
+		System.out.println(uploadfile);
+		System.out.println(prod_id);
+		service.insertProductpic(uploadfile, prod_id, session);
+		return true;
+	}
+	
 	//prodoption 넣기 ajax
 	@RequestMapping("seller/prodoptionInsert.do")
 	public @ResponseBody ProdOption insertProdOption(ProdOption option) {
@@ -195,21 +204,21 @@ public class SellerController {
 	//상품상세
 	@RequestMapping("seller/prodDetails.do")
 	public void prodDetails() {
-		//미완성
+		
 	}
 	
 	//주문상세
 	
-	//주문내역 상세
-	@RequestMapping("seller/orderDetails.do")
-	public void orderDetails() {
-		//미완성
-	}
+//	//주문내역 상세
+//	@RequestMapping("seller/orderDetails.do")
+//	public void orderDetails() {
+//		
+//	}
 	
 	//사장님정보수정
 	@RequestMapping("seller/modifyInfoForm.do")
 	public void modifyInfoForm() {
-		//미완성
+		
 	}
 	
 	@RequestMapping("seller/reviewManage.do")

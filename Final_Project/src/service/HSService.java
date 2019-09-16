@@ -21,6 +21,7 @@ import model.OptionDetail;
 import model.Pick;
 import model.ProdOption;
 import model.Product;
+import model.ProductPict;
 import model.QnAComment;
 import model.Receipt;
 import model.Review;
@@ -96,6 +97,9 @@ public interface HSService {
 	
 	//상품 넣기
 	public Product insertProd(Product p);
+	
+	//사진 넣기
+	public void insertProductpic(List<MultipartFile> uploadfile, int prod_id, HttpSession session);
 	
 	//큰 옵션 넣기
 	public ProdOption insertProdOption(ProdOption option);
@@ -289,6 +293,11 @@ public interface HSService {
 	public void updateReceiptStatus(int receipt_id, int delstatus);
 	
 	public void deleteReceipt(int receipt_id);
-
+	
+	//해당 상품의 사진들 가져오기
+	public List<ProductPict> getProductPicts(int prod_id);
+	
+	//해당 상품의 대표사진 가져오기
+	public File getRepresentativePict(int prod_id, HttpSession session);
 
 }

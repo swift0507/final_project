@@ -1,6 +1,7 @@
 package service;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import model.Answer;
@@ -26,6 +28,7 @@ import model.OptionDetail;
 import model.Pick;
 import model.ProdOption;
 import model.Product;
+import model.ProductPict;
 import model.QnA;
 import model.QnAComment;
 import model.Receipt;
@@ -115,17 +118,19 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 	@Override
 	public List<HashMap<String, Object>> getBasketList(String mem_id) {
 		// TODO Auto-generated method stub
-		//System.out.println(basketDao.groupBySeller(mem_id));
 		List<HashMap<String, Object>> list = new ArrayList<HashMap<String,Object>>();
 		for(String sel_id : basketDao.groupBySeller(mem_id)) {
+			//basketInfo = 사장님별 장바구니 정보가 들어가는 맵
 			HashMap<String, Object> basketInfo = new HashMap<String, Object>();
+			
+			//param = DB조회를 위한 파라미터 맵
 			HashMap<String, String> param = new HashMap<String, String>();
 			param.put("mem_id", mem_id);
 			param.put("sel_id", sel_id);
 			//장바구니리스트를 받아오기
 			List<Basket> basketList = basketDao.selectBySeller(param);
 			Seller seller = sellerDao.selectOneSeller(sel_id);
-			//사장님별 맵에 특정 사장님 장바구니 넣기
+			//사장님별 맵에 특정 사장님 장바구니 목록 넣기
 			basketInfo.put("list", basketList);
 			//판매자 정보 넣기(배송비, 배송비무료 넣기 위함.)
 			basketInfo.put("seller", seller);
@@ -408,6 +413,42 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		// TODO Auto-generated method stub
 		productDao.insertProd(p);
 		return p;
+	}
+	
+	//사진 등록하기
+	@Override
+	public void insertProductpic(List<MultipartFile> uploadfile, int prod_id, HttpSession session) {
+		// TODO Auto-generated method stub
+		/*images/productPict으로 상대경로 설정*/
+		/*
+		 * 그런데 이 경로가 좀 이상함. 실제 로컬경로가 아니라 무슨 다른 경로인데 여기에 들어가면 실제로 복사가 된 건데 프로젝트 내의 폴더에는 나오지 않음.
+		 * 상대경로를 쓰기 위해서 (모두가 사용할 수 있도록) 이런 경로를 택한 것인데 눈으로 보려면 좀 어렵게 들어가야 함. 폴더 경로 창에 getRealPath()를 sysout한 값을 입력해보면 
+		 * 정확하게 파일이 쓰여진 곳으로 이동할 수 있음. 어쨌든 되긴 됨. 더 신기한게 뭐냐면 내가 직접 프로젝트 이미지폴더에 이미지나 파일을 집어 넣으면 내가 찾은 상대 경로에도 자동으로 들어가짐
+		 * 아마 미러처럼 복사하는 뭐가 있나본데 정확히는 잘 모르겠음. 
+		 */
+		String path = session.getServletContext().getRealPath("images\\productPict")+"\\";
+		File dir = new File(session.getServletContext().getRealPath("images\\productPict"));
+		if(!dir.exists()) dir.mkdir();
+		int order = 1;
+		for(MultipartFile file : uploadfile) {
+			ProductPict pict = new ProductPict();
+			/*파일 명의 중복을 막기 위해 실제 파일 명과 prod_id, order를 조합해서 고유값을 어플리케이션에서 생성함.*/
+			String fileName = prod_id + "_" + order+"_"+file.getOriginalFilename();
+			File attachFile = new File(path+fileName);
+			System.out.println(attachFile.getPath());
+			try {
+				file.transferTo(attachFile);
+			} catch (IllegalStateException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			pict.setProd_id(prod_id);
+			//여기서 파일 경로를 이렇게 설정하는 이유는 로컬로는 바로 접근이 불가능 하기 때문이다. 로컬 경로가 아니라 url경로로 지정을 해주어서 서버의 이미지에 접근하도록 해야 한다. 
+			pict.setProd_pict("/Final_Project/images/productPict/"+fileName);
+			pict.setProd_order(order);
+			productPictDao.insertProductPict(pict);
+			order++;
+		}
 	}
 	
 	//큰 옵션 집어넣기
@@ -1116,6 +1157,35 @@ public class HSServiceImpl extends HSServiceField implements HSService {
 		// TODO Auto-generated method stub
 		return reviewDao.selectByStatus(prod_id);
 	}
+
+	//상품의 사진 가져오기
+	@Override
+	public List<ProductPict> getProductPicts(int prod_id) {
+		// TODO Auto-generated method stub
+		List<ProductPict> pictures = productPictDao.getProductPict(prod_id);
+		return pictures;
+	}
+
+	//대표사진 가져오기
+	@Override
+	public File getRepresentativePict(int prod_id, HttpSession session) {
+		// TODO Auto-generated method stub
+		List<ProductPict> pictures = productPictDao.getProductPict(prod_id);
+		String path = session.getServletContext().getRealPath("images\\productPict")+"\\";
+		if(pictures.isEmpty()) {
+			String noImagePath = session.getServletContext().getRealPath("images\\noimage.png");
+			return new File(noImagePath);
+		}
+		
+		String pic = pictures.get(0).getProd_pict();
+		int length = pic.split("/").length;
+		String realName = pic.split("/")[length-1];
+		System.out.println(realName);
+		
+		return new File(path+realName);
+	}
+	
+	
 	
 
 }

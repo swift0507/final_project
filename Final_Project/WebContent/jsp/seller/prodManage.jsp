@@ -92,7 +92,7 @@ ${ sellerProduct.sel_count[0] }
 					</tr>
 					<tr>
 						<td rowspan = 3  class = "text-center">
-							<img src = "images/sk.png" style = "width: 125px; height: 125px;">
+							<img src = "/Final_Project/getRepresentivePic.do?prod_id=${prod.prod_id}" style = "width: 125px; height: 125px;">
 						</td>
 						<td> 상품명 : ${ sellerProduct.prod_name[i.index] }</td>
 						<td> 판매수량 : ${ sellerProduct.sel_count[i.index] }개 </td>

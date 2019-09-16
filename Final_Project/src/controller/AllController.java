@@ -195,6 +195,9 @@ public class AllController {
 		
 		//해당 상품의 Q&A 전체 갯수 model에 담기
 		model.addAttribute("qnaTotalBoards", service.getQnACountById(prod_id));
+		
+		/*명섭 작업*/
+		model.addAttribute("pictures", service.getProductPicts(prod_id));
 	}
 	
 	@RequestMapping("reviewByProd.do")
@@ -261,6 +264,7 @@ public class AllController {
 		return view; 
 	}
 	
+	
 	//faq 요청
 	@RequestMapping("faq.do")
 	public void faq(Model model) {
@@ -275,6 +279,19 @@ public class AllController {
 		//자주 묻는 질문 목록
 		model.addAttribute("faq", service.getsupportfaqList());
 	}
+	
+	//대표사진 불러오기
+	@RequestMapping("getRepresentivePic.do")
+	public View prodDownload(int prod_id, HttpSession session) {
+		System.out.println(prod_id);
+		File attachFile = service.getRepresentativePict(prod_id, session);
+//		if(attachFile==null) {
+//			return null;
+//		}
+		View view = new DownloadView(attachFile);
+		return view;
+	}
+	
 
 }
 

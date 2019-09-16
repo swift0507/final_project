@@ -40,7 +40,7 @@
 		/* file 추가  폼 */
 		var input_photo_form = '<tr id = "added_photo">';
 			input_photo_form += '<td>';
-			input_photo_form += '<input type="file" class="form-control-file">';
+			input_photo_form += '<input type="file" name="uploadfile" class="form-control-file">';
 			input_photo_form += '</td>';
 			input_photo_form += '</tr>';
 		/* file 추가 폼 종료 */
@@ -283,7 +283,8 @@
         	})
         	
         	$(document).on("click", "#post", function(){
-        		var prod_id = 0;
+        		var prod_id = 9;
+        		
         		
         		//상품 넣고
         		$.ajax({
@@ -297,7 +298,6 @@
         			success : function(data){
         				//prod_id를 리턴한다. 
         				prod_id = data.prod_id;
-        				//alert(prod_id)
         			}
         		})
         		
@@ -305,8 +305,23 @@
         		//배송비조건
         		$('input[name="delivery_cost"]:checked').val();
     			
-        		//사진 넣고
+        		//사진 넣기. 사진들과 생성된 prod_id를 함께 넣는다. 
+        		var formData = new FormData();
+        		formData.append("prod_id", prod_id);
+        		for(var x=0 ; x<$("input[name=uploadfile]").length; x++){
+	        		formData.append("uploadfile", $("input[name=uploadfile]")[x].files[0]);
+        		}
         		
+        		$.ajax({
+        			url : "uploadFile.do",
+        			processData : false,
+        			contentType : false,
+        			data : formData,
+        			type : "post",
+        			success : function(data){
+        			}
+        		})
+        		//-----------------------------------테스트 완료
         		
         		
         		
@@ -365,7 +380,7 @@
         				url : "prodoptionInsert.do",
         				data : {prod_id : prod_id, opt_name : $(this).val(), opt_order : order},
         				type : "post",
-        				async : true,
+        				async : false,
         				success : function(data){
         					//data는 opt_id를 들고 와야 한다. 잘 가져왔다.
         					//alert(data.opt_id)
@@ -386,7 +401,7 @@
         					
         				}
         			})
-        				//순서올리기
+        				//옵션의 순서올리기
         				order++;
 	        		})
         		}//else 종료 옵션 넣기 종료 여기까지 테스트 완료 ---------------------------------------------------------------------------------
@@ -407,6 +422,7 @@
         			})
         		})
         		//테스트완료 --------------------------------------------------------------------------------------------
+        		
         		
         		
         		alert("등록이 완료되었습니다.");
@@ -466,7 +482,7 @@
 			<table style = "width: 700px;" class= "mt-4">
 				<tr>
 					<td rowspan = 5 style = "width: 30%; height: 175px;">
-						<img id = "rep_image" src = "images/noimage.png" style = "width: 150px; height: 175px;">
+						<img id = "rep_image" src = "../images/noimage.png" style = "width: 150px; height: 175px;">
 					</td>
 					<th colspan = 2 style = "width: 70%;"> 상품명 </th>
 				</tr>
@@ -562,7 +578,7 @@
 				</tr>
 				<tr>
 					<td colspan = 2>
-						<input type="file" class="form-control-file" onchange="readURL(this);">
+						<input type="file" name="uploadfile" class="form-control-file" onchange="readURL(this);">
 					</td>
 				</tr>
 			</table>
@@ -583,7 +599,7 @@
 				</tr>
 				<tr id = "added_photo">
 					<td colspan = 2>
-						<input type="file" class="form-control-file">
+						<input type="file" name="uploadfile" class="form-control-file">
 					</td>
 				</tr>
 			</table>		

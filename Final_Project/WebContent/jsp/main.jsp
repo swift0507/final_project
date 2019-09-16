@@ -96,7 +96,7 @@
       <c:forEach var="popular" items="${ popular }">
       	<div class="card">
       	<a class="text-decoration-none text-secondary" href="prodView.do?prod_id=${ popular.prod_id }" target="_blank">
-          <img src="images/noimage.png" class="card-img-top" width="200" height="200">
+          <img src="getRepresentivePic.do?prod_id=${popular.prod_id}" class="card-img-top" width="200" height="200">
           <div class="card-body">
             <h5 class="card-title">${ popular.prod_name }</h5>
 			<p class="card-text">${ popular.sel_id }</p>
@@ -173,7 +173,7 @@
           <c:forEach var="latest" items="${ latest }">
 	      	<div class="card">
 	      	<a class="text-decoration-none text-secondary" href="prodView.do?prod_id=${ latest.prod_id }" target="_blank">
-	          <img src="images/noimage.png" class="card-img-top" width="200" height="200">
+	          <img src="getRepresentivePic.do?prod_id=${latest.prod_id}" class="card-img-top" width="200" height="200">
 	          <div class="card-body">
 	            <h5 class="card-title">${ latest.prod_name }</h5>
 				<p class="card-text">${ latest.sel_id }</p>

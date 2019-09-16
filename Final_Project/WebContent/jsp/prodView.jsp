@@ -49,7 +49,7 @@
 		var prod_id = ${ product.prod_id };
 		var prodname = "${ product.prod_name }";
 		var selectprod = "";
-		var sumPrice = parseInt(${ product.prod_price });
+		var sumPrice = parseInt(${product.prod_price});
 		var quantity = 0;
 		var buyProdList = "";
 		var totalPrice = parseInt(0);
@@ -111,6 +111,7 @@
 			var id = $(this).val();
 			sumPrice += parseInt($("#" + id).attr('class'));
 			
+			
 			if($(this).parent().nextAll().find('select').first().text().length == 0) {
 				var prodAndOption = "";
 				prodAndOption += "상품 : " + prodname;
@@ -120,7 +121,7 @@
 				buyProdList += selectprod + "," + sumPrice + "/";
 				selectprod = "";
 				totalPrice += sumPrice
-				sumPrice = parseInt(${ product.prod_price });
+				sumPrice = parseInt(${product.prod_price});
 				
 				$("#total_price").html("총합 : " + totalPrice + "원<br>")
 				
@@ -187,7 +188,7 @@
 		        		var date = new Date(data.review[i].review_date);
 		        		inputReview += '<tr style = "height: 10px;"></tr>';
 		        		inputReview += '<tr>';
-		        		inputReview += '<th style = "width: 75px;" rowspan = 3><img src = "images/sk.png" style = "width: 50px; height: 50px;"></th>';
+		        		inputReview += '<th style = "width: 75px;" rowspan = 3><img src = "/Final_Project/getRepresentivePic.do?prod_id='+data.review[i].prod_id+'" style = "width: 50px; height: 50px;"></th>';
 		        		inputReview += '<th><h5><b>' + data.review[i].prod_name + '</b></h5></th>';	//상품명
 		        		if(data.review[i].review_writer == loginUser)
 		        			inputReview += '<th class = "text-right"><button id="' + data.review[i].review_id + '" class = "reviewModifyBtn btn-sm btn-secondary">수정</button><button id="' + data.review[i].review_id + '" class = "reviewDeleteBtn btn-sm btn-danger">삭제</button></th>';
@@ -396,7 +397,14 @@
 			        <tr> 
 			            <td rowspan = 8 colspan = 5 style = "width: 350px;">
 			                <div id = "item_image">
-			                    <img src = "images/sk.png">
+			                <c:choose>
+			                	<c:when test="${pictures.isEmpty()}">
+			                	 <img src = "images/sk.png" style = "width: 100px; height: 100px;">
+			                	</c:when>
+			                	<c:otherwise>
+			                    <img src="${pictures.get(0).prod_pict}" width="320" height="380">
+			                	</c:otherwise> 
+			                </c:choose> 
 			                </div>
 			            </td>
 			            
@@ -486,19 +494,19 @@
 			        </tr>
 			        <tr>
 			            <td>
-			                <img src = "images/sk.png" width = 60 height = 40>
+			                <!-- <img src = "images/sk.png" width = 60 height = 40> -->
 			            </td>
 			            <td>
-			                <img src = "images/sk.png" width = 60 height = 40>
+			                <!-- <img src = "images/sk.png" width = 60 height = 40> -->
 			            </td>
 			            <td>
-			                <img src = "images/sk.png" width = 60 height = 40>
+			                <!-- <img src = "images/sk.png" width = 60 height = 40> -->
 			            </td>
 			            <td>
-			                <img src = "images/sk.png" width = 60 height = 40>
+			                <!-- <img src = "images/sk.png" width = 60 height = 40> -->
 			            </td>
 			            <td>
-			                <img src = "images/sk.png" width = 60 height = 40>
+			               <!--  <img src = "images/sk.png" width = 60 height = 40> -->
 			            </td>
 			            <td>
 			                
@@ -563,7 +571,7 @@
 				</nav>
 			            </div>
 			        </div>
-			        <hr>
+			        <!-- <hr>
 			        <h5>사장님 판매상품</h5>
 			        <br>
 			        <div id = "seller_item_slider">
@@ -574,7 +582,7 @@
 			            <img src = "images/sk.png" style = "width: 100px; height: 100px;">
 			            <img src = "images/sk.png" style = "width: 100px; height: 100px;">
 			            </span>
-			        </div>
+			        </div> -->
 			    </div>
 			    <div class="col"></div>
 		    

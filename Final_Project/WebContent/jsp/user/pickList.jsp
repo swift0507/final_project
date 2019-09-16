@@ -56,7 +56,7 @@
 	    		<c:forEach var="pick" items="${ pickList }">
 					<div class="card ml-3 mb-3" style="width : 14rem;">
 					<a class="text-decoration-none text-secondary" href="/Final_Project/prodView.do?prod_id=${ pick.prod_id }" target="_blank">
-						<img src="../images/noimage.png" class="card-img-top" style="width:100; height:100;">
+						<img src="/Final_Project/getRepresentivePic.do?prod_id=${pick.prod_id}" class="card-img-top" style="width:100; height:100;">
 						<div class="card-body">
 							<h5 class="card-title">${ pick.prod_name }</h5>
 							<p class="card-text">${ pick.sel_id }</p>

@@ -3,5 +3,11 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     <mapper namespace="dao.ProductPictDao">
+    <insert id="insertProductPict">
+    	insert into productpict values (#{prod_id}, #{prod_pict}, #{prod_order})
+    </insert>
     
+    <select id="getProductPict" resultType="productPict">
+    	select * from productpict where prod_id=#{prod_id} order by prod_order
+    </select>
     </mapper>
